@@ -19,6 +19,7 @@ public class CustomerCtr
 	public Customer getCustomer(int phone)
 	{
 		//TODO - update
+		//CHANGE SMTHSGH
 		return null;
 	}
 }
