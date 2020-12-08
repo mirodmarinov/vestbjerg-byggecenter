@@ -18,6 +18,10 @@ public class CustomerContainer
 
     private CustomerContainer()
     {
+    	
+    	
+    	
+    	
     }
     
     public static CustomerContainer getInstance()
