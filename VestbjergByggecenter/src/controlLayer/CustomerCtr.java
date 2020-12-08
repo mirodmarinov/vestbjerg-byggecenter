@@ -13,6 +13,7 @@ public class CustomerCtr
 
 	public CustomerCtr()
 	{
+		//hope this works lol
 	}
 	
 	
