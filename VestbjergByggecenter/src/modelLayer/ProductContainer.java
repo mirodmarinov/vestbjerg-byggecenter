@@ -6,6 +6,7 @@ package modelLayer;
  * of all products in the system. This allows us to
  * create methods that needs to be done on the entire 
  * collection, rather than the individual product.
+ * I am making this change now.
  *
  */
 
