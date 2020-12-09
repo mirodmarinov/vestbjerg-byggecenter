@@ -12,13 +12,13 @@ import modelLayer.ProductContainer;
 import modelLayer.CustomerContainer;
 import modelLayer.OrderContainer;
 import java.util.Scanner;
+import java.lang.reflect.Method;
 import java.io.*;
 
 public class MainMenu 
 {
 	private Scanner input = new Scanner(System.in);
 	private OrderMenu orderUI = new OrderMenu();
-	
 	File CONFIG_HOME; //storing the app data folder
 
 	public MainMenu()
@@ -99,7 +99,7 @@ public class MainMenu
     }
 
 
-	public void serializeClass(String className)
+	private void serializeClass(String className)
 	{
 
 		/*
@@ -110,11 +110,13 @@ public class MainMenu
 		
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(CONFIG_HOME.getPath() + File.separator + className + ".ser"))))
 		{
-			oos.writeObject(ProductContainer.getInstance());
+			Class<?> c = Class.forName(className);
+			Method method = c.getDeclaredMethod("getInstance");
+			//oos.writeObject(method.invoke());
 		}
-		catch (IOException ioe)
+		catch (Exception e)
 		{
-			ioe.printStackTrace();
+			e.printStackTrace();
 		}
 
 	}
@@ -123,7 +125,7 @@ public class MainMenu
 	 * 
 	 * @param className
 	 */
-	public void deserializeClass(String className)
+	private void deserializeClass(String className)
 	{
 		
 		try (ObjectInputStream oos = new ObjectInputStream(new FileInputStream(new File(CONFIG_HOME.getPath() + File.separator + className + ".ser"))))

@@ -21,6 +21,11 @@ public class OrderCtr
 	{
 	}
 
+	public ArrayList<OrderLineItem> getOrderProducts()
+	{
+		return orderProducts;
+	}
+	
 	/**
 	 * This method returns the customers name 
 	 * and also stores the customer Object in the customer field

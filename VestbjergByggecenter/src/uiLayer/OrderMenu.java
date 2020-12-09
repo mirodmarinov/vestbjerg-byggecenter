@@ -1,6 +1,7 @@
 package uiLayer;
 
 import controlLayer.*;
+import modelLayer.*;
 
 /**
  * This class is a part of the System for
@@ -62,19 +63,42 @@ public class OrderMenu
 			String customerName = orderCtr.findCustomer(phone);
 			System.out.println("Creating offer for  " + customerName + ":");
 			
-			System.out.println("Please input product name:");
-			String productName = input.nextLine();
-			ArrayList<String[]> products = orderCtr.getProducts(productName);
-			
-			int i = 1;
-			for(String[] product: products)
+			boolean productsAdded = false;
+			while(!productsAdded)
 			{
-				System.out.println("(" + i + ") Product name: " + product[0]);
-				System.out.println("   Description: " + product[1]);
-				i++;
+				searchForProduct();
+				
+				System.out.println("Do you wish to add more products to the offer? Y/N");
+				String answer = input.nextLine();
+				if(answer.equals("N") || answer.toLowerCase().equals("no"))
+				{
+					productsAdded = true;
+				}
+			}
+		
+			System.out.println("Offer summary:");
+			System.out.println("Products: ");
+			
+			ArrayList<OrderLineItem> allProducts = orderCtr.getOrderProducts();
+			for(OrderLineItem o : allProducts)
+			{
+				Product product = o.getProduct();
+				String name = product.getName();
+				long price = product.getSalesPrice();
+				int quantity = o.getQuantity();
+				long totalPrice = quantity * price;
+				
+				System.out.println(name + "				" + price + "kr.");
+				System.out.println("");
+				if(quantity > 1)
+				{
+					System.out.println(quantity +  " x " + price +				totalPrice + "kr.");
+				}
+				
 			}
 			
 		}
+		
 	}
 
 	private int writeOrderMenu()
@@ -94,5 +118,35 @@ public class OrderMenu
 
 		int choice = input.nextInt();
 		return choice;
+	}
+	
+	private void searchForProduct() {
+		
+		System.out.println("Please input product name:");
+		String productName = input.nextLine();
+		ArrayList<String[]> products = orderCtr.getProducts(productName);
+		
+		
+			System.out.println("Please select a product by number:");
+		
+			int i = 1;
+			for(String[] product: products)
+			{
+				System.out.println("(" + i + ") Product name: " + product[0]);
+				System.out.println("   Description: " + product[1]);
+				i++;
+			}
+		
+			int choice = input.nextInt();
+			input.nextLine();
+			
+			System.out.println("Please input quantity: ");
+			int quantity = input.nextInt();
+			input.nextLine();
+			orderCtr.selectProduct(choice - 1, quantity);
+		
+			String[] chosenProductInfo = products.get(i-1);
+			String chosenProductName = chosenProductInfo[0];
+			System.out.println(quantity + " of product " + chosenProductName + " has been added to the offer");	
 	}
 }
