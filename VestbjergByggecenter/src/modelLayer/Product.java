@@ -12,23 +12,23 @@ public class Product
 	private int threshold; // the minimum of products, once crossed, restock is
 	                       // initiated
 	private int quantity;
-	private int purchasePrice;
-	private int salesPrice;
 	private int discount;
+	private long purchasePrice;
+	private long salesPrice;
 	private String barcode; // unique number for each type of product
 	private String name;
 	private String description;
 	private String group;
 	private String location;
 
-	public Product(int threshold, int quantity, int purchasePrice, int salesPrice, int discount, String barcode, String name, String description,
+	public Product(int threshold, int quantity,  int discount, long purchasePrice, long salesPrice, String barcode, String name, String description,
 	                String group, String location)
 	{
 		this.threshold = threshold;
 		this.quantity = quantity;
+		this.discount = discount;
 		this.purchasePrice = purchasePrice;
 		this.salesPrice = salesPrice;
-		this.discount = discount;
 		this.barcode = barcode;
 		this.name = name;
 		this.description = description;
@@ -100,9 +100,9 @@ public class Product
 		this.quantity = quantity;
 	}
 
-	public int getDiscount()
+	public int getDiscount(int quantity)
 	{
-		return discount;
+		return quantity > 5 ? discount + 2 : discount;
 	}
 
 	public void setDiscount(int discount)
@@ -110,7 +110,7 @@ public class Product
 		this.discount = discount;
 	}
 	
-	public int getPurchasePrice()
+	public long getPurchasePrice()
 	{
 		return purchasePrice;
 	}
@@ -120,7 +120,7 @@ public class Product
 		this.purchasePrice = purchasePrice;
 	}
 
-	public int getSalesPrice()
+	public long getSalesPrice()
 	{
 		return salesPrice;
 	}
@@ -140,12 +140,9 @@ public class Product
 		this.location = location;
 	}
 
-	/**
-	 * 
-	 */
-	public void updateThreshold()
+	public void updateThreshold(int threshold)
 	{
-		// TODO - do the body
+		this.threshold += threshold;
 	}
 
 

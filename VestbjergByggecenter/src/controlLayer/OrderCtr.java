@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * This class is a part of the System developed for Vestbjerg Byggecenter. It
- * acts a controller for all of the order objects.
+ * acts as a controller for all of the order objects.
  */
 
 public class OrderCtr
@@ -13,34 +13,131 @@ public class OrderCtr
 	private CustomerCtr customerCtr = new CustomerCtr();
 	private ProductCtr productCtr = new ProductCtr();
 	private Customer customer;
-	private ArrayList<Product> products;
+	private ArrayList<Object[]> orderProducts;
+	private ArrayList<Product> foundProducts;
+	
 
 	public OrderCtr()
 	{
 	}
 
-	public String findCustomer(String phone)
+	/**
+	 * This method returns the customers name 
+	 * and also stores the customer Object in the customer field
+	 * of this class.
+	 * 
+	 * @param phone
+	 * @return String of customer name
+	 */
+	public String findCustomer(int phone)
 	{
-		// TODO - update
-		return "";
+		// TODO - check if correct
+		Customer customer = customerCtr.getCustomer(phone);
+		this.customer = customer;
+		return customer.getName();
 	}
 
-	public ArrayList<String> getProducts(String name)
+	/**
+	 * This method calls the getProducts() in the product controller
+	 * and creates a list of products that are stored in the foundProducts
+	 * field. Then an Array of Strings containing info such
+	 * as the name an description of the product. This can then be used
+	 * in the UI layer.
+	 * 
+	 * @param name
+	 * @return ArrayList of String Arrays containing product information
+	 */
+	public ArrayList<String[]> getProducts(String name)
 	{
-		// TODO - update
-		return null;
+		foundProducts = productCtr.getProducts(name);
+		ArrayList<String[]> allProductsInfo = new ArrayList<String[]>();
+		
+		for(Product product: foundProducts)
+		{
+			String[] productInfo = new String[2];
+			productInfo[0] = product.getName();
+			productInfo[1] = product.getDescription();
+			
+			allProductsInfo.add(productInfo);
+		}
+		
+		return allProductsInfo;
 	}
 
-	public boolean selectProduct(String barcode, int quantity)
+	/**
+	 * This method allows us to have a product
+	 * selected from the foundProducts list,
+	 * and then based on the place in the list
+	 * add it to the orderProducts list
+	 * along with the quantity of the product
+	 * that is being ordered/offered. If the product
+	 * and quantity is successfully added to the orderProducts
+	 * list, the method returns true, if not
+	 * false.
+	 * 
+	 * @param placeInList
+	 * @param quantity
+	 * @return true or false
+	 */
+	public boolean selectProduct(int placeInList, int quantity)
 	{
-		// TODO - update
-		return true;
+		Product product = foundProducts.get(placeInList);
+		
+		Object[] orderLineItem = new Object[2];
+		orderLineItem[0] = product;
+		orderLineItem[1] = quantity;
+		
+		return orderProducts.add(orderLineItem);
 	}
 
+	/**
+	 *This method uses the fields customer and  
+	 *orderProducts to create
+	 *an order/offer Object and add
+	 *it to our collection of add it.
+	 * 
+	 * @return true or false
+	 */
 	public boolean createOffer()
 	{
-		// TODO - update
-		return true;
+		Offer offer = new Offer(customer, orderProducts);
+		
+		/*
+		 * Here we update the threshold of the product, 
+		 * to make sure that the quantity in stock matches
+		 * the possible order size. The threshold however, should
+		 * be changed again, if the offer is not
+		 * accepted within the agreed expiration date
+		 */
+		for(Object[] p: orderProducts)
+		{
+			Product product = (Product)p[0];
+			int quantity = (int)p[1];
+			product.updateThreshold(quantity);
+		}
+		
+		return OrderContainer.getInstance().addOffer(offer);
 	}
 
+	/**
+	 * This method allows us to calculate the price for the offer/order.
+	 * 
+	 * @return total cost of order/offer
+	 */
+	public long calculateTotal()
+	{
+		long totalWithoutDiscount = 0;
+		long totalWithDiscount = 0;
+		for(Object[] p : orderProducts) 
+		{
+			Product product = (Product)p[0];
+			int quantity = (int)p[1];
+			totalWithoutDiscount += product.getSalesPrice() * quantity;
+			totalWithDiscount += product.getSalesPrice() * quantity * (100 - product.getDiscount(quantity));
+		}
+		
+		totalWithDiscount *= (100-customer.getDiscount());
+		
+		return totalWithDiscount/totalWithoutDiscount < 0.8 ? (int)0.8*totalWithoutDiscount : totalWithDiscount;
+	}
 }

@@ -1,4 +1,5 @@
 package controlLayer;
+
 import modelLayer.*;
 
 /**
@@ -13,14 +14,17 @@ public class CustomerCtr
 
 	public CustomerCtr()
 	{
-		//hope this works lol
-		//test commit ~
 	}
 	
-	
+	/**
+	 * The method calls a matching method
+	 * inside the container, and passes the phone
+	 * parameter to find a customer
+	 * with the phone number. The method then returns
+	 * the found customer.
+	 */
 	public Customer getCustomer(int phone)
 	{
-		//TODO - update
-		return null;
+		return CustomerContainer.getInstance().getCustomer(phone);
 	}
 }

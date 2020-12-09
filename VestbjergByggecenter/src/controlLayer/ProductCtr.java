@@ -17,15 +17,21 @@ public class ProductCtr
 	{
 	}
 	
+	/*
+	 * The method returns an ArrayList of products
+	 * by calling the matching method in the Container
+	 * and passing the String parameter name.
+	 */
 	public ArrayList<Product> getProducts(String name)
 	{
-		//TODO - update
-		return null;
+		return ProductContainer.getInstance().getProducts(name);
 	}
 	
+	/*
 	public Product selectProduct(String barcode, int quantity)
 	{
 		//TODO - update
-		return null;
+		return ProductContainer.getInstance().selectProduct(barcode);
 	}
+	*/
 }

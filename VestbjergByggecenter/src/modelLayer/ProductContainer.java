@@ -26,15 +26,47 @@ public class ProductContainer
 		return uniqueInstance;
 	}
 	
+	/**
+	 * This method creates and returns an ArrayList
+	 * of all the products whose name, somewhat matches
+	 * the search word.
+	 * 
+	 * @param name
+	 * @return A list of products found
+	 */
 	public ArrayList<Product> getProducts(String name)
 	{
-		//TODO - update the returned list
-		return products;
+		ArrayList<Product> specifiedProducts = new ArrayList<Product>();
+		
+		for(Product a: products)
+		{
+			if(a.getName().contains(name))
+			{
+				specifiedProducts.add(a);
+			}
+		}
+		
+		return specifiedProducts;
+		//TODO - check this code
 	}
 	
-	public Product selectProduct(String barcode, int quantity)
+	/*
+	public Product selectProduct(String barcode) //quantity removed for now?
 	{
-		//TODO - update
-		return null;
+		boolean found = false;
+		Product product = null;
+		
+		for(int i = 0; i < products.size() && found == false; i++)
+		{
+			if(barcode.equals(products.get(i).getBarcode()))
+			{
+				product = products.get(i);
+				found = true;
+			}
+		}
+			
+		return product;
+		//TODO - quantity????
 	}
+	*/
 }

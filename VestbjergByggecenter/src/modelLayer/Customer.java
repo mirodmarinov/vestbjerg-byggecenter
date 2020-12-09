@@ -29,44 +29,53 @@ public class Customer
      * The following methods are the getters
      * and setters for all the fields
      */
-	public int getPhone() {
+	public int getPhone() 
+	{
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(int phone) 
+	{
 		this.phone = phone;
 	}
 
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name) 
+	{
 		this.name = name;
 	}
 
-	public String getAddress() {
+	public String getAddress() 
+	{
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(String address) 
+	{
 		this.address = address;
 	}
 
-	public int getDiscount() {
+	public int getDiscount() 
+	{
 		return discount;
 	}
 
-	public void setDiscount(int discount) {
+	public void setDiscount(int discount) 
+	{
 		this.discount = discount;
 	}
 
-	public String getGroup() {
+	public String getGroup() 
+	{
 		return group;
 	}
 
-	public void setGroup(String group) {
+	public void setGroup(String group) 
+	{
 		this.group = group;
 	}
-
 }

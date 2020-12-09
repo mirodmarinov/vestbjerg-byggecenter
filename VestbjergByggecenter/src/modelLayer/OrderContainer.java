@@ -24,10 +24,19 @@ public class OrderContainer
 		return uniqueInstance;
 	}
 	
+	/**
+	 * The method adds an already existing offer to
+	 * the ArrayList<> orders. If the
+	 * addition is successful the method returns true,
+	 * if not it returns false.
+	 * 
+	 * @param offer
+	 * @return true or false
+	 */
 	public boolean addOffer(Offer offer)
 	{
-		//TODO - update
-		return true;
+		return orders.add(offer);
+		//TODO - any checks?
 	}
 
 }

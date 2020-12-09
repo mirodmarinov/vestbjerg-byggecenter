@@ -9,24 +9,29 @@ import java.util.ArrayList;
  * Therefore it contains all the same elements.
  *
  */
-public class Offer extends Order {
+public class Offer extends Order 
+{
 	
 	private Calendar expirationDate;
 	
-	public Offer(Customer customer, ArrayList<Product> products, Calendar expirationDate) {
+	public Offer(Customer customer, ArrayList<Object[]> products) 
+	{
 		super(customer, products);
-		this.setExpirationDate(expirationDate);
+		expirationDate = null;
+		//TODO make automatically generated expirationDate
 	}
 
 	/**
 	 * These are the getters and setters
 	 * for the field expirationDate
 	 */
-	public Calendar getExpirationDate() {
+	public Calendar getExpirationDate() 
+	{
 		return expirationDate;
 	}
 
-	public void setExpirationDate(Calendar expirationDate) {
+	public void setExpirationDate(Calendar expirationDate) 
+	{
 		this.expirationDate = expirationDate;
 	}
 	

@@ -1,5 +1,7 @@
 package modelLayer;
 
+import java.util.ArrayList;
+
 /**
  * This class defines orders in the System for
  * Vestbjerg Byggecenter. It acts as a collection
@@ -8,8 +10,6 @@ package modelLayer;
  * collection, rather than the individual customer.
  *
  */
-
-import java.util.ArrayList;
 
 public class CustomerContainer 
 {
@@ -25,6 +25,16 @@ public class CustomerContainer
         return uniqueInstance;
     }
 
+    /**
+     * The method returns a Customer
+     * by searching through the collection
+     * and finding a customer based on their phone number
+     * since this is the unique identifier for
+     * Customer objects.
+     * 
+     * @param phone
+     * @return Customer
+     */
 	public Customer getCustomer(int phone)
 	{
 		Customer customer = null;
@@ -38,7 +48,6 @@ public class CustomerContainer
 				found = true;
 			}
 		}
-
 		return customer;
 	}
 }
