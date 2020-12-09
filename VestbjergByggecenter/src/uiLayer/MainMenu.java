@@ -8,16 +8,33 @@ package uiLayer;
  * do when interacting with the system.
  *
  */
-
+import modelLayer.ProductContainer;
+import modelLayer.CustomerContainer;
+import modelLayer.OrderContainer;
 import java.util.Scanner;
+import java.io.*;
 
 public class MainMenu 
 {
 	private Scanner input = new Scanner(System.in);
 	private OrderMenu orderUI = new OrderMenu();
+	
+	File CONFIG_HOME; //storing the app data folder
 
 	public MainMenu()
 	{
+		// works on all systems, finds either the APPDATA folder for temporary
+		// files or picks user home folder for linux/mac.
+		String home = System.getenv("APPDATA");
+		if ((home == null) || home.isEmpty())
+		{
+			home = System.getProperty("user.home");
+		}
+		
+		// creates a folder called VestbjergWMS with a dot in the front which
+		// makes it hidden for basic operating systems.
+		CONFIG_HOME = new File(home, ".VestbjergWMS").getAbsoluteFile();
+		CONFIG_HOME.mkdirs();
 	}
 	
 	/**
@@ -80,4 +97,43 @@ public class MainMenu
         int choice = input.nextInt();
         return choice;
     }
+
+
+	public void serializeClass(String className)
+	{
+
+		/*
+		 *  we use try with resources here, so we make sure that the
+		 *  ObjectOutputStream object is closed automatically once the try is
+		 *  finished.
+		 */
+		
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(CONFIG_HOME.getPath() + File.separator + className + ".ser"))))
+		{
+			oos.writeObject(ProductContainer.getInstance());
+		}
+		catch (IOException ioe)
+		{
+			ioe.printStackTrace();
+		}
+
+	}
+	
+	/**
+	 * 
+	 * @param className
+	 */
+	public void deserializeClass(String className)
+	{
+		
+		try (ObjectInputStream oos = new ObjectInputStream(new FileInputStream(new File(CONFIG_HOME.getPath() + File.separator + className + ".ser"))))
+		{
+			oos.readObject();
+		}
+		catch (Exception e)
+		{
+		}
+
+	}
+
 }

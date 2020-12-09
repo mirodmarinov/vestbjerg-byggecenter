@@ -10,10 +10,15 @@ package modelLayer;
  *
  */
 
-import java.util.*;
+import java.util.ArrayList;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 
-public class ProductContainer 
+public class ProductContainer implements Serializable
 {
+	
+	private static final long serialVersionUID = 1L;
 	private static ProductContainer uniqueInstance = new ProductContainer();
 	private ArrayList<Product> products = new ArrayList<>();
 	
@@ -48,6 +53,29 @@ public class ProductContainer
 		
 		return specifiedProducts;
 		//TODO - check this code
+	}
+	
+	/**
+	 *
+	 *A method that overrides the instance with the object retrieved from deserialization
+	 * @param ois
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+
+	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException
+	{
+		ois.defaultReadObject();
+		uniqueInstance = this;
+	}
+
+	/**
+	 * used for serialization to return the instance of the singleton class
+	 * @return returns a productCOntainer instance that can be serialized
+	 */
+	private Object readResolve()
+	{
+		return uniqueInstance;
 	}
 	
 	/*

@@ -17,10 +17,10 @@ public class Order
 	private String status; // The status of the sales process, is it still just an offer or how far along has it come
 	private String delivery;
 	private Customer customer;
-	private ArrayList<Object[]> products;
+	private ArrayList<OrderLineItem> products;
 	
 	
-	public Order(Customer customer, ArrayList<Object[]> products) 
+	public Order(Customer customer, ArrayList<OrderLineItem> products) 
 	{
 		this.customer = customer;
 		this.products = products;
@@ -82,12 +82,12 @@ public class Order
 		this.customer = customer;
 	}
 
-	public ArrayList<Object[]> getProducts() 
+	public ArrayList<OrderLineItem> getProducts() 
 	{
 		return products;
 	}
 
-	public void setProducts(ArrayList<Object[]> products) 
+	public void setProducts(ArrayList<OrderLineItem> products) 
 	{
 		this.products = products;
 	}

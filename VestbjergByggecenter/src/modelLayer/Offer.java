@@ -14,7 +14,7 @@ public class Offer extends Order
 	
 	private Calendar expirationDate;
 	
-	public Offer(Customer customer, ArrayList<Object[]> products) 
+	public Offer(Customer customer, ArrayList<OrderLineItem> products) 
 	{
 		super(customer, products);
 		expirationDate = null;

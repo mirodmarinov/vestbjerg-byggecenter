@@ -11,8 +11,15 @@ import java.util.ArrayList;
  *
  */
 
-public class CustomerContainer 
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+
+public class CustomerContainer implements Serializable
 {
+	
+	private static final long serialVersionUID = 1L;
     private static CustomerContainer uniqueInstance = new CustomerContainer();
 	private ArrayList<Customer> customers = new ArrayList<>();
 
@@ -49,5 +56,28 @@ public class CustomerContainer
 			}
 		}
 		return customer;
+	}
+	
+		/**
+	 *
+	 *A method that overrides the instance with the object retrieved from deserialization
+	 * @param ois
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+
+	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException
+	{
+		ois.defaultReadObject();
+		uniqueInstance = this;
+	}
+
+	/**
+	 * used for serialization to return the instance of the singleton class
+	 * @return returns a productCOntainer instance that can be serialized
+	 */
+	private Object readResolve()
+	{
+		return uniqueInstance;
 	}
 }

@@ -10,6 +10,7 @@ import controlLayer.*;
  */
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class OrderMenu
 {
@@ -40,7 +41,6 @@ public class OrderMenu
 					System.out.println("Not yet possible");
 					break;
 				case 0:
-					System.out.println("Have a nice day");
 					running = false;
 					break;
 				default:
@@ -52,17 +52,39 @@ public class OrderMenu
 
 	private void createOffer()
 	{
+		boolean running = true;
 		
+		while(running) 
+		{
+			System.out.println("Please input customer phone number: ");
+			int phone = input.nextInt();
+			input.nextLine();
+			String customerName = orderCtr.findCustomer(phone);
+			System.out.println("Creating offer for  " + customerName + ":");
+			
+			System.out.println("Please input product name:");
+			String productName = input.nextLine();
+			ArrayList<String[]> products = orderCtr.getProducts(productName);
+			
+			int i = 1;
+			for(String[] product: products)
+			{
+				System.out.println("(" + i + ") Product name: " + product[0]);
+				System.out.println("   Description: " + product[1]);
+				i++;
+			}
+			
+		}
 	}
 
 	private int writeOrderMenu()
 	{
 		System.out.println("* Main Menu *");
-		System.out.println(" (1) Order menu");
-		System.out.println(" (2) ");
+		System.out.println(" (1) Create Offer");
+		System.out.println(" (2) Place Order");
 		System.out.println(" (3) ");
-		System.out.println(" (0) Quit");
-		System.out.print("\n Choose:");
+		System.out.println(" (0) Back");
+		System.out.print("\n Choose: \n");
 
 		while (!input.hasNextInt())
 		{

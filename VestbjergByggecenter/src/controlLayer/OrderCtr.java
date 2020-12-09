@@ -13,7 +13,7 @@ public class OrderCtr
 	private CustomerCtr customerCtr = new CustomerCtr();
 	private ProductCtr productCtr = new ProductCtr();
 	private Customer customer;
-	private ArrayList<Object[]> orderProducts;
+	private ArrayList<OrderLineItem> orderProducts;
 	private ArrayList<Product> foundProducts;
 	
 
@@ -82,10 +82,7 @@ public class OrderCtr
 	public boolean selectProduct(int placeInList, int quantity)
 	{
 		Product product = foundProducts.get(placeInList);
-		
-		Object[] orderLineItem = new Object[2];
-		orderLineItem[0] = product;
-		orderLineItem[1] = quantity;
+		OrderLineItem orderLineItem = new OrderLineItem(product, quantity);
 		
 		return orderProducts.add(orderLineItem);
 	}
@@ -109,11 +106,9 @@ public class OrderCtr
 		 * be changed again, if the offer is not
 		 * accepted within the agreed expiration date
 		 */
-		for(Object[] p: orderProducts)
+		for(OrderLineItem p: orderProducts)
 		{
-			Product product = (Product)p[0];
-			int quantity = (int)p[1];
-			product.updateThreshold(quantity);
+			p.getProduct().updateThreshold(p.getQuantity());
 		}
 		
 		return OrderContainer.getInstance().addOffer(offer);
@@ -128,10 +123,10 @@ public class OrderCtr
 	{
 		long totalWithoutDiscount = 0;
 		long totalWithDiscount = 0;
-		for(Object[] p : orderProducts) 
+		for(OrderLineItem p : orderProducts) 
 		{
-			Product product = (Product)p[0];
-			int quantity = (int)p[1];
+			Product product = p.getProduct();
+			int quantity = p.getQuantity();
 			totalWithoutDiscount += product.getSalesPrice() * quantity;
 			totalWithDiscount += product.getSalesPrice() * quantity * (100 - product.getDiscount(quantity));
 		}
