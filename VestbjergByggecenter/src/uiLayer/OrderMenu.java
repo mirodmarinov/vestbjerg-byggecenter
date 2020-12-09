@@ -53,6 +53,7 @@ public class OrderMenu
 
 	private void createOffer()
 	{
+		//TODO discuss whether the ctr is created here
 		boolean running = true;
 		
 		while(running) 
@@ -77,8 +78,10 @@ public class OrderMenu
 			}
 		
 			System.out.println("Offer summary:");
+			System.out.println("Customer : " + customerName);
 			System.out.println("Products: ");
 			
+			long priceWithoutDiscount = 0;
 			ArrayList<OrderLineItem> allProducts = orderCtr.getOrderProducts();
 			for(OrderLineItem o : allProducts)
 			{
@@ -87,16 +90,42 @@ public class OrderMenu
 				long price = product.getSalesPrice();
 				int quantity = o.getQuantity();
 				long totalPrice = quantity * price;
+				priceWithoutDiscount += totalPrice;
 				
 				System.out.println(name + "				" + price + "kr.");
-				System.out.println("");
 				if(quantity > 1)
 				{
 					System.out.println(quantity +  " x " + price +				totalPrice + "kr.");
 				}
+				System.out.println("");
 				
 			}
 			
+			//probably stupidly complicated but it calculates the discount
+			//TODO - probably update if we want to make it simpler
+			long discount = 0;
+			long difference = priceWithoutDiscount - orderCtr.calculateTotal();
+			long a = priceWithoutDiscount / 100;
+			discount = difference / a;
+			
+			System.out.println("Price before discount " + priceWithoutDiscount + "kr.");
+			System.out.println("Discount " + discount + "%"); //TODO figure out how to showcase discounts
+			System.out.println("Total " + orderCtr.calculateTotal() + "kr.");
+			
+			System.out.println("\n Confirm offer? Y/N");
+			String answer = input.nextLine(); 
+			if(answer.toLowerCase().equals("y") || answer.toLowerCase().equals("yes"))
+			{
+				orderCtr.createOffer();
+				System.out.println("Offer has succesfully been created, you will now be returned to the Order Menu.");
+				running = false;
+			}
+			else
+			{
+				//TODO figure out if other things should happen if the offer is rejected.
+				System.out.println("Offer rejected, you will now be returned to the Order Menu.");
+				running = false;
+			}
 		}
 		
 	}
