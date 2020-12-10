@@ -1,6 +1,7 @@
 package modelLayer;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.ArrayList;
 
 /**
  * This class defines orders in the System for
@@ -13,6 +14,7 @@ public class Order
 	private int orderNumber; // The unique identifier
 	private int discount;
 	private long totalPrice;
+	private Calendar expirationDate;
 	private Calendar purchaseDate;
 	private String status; // The status of the sales process, is it still just an offer or how far along has it come
 	private String delivery;
@@ -24,8 +26,9 @@ public class Order
 	{
 		this.customer = customer;
 		this.products = products;
+		expirationDate = null;
 	
-		//TODO automatically add purchaseDate, status, delivery, totalPrice
+		//TODO automatically add purchaseDate, status, delivery, totalPrice, automatically generate expirationDate
 	}
 
 	/**
@@ -110,6 +113,16 @@ public class Order
 	public void setPurchaseDate(Calendar purchaseDate) 
 	{
 		this.purchaseDate = purchaseDate;
+	}
+	
+	public Calendar getExpirationDate() 
+	{
+		return expirationDate;
+	}
+
+	public void setExpirationDate(Calendar expirationDate) 
+	{
+		this.expirationDate = expirationDate;
 	}
 
 }
