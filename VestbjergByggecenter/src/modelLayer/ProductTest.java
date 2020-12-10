@@ -33,16 +33,25 @@ class ProductTest
 	}
 	
 	@Test
-	void productNameShouldBeSet()
+	void productGetMethods()
 	{
-		assertEquals(product1.getName().trim(), "Hammer"); //This
-		assertEquals(product1.getGroup(), "Tools"); //Its ok
+		assertEquals(product1.getName(), "Hammer");
+		assertEquals(product1.getGroup(), "Tools");
+		assertEquals(product1.getThreshold(), 10);
+		assertEquals(product1.getQuantity(), 10);
+		assertEquals(product1.getDiscount(0), 0);
+		assertEquals(product1.getDiscount(10), 2);
+		assertEquals(product1.getPurchasePrice(), 2500);
+		assertEquals(product1.getSalesPrice(), 2000);
+		assertEquals(product1.getBarcode(), "123CDB24");
+		assertEquals(product1.getDescription(), "A construction hammer");
+		assertEquals(product1.getLocation(), "DIY");
 	}
 	
 	@Test
 	void productNameShouldNotBeThat()
 	{
-		assertNotEquals(product2.getName().trim(), "Wood"); //This
+		assertNotEquals(product2.getName(), "Wood");
 	}
 
 }

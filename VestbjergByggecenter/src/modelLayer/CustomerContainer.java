@@ -82,4 +82,14 @@ public class CustomerContainer implements Serializable
 	{
 		return uniqueInstance;
 	}
+	
+	/**
+	 * Made as a test method for the CustomerContainerTest test class, the create offer
+	 * and the create order use cases.
+	 * @param customer
+	 */
+	public void addCustomer(Customer customer)
+	{
+		customers.add(customer);
+	}
 }

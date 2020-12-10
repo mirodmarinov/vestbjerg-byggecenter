@@ -34,4 +34,24 @@ public class ProductCtr
 		return ProductContainer.getInstance().selectProduct(barcode);
 	}
 	*/
+	
+	/**
+	 * Made as a test method for the create offer and the create order use cases.
+	 * @param threshold
+	 * @param quantity
+	 * @param discount
+	 * @param purchasePrice
+	 * @param salesPrice
+	 * @param barcode
+	 * @param name
+	 * @param description
+	 * @param group
+	 * @param location
+	 */
+	public void addProduct(int threshold, int quantity,  int discount, long purchasePrice, long salesPrice, String barcode, String name, String description,
+	                String group, String location)
+	{
+		Product product = new Product(threshold,quantity,discount,purchasePrice,salesPrice,barcode,name,description,group,location);
+		ProductContainer.getInstance().addProduct(product);
+	}
 }

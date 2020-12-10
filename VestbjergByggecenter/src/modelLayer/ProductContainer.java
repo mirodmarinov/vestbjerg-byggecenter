@@ -97,4 +97,13 @@ public class ProductContainer implements Serializable
 		//TODO - quantity????
 	}
 	*/
+	/**
+	 * Made as a test method for the ProductContainerTest test class, the create offer
+	 * and the create order use cases.
+	 * @param product
+	 */
+	public void addProduct(Product product)
+	{
+		products.add(product);
+	}
 }

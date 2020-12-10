@@ -27,4 +27,18 @@ public class CustomerCtr
 	{
 		return CustomerContainer.getInstance().getCustomer(phone);
 	}
+	
+	/**
+	 * Made as a test method for the create offer and the create order use cases.
+	 * @param phone
+	 * @param discount
+	 * @param name
+	 * @param address
+	 * @param group
+	 */
+	public void addCustomer(int phone, int discount, String name, String address, String group)
+	{
+		Customer customer = new Customer(phone,discount,name,address,group);
+		CustomerContainer.getInstance().addCustomer(customer);
+	}
 }
