@@ -58,10 +58,7 @@ public class OrderMenu
 		
 		while(running) 
 		{
-			System.out.println("Please input customer phone number: ");
-			int phone = input.nextInt();
-			input.nextLine();
-			String customerName = orderCtr.findCustomer(phone);
+			String customerName = findCustomer();
 			System.out.println("Creating offer for  " + customerName + ":");
 			
 			boolean productsAdded = false;
@@ -71,7 +68,7 @@ public class OrderMenu
 				
 				System.out.println("Do you wish to add more products to the offer? Y/N");
 				String answer = input.nextLine();
-				if(answer.trim().toLowerCase().equals("n") || answer.toLowerCase().trim().equals("no"))
+				if(answer.trim().equalsIgnoreCase("N") || answer.trim().equalsIgnoreCase("no"))
 				{
 					productsAdded = true;
 				}
@@ -108,7 +105,7 @@ public class OrderMenu
 			
 			System.out.println("\n Confirm offer? Y/N");
 			String answer = input.nextLine(); 
-			if(answer.trim().toLowerCase().equals("y") || answer.trim().toLowerCase().equals("yes"))
+			if(answer.trim().equalsIgnoreCase("Y") || answer.trim().equalsIgnoreCase("yes"))
 			{
 				orderCtr.createOffer();
 				System.out.println("Offer has succesfully been created, you will now be returned to the Order Menu.");
@@ -126,7 +123,7 @@ public class OrderMenu
 	/**
 	 * This method returns the int we use to choose
 	 * where the user is going in the OrderMenu.
-	 * It also prints and handles choices in gener
+	 * It also prints and handles choices in general.
 	 * @return
 	 */
 	private int writeOrderMenu()
@@ -148,15 +145,35 @@ public class OrderMenu
 		return choice;
 	}
 	
-	
-	
+	/**
+	 * This method allows us to search for customers
+	 * based on their phone numbers,
+	 * and return their name as a string, in order to use
+	 * it inside other methods.
+	 * 
+	 * @return the found customers name
+	 */
+	private String findCustomer() 
+	{
+		
+		System.out.println("Please input customer phone number: ");
+		int phone = input.nextInt();
+		input.nextLine();
+		String customerName = orderCtr.findCustomer(phone);
+		return customerName;
+	}
+	/**
+	 * This method allows us to search for products based
+	 * on their names and add them to the list
+	 * of orderProducts inside the order controller.
+	 * 
+	 */
 	private void searchForProduct() 
 	{
 		
 		System.out.println("Please input product name:");
 		String productName = input.nextLine();
-		ArrayList<String[]> products = orderCtr.getProducts(productName);
-		
+		ArrayList<String[]> products = orderCtr.getProducts(productName);		
 		
 			System.out.println("Please select a product by number:");
 		
