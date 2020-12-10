@@ -6,3 +6,13 @@
 /Product.class
 /ProductContainer.class
 /OrderLineItem.class
+/modelLayerTest.class
+/CustomerTest.class
+/OrderContainerTest.class
+/OrderLineItemTest.class
+/ProductTest.class
+/ProductContainerTest.class
+/CustomerTest2.class
+/CustomerContainerTest.class
+/OrderTest.class
+/CustomerNotFoundException.class
