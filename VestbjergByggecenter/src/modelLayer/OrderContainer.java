@@ -28,17 +28,17 @@ public class OrderContainer implements Serializable
 	}
 	
 	/**
-	 * The method adds an already existing offer to
+	 * The method adds an already existing order to
 	 * the ArrayList<> orders. If the
 	 * addition is successful the method returns true,
 	 * if not it returns false.
 	 * 
-	 * @param offer
+	 * @param order
 	 * @return true or false
 	 */
-	public boolean addOffer(Offer offer)
+	public boolean addOrder(Order order)
 	{
-		return orders.add(offer);
+		return orders.add(order);
 		//TODO - any checks?
 	}
 	

@@ -14,7 +14,7 @@ public class Order
 	private int orderNumber; // The unique identifier
 	private int discount;
 	private long totalPrice;
-	private Calendar expirationDate;
+	private Calendar expirationDate; //and Order object is order if expirationDate is null, if it isnt, it is and offer
 	private Calendar purchaseDate;
 	private String status; // The status of the sales process, is it still just an offer or how far along has it come
 	private String delivery;
@@ -30,6 +30,7 @@ public class Order
 	
 		//TODO automatically add purchaseDate, status, delivery, totalPrice, automatically generate expirationDate
 	}
+	
 
 	/**
  	* The following methods are the getters 
@@ -125,4 +126,16 @@ public class Order
 		this.expirationDate = expirationDate;
 	}
 
+	public Calendar calculateExpirationDate() 
+	{
+		Calendar generateExpirationDate = Calendar.getInstance();
+		generateExpirationDate.roll(Calendar.MONTH, true);
+		return generateExpirationDate;
+	}
+	
+	public void generatePurchaseDate() 
+	{
+		purchaseDate = Calendar.getInstance();
+	}
+	
 }

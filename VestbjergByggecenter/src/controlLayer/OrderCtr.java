@@ -95,14 +95,18 @@ public class OrderCtr
 	/**
 	 *This method uses the fields customer and  
 	 *orderProducts to create
-	 *an order/offer Object and add
-	 *it to our collection of add it.
+	 *an order Object and add
+	 *it to our collection of orders.
+	 *It also creates an expiration date and automatically
+	 *sets status to pending.
 	 * 
 	 * @return true or false
 	 */
 	public boolean createOffer()
 	{
-		Offer offer = new Offer(customer, orderProducts);
+		Order offer = new Order(customer, orderProducts);
+		offer.calculateExpirationDate();
+		offer.setStatus("pending");
 		
 		/*
 		 * Here we update the threshold of the product, 
@@ -116,7 +120,15 @@ public class OrderCtr
 			p.getProduct().updateThreshold(p.getQuantity());
 		}
 		
-		return OrderContainer.getInstance().addOffer(offer);
+		return OrderContainer.getInstance().addOrder(offer);
+	}
+
+	public boolean createOrder()
+	{
+		Order order = new Order(customer, orderProducts);
+		order.setStatus("confirmed");
+		
+		return OrderContainer.getInstance().addOrder(order);
 	}
 
 	/**
@@ -138,6 +150,6 @@ public class OrderCtr
 		
 		totalWithDiscount *= (100-customer.getDiscount());
 		
-		return totalWithDiscount/totalWithoutDiscount < 0.8 ? (int)0.8*totalWithoutDiscount : totalWithDiscount;
+		return totalWithDiscount/totalWithoutDiscount < 0.8 ? (int)0.8 * totalWithoutDiscount : totalWithDiscount;
 	}
 }
