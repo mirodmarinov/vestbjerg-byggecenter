@@ -34,11 +34,15 @@ public class OrderCtr
 	 * @param phone
 	 * @return String of customer name
 	 */
-	public String findCustomer(int phone)
+	public String findCustomer(int phone) throws CustomerNotFoundException
 	{
 		// TODO - check if correct
 		Customer customer = customerCtr.getCustomer(phone);
 		this.customer = customer;
+		if(customer == null)
+		{
+			throw new CustomerNotFoundException("No customer exists with this phone number: " + phone + "\n Make sure to write the phone number without the country code.");
+		}
 		return customer.getName();
 	}
 
@@ -52,8 +56,8 @@ public class OrderCtr
 	 * @param name
 	 * @return ArrayList of String Arrays containing product information
 	 */
-	public ArrayList<String[]> getProducts(String name)
-	{
+	 public ArrayList<String[]> getProducts(String name)
+	 {
 		foundProducts = productCtr.getProducts(name);
 		ArrayList<String[]> allProductsInfo = new ArrayList<String[]>();
 		
@@ -67,7 +71,7 @@ public class OrderCtr
 		}
 		
 		return allProductsInfo;
-	}
+	 }
 
 	/**
 	 * This method allows us to have a product

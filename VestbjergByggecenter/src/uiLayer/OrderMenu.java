@@ -155,13 +155,23 @@ public class OrderMenu
 	 */
 	private String findCustomer() 
 	{
-		
+		String customerName = null;
 		System.out.println("Please input customer phone number: ");
 		int phone = input.nextInt();
 		input.nextLine();
-		String customerName = orderCtr.findCustomer(phone);
+		try 
+		{
+			customerName = orderCtr.findCustomer(phone);
+		} 
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+			customerName = findCustomer();
+			
+		}
 		return customerName;
 	}
+	
 	/**
 	 * This method allows us to search for products based
 	 * on their names and add them to the list
