@@ -112,7 +112,7 @@ public class MainMenu
 		{
 			Class<?> c = Class.forName(className);
 			Method method = c.getDeclaredMethod("getInstance");
-			//oos.writeObject(method.invoke());
+			oos.writeObject(method.invoke(null));
 		}
 		catch (Exception e)
 		{

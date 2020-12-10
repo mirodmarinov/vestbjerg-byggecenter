@@ -71,25 +71,27 @@ public class OrderMenu
 				
 				System.out.println("Do you wish to add more products to the offer? Y/N");
 				String answer = input.nextLine();
-				if(answer.equals("N") || answer.toLowerCase().equals("no"))
+				if(answer.trim().toLowerCase().equals("n") || answer.toLowerCase().trim().equals("no"))
 				{
 					productsAdded = true;
 				}
 			}
 		
 			System.out.println("Offer summary:");
-			System.out.println("Customer : " + customerName);
+			System.out.println("Customer: " + customerName);
 			System.out.println("Products: ");
+			
 			
 			long priceWithoutDiscount = 0;
 			ArrayList<OrderLineItem> allProducts = orderCtr.getOrderProducts();
+			
 			for(OrderLineItem o : allProducts)
 			{
 				Product product = o.getProduct();
 				String name = product.getName();
 				long price = product.getSalesPrice();
 				int quantity = o.getQuantity();
-				long totalPrice = quantity * price;
+				long totalPrice = quantity * price; //Total price of the product based on quantity
 				priceWithoutDiscount += totalPrice;
 				
 				System.out.println(name + "				" + price + "kr.");
@@ -101,20 +103,12 @@ public class OrderMenu
 				
 			}
 			
-			//probably stupidly complicated but it calculates the discount
-			//TODO - probably update if we want to make it simpler
-			long discount = 0;
-			long difference = priceWithoutDiscount - orderCtr.calculateTotal();
-			long a = priceWithoutDiscount / 100;
-			discount = difference / a;
-			
 			System.out.println("Price before discount " + priceWithoutDiscount + "kr.");
-			System.out.println("Discount " + discount + "%"); //TODO figure out how to showcase discounts
 			System.out.println("Total " + orderCtr.calculateTotal() + "kr.");
 			
 			System.out.println("\n Confirm offer? Y/N");
 			String answer = input.nextLine(); 
-			if(answer.toLowerCase().equals("y") || answer.toLowerCase().equals("yes"))
+			if(answer.trim().toLowerCase().equals("y") || answer.trim().toLowerCase().equals("yes"))
 			{
 				orderCtr.createOffer();
 				System.out.println("Offer has succesfully been created, you will now be returned to the Order Menu.");
@@ -127,9 +121,14 @@ public class OrderMenu
 				running = false;
 			}
 		}
-		
 	}
 
+	/**
+	 * This method returns the int we use to choose
+	 * where the user is going in the OrderMenu.
+	 * It also prints and handles choices in gener
+	 * @return
+	 */
 	private int writeOrderMenu()
 	{
 		System.out.println("* Main Menu *");
@@ -149,7 +148,10 @@ public class OrderMenu
 		return choice;
 	}
 	
-	private void searchForProduct() {
+	
+	
+	private void searchForProduct() 
+	{
 		
 		System.out.println("Please input product name:");
 		String productName = input.nextLine();
