@@ -144,6 +144,11 @@ public class Product
 	{
 		this.threshold += threshold;
 	}
+	
+	public void updateQuantity(int quantity)
+	{
+		this.quantity += quantity;
+	}
 
 
 }

@@ -102,7 +102,7 @@ public class OrderCtr
 	 *an order Object and add
 	 *it to our collection of orders.
 	 *It also creates an expiration date and automatically
-	 *sets status to pending.
+	 *sets status to pending. This is an offer because its status is set to pending.
 	 * 
 	 * @return true or false
 	 */
@@ -127,10 +127,30 @@ public class OrderCtr
 		return OrderContainer.getInstance().addOrder(offer);
 	}
 
+	/**
+	 * This method creates an Order,
+	 * by passing the customer and
+	 * the list of products and setting
+	 * the status of the order to confirmed
+	 * so indicate that it is an order.
+	 * 
+	 * 
+	 */
 	public boolean createOrder()
 	{
 		Order order = new Order(customer, orderProducts);
 		order.setStatus("confirmed");
+		
+		/*
+		 * Here we update the stock, by changing
+		 * the quantity of the product in stock
+		 * based on the quantity of the orderline
+		 * item. 
+		 */
+		for(OrderLineItem p: orderProducts)
+		{
+			p.getProduct().updateQuantity(p.getQuantity() * (-1));
+		}
 		
 		return OrderContainer.getInstance().addOrder(order);
 	}
