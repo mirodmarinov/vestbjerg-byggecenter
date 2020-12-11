@@ -9,8 +9,11 @@ package modelLayer;
  */
 
 import java.util.ArrayList;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 
-public class OrderContainer 
+public class OrderContainer implements Serializable
 {
 	private static OrderContainer uniqueInstance = new OrderContainer();
 	private ArrayList<Order> orders = new ArrayList<>();
@@ -24,10 +27,42 @@ public class OrderContainer
 		return uniqueInstance;
 	}
 	
-	public boolean addOffer(Offer offer)
+	/**
+	 * The method adds an already existing order to
+	 * the ArrayList<> orders. If the
+	 * addition is successful the method returns true,
+	 * if not it returns false.
+	 * 
+	 * @param order
+	 * @return true or false
+	 */
+	public boolean addOrder(Order order)
 	{
-		//TODO - update
-		return true;
+		return orders.add(order);
+		//TODO - any checks?
+	}
+	
+		/**
+	 *
+	 *A method that overrides the instance with the object retrieved from deserialization
+	 * @param ois
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+
+	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException
+	{
+		ois.defaultReadObject();
+		uniqueInstance = this;
+	}
+
+	/**
+	 * used for serialization to return the instance of the singleton class
+	 * @return returns a productCOntainer instance that can be serialized
+	 */
+	private Object readResolve()
+	{
+		return uniqueInstance;
 	}
 
 }
