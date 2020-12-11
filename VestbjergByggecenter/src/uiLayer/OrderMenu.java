@@ -13,17 +13,21 @@ import modelLayer.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class OrderMenu {
+public class OrderMenu 
+{
 	private Scanner input = new Scanner(System.in);
 	private OrderCtr orderCtr = new OrderCtr();
 
-	public OrderMenu() {
+	public OrderMenu()
+	{
 	}
 
-	public void start() {
+	public void start() 
+	{
 		boolean running = true;
 
-		while (running) {
+		while (running) 
+		{
 			System.out.println("* Order Menu *");
 			System.out.println(" (1) Create Offer");
 			System.out.println(" (2) Place Order");
@@ -33,27 +37,29 @@ public class OrderMenu {
 
 			int choice = intInput();
 
-			switch (choice) {
-			case 1:
-				createOffer();
-				break;
-			case 2:
-				createOrder();
-				break;
-			case 3:
-				System.out.println("Not yet possible");
-				break;
-			case 0:
-				running = false;
-				break;
-			default:
-				System.out.println("An error has happened, choice = " + choice);
-				break;
+			switch (choice) 
+			{
+				case 1:
+					createOffer();
+					break;
+				case 2:
+					createOrder();
+					break;
+				case 3:
+					System.out.println("Not yet possible");
+					break;
+				case 0:
+					running = false;
+					break;
+				default:
+					System.out.println("An error has happened, choice = " + choice);
+					break;
 			}
 		}
 	}
 
-	private void createOffer() {
+	private void createOffer() 
+	{
 		// TODO discuss whether the ctr is created here
 
 		String customerName = findCustomer();
@@ -66,7 +72,8 @@ public class OrderMenu {
 		confirm("offer");
 	}
 
-	public void createOrder() {
+	public void createOrder() 
+	{
 
 		String customerName = findCustomer();
 		System.out.println("Creating order for  " + customerName + ":");
@@ -84,8 +91,10 @@ public class OrderMenu {
 	 * 
 	 * @return int
 	 */
-	private int intInput() {
-		while (!input.hasNextInt()) {
+	private int intInput() 
+	{
+		while (!input.hasNextInt()) 
+		{
 			System.out.println("Input should be a number, try again");
 			input.nextLine();
 		}
@@ -100,22 +109,25 @@ public class OrderMenu {
 	 * 
 	 * @return the found customers name
 	 */
-	private String findCustomer() {
+	private String findCustomer() 
+	{
 		String customerName = null;
 		System.out.println("Please input customer's phone number: ");
 		int phone = intInput();
 
-		if(Integer.toString(phone).length() != 8) {
+		if(Integer.toString(phone).length() != 8) 
+		{
 			System.out.println("Phone number invalid, make sure not to use white spaces or country code.");
 			findCustomer();
 		}
 
-		try {
+		try 
+		{
 			customerName = orderCtr.findCustomer(phone);
-		} catch (Exception e) {
+		} catch (Exception e) 
+		{
 			System.out.println(e.getMessage());
 			customerName = findCustomer();
-
 		}
 		return customerName;
 	}
@@ -203,7 +215,8 @@ public class OrderMenu {
 	 * the method is the customer name, which should already have been identified,
 	 * prior to this method.
 	 */
-	private void displaySummary(String customerName) {
+	private void displaySummary(String customerName) 
+	{
 		System.out.println("Summary:");
 		System.out.println("Customer: " + customerName);
 		System.out.println("Products:");
@@ -211,7 +224,8 @@ public class OrderMenu {
 		long priceWithoutDiscount = 0;
 		ArrayList<OrderLineItem> allProducts = orderCtr.getOrderProducts();
 
-		for (OrderLineItem o : allProducts) {
+		for (OrderLineItem o : allProducts) 
+		{
 			Product product = o.getProduct();
 			String name = product.getName();
 			long price = product.getSalesPrice();
@@ -220,11 +234,11 @@ public class OrderMenu {
 			priceWithoutDiscount += totalPrice;
 
 			System.out.println(name + "				" + price + "kr.");
-			if (quantity > 1) {
+			if (quantity > 1) 
+			{
 				System.out.println(quantity + " x " + price + totalPrice + "kr.");
 			}
 			System.out.println("");
-
 		}
 
 		System.out.println("Price before discount " + priceWithoutDiscount + "kr.");
@@ -237,19 +251,25 @@ public class OrderMenu {
 	 * creating an order or offer, and it sends the confirmation to the OrderCtr
 	 * that then creates the Order object and adds it to the OrderContainer
 	 */
-	private void confirm(String type) {
+	private void confirm(String type) 
+	{
 		System.out.println("\n Confirm " + type + "? Y/N");
 		String answer = input.nextLine();
-		if (answer.trim().equalsIgnoreCase("Y") || answer.trim().equalsIgnoreCase("yes")) {
-			if (type.equals("offer")) {
+		if (answer.trim().equalsIgnoreCase("Y") || answer.trim().equalsIgnoreCase("yes")) 
+		{
+			if (type.equals("offer")) 
+			{
 				orderCtr.createOffer();
-			} else {
+			} 
+			else 
+			{
 				orderCtr.createOrder();
 			}
 
-			System.out.println(
-					"The " + type + " has succesfully been created, you will now be returned to the Order Menu.");
-		} else {
+			System.out.println("The " + type + " has succesfully been created, you will now be returned to the Order Menu.");
+		} 
+		else 
+		{
 			// TODO figure out if other things should happen if the offer is rejected.
 			System.out.println("The " + type + " was rejected, you will now be returned to the Order Menu.");
 		}
