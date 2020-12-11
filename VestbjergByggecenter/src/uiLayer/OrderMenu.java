@@ -206,7 +206,7 @@ public class OrderMenu {
 	private void displaySummary(String customerName) {
 		System.out.println("Summary:");
 		System.out.println("Customer: " + customerName);
-		System.out.println("Products: ");
+		System.out.println("Products:");
 
 		long priceWithoutDiscount = 0;
 		ArrayList<OrderLineItem> allProducts = orderCtr.getOrderProducts();
