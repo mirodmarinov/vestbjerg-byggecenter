@@ -28,8 +28,15 @@ public class OrderMenu
 
 		while (running)
 		{
-			int choice = writeOrderMenu();
-
+			System.out.println("* Main Menu *");
+			System.out.println(" (1) Create Offer");
+			System.out.println(" (2) Place Order");
+			System.out.println(" (3) ");
+			System.out.println(" (0) Back");
+			System.out.print("\n Choose: \n");
+			
+			int choice = intInput();
+			
 			switch (choice)
 			{
 				case 1:
@@ -121,19 +128,14 @@ public class OrderMenu
 	}
 
 	/**
-	 * This method returns the int we use to choose
-	 * where the user is going in the OrderMenu.
-	 * It also prints and handles choices in general.
-	 * @return
+	 * This method returns the int we use to handle
+	 * user input errors when we are searching for
+	 * ints, and they input Strings instead.
+	 * 
+	 * @return int
 	 */
-	private int writeOrderMenu()
+	private int intInput()
 	{
-		System.out.println("* Main Menu *");
-		System.out.println(" (1) Create Offer");
-		System.out.println(" (2) Place Order");
-		System.out.println(" (3) ");
-		System.out.println(" (0) Back");
-		System.out.print("\n Choose: \n");
 
 		while (!input.hasNextInt())
 		{
@@ -156,9 +158,15 @@ public class OrderMenu
 	private String findCustomer() 
 	{
 		String customerName = null;
-		System.out.println("Please input customer phone number: ");
-		int phone = input.nextInt();
-		input.nextLine();
+		System.out.println("Please input customer's phone number: ");
+		int phone = intInput();
+		
+		if(!Integer.toString(phone).length() == 8)
+		{
+			System.out.println("Phone number invalid, make sure not to use white spaces or country code.");
+			findCustomer();
+		}
+		
 		try 
 		{
 			customerName = orderCtr.findCustomer(phone);
@@ -183,28 +191,59 @@ public class OrderMenu
 		
 		System.out.println("Please input product name:");
 		String productName = input.nextLine();
-		ArrayList<String[]> products = orderCtr.getProducts(productName);		
+		ArrayList<String[]> products = orderCtr.getProducts(productName);
 		
-			System.out.println("Please select a product by number:");
+		if(products.size() == 0)
+		{
+			System.out.println("There is no product that conatins this sequence of characters: " + productName);
+			searchForProduct();
+		}		
 		
-			int i = 1;
-			for(String[] product: products)
+		System.out.println("Please select a product by number:");
+		
+		int i = 1;
+		for(String[] product: products)
+		{
+			System.out.println("(" + i + ") Product name: " + product[0]);
+			System.out.println("   Description: " + product[1]);
+			i++;
+		}
+		
+		int choice = intInput(); // Choice is registered
+		
+		while(choice <= 0 && choice > i) //Handles input error when choice is invalid or negative
+		{
+			System.out.println("Please input one of the possible choices: ");
+			choice = intInput();
+		}
+		
+		System.out.println("Please input quantity: ");
+		int quantity = intInput(); // Quantity is registered
+		
+		while(quantity <= 0 || quantity > 1000) //Handles input error when quantity is negative
+		{
+			if(quantity <= 0)
 			{
-				System.out.println("(" + i + ") Product name: " + product[0]);
-				System.out.println("   Description: " + product[1]);
-				i++;
+				System.out.println("Please input positive quantity: ");
+				quantity = intInput();
 			}
+			else
+			{
+				System.out.println("Really? Are you trying to buy " + quantity + " products?");
+				System.out.println("Stop trying to break our code and input serious quantity: ");
+				quantity = intInput();
+			}
+		}
 		
-			int choice = input.nextInt();
-			input.nextLine();
-			
-			System.out.println("Please input quantity: ");
-			int quantity = input.nextInt();
-			input.nextLine();
-			orderCtr.selectProduct(choice - 1, quantity);
+		if(quantity == 69)
+		{
+			System.out.println("Nice.");
+		}
 		
-			String[] chosenProductInfo = products.get(i-1);
-			String chosenProductName = chosenProductInfo[0];
-			System.out.println(quantity + " of product " + chosenProductName + " has been added to the offer");	
+		orderCtr.selectProduct(choice - 1, quantity); //Chosen product and quantity is passed to ctr
+		
+		String[] chosenProductInfo = products.get(i-1);
+		String chosenProductName = chosenProductInfo[0];
+		System.out.println(quantity + " of product " + chosenProductName + " has been added to the offer");	
 	}
 }
