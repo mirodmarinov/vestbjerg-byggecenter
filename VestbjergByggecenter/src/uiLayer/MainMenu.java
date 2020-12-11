@@ -20,6 +20,11 @@ public class MainMenu
 	private Scanner input = new Scanner(System.in);
 	private OrderMenu orderUI = new OrderMenu();
 	File CONFIG_HOME; //storing the app data folder
+	
+	static void main(String[] args) {
+		MainMenu mn = new MainMenu();
+		mn.start();
+	}
 
 	public MainMenu()
 	{

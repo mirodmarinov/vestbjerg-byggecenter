@@ -162,7 +162,7 @@ public class OrderMenu
 		System.out.println("Please input customer's phone number: ");
 		int phone = intInput();
 		
-		if(!Integer.toString(phone).length() == 8)
+		if (Integer.toString(phone).length() != 8)
 		{
 			System.out.println("Phone number invalid, make sure not to use white spaces or country code.");
 			findCustomer();

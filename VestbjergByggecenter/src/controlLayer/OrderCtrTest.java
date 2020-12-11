@@ -22,6 +22,8 @@ class OrderCtrTest
 	Customer customer2;
 	Product product1;
 	Product product2;
+	
+	
 	@BeforeEach
 	void setUpBeforeClass() throws Exception
 	{
