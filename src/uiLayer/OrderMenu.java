@@ -207,6 +207,7 @@ public class OrderMenu
 				productsAdded = true;
 			}
 		}
+	}
 
 	/**
 	 * This method shows a summary of whatever type of sale (orfer or order) is
