@@ -1,5 +1,6 @@
 package controlLayer;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ class OrderCtrTest
 	//Customer customer2;
 	Product product1;
 	Product product2;
-	ArrayList<OrderLineItem> olns;
+	private ArrayList<OrderLineItem> olns = new ArrayList<>();
 	OrderLineItem oln;
 	
 	@BeforeEach
@@ -40,14 +41,15 @@ class OrderCtrTest
 		customerCtr.addCustomer(165598,0,"Tobias","Aarhus 50","Customer");
 		productCtr.addProduct(10, 10, 0, 2500, 2000, "123CDB24", "Hammer", "A construction hammer", "Tools", "DIY");
 		productCtr.addProduct(100, 100, 0, 30, 30, "C62CDA24", "Nail", "Standart nail", "Item", "DIY");
-		//product1 = new Product(10, 10, 0, 2500, 2000, "123CDB24", "Hammer", "A construction hammer", "Tools", "DIY");
-		//product2 = new Product(100, 100, 0, 30, 30, "C62CDA24", "Nail", "Standart nail", "Item", "DIY");
+		product1 = new Product(10, 10, 0, 2500, 2000, "123CDB24", "Hammer", "A construction hammer", "Tools", "DIY");
+		product2 = new Product(100, 100, 0, 30, 30, "C62CDA24", "Nail", "Standart nail", "Item", "DIY");
 		//ProductContainer.getInstance().addProduct(product1);
 		//ProductContainer.getInstance().addProduct(product2);
 		oln = new OrderLineItem(product1,2);
 		olns.add(oln);
 		oln = new OrderLineItem(product2,4);
 		olns.add(oln);
+		
 	}
 
 	@Test
