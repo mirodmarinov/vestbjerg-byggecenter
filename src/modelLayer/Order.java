@@ -1,6 +1,7 @@
 package modelLayer;
 
 import java.util.Calendar;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * Vestbjerg Byggecenter. It defines all the elements
  * of knowledge that is necessary to manage orders.
  */
-public class Order 
+public class Order implements Serializable
 {
 	
 	private int orderNumber; // The unique identifier
