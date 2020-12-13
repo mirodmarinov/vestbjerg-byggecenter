@@ -221,7 +221,7 @@ public class OrderMenu
 		System.out.println("Summary:");
 		System.out.println("Customer: " + customerName);
 		System.out.println("Products:");
-
+		
 		long priceWithoutDiscount = 0;
 		ArrayList<OrderLineItem> allProducts = orderCtr.getOrderProducts();
 
