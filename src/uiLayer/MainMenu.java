@@ -33,6 +33,8 @@ public class MainMenu
 		// makes it hidden for basic operating systems.
 		CONFIG_HOME = new File(home, ".VestbjergWMS").getAbsoluteFile();
 		CONFIG_HOME.mkdirs();
+		
+		//some changes
 	}
 
 	public static void main(String[] args)
