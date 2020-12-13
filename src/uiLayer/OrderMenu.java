@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class OrderMenu 
 {
 	private Scanner input = new Scanner(System.in);
-	private OrderCtr orderCtr = new OrderCtr();
+	private OrderCtr orderCtr;
 
 	public OrderMenu()
 	{
@@ -60,29 +60,37 @@ public class OrderMenu
 
 	private void createOffer() 
 	{
-		// TODO discuss whether the ctr is created here
+		orderCtr = new OrderCtr(); //Creating the orderCtr, in that way we wipe all the data in the controller
+		
+		String customerName = "";
+		customerName = findCustomer();
+		System.out.println("Creating order for  " + customerName + ":");
 
-		String customerName = findCustomer();
-		System.out.println("Creating offer for  " + customerName + ":");
-
-		searchForProduct(); // creates a list of products and stores it in the OrderCtr
+		if(searchForProduct(true))
+		{
 
 		displaySummary(customerName);
 
 		confirm("offer");
+		}
 	}
 
 	public void createOrder() 
 	{
-
-		String customerName = findCustomer();
+		orderCtr = new OrderCtr();
+		
+		String customerName = ""; //Creating the orderCtr, in that way we wipe all the data in the controller
+		customerName = findCustomer();
 		System.out.println("Creating order for  " + customerName + ":");
 
-		searchForProduct();
+		if(searchForProduct(true))
+		{
 
 		displaySummary(customerName);
 
 		confirm("order");
+		}
+		
 	}
 
 	/**
@@ -111,26 +119,46 @@ public class OrderMenu
 	 */
 	private String findCustomer() 
 	{
-		String customerName = null;
-		System.out.println("Please input customer's phone number: ");
-		int phone = intInput();
-
-		if(Integer.toString(phone).length() != 8) 
+		String customerName = "";
+		int phone;
+		do 
 		{
-			System.out.println("Phone number invalid, make sure not to use white spaces or country code.");
-			findCustomer();
+			
+			do 
+			{
+				System.out.println("Please input customer's phone number or write 0 to return to the menu.");
+				phone = intInput();
+				if (phone == 0)
+					{
+						break; //breaks the while loop and returns to the order menu.
+					}
+				if(Integer.toString(phone).length() != 8) 
+					{
+						System.out.println("Phone number invalid, make sure not to use spaces or country code.");
+					}
+			}
+			while (customerName.equals(""));
+			
+			
+			if (!customerName.equals(""))
+			{
+					System.out.println("Bent");
+				try 
+					{
+						return orderCtr.findCustomer(phone);
+					} 
+				catch (Exception e) 
+					{
+						System.out.println(e.getMessage());
+					}
+				
+			}
 		}
-
-		try 
-		{
-			customerName = orderCtr.findCustomer(phone);
-		} catch (Exception e) 
-		{
-			System.out.println(e.getMessage());
-			customerName = findCustomer();
-		}
-		return customerName;
-	}
+		while(phone != 0);
+		
+	
+		return "";
+	}	
 
 	/**
 	 * This method allows us to search for products based
@@ -138,22 +166,37 @@ public class OrderMenu
 	 * of orderProducts inside the order controller.
 	 * 
 	 */
-	private void searchForProduct() 
+	private boolean searchForProduct(boolean isOrder) 
 	{			
 		boolean productsAdded = false;
+		String productName;
+		ArrayList<String[]> products = new ArrayList<>();
 		while(!productsAdded)
 		{
-			System.out.println("Please input product name:");
-			String productName = input.nextLine();
+			do
+				{
+				System.out.println("Please input product name or type 0 to return to the main menu");
+				productName = input.nextLine();
+				if (productName.equals("0"))
+				{
+					break;
+				}
+				
+				products = orderCtr.getProducts(productName);
 			
-			ArrayList<String[]> products = orderCtr.getProducts(productName);
-		
-			if(products.size() == 0)
+				if(products.size() == 0)
+				{
+					System.out.println("Product(s) not found");
+				}		
+				}
+			while (products.size() == 0);
+			
+			if (products.size() == 0)
 			{
-				System.out.println("There is no product that conatins this sequence of characters: " + productName);
-				searchForProduct();
-			}		
-		
+				break; //return to the main menu
+			}
+			
+			//********************** Selecting the product from the list ***********************\\
 			System.out.println("Please select a product by number:");
 		
 			int i = 1;
@@ -161,21 +204,26 @@ public class OrderMenu
 			{
 				System.out.println("(" + i + ") Product name: " + product[0]);
 				System.out.println("   Description: " + product[1]);
+				System.out.println("   Quantity: " + product[2]);
 				i++;
 			}
 		
 			int choice = intInput(); // Choice is registered
 		
-			while(choice <= 0 && choice > i) //Handles input error when choice is invalid or negative
+			while(choice <= 0 && choice > i-1) //Handles input error when choice is invalid or negative
 			{
 				System.out.println("Please input one of the possible choices: ");
 				choice = intInput();
 			}
-		
+			
+			//********************** Input quantity **********************\\
 			System.out.println("Please input quantity: ");
 			int quantity = intInput(); // Quantity is registered
-		
-			while(quantity <= 0 || quantity > 1000) //Handles input error when quantity is negative
+			
+			String orderNotPassed = "Passed";
+
+
+			while(quantity <= 0 || quantity > 100000) //Handles input error when quantity is negative
 			{
 				if(quantity <= 0)
 				{
@@ -189,24 +237,64 @@ public class OrderMenu
 					quantity = intInput();
 				}
 			}
+			if (isOrder) //if true, it checks if the quantity reaches the stock quantity or not
+			{
+					
+				while (Integer.valueOf(products.get(choice)[2]) < choice)
+				{
+					System.out.println("The quantity more than the quantity on the stock!\n"
+							+ "Please input an another quantity or type 0 to return the menu: ");
+					quantity = intInput();
+					if (quantity == 0)
+					{
+						orderNotPassed = "NotPassed";
+						break;
+							
+					}
+				}
+			}
 			if(quantity == 69)
 			{
 				System.out.println("Nice.");
 			}
-		
-			orderCtr.selectProduct(choice - 1, quantity); //Chosen product and quantity is passed to ctr
-		
-			String[] chosenProductInfo = products.get(i-1);
-			String chosenProductName = chosenProductInfo[0];
-			System.out.println(quantity + " of product " + chosenProductName + " has been added");
-		
-			System.out.println("Do you wish to add more products? Y/N");
-			String answer = input.nextLine();
-			if(answer.trim().equalsIgnoreCase("N") || answer.trim().equalsIgnoreCase("no"))
+			
+			//********************** Saving the product **********************\\
+			if (orderNotPassed.equals("Passed"))
 			{
-				productsAdded = true;
+				
+			
+				orderCtr.selectProduct(choice - 1, quantity); //Chosen product and quantity is passed to ctr
+			
+				String[] chosenProductInfo = products.get(i-1);
+				String chosenProductName = chosenProductInfo[0];
+				System.out.println(quantity + " of product " + chosenProductName + " has been added");
+				
+				//********************** Check if the the user wants to add more product **********************\\
+				String leaveTheWhileLoop = "Stay";
+				while(leaveTheWhileLoop.equals("Stay"))
+				{
+					System.out.println("Do you wish to add more products? Y/N");
+					String answer = input.nextLine();
+					if(answer.trim().equalsIgnoreCase("N") || answer.trim().equalsIgnoreCase("no"))
+					{
+						productsAdded = true;
+						leaveTheWhileLoop = "DontStay";
+					}
+					else if (answer.trim().equalsIgnoreCase("Y") || answer.trim().equalsIgnoreCase("yes"))
+					{
+						leaveTheWhileLoop = "DontStay";
+					}
+					else 
+					{
+						System.out.println("Invalid command! Please enter one of the options!");
+					}
+				
+				}
 			}
+			
+			
 		}
+		return true;
 	}
 
 	/**
@@ -271,7 +359,6 @@ public class OrderMenu
 		} 
 		else 
 		{
-			// TODO figure out if other things should happen if the offer is rejected.
 			System.out.println("The " + type + " was rejected, you will now be returned to the Order Menu.");
 		}
 	}
