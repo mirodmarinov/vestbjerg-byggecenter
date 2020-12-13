@@ -12,7 +12,11 @@ import java.io.Serializable;
 
 public class Customer implements Serializable
 {
-    private int phone; //phone number without country code
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int phone; //phone number without country code
     private int discount; //based on the group
     private String name;
     private String address;

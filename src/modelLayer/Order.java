@@ -12,6 +12,10 @@ import java.util.ArrayList;
 public class Order implements Serializable
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int orderNumber; // The unique identifier
 	private int discount;
 	private long totalPrice;

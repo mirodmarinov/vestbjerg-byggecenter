@@ -15,6 +15,10 @@ import java.io.Serializable;
 
 public class OrderContainer implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static OrderContainer uniqueInstance = new OrderContainer();
 	private ArrayList<Order> orders = new ArrayList<>();
 	

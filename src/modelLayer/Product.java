@@ -1,5 +1,7 @@
 package modelLayer;
 
+import java.io.Serializable;
+
 /**
  * The class Product is a part of the System developed for Vestbjerg
  * Byggecenter. It defines all the traits and knowledge we need to store on each
@@ -7,8 +9,12 @@ package modelLayer;
  * 
  */
 
-public class Product
+public class Product implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int threshold; // the minimum of products, once crossed, restock is
 	                       // initiated
 	private int quantity;

@@ -1,5 +1,7 @@
 package modelLayer;
 
+import java.io.Serializable;
+
 /**
  * This Class is a part of the Vestbjerg Byggecenter System.
  * It contains a product and quantity, and allow us to easily 
@@ -8,8 +10,12 @@ package modelLayer;
  * bulk buy discounts as well.
  *
  */
-public class OrderLineItem
+public class OrderLineItem implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Product product;
 	private int quantity;
 	
