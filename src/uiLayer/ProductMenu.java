@@ -157,7 +157,7 @@ public class ProductMenu {
 		}
 		//
 		
-		if (productCtr.createProduct(threshold,quantity,purchasePrice,salesPrice,barcode,name,description,group,location))
+		if (productCtr.createProduct(threshold,quantity,discount,purchasePrice,salesPrice,barcode,name,description,group,location))
 		{
 			System.out.println("Product creation successful!");
 		}
@@ -171,13 +171,13 @@ public class ProductMenu {
 	private void readProduct()
 	{
 		int choice = getProduct();	
-		productCtr.getInfo(choice);
+		productCtr.getInfo(choice-1);
 	}
 	
 	private void updateProduct()
 	{
 		int choice = getProduct();
-		productCtr.getParameters(choice);
+		productCtr.getParameters(choice-1);
 		
 		boolean running = true;
 		int element;
@@ -190,7 +190,14 @@ public class ProductMenu {
 				System.out.println("Please choose a number from the list!");
 				element = intInput();
 			}
-			productCtr.updateParameter(element);
+			System.out.println("Please enter the new value:");
+			String value = input.nextLine();
+			while (value.length() == 0)
+			{
+				System.out.println("It cannot be empty!");
+				value = input.nextLine();
+			}
+			productCtr.updateParameter(choice-1, element-1, value);
 			System.out.println("If you want to edit an another parameter of the product type'y' or 'yes' otherwise type 'n' or 'no' ");
 			String answer = "run";
 			while (answer.equals("run"))
@@ -252,7 +259,7 @@ public class ProductMenu {
 			System.out.println("Please enter a name with more than 2 characters!");
 			name = input.nextLine();
 		}
-		ArrayList<String[]> data = readProduct(name);
+		ArrayList<String[]> data = productCtr.getProduct(name);
 		System.out.println("Please select an product from the list:");
 		int place = 0;
 		for (String[] element : data)

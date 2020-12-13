@@ -11,6 +11,7 @@ package modelLayer;
  */
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -62,21 +63,6 @@ public class ProductContainer implements Serializable
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-
-	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException
-	{
-		ois.defaultReadObject();
-		uniqueInstance = this;
-	}
-
-	/**
-	 * used for serialization to return the instance of the singleton class
-	 * @return returns a productCOntainer instance that can be serialized
-	 */
-	private Object readResolve()
-	{
-		return uniqueInstance;
-	}
 	
 	/*
 	public Product selectProduct(String barcode) //quantity removed for now?
@@ -97,13 +83,44 @@ public class ProductContainer implements Serializable
 		//TODO - quantity????
 	}
 	*/
+	
+	
 	/**
 	 * Made as a test method for the ProductContainerTest test class, the create offer
 	 * and the create order use cases.
 	 * @param product
 	 */
-	public void addProduct(Product product)
+	public boolean addProduct(Product product)
 	{
-		products.add(product);
+		return products.add(product);
+	}
+	
+	public boolean deleteProduct(Product product)
+	{
+		Iterator<Product> it = products.iterator();
+		while (it.hasNext())
+		{
+			Product p = it.next();
+			if (p.getBarcode().equals(p.getBarcode()))
+			{
+				return products.remove(p);
+			}
+		}
+		return false;
+	}
+	
+	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException
+	{
+		ois.defaultReadObject();
+		uniqueInstance = this;
+	}
+
+	/**
+	 * used for serialization to return the instance of the singleton class
+	 * @return returns a productCOntainer instance that can be serialized
+	 */
+	private Object readResolve()
+	{
+		return uniqueInstance;
 	}
 }

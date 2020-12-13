@@ -17,6 +17,7 @@ public class MainMenu
 {
 	private Scanner input = new Scanner(System.in);
 	private OrderMenu orderUI = new OrderMenu();
+	private ProductMenu productUI = new ProductMenu();
 	File CONFIG_HOME; // storing the app data folder
 
 	public MainMenu()
@@ -40,13 +41,15 @@ public class MainMenu
 	public static void main(String[] args)
 	{
 		MainMenu mm = new MainMenu();
-		//mm.deserializeClass("modelLayer.ProductContainer");
-		//mm.deserializeClass("modelLayer.CustomerContainer");
-		//mm.deserializeClass("modelLayer.OrderContainer");
+		//retrieves any saved data
+		mm.deserializeClass("modelLayer.ProductContainer");
+		mm.deserializeClass("modelLayer.CustomerContainer");
+		mm.deserializeClass("modelLayer.OrderContainer");
 		mm.start();
-		//mm.serializeClass("modelLayer.ProductContainer");
-		//mm.serializeClass("modelLayer.CustomerContainer");
-		//mm.serializeClass("modelLayer.OrderContainer");
+		//stores all singleton containers locally
+		mm.serializeClass("modelLayer.ProductContainer");
+		mm.serializeClass("modelLayer.CustomerContainer");
+		mm.serializeClass("modelLayer.OrderContainer");
 	}
 
 	/**
@@ -68,7 +71,7 @@ public class MainMenu
 					break;
 				case 2:
 					//this.populateClasses();
-					System.out.println("Not implemented yet");
+					productUI.start();
 					break;
 				case 3:
 					//this.readCustomer();
@@ -95,8 +98,8 @@ public class MainMenu
 	{
 		System.out.println("* Main Menu *");
 		System.out.println(" (1) Order menu");
-		System.out.println(" (2) Populate classes");
-		System.out.println(" (3) Read Customer");
+		System.out.println(" (2) Product Manu");
+		System.out.println(" (3) ");
 		System.out.println(" (0) Quit");
 		System.out.print("\n Choose: \n");
 

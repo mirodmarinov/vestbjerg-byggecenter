@@ -76,7 +76,7 @@ public class OrderMenu
 		}
 	}
 
-	public void createOrder() 
+	private void createOrder() 
 	{
 		orderCtr = new OrderCtr();
 		
