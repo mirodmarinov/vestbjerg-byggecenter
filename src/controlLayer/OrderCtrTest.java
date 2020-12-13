@@ -33,10 +33,6 @@ class OrderCtrTest
 	@Test
 	void Setup()
 	{	
-		customerCtr.addCustomer(126589,2,"Bob","Aalborg 12","Customer");
-		customerCtr.addCustomer(165598,0,"Tobias","Aarhus 50","Customer");
-		productCtr.addProduct(10, 10, 0, 2500, 2000, "123CDB24", "Hammer", "A construction hammer", "Tools", "DIY");
-		productCtr.addProduct(100, 100, 0, 30, 30, "C62CDA24", "Nail", "Standart nail", "Item", "DIY");
 		product1 = new Product(10, 10, 0, 2500, 2000, "123CDB24", "Hammer", "A construction hammer", "Tools", "DIY");
 		product2 = new Product(100, 100, 0, 30, 30, "C62CDA24", "Nail", "Standart nail", "Item", "DIY");
 		oln = new OrderLineItem(product1,2);

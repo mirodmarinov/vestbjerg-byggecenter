@@ -11,11 +11,15 @@ import java.util.ArrayList;
  */
 public class Order implements Serializable
 {
+<<<<<<< Updated upstream
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+=======
+	private static int orderNumberGenerator = 0;
+>>>>>>> Stashed changes
 	private int orderNumber; // The unique identifier
 	private int discount;
 	private long totalPrice;
@@ -29,6 +33,7 @@ public class Order implements Serializable
 	
 	public Order(Customer customer, ArrayList<OrderLineItem> products) 
 	{
+		orderNumber = ++orderNumberGenerator;
 		this.customer = customer;
 		this.products = products;
 		expirationDate = null;
