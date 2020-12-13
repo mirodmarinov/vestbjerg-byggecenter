@@ -220,7 +220,15 @@ public class ProductMenu {
 	
 	private void deleteProduct()
 	{
-		//TODO write this
+		int choice = getProduct();
+		if(productCtr.deleteProduct(choice))
+		{
+			System.out.println("Product successfully deleted!");
+		}
+		else
+		{
+			System.out.println("Product delete error!");
+		}
 	}
 	
 	private int intInput() 
