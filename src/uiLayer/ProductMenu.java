@@ -171,7 +171,7 @@ public class ProductMenu {
 	private void readProduct()
 	{
 		int choice = getProduct();	
-		productCtr.getInfo(choice-1);
+		System.out.println(productCtr.getInfo(choice-1));
 	}
 	
 	private void updateProduct()
@@ -228,7 +228,7 @@ public class ProductMenu {
 	private void deleteProduct()
 	{
 		int choice = getProduct();
-		if(productCtr.deleteProduct(choice))
+		if(productCtr.deleteProduct(choice-1))
 		{
 			System.out.println("Product successfully deleted!");
 		}

@@ -141,9 +141,10 @@ public class ProductCtr
 		return true;
 	}
 	
-	public String getInfo (int placeInList)
+	public String getInfo(int placeInList)
 	{
 		return products.get(placeInList).toString().replaceAll("\\([^()]*\\)", "");
+		//return products.get(placeInList).toString();
 	}
 	
 	public String getParameters (int placeInList)
