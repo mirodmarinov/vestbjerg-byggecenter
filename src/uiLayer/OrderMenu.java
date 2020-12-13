@@ -15,11 +15,12 @@ import java.util.ArrayList;
 
 public class OrderMenu 
 {
-	private Scanner input = new Scanner(System.in);
+	private Scanner input;
 	private OrderCtr orderCtr;
 
 	public OrderMenu()
 	{
+		input = new Scanner(System.in);
 	}
 
 	public void start() 
