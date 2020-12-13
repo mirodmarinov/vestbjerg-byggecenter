@@ -264,12 +264,12 @@ public class ProductMenu {
 		int place = 0;
 		for (String[] element : data)
 		{
-			System.out.println(""+(++place)+")");
+			System.out.print(""+(++place)+")");
 			System.out.println("Name of the product: "+element[0] );
 			System.out.println("Description: "+element[1] );
 			
 		}
-		System.out.println("Number: ");
+		System.out.println("Choice: ");
 		int choice = input.nextInt();
 		while (choice <= 0 || choice > place)
 		{
