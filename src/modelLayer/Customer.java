@@ -1,5 +1,7 @@
 package modelLayer;
 
+import java.io.Serializable;
+
 /**
  * This class is part of the System developed for 
  * Vestbjerg Byggecenter. The class contains all the
@@ -8,7 +10,7 @@ package modelLayer;
  * this information.
  */
 
-public class Customer 
+public class Customer implements Serializable
 {
     private int phone; //phone number without country code
     private int discount; //based on the group

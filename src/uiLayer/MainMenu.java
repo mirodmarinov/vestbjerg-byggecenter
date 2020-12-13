@@ -8,18 +8,16 @@ package uiLayer;
  * do when interacting with the system.
  *
  */
-import modelLayer.ProductContainer;
-import modelLayer.CustomerContainer;
-import modelLayer.OrderContainer;
+import modelLayer.*;
 import java.util.Scanner;
 import java.lang.reflect.Method;
 import java.io.*;
 
-public class MainMenu 
+public class MainMenu
 {
 	private Scanner input = new Scanner(System.in);
 	private OrderMenu orderUI = new OrderMenu();
-	File CONFIG_HOME; //storing the app data folder
+	File CONFIG_HOME; // storing the app data folder
 
 	public MainMenu()
 	{
@@ -30,96 +28,102 @@ public class MainMenu
 		{
 			home = System.getProperty("user.home");
 		}
-		
+
 		// creates a folder called VestbjergWMS with a dot in the front which
 		// makes it hidden for basic operating systems.
 		CONFIG_HOME = new File(home, ".VestbjergWMS").getAbsoluteFile();
 		CONFIG_HOME.mkdirs();
 	}
-	
-	
-	public static void main (String[] args)
+
+	public static void main(String[] args)
 	{
-		MainMenu mn = new MainMenu();
-		mn.start();
+		MainMenu mm = new MainMenu();
+		//mm.deserializeClass("modelLayer.ProductContainer");
+		//mm.deserializeClass("modelLayer.CustomerContainer");
+		//mm.deserializeClass("modelLayer.OrderContainer");
+		mm.start();
+		//mm.serializeClass("modelLayer.ProductContainer");
+		//mm.serializeClass("modelLayer.CustomerContainer");
+		//mm.serializeClass("modelLayer.OrderContainer");
 	}
-	
-	/**
-	 * The start method is what we use
-	 * to redirect the user to the TUI's for managing
-	 * specific actions inside the system.
-	 */
-	public void start() 
-	{
-        boolean running = true;
-        
-        while (running) 
-		{
-        	int choice = writeMainMenu();
-        	
-            switch (choice) 
-			{
-                case 1:
-                	orderUI.start();
-                	break;
-                case 2:
-                	System.out.println("Not yet possible");
-                	break;
-                case 3:
-                	System.out.println("Not yet possible");
-                	break;
-                case 0:
-                	System.out.println("Have a nice day");
-                	running = false;
-                	break;
-                default:
-                  System.out.println("An error has happened, choice = "+ choice);
-                  break;
-            }
-        }
-    }
 
 	/**
-	 * Writes the main menu that is displayed, and return an int,
-	 * based on the choice of the user, this int
-	 * is then used in the start method, to execute different options
-	 * inside the switch.
+	 * The start method is what we use to redirect the user to the TUI's for
+	 * managing specific actions inside the system.
+	 */
+	public void start()
+	{
+		boolean running = true;
+
+		while (running)
+		{
+			int choice = writeMainMenu();
+
+			switch (choice)
+			{
+				case 1:
+					orderUI.start();
+					break;
+				case 2:
+					//this.populateClasses();
+					System.out.println("Not implemented yet");
+					break;
+				case 3:
+					//this.readCustomer();
+					System.out.println("Not implemented yet!");
+					break;
+				case 0:
+					System.out.println("Have a nice day");
+					running = false;
+					break;
+				default:
+					System.out.println("An error has happened, choice = " + choice);
+					break;
+			}
+		}
+	}
+
+	/**
+	 * Writes the main menu that is displayed, and return an int, based on the
+	 * choice of the user, this int is then used in the start method, to execute
+	 * different options inside the switch.
 	 * 
 	 */
-    private int writeMainMenu() 
+	private int writeMainMenu()
 	{
-        System.out.println("* Main Menu *");
-        System.out.println(" (1) Order menu");
-        System.out.println(" (2) ");
-        System.out.println(" (3) ");
-        System.out.println(" (0) Quit");
-        System.out.print("\n Choose: \n");
-        
-        while (!input.hasNextInt()) 
+		System.out.println("* Main Menu *");
+		System.out.println(" (1) Order menu");
+		System.out.println(" (2) Populate classes");
+		System.out.println(" (3) Read Customer");
+		System.out.println(" (0) Quit");
+		System.out.print("\n Choose: \n");
+
+		while (!input.hasNextInt())
 		{
-            System.out.println("Input should be a number, try again");
-            input.nextLine();
-        }
+			System.out.println("Input should be a number, try again");
+			input.nextLine();
+		}
 
-        int choice = input.nextInt();
-        return choice;
-    }
-
+		int choice = input.nextInt();
+		return choice;
+	}
 
 	private void serializeClass(String className)
 	{
 
 		/*
-		 *  we use try with resources here, so we make sure that the
-		 *  ObjectOutputStream object is closed automatically once the try is
-		 *  finished.
+		 * we use try with resources here, so we make sure that the
+		 * ObjectOutputStream object is closed automatically once the try is
+		 * finished.
 		 */
-		
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(CONFIG_HOME.getPath() + File.separator + className + ".ser"))))
+
+		try (ObjectOutput oos = new ObjectOutputStream(new FileOutputStream(new File(CONFIG_HOME.getPath() + File.separator + className + ".ser"))))
 		{
 			Class<?> c = Class.forName(className);
 			Method method = c.getDeclaredMethod("getInstance");
+			System.out.println("Succeeded" + method.invoke(null));
 			oos.writeObject(method.invoke(null));
+			oos.close();
 		}
 		catch (Exception e)
 		{
@@ -127,22 +131,39 @@ public class MainMenu
 		}
 
 	}
-	
+
 	/**
 	 * 
 	 * @param className
 	 */
 	private void deserializeClass(String className)
 	{
-		
-		try (ObjectInputStream oos = new ObjectInputStream(new FileInputStream(new File(CONFIG_HOME.getPath() + File.separator + className + ".ser"))))
+		File tmpFile = new File(CONFIG_HOME.getPath() + File.separator + className + ".ser");
+		if (tmpFile.exists() && tmpFile.isFile())
 		{
-			oos.readObject();
+			try (ObjectInput ois = new ObjectInputStream(new FileInputStream(tmpFile)))
+			{
+				ois.readObject();
+				ois.close();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
-		catch (Exception e)
-		{
-		}
-
 	}
+	/* Used for testing if serializable files work
+	private void populateClasses()
+	{
+		Customer customer1 = new Customer(126589,2,"Bob","Aalborg 12","Customer");
+		Customer customer2 = new Customer(165598,0,"Tobias","Aarhus 50","Customer");
+		CustomerContainer.getInstance().addCustomer(customer1);
+		CustomerContainer.getInstance().addCustomer(customer2);
+	}
+	
+	private void readCustomer()
+	{
+		System.out.println(CustomerContainer.getInstance().getCustomer(126589).getName());
+	}*/
 
 }
