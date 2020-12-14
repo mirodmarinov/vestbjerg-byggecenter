@@ -18,7 +18,7 @@ public class ProductMenu {
 	public void start()
 	{
 		boolean running = true;
-
+		int choice;
 		while (running)
 		{
 			System.out.println("* Order Menu *");
@@ -29,7 +29,7 @@ public class ProductMenu {
 			System.out.println(" (0) Back");
 			System.out.print("\n Choose: \n");
 
-			int choice = intInput();
+			choice = intInput();
 
 			switch (choice)
 			{
@@ -182,13 +182,14 @@ public class ProductMenu {
 		int choice = getProduct();
 		if (choice != -6)
 		{
-		productCtr.getParameters(choice-1);
+		System.out.println(productCtr.getParameters(choice-1));
 		
 		
 		boolean running = true;
 		int element;
 		while (running)
 		{
+			
 			System.out.println("Please choose an element you want to edit");
 			element = intInput();
 			while (element <= 0 || element > 10)
@@ -196,14 +197,30 @@ public class ProductMenu {
 				System.out.println("Please choose a number from the list!");
 				element = intInput();
 			}
-			System.out.println("Please enter the new value:");
-			String value = input.nextLine();
-			while (value.length() == 0)
+			String updated = "No";
+			while (updated.equals("No"))
 			{
-				System.out.println("It cannot be empty!");
-				value = input.nextLine();
+				System.out.println("Please enter the new value or type 0 to return to the main menu without saving!");
+				String value = input.nextLine();
+				if (value.equals("0"))
+				{
+					return;
+				}
+				while (value.length() == 0)
+				{
+					System.out.println("It cannot be empty!");
+					value = input.nextLine();
+				}
+				if (!productCtr.updateParameter(choice-1, element-1, value))
+				{
+					System.out.println("Invalid value!");
+					
+				}
+				else
+				{
+					updated = "Yes";
+				}
 			}
-			productCtr.updateParameter(choice-1, element-1, value);
 			System.out.println("If you want to edit an another parameter of the product type'y' or 'yes' otherwise type 'n' or 'no' ");
 			String answer = "run";
 			while (answer.equals("run"))
@@ -254,6 +271,7 @@ public class ProductMenu {
 		}
 
 		int choice = input.nextInt();
+		input.nextLine();
 		return choice;
 	}
 	
@@ -262,11 +280,12 @@ public class ProductMenu {
 		
 		int choice = 0;
 		int place = 0;
+		String name;
 		ArrayList<String[]> data;
 		do
 		{
 		System.out.println("Please enter the name of the product or type 0 to return to the menu:");
-		String name = input.nextLine();
+		name = input.nextLine();
 		if (name.equals("0"))
 		{
 			return  -6; //if the user inputs 0 it returns to the menu returning -6 so it won't display anyting more
