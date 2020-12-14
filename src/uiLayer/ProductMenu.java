@@ -171,13 +171,19 @@ public class ProductMenu {
 	private void readProduct()
 	{
 		int choice = getProduct();	
+		if (choice != -6)
+		{
 		System.out.println(productCtr.getInfo(choice-1));
+		}
 	}
 	
 	private void updateProduct()
 	{
 		int choice = getProduct();
+		if (choice != -6)
+		{
 		productCtr.getParameters(choice-1);
+		
 		
 		boolean running = true;
 		int element;
@@ -221,6 +227,7 @@ public class ProductMenu {
 				}
 			}
 		}
+		}
 		
 		
 	}
@@ -252,31 +259,41 @@ public class ProductMenu {
 	
 	private int getProduct()
 	{
-		System.out.println("Please enter the name of the product:");
+		
+		int choice = 0;
+		
+		System.out.println("Please enter the name of the product or type 0 to return to the menu:");
 		String name = input.nextLine();
+		if (name.equals(0))
+		{
+			return  -6; //if the user inputs 0 the p
+		}
 		while (name.length() < 3)
 		{
-			System.out.println("Please enter a name with more than 2 characters!");
+			System.out.println("Please enter a name with has more than 2 characters!");
 			name = input.nextLine();
 		}
 		ArrayList<String[]> data = productCtr.getProduct(name);
 		System.out.println("Please select an product from the list:");
+
+		
 		int place = 0;
 		for (String[] element : data)
 		{
 			System.out.print(""+(++place)+")");
-			System.out.println("Name of the product: "+element[0] );
-			System.out.println("Description: "+element[1] );
+			System.out.println("Name of the product: " + element[0] );
+			System.out.println("Description: " + element[1] );
 			
 		}
 		System.out.println("Choice: ");
-		int choice = input.nextInt();
+		choice = intInput();
 		while (choice <= 0 || choice > place)
 		{
-			System.out.println("Please enter a number between 1 and "+place+"!");
+			System.out.println("Please enter a number between 1 and " + place + "!");
 			choice = input.nextInt();
 		}
 		
 		return choice;
+
 	}
 }

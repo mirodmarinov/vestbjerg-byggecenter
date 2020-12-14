@@ -65,14 +65,14 @@ public class OrderMenu
 		
 		String customerName = "";
 		customerName = findCustomer();
-		System.out.println("Creating order for  " + customerName + ":");
+		System.out.println("Creating order for " + customerName + ":");
 
 		if(searchForProduct(true))
 		{
 
-		displaySummary(customerName);
+			displaySummary(customerName);
 
-		confirm("offer");
+			confirm("offer");
 		}
 	}
 
@@ -87,9 +87,9 @@ public class OrderMenu
 		if(searchForProduct(true))
 		{
 
-		displaySummary(customerName);
+			displaySummary(customerName);
 
-		confirm("order");
+			confirm("order");
 		}
 		
 	}
@@ -124,36 +124,33 @@ public class OrderMenu
 		int phone;
 		do 
 		{
-			
 			do 
 			{
 				System.out.println("Please input customer's phone number or write 0 to return to the menu.");
 				phone = intInput();
 				if (phone == 0)
-					{
-						break; //breaks the while loop and returns to the order menu.
-					}
+				{
+					break; //breaks the while loop and returns to the order menu.
+				}
 				if(Integer.toString(phone).length() != 8) 
-					{
-						System.out.println("Phone number invalid, make sure not to use spaces or country code.");
-					}
+				{
+					System.out.println("Phone number invalid, make sure not to use spaces or country code.");
+				}
 			}
-			while (customerName.equals(""));
+			while (Integer.toString(phone).length() != 8);
 			
 			
-			if (!customerName.equals(""))
+			if (Integer.toString(phone).length() == 8)
 			{
-					System.out.println("Bent");
 				try 
-					{
-						return orderCtr.findCustomer(phone);
-					} 
+				{
+					return orderCtr.findCustomer(phone);
+				} 
 				catch (Exception e) 
-					{
-						System.out.println(e.getMessage());
-					}
-				
-			}
+				{
+					System.out.println(e.getMessage());
+				}
+			}		
 		}
 		while(phone != 0);
 		
@@ -175,7 +172,7 @@ public class OrderMenu
 		while(!productsAdded)
 		{
 			do
-				{
+			{
 				System.out.println("Please input product name or type 0 to return to the main menu");
 				productName = input.nextLine();
 				if (productName.equals("0"))
@@ -188,8 +185,8 @@ public class OrderMenu
 				if(products.size() == 0)
 				{
 					System.out.println("Product(s) not found");
-				}		
-				}
+				}	
+			}
 			while (products.size() == 0);
 			
 			if (products.size() == 0)
@@ -292,8 +289,6 @@ public class OrderMenu
 				
 				}
 			}
-			
-			
 		}
 		return true;
 	}

@@ -43,6 +43,7 @@ public class ProductContainer implements Serializable
 	public ArrayList<Product> getProducts(String name)
 	{
 		ArrayList<Product> specifiedProducts = new ArrayList<Product>();
+		name = name.toLowerCase();
 		
 		for(Product a: products)
 		{

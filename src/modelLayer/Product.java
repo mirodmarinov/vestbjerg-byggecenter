@@ -36,7 +36,7 @@ public class Product implements Serializable
 		this.purchasePrice = purchasePrice;
 		this.salesPrice = salesPrice;
 		this.barcode = barcode;
-		this.name = name;
+		this.name = name.toLowerCase();
 		this.description = description;
 		this.group = group;
 		this.location = location;

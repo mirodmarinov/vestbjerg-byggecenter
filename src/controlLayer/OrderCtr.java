@@ -65,13 +65,8 @@ public class OrderCtr
 			String[] productInfo = new String[2];
 			productInfo[0] = product.getName();
 			productInfo[1] = product.getDescription();
-			//if the product exists in the cart already(one or multiple times), it substracts the ordered quantity and displays the quantity left
-			productInfo[2] = isProductInCart(product) > 0 ? Integer.toString(product.getQuantity() - isProductInCart(product)) : Integer.toString(product.getQuantity());
-			//if there is no quantity left, it does not display the product
-			if (product.getQuantity() - isProductInCart(product) > 0)
-			{
-				allProductsInfo.add(productInfo);
-			}
+			//productInfo[2] = isProductInCart(product) > 0 ? Integer.toString(product.getQuantity() - isProductInCart(product)) : Integer.toString(product.getQuantity());
+			
 		}
 
 		return allProductsInfo;
@@ -170,7 +165,7 @@ public class OrderCtr
 		return totalWithDiscount / totalWithoutDiscount < 0.8 ? (int)0.8 * totalWithoutDiscount : totalWithDiscount;
 	}
 
-	private int isProductInCart(Product product)
+	/*private int isProductInCart(Product product)
 	{
 		int tempQuantity = 0;
 		for (OrderLineItem oli : orderProducts)
@@ -181,6 +176,6 @@ public class OrderCtr
 			}
 		}
 		return tempQuantity;
-	}
+	}*/
 
 }
