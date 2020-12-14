@@ -29,18 +29,15 @@ class ProductContainerTest
 	void getProduct()
 	{
 		assertEquals(ProductContainer.getInstance().getProducts("Hammer").size(), 1);
-		assertEquals(ProductContainer.getInstance().getProducts("Hammer").get(0).getName(), "Hammer");
+		assertEquals(ProductContainer.getInstance().getProducts("Hammer").get(0).getName(), "hammer");
 	}
 
-	
-	
-	
-	/*@Test
+
+	@Test
 	void getNoInput()
 	{
-		//Null or empty arraylist. We have to change it later
-		assertEquals(ProductContainer.getInstance().getProducts("1"), null);
-	}*/
+		assertEquals(ProductContainer.getInstance().getProducts("1").size(), 0);
+	}
 
 
 }

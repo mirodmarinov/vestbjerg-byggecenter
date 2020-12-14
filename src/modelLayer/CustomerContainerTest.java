@@ -8,11 +8,14 @@ import org.junit.jupiter.api.Test;
 class CustomerContainerTest
 {
 
-	Customer customer1;
-	Customer customer2;
-	@BeforeEach
-	void setUp()
+
+	@BeforeAll
+	static void setUp()
 	{
+		Customer customer1 = new Customer(12658989,2,"Bob", "Aalborg 12", "Customer");
+		Customer customer2 = new Customer(16559898,0,"Tobias", "Aarhus 50", "Customer");
+		CustomerContainer.getInstance().addCustomer(customer1);
+		CustomerContainer.getInstance().addCustomer(customer2);
 	}
 	@Test
 	void notNullTest()
@@ -23,9 +26,7 @@ class CustomerContainerTest
 	@Test
 	void getProduct()
 	{
-		//1. Damn hate arraylists
-		//2. How to write the return type of the arraylist?
-		assertEquals(CustomerContainer.getInstance().getCustomer(126589), "Bob");
+		assertEquals(CustomerContainer.getInstance().getCustomer(12658989).getName(), "Bob");
 	}
 	
 	@Test
