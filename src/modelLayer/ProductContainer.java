@@ -93,6 +93,13 @@ public class ProductContainer implements Serializable
 	 */
 	public boolean addProduct(Product product)
 	{
+		for (Product p: products)
+		{
+			if (product.getBarcode().equals(p.getBarcode()))
+			{
+				return false;
+			}
+		}
 		return products.add(product);
 	}
 	

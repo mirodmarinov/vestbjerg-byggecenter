@@ -66,7 +66,6 @@ public class OrderCtr
 			productInfo[0] = product.getName();
 			productInfo[1] = product.getDescription();
 			productInfo[2] = String.valueOf(product.getQuantity());
-			//productInfo[2] = isProductInCart(product) > 0 ? Integer.toString(product.getQuantity() - isProductInCart(product)) : Integer.toString(product.getQuantity());
 			allProductsInfo.add(productInfo);
 		}
 
@@ -161,22 +160,10 @@ public class OrderCtr
 			totalWithDiscount += product.getSalesPrice() * quantity * (100 - product.getDiscount(quantity))/100;
 		}
 
-		totalWithDiscount *= (100 - customer.getDiscount());
+		totalWithDiscount *= (100 - customer.getDiscount())/100;
 
 		return totalWithDiscount / totalWithoutDiscount < 0.8 ? (int)0.8 * totalWithoutDiscount : totalWithDiscount;
 	}
 
-	/*private int isProductInCart(Product product)
-	{
-		int tempQuantity = 0;
-		for (OrderLineItem oli : orderProducts)
-		{
-			if (oli.getProduct().getBarcode().equals(product.getBarcode()))
-			{
-				tempQuantity += oli.getQuantity();
-			}
-		}
-		return tempQuantity;
-	}*/
 
 }

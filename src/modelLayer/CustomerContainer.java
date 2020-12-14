@@ -89,8 +89,15 @@ public class CustomerContainer implements Serializable
 	 * and the create order use cases.
 	 * @param customer
 	 */
-	public void addCustomer(Customer customer)
+	public boolean addCustomer(Customer customer)
 	{
-		customers.add(customer);
+		for (Customer c: customers)
+		{
+			if (customer.getPhone() == c.getPhone())
+			{
+				return false;
+			}
+		}
+		return customers.add(customer);
 	}
 }
