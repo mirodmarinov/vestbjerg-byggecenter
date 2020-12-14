@@ -88,6 +88,7 @@ public class ProductCtr
 
 	/**
 	 * It updates a product's parameter based on its place on the list
+	 * 
 	 * @param placeOnList
 	 * @param index
 	 * @param value
@@ -97,6 +98,21 @@ public class ProductCtr
 	{
 		Product p = products.get(placeOnList);
 		switch (index)
+		{
+			case 5, 6, 9:
+				if (!isInt(value))
+				{
+					return false;
+				}
+			case 7, 8:
+				if (!isLong(value))
+				{
+					return false;
+				}
+
+		}
+		switch (index)
+
 		{
 			case 0:
 				p.setName(value);
@@ -129,28 +145,53 @@ public class ProductCtr
 				p.setDiscount(Integer.valueOf(value));
 				break;
 			default:
-				break;
+				return true;
 		}
 		return true;
 	}
-	
+
 	public boolean deleteProduct(int placeInList)
 	{
 		ProductContainer.getInstance().deleteProduct(products.get(placeInList));
-		
+
 		return true;
 	}
-	
+
 	public String getInfo(int placeInList)
 	{
 		return products.get(placeInList).toString().replaceAll("\\([^()]*\\)", "");
-		//return products.get(placeInList).toString();
+		// return products.get(placeInList).toString();
 	}
-	
-	public String getParameters (int placeInList)
+
+	public String getParameters(int placeInList)
 	{
-		//return products.get(placeInList).getParameterList();
+		// return products.get(placeInList).getParameterList();
 		return products.get(placeInList).toString();
-		
+
+	}
+
+	private boolean isLong(String value)
+	{
+		try
+		{
+			Long.parseLong(value);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
+	private boolean isInt(String value)
+	{
+		try
+		{
+			Integer.parseInt(value);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
 	}
 }
