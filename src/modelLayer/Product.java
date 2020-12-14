@@ -108,7 +108,7 @@ public class Product implements Serializable
 
 	public int getDiscount(int quantity)
 	{
-		return quantity > 5 ? discount + 2 : discount;
+		return discount;
 	}
 
 	public void setDiscount(int discount)

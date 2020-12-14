@@ -94,14 +94,52 @@ public class OrderMenu
 	private int intInput() 
 	{
 		while (!input.hasNextInt()) 
-		{
+		{	
 			System.out.println("Input should be a number, try again");
 			input.nextLine();
 		}
-
+		
 		int choice = input.nextInt();
 		input.nextLine();
 		return choice;
+	}
+	
+	/**
+	 * This method allows us to check whether
+	 * an input is an int, and whether
+	 * that int within the limits
+	 * of what we need.
+	 * 
+	 * @param min
+	 * @param max
+	 * @return int
+	 */
+	private int intInput(int min, int max)
+	{
+		int choice = intInput();
+		while(choice < min || choice > max)
+		{
+			System.out.println("Input should be no lower than " + min + " and no higher than " + max + ", try again");
+			choice = intInput(); // Try again
+		}
+		
+		return choice;
+	}
+	
+	/**
+	 * 
+	 * @return String
+	 */
+	private String stringInput()
+	{
+		String outcome = input.nextLine();
+		while(outcome.length() < 3)
+		{
+			System.out.println("Please input more than 2 characters to search.");
+			outcome = input.nextLine();
+		}
+		
+		return outcome;
 	}
 
 	/**
@@ -113,24 +151,37 @@ public class OrderMenu
 	private String findCustomer() 
 	{
 		String customerName = null;
-		System.out.println("Please input customer's phone number: ");
-		int phone = intInput();
+		boolean phoneCorrect = false;
+		int phone = 0;
+		while(!phoneCorrect)
+		{
+			System.out.println("Please input customer's phone number: ");
+			phone = intInput();
 
-		if(Integer.toString(phone).length() != 8) 
-		{
-			System.out.println("Phone number invalid, make sure not to use white spaces or country code.");
-			findCustomer();
+			if(Integer.toString(phone).length() != 8) 
+			{	
+				System.out.println("Phone number invalid, make sure not to use white spaces or country code.");
+				//skips searching for customer
+				continue;
+			}
+			else 
+			{
+				phoneCorrect = true;
+			}
+			boolean customerFound = false;
+			while(!customerFound)
+			{
+				try 
+				{
+					customerName = orderCtr.findCustomer(phone);
+					customerFound = true;
+				} catch (Exception e) 
+				{
+					System.out.println(e.getMessage());
+				}
+			}
 		}
-
-		try 
-		{
-			customerName = orderCtr.findCustomer(phone);
-		} catch (Exception e) 
-		{
-			System.out.println(e.getMessage());
-			customerName = findCustomer();
-		}
-		return customerName;
+			return customerName;
 	}
 
 	/**
@@ -144,41 +195,41 @@ public class OrderMenu
 		boolean productsAdded = false;
 		while(!productsAdded)
 		{
-			System.out.println("Please input product name:");
-			String productName = input.nextLine();
-			
-			if(productName.length() < 3 ) 
+			String productName = "";
+			ArrayList<String[]> products = new ArrayList<>();
+			boolean productsFound = false;
+			while(!productsFound)
 			{
-				System.out.println("Please input more than 2 characters to search");
-				searchForProduct();
+				System.out.println("Please input product name:");
+				productName = stringInput();
+				
+				products = orderCtr.getProducts(productName);
+			
+				if(products.size() == 0)
+				{
+					System.out.println("There is no product that contains this sequence of characters: " + productName);
+				}
+				else
+				{
+					productsFound = true;
+				}
 			}
 			
-			ArrayList<String[]> products = orderCtr.getProducts(productName);
-			
-			if(products.size() == 0)
-			{
-				System.out.println("There is no product that contains this sequence of characters: " + productName);
-				searchForProduct();
-			}		
-		
+			/******************************* Product Selection *******************************/
 			System.out.println("Please select a product by number:");
 		
 			int i = 1;
 			for(String[] product: products)
 			{
 				System.out.println("(" + i + ") Product name: " + product[0]);
-				System.out.println("   Description: " + product[1]);
+				System.out.println("    Description: " + product[1]);
+				System.out.println("    Quantity in stock: " + product[2]);
 				i++;
 			}
 		
-			int choice = intInput(); // Choice is registered
-		
-			while(choice <= 0 && choice > i) //Handles input error when choice is invalid or negative
-			{
-				System.out.println("Please input one of the possible choices: ");
-				choice = intInput();
-			}
-		
+			int choice = intInput(1, products.size()); // Choice is registered
+			
+			/******************************* Quantity selection *******************************/
 			System.out.println("Please input quantity: ");
 			int quantity = intInput(); // Quantity is registered
 		
@@ -201,11 +252,13 @@ public class OrderMenu
 				System.out.println("Nice.");
 			}
 		
+			
 			orderCtr.selectProduct(choice - 1, quantity); //Chosen product and quantity is passed to ctr
 		
-			String[] chosenProductInfo = products.get(i-1);
+			/******************************* Addition confirmation *******************************/
+			String[] chosenProductInfo = products.get(choice-1);
 			String chosenProductName = chosenProductInfo[0];
-			System.out.println(quantity + " of product " + chosenProductName + " has been added");
+			System.out.println(quantity + " of product " +  "'" + chosenProductName + "'" + " has been added");
 		
 			System.out.println("Do you wish to add more products? Y/N");
 			String answer = input.nextLine();
@@ -217,7 +270,7 @@ public class OrderMenu
 	}
 
 	/**
-	 * This method shows a summary of whatever type of sale (orfer or order) is
+	 * This method shows a summary of whatever type of sale (offer or order) is
 	 * currently stored in the order controller, by retrieving the list of
 	 * orderLineItems and the customer that has been saved. The parameter needed for
 	 * the method is the customer name, which should already have been identified,
@@ -225,7 +278,7 @@ public class OrderMenu
 	 */
 	private void displaySummary(String customerName) 
 	{
-		System.out.println("Summary:");
+		System.out.println("\n Summary:");
 		System.out.println("Customer: " + customerName);
 		System.out.println("Products:");
 
@@ -244,7 +297,7 @@ public class OrderMenu
 			System.out.println(name + "				" + price + "kr.");
 			if (quantity > 1) 
 			{
-				System.out.println(quantity + " x " + price + totalPrice + "kr.");
+				System.out.println(quantity + " x " + price + "			" + totalPrice + "kr.");
 			}
 			System.out.println("");
 		}

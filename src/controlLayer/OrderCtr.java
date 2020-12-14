@@ -62,9 +62,10 @@ public class OrderCtr
 
 		for (Product product : foundProducts)
 		{
-			String[] productInfo = new String[2];
+			String[] productInfo = new String[3];
 			productInfo[0] = product.getName();
 			productInfo[1] = product.getDescription();
+			productInfo[2] = String.valueOf(product.getQuantity());
 			//productInfo[2] = isProductInCart(product) > 0 ? Integer.toString(product.getQuantity() - isProductInCart(product)) : Integer.toString(product.getQuantity());
 			allProductsInfo.add(productInfo);
 		}
@@ -157,7 +158,7 @@ public class OrderCtr
 			Product product = p.getProduct();
 			int quantity = p.getQuantity();
 			totalWithoutDiscount += product.getSalesPrice() * quantity;
-			totalWithDiscount += product.getSalesPrice() * quantity * (100 - product.getDiscount(quantity));
+			totalWithDiscount += product.getSalesPrice() * quantity * (100 - product.getDiscount(quantity))/100;
 		}
 
 		totalWithDiscount *= (100 - customer.getDiscount());
