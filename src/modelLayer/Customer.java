@@ -40,7 +40,7 @@ public class Customer implements Serializable
 		return phone;
 	}
 
-	public void setPhone(int phone) 
+	public void setPhone(int phone)
 	{
 		this.phone = phone;
 	}
@@ -75,7 +75,7 @@ public class Customer implements Serializable
 		this.discount = discount;
 	}
 
-	public String getGroup() 
+	public String getGroup()
 	{
 		return group;
 	}
