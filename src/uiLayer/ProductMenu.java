@@ -261,23 +261,26 @@ public class ProductMenu {
 	{
 		
 		int choice = 0;
-		
+		int place = 0;
+		ArrayList<String[]> data;
+		do
+		{
 		System.out.println("Please enter the name of the product or type 0 to return to the menu:");
 		String name = input.nextLine();
-		if (name.equals(0))
+		if (name.equals("0"))
 		{
-			return  -6; //if the user inputs 0 the p
+			return  -6; //if the user inputs 0 it returns to the menu returning -6 so it won't display anyting more
 		}
 		while (name.length() < 3)
 		{
 			System.out.println("Please enter a name with has more than 2 characters!");
 			name = input.nextLine();
 		}
-		ArrayList<String[]> data = productCtr.getProduct(name);
+		data = productCtr.getProduct(name);
 		System.out.println("Please select an product from the list:");
 
 		
-		int place = 0;
+		place = 0;
 		for (String[] element : data)
 		{
 			System.out.print(""+(++place)+")");
@@ -285,6 +288,11 @@ public class ProductMenu {
 			System.out.println("Description: " + element[1] );
 			
 		}
+		
+		}
+		while(data.size() == 0);
+		
+		
 		System.out.println("Choice: ");
 		choice = intInput();
 		while (choice <= 0 || choice > place)
@@ -292,6 +300,7 @@ public class ProductMenu {
 			System.out.println("Please enter a number between 1 and " + place + "!");
 			choice = input.nextInt();
 		}
+		
 		
 		return choice;
 
