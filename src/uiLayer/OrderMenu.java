@@ -40,9 +40,11 @@ public class OrderMenu
 			switch (choice) 
 			{
 				case 1:
+					orderCtr = new OrderCtr(); // created locally to reset fields
 					createOffer();
 					break;
 				case 2:
+					orderCtr = new OrderCtr();
 					createOrder();
 					break;
 				case 3:
@@ -60,8 +62,6 @@ public class OrderMenu
 
 	private void createOffer() 
 	{
-		// TODO discuss whether the ctr is created here
-
 		String customerName = findCustomer();
 		System.out.println("Creating offer for  " + customerName + ":");
 
@@ -278,11 +278,14 @@ public class OrderMenu
 	 */
 	private void displaySummary(String customerName) 
 	{
-		System.out.println("\n Summary:");
+		System.out.println("\nSummary:");
 		System.out.println("Customer: " + customerName);
-		System.out.println("Products:");
+		System.out.println("Products:\n");
 
 		long priceWithoutDiscount = 0;
+		//storing a string value of a price
+		String temp;
+		
 		ArrayList<OrderLineItem> allProducts = orderCtr.getOrderProducts();
 
 		for (OrderLineItem o : allProducts) 
@@ -293,17 +296,32 @@ public class OrderMenu
 			int quantity = o.getQuantity();
 			long totalPrice = quantity * price; // Total price of the product based on quantity
 			priceWithoutDiscount += totalPrice;
-
-			System.out.println(name + "				" + price + "kr.");
+			
+			temp = String.valueOf(price);
+			String formattedPrice = temp.substring(0, temp.length()-1) + "." +  temp.substring(temp.length() - 2, temp.length());
+			
+			temp = String.valueOf(totalPrice);
+			String formattedTotal = temp.substring(0, temp.length()-1) + "." +  temp.substring(temp.length() - 2, temp.length());
+			
+			System.out.println(name + "				" + formattedPrice + " kr./stk");
 			if (quantity > 1) 
 			{
-				System.out.println(quantity + " x " + price + "			" + totalPrice + "kr.");
+				System.out.println(quantity + " x " + formattedPrice + " kr./stk" + "		" + formattedTotal + " kr.");
 			}
 			System.out.println("");
 		}
 
-		System.out.println("Price before discount " + priceWithoutDiscount + "kr.");
-		System.out.println("Total " + orderCtr.calculateTotal() + "kr.");
+		temp = String.valueOf(priceWithoutDiscount);
+		String withoutDiscount = temp.substring(0, temp.length()-1) + "." +  temp.substring(temp.length() - 2, temp.length());
+		
+		
+		
+		System.out.println("Price before discount: " + withoutDiscount + " kr.");
+		
+		temp = String.valueOf(orderCtr.calculateTotal());
+		String withDiscount = temp.substring(0, temp.length()-1) + "." +  temp.substring(temp.length() - 2, temp.length());
+		
+		System.out.println("Total: " + withDiscount + " kr.");
 	}
 
 	/**
@@ -314,7 +332,7 @@ public class OrderMenu
 	 */
 	private void confirm(String type) 
 	{
-		System.out.println("\n Confirm " + type + "? Y/N");
+		System.out.println("\nConfirm " + type + "? Y/N");
 		String answer = input.nextLine();
 		if (answer.trim().equalsIgnoreCase("Y") || answer.trim().equalsIgnoreCase("yes")) 
 		{
