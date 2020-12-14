@@ -97,19 +97,12 @@ public class ProductCtr
 	public boolean updateParameter(int placeOnList, int index, String value)
 	{
 		Product p = products.get(placeOnList);
-		switch (index)
+		if (index == 5 || index == 6 || index == 7 || index == 8 || index == 9)
 		{
-			case 5, 6, 9:
-				if (!isInt(value))
-				{
-					return false;
-				}
-			case 7, 8:
-				if (!isLong(value))
-				{
-					return false;
-				}
-
+			if (!tryCatch(value))
+			{
+				return false;
+			}
 		}
 		switch (index)
 
@@ -130,54 +123,19 @@ public class ProductCtr
 				p.setLocation(value);
 				break;
 			case 5:
-				try
-				{
-					p.setQuantity(Integer.valueOf(value));
-				}
-				catch (Exception e)
-				{
-					return false;
-				}
+				p.setQuantity(Integer.valueOf(value));
 				break;
 			case 6:
-				try
-				{
-					p.setThreshold(Integer.valueOf(value));
-				}
-				catch (Exception e)
-				{
-					return false;
-				}
+				p.setThreshold(Integer.valueOf(value));
 				break;
 			case 7:
-				try
-				{
-					p.setSalesPrice(Long.valueOf(value));
-				}
-				catch (Exception e)
-				{
-					return false;
-				}
+				p.setSalesPrice(Long.valueOf(value));
 				break;
 			case 8:
-				try
-				{
-					p.setPurchasePrice(Long.valueOf(value));
-				}
-				catch (Exception e)
-				{
-					return false;
-				}
+				p.setPurchasePrice(Long.valueOf(value));
 				break;
 			case 9:
-				try
-				{
-					p.setDiscount(Integer.valueOf(value));
-				}
-				catch (Exception e)
-				{
-					return false;
-				}
+				p.setDiscount(Integer.valueOf(value));
 				break;
 		}
 		return true;
@@ -203,30 +161,18 @@ public class ProductCtr
 		return products.get(placeInList).toString();
 
 	}
-
-	private boolean isLong(String value)
+	
+	private boolean tryCatch(String value)
 	{
 		try
 		{
 			Long.parseLong(value);
 			return true;
 		}
-		catch (Exception e)
+		catch(Exception e)
 		{
 			return false;
 		}
-	}
-
-	private boolean isInt(String value)
-	{
-		try
-		{
-			Integer.parseInt(value);
-			return true;
-		}
-		catch (Exception e)
-		{
-			return false;
-		}
+		
 	}
 }
