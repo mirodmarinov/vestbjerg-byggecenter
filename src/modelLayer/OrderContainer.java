@@ -62,11 +62,20 @@ public class OrderContainer implements Serializable
 
 	/**
 	 * used for serialization to return the instance of the singleton class
-	 * @return returns a productCOntainer instance that can be serialized
+	 * @return returns a productContainer instance that can be serialized
 	 */
 	private Object readResolve()
 	{
 		return uniqueInstance;
+	}
+	
+	/**
+	 * Method was created so we can test the createOffer and placeOrder use cases
+	 * @return
+	 */
+	public ArrayList<Order> getOrders()
+	{
+		return orders;
 	}
 
 }
