@@ -1,6 +1,6 @@
 package controlLayer;
 
-
+import uiLayer.*;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -17,6 +17,7 @@ class OrderCtrTest
 
 	private static CustomerCtr customerCtr;
 	private static ProductCtr productCtr;
+	private static MainMenu mainMenu;
 	private static OrderCtr orderCtr = new OrderCtr();
 	Product product1;
 	Product product2;
@@ -39,20 +40,23 @@ class OrderCtrTest
 		olns.add(oln);
 		oln = new OrderLineItem(product2,4);
 		olns.add(oln);
-		
+		if (customerCtr.getCustomer(12658989) == null)
+		{
+			mainMenu.populateClasses();
+		}
 	}
 
 	@Test
 	void findCustomer() throws CustomerNotFoundException
 	{	
-		assertEquals(orderCtr.findCustomer(126589),"Bob");
+		assertEquals(orderCtr.findCustomer(12658989),"Bob");
 	}
 	
 	
 	@Test
 	void findCustomerNegativeTest()
 	{	
-		Exception exception = assertThrows(CustomerNotFoundException.class, () -> {orderCtr.findCustomer(111111);});
+		Exception exception = assertThrows(CustomerNotFoundException.class, () -> {orderCtr.findCustomer(11111111);});
 	    exception.getMessage();
 	}
 	
@@ -61,15 +65,13 @@ class OrderCtrTest
 	{	
 		assertEquals(orderCtr.getProducts("Ham").get(0)[0],"Hammer");
 		assertEquals(orderCtr.getProducts("Ham").get(0)[1],"A construction hammer");
-		assertEquals(orderCtr.getProducts("Ham").size(),1);
-		
 	}
 	
-	/*@Test
+	@Test
 	void selectProduct()
 	{	
 		assertEquals(orderCtr.selectProduct(0, 2),true);
-	}*/
+	}
 	
 	/*void selectProductNegativeTest()
 	{	
@@ -81,7 +83,6 @@ class OrderCtrTest
 	void getProductsNegativeTest()
 	{	
 		assertEquals(orderCtr.getProducts("Ham").size(),0);
-		
 	}
 	
 	/*@Test

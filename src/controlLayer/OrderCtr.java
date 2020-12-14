@@ -66,7 +66,7 @@ public class OrderCtr
 			productInfo[0] = product.getName();
 			productInfo[1] = product.getDescription();
 			//productInfo[2] = isProductInCart(product) > 0 ? Integer.toString(product.getQuantity() - isProductInCart(product)) : Integer.toString(product.getQuantity());
-			
+			allProductsInfo.add(productInfo);
 		}
 
 		return allProductsInfo;

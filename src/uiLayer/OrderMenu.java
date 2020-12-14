@@ -76,7 +76,7 @@ public class OrderMenu
 	{
 
 		String customerName = findCustomer();
-		System.out.println("Creating order for  " + customerName + ":");
+		System.out.println("Creating order for " + customerName + ":");
 
 		searchForProduct();
 
@@ -100,6 +100,7 @@ public class OrderMenu
 		}
 
 		int choice = input.nextInt();
+		input.nextLine();
 		return choice;
 	}
 
@@ -146,11 +147,17 @@ public class OrderMenu
 			System.out.println("Please input product name:");
 			String productName = input.nextLine();
 			
+			if(productName.length() < 3 ) 
+			{
+				System.out.println("Please input more than 2 characters to search");
+				searchForProduct();
+			}
+			
 			ArrayList<String[]> products = orderCtr.getProducts(productName);
-		
+			
 			if(products.size() == 0)
 			{
-				System.out.println("There is no product that conatins this sequence of characters: " + productName);
+				System.out.println("There is no product that contains this sequence of characters: " + productName);
 				searchForProduct();
 			}		
 		
