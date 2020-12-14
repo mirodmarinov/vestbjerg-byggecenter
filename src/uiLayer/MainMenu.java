@@ -74,8 +74,7 @@ public class MainMenu
 					productUI.start();
 					break;
 				case 3:
-					//this.readCustomer();
-					System.out.println("Not implemented yet!");
+					this.populateClasses();
 					break;
 				case 0:
 					System.out.println("Have a nice day");
@@ -99,7 +98,7 @@ public class MainMenu
 		System.out.println("* Main Menu *");
 		System.out.println(" (1) Order menu");
 		System.out.println(" (2) Product Manu");
-		System.out.println(" (3) ");
+		System.out.println(" (3) Populate class");
 		System.out.println(" (0) Quit");
 		System.out.print("\n Choose: \n");
 
@@ -158,7 +157,8 @@ public class MainMenu
 		}
 	}
 	/* Used for testing if serializable files work
-	private void populateClasses()
+	 * 
+	*/private void populateClasses()
 	{
 		Customer customer1 = new Customer(126589,2,"Bob","Aalborg 12","Customer");
 		Customer customer2 = new Customer(165598,0,"Tobias","Aarhus 50","Customer");
@@ -166,7 +166,7 @@ public class MainMenu
 		CustomerContainer.getInstance().addCustomer(customer2);
 	}
 	
-	private void readCustomer()
+	/*private void readCustomer()
 	{
 		System.out.println(CustomerContainer.getInstance().getCustomer(126589).getName());
 	}*/
