@@ -130,24 +130,58 @@ public class ProductCtr
 				p.setLocation(value);
 				break;
 			case 5:
-				p.setQuantity(Integer.valueOf(value));
+				try
+				{
+					p.setQuantity(Integer.valueOf(value));
+				}
+				catch (Exception e)
+				{
+					return false;
+				}
 				break;
 			case 6:
-				p.setThreshold(Integer.valueOf(value));
+				try
+				{
+					p.setThreshold(Integer.valueOf(value));
+				}
+				catch (Exception e)
+				{
+					return false;
+				}
 				break;
 			case 7:
-				p.setSalesPrice(Long.valueOf(value));
+				try
+				{
+					p.setSalesPrice(Long.valueOf(value));
+				}
+				catch (Exception e)
+				{
+					return false;
+				}
 				break;
 			case 8:
-				p.setPurchasePrice(Long.valueOf(value));
+				try
+				{
+					p.setPurchasePrice(Long.valueOf(value));
+				}
+				catch (Exception e)
+				{
+					return false;
+				}
 				break;
 			case 9:
-				p.setDiscount(Integer.valueOf(value));
+				try
+				{
+					p.setDiscount(Integer.valueOf(value));
+				}
+				catch (Exception e)
+				{
+					return false;
+				}
 				break;
-			default:
-				return true;
 		}
 		return true;
+
 	}
 
 	public boolean deleteProduct(int placeInList)
@@ -177,11 +211,12 @@ public class ProductCtr
 			Long.parseLong(value);
 			return true;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return false;
 		}
 	}
+
 	private boolean isInt(String value)
 	{
 		try
@@ -189,7 +224,7 @@ public class ProductCtr
 			Integer.parseInt(value);
 			return true;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return false;
 		}
