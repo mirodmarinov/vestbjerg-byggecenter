@@ -30,6 +30,7 @@ public class OrderCtr
 	/**
 	 * This method returns the customers name and also stores the customer
 	 * Object in the customer field of this class.
+	 * Throws and exception if the customer can't be find
 	 * 
 	 * @param phone
 	 * @return String of customer name
@@ -50,7 +51,7 @@ public class OrderCtr
 	 * This method calls the getProducts() in the product controller and creates
 	 * a list of products that are stored in the foundProducts field. Then an
 	 * Array of Strings containing info such as the name an description of the
-	 * product. This can then be used in the UI layer.
+	 * product is created. This can then be used in the UI layer.
 	 * 
 	 * @param name
 	 * @return ArrayList of String Arrays containing product information
@@ -107,9 +108,7 @@ public class OrderCtr
 
 		/*
 		 * Here we update the threshold of the product, to make sure that the
-		 * quantity in stock matches the possible order size. The threshold
-		 * however, should be changed again, if the offer is not accepted within
-		 * the agreed expiration date
+		 * quantity in stock matches the possible order size.
 		 */
 		for (OrderLineItem p : orderProducts)
 		{

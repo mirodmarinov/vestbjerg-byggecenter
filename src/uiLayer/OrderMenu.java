@@ -21,7 +21,9 @@ public class OrderMenu
 	public OrderMenu()
 	{
 	}
-
+	/**
+	 * Runs the OrderMenu. Whenever the user enters 0 returns to the main menu.
+	 */
 	public void start() 
 	{
 		boolean running = true;
@@ -105,10 +107,8 @@ public class OrderMenu
 	}
 	
 	/**
-	 * This method allows us to check whether
-	 * an input is an int, and whether
-	 * that int within the limits
-	 * of what we need.
+	 * This method allows us to check whether an input is an int, and whether
+	 * that int within the limits of what we need.
 	 * 
 	 * @param min
 	 * @param max
@@ -331,7 +331,7 @@ public class OrderMenu
 
 	/**
 	 * This method is used to confirm an order based on the orderLineItems and
-	 * customer placed inside the OrderCtr. This is used to finalise the process of
+	 * customer placed inside the OrderCtr. This is used to finalize the process of
 	 * creating an order or offer, and it sends the confirmation to the OrderCtr
 	 * that then creates the Order object and adds it to the OrderContainer
 	 */

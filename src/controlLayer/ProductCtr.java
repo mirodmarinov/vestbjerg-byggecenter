@@ -26,26 +26,7 @@ public class ProductCtr
 		return ProductContainer.getInstance().getProducts(name);
 	}
 
-	/*
-	 * public Product selectProduct(String barcode, int quantity) { //TODO -
-	 * update return ProductContainer.getInstance().selectProduct(barcode); }
-	 */
-
-	/**
-	 * Made as a test method for the create offer and the create order use
-	 * cases.
-	 * 
-	 * @param threshold
-	 * @param quantity
-	 * @param discount
-	 * @param purchasePrice
-	 * @param salesPrice
-	 * @param barcode
-	 * @param name
-	 * @param description
-	 * @param group
-	 * @param location
-	 */
+	
 	public boolean createProduct(int threshold, int quantity, int discount, long purchasePrice, long salesPrice, String barcode, String name, String description,
 	                String group, String location)
 	{
@@ -58,9 +39,9 @@ public class ProductCtr
 	 * Finds all products that contain a certain String in their name and
 	 * returns their string values
 	 * 
-	 * @param name
-	 *            used to find all products that contain this string
-	 * @return An array of Strings with their fields as values
+	 * @param name used to find all products that contain this string
+	 *            
+	 * @return An ArrayList of Strings arrays with their fields as values
 	 */
 	public ArrayList<String[]> getProduct(String name)
 	{
@@ -75,10 +56,10 @@ public class ProductCtr
 	}
 
 	/**
-	 * Finds a product by its place on the generated arraylist
+	 * Finds a product by its place on the generated ArrayList
 	 * 
-	 * @param placeOnList
-	 *            index in the products arraylist
+	 * @param placeOnList index in the products ArrayList
+	 *            
 	 * @return returns an array of all its field values
 	 */
 	public String[] selectProduct(int placeOnList)
@@ -87,12 +68,13 @@ public class ProductCtr
 	}
 
 	/**
-	 * It updates a product's parameter based on its place on the list
+	 * It updates a product's parameter based on its place on the list of the product ArrayList
+	 * If the input is invalid, it returns false, otherwise returns true.
 	 * 
 	 * @param placeOnList
 	 * @param index
 	 * @param value
-	 * @return
+	 * @return boolean
 	 */
 	public boolean updateParameter(int placeOnList, int index, String value)
 	{
@@ -141,7 +123,12 @@ public class ProductCtr
 		return true;
 
 	}
-
+	
+	/**
+	 * 
+	 * @param placeInList
+	 * @return
+	 */
 	public boolean deleteProduct(int placeInList)
 	{
 		ProductContainer.getInstance().deleteProduct(products.get(placeInList));
@@ -149,19 +136,34 @@ public class ProductCtr
 		return true;
 	}
 
+	/**
+	 * 
+	 * @param placeInList
+	 * @return
+	 */
 	public String getInfo(int placeInList)
 	{
 		return products.get(placeInList).toString().replaceAll("\\([^()]*\\)", "");
-		// return products.get(placeInList).toString();
 	}
 
+	/**
+	 * 
+	 * @param placeInList
+	 * @return
+	 */
 	public String getParameters(int placeInList)
 	{
-		// return products.get(placeInList).getParameterList();
 		return products.get(placeInList).toString();
 
 	}
 	
+	/**
+	 * Checks the parameter validation for the updateParameter method.
+	 * Whenever the value is a number returs true otherwise it returs false
+	 * 
+	 * @param value
+	 * @return
+	 */
 	private boolean tryCatch(String value)
 	{
 		try

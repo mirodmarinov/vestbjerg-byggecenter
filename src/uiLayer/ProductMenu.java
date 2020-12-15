@@ -15,6 +15,9 @@ public class ProductMenu {
 		productCtr = new ProductCtr();
 	}
 	
+	/**
+	 * Runs the ProductMenu. Whenever the user enters 0 returns to the main menu.
+	 */
 	public void start()
 	{
 		boolean running = true;
@@ -168,6 +171,7 @@ public class ProductMenu {
 		
 	}
 	
+	
 	private void readProduct()
 	{
 		int choice = getProduct();	
@@ -177,6 +181,14 @@ public class ProductMenu {
 		}
 	}
 	
+	/*
+	 * Runs the getProduct method, then prints the found product. After the 
+	 * user selects a parameter of the product and enters the value of it
+	 * it send the values to the controllayer so it can process the
+	 * information. If the input is invalid asks for the data again.
+	 * The method can be leaved by typing 0.
+	 * 
+	 */
 	private void updateProduct()
 	{
 		int choice = getProduct();
@@ -221,7 +233,7 @@ public class ProductMenu {
 					updated = "Yes";
 				}
 			}
-			System.out.println("If you want to edit an another parameter of the product type'y' or 'yes' otherwise type 'n' or 'no' ");
+			System.out.println("If you want to edit an another parameter of the product type 'y' or 'yes' otherwise type 'n' or 'no' ");
 			String answer = "run";
 			while (answer.equals("run"))
 			{
@@ -265,6 +277,11 @@ public class ProductMenu {
 		}
 	}
 	
+	/**
+	 * Used for asking for Integer input from the scenner.
+	 * Whenever the input is not string it asks again.
+	 * @return
+	 */
 	private int intInput() 
 	{
 		while (!input.hasNextInt()) 
@@ -278,6 +295,12 @@ public class ProductMenu {
 		return choice;
 	}
 	
+	/**
+	 * The methods readProduct, updateProduct and deleteProduct uses it.
+	 * Used for searching for product and printing the whole returned array.
+	 * It also captures the choice of the user, which element they want to display.
+	 * @return
+	 */
 	private int getProduct()
 	{
 		

@@ -30,7 +30,7 @@ public class CustomerCtr
 	}
 	
 	/**
-	 * Made as a test method for the create offer and the create order use cases.
+	 * Made as a test method for the create order use case.
 	 * @param phone
 	 * @param discount
 	 * @param name
