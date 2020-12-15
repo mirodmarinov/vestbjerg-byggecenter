@@ -54,7 +54,6 @@ public class ProductContainer implements Serializable
 		}
 		
 		return specifiedProducts;
-		//TODO - check this code
 	}
 	
 	
@@ -77,14 +76,12 @@ public class ProductContainer implements Serializable
 	
 	public boolean deleteProduct(Product product)
 	{
-		System.out.println();
 		Iterator<Product> it = products.iterator();
 		while (it.hasNext())
 		{
 			Product p = it.next();
-			if (p.getBarcode().equals(p.getBarcode()))
+			if (p.getBarcode().equals(product.getBarcode()))
 			{
-				System.out.println(p.getName());
 				return products.remove(p);
 			}
 		}

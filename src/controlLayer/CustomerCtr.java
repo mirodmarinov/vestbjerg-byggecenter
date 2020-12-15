@@ -22,6 +22,7 @@ public class CustomerCtr
 	 * parameter to find a customer
 	 * with the phone number. The method then returns
 	 * the found customer.
+	 * @param phone
 	 */
 	public Customer getCustomer(int phone)
 	{

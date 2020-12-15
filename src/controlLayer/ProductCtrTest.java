@@ -1,9 +1,8 @@
 package controlLayer;
 
-import modelLayer.*;
+//import modelLayer.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -25,27 +24,18 @@ class ProductCtrTest {
 		productCtr.createProduct(10, 10, 10, 10, 10, "Dead", "Victim", "This product is meant to be deleted", "DIY", "Aalborg 50");
 	}
 
-	/*@Test
+	@Test
 	void createProduct() 
 	{
-		System.out.println();
-		System.out.println("CREATEPRODUCT");
-
-		ArrayList<Product> products = ProductContainer.getInstance().products;
-		for (Product pr : products) System.out.println(pr.getName());
 		productCtr = new ProductCtr();
 		productCtr.getProduct("Nail");
 		assertEquals(productCtr.products.size(),1);
 		//assertEquals(ProductContainer.getInstance().getProducts("Nail").get(0).getName(),"nail");
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	void readProduct()
 	{
-		System.out.println();
-		System.out.println("READPRODUCT");
-		ArrayList<Product> products = ProductContainer.getInstance().products;
-		for (Product pr : products) System.out.println(pr.getName());
 		productCtr = new ProductCtr();
 		assertEquals(productCtr.getProduct("nail").size(),1);
 	}
@@ -54,24 +44,17 @@ class ProductCtrTest {
 	@Test
 	void updateProduct()
 	{
-		System.out.println();
-		System.out.println("UPDATEPRODUCT");
-		ArrayList<Product> products = ProductContainer.getInstance().products;
-		for (Product pr : products) System.out.println(pr.getName());
 		productCtr = new ProductCtr();
 		productCtr.getProduct("hemm");
 		assertEquals(productCtr.updateParameter(0, 0, "Changed from Hemmors"),true);
-	}*/
+	}
 	
 	@Test
 	void deleteProduct()
 	{
-		System.out.println();
-		System.out.println("DELETEPRODUCT");
-		ArrayList<Product> products = ProductContainer.getInstance().products;
-		for (Product pr : products) System.out.println(pr.getName());
 		productCtr = new ProductCtr();
 		productCtr.getProduct("vic");
+		
 		assertEquals(productCtr.deleteProduct(0),true);
 	}
 
