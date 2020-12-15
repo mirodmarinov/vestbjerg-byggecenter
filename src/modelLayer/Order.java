@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * This class defines orders in the System for
  * Vestbjerg Byggecenter. It defines all the elements
  * of knowledge that is necessary to manage orders.
+ * It implement Serializable in order ot be able to save it to a file.
  */
 public class Order implements Serializable
 {

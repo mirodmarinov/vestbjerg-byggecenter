@@ -6,6 +6,7 @@ import java.io.Serializable;
  * The class Product is a part of the System developed for Vestbjerg
  * Byggecenter. It defines all the traits and knowledge we need to store on each
  * individual product.
+ * It implement Serializable in order ot be able to save it to a file.
  * 
  */
 

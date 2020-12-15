@@ -6,6 +6,7 @@ package modelLayer;
  * of all orders in the system. This allows us to
  * create methods that needs to be done on the entire 
  * collection, rather than the individual order.
+ * It implement Serializable in order ot be able to save it to a file.
  */
 
 import java.util.ArrayList;
@@ -15,9 +16,6 @@ import java.io.Serializable;
 
 public class OrderContainer implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static OrderContainer uniqueInstance = new OrderContainer();
 	private ArrayList<Order> orders = new ArrayList<>();

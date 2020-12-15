@@ -15,7 +15,12 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
-
+/**
+ *  Customer Container implements Serializable in order to be able to save it in a local file.
+ *  It is a singleton class that contains all customers of the system.
+ * @author Miroslav
+ *
+ */
 public class CustomerContainer implements Serializable
 {
 	

@@ -8,13 +8,11 @@ import java.io.Serializable;
  * construct orders containing products and the amount
  * of the products we want to sell. This helps us calculate
  * bulk buy discounts as well.
+ * It implement Serializable in order ot be able to save it to a file.
  *
  */
 public class OrderLineItem implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Product product;
 	private int quantity;
