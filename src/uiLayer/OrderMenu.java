@@ -321,14 +321,12 @@ public class OrderMenu
 		String withoutDiscount = temp.substring(0, temp.length()-1) + "." +  temp.substring(temp.length() - 2, temp.length());
 
 		System.out.println("Price before discount: " + withoutDiscount + " kr.");
-		try
-		{
-			temp = String.valueOf(orderCtr.calculateTotal());
-			String withDiscount = temp.substring(0, temp.length()-1) + "." +  temp.substring(temp.length() - 2, temp.length());
+		
+
+		temp = String.valueOf(orderCtr.calculateTotal());
+		String withDiscount = temp.substring(0, temp.length()-1) + "." +  temp.substring(temp.length() - 2, temp.length());
 			
-			System.out.println("Total: " + withDiscount + " kr.");
-		}
-		catch(Exception e) {}
+		System.out.println("Total: " + withDiscount + " kr.");
 
 	}
 
@@ -357,7 +355,6 @@ public class OrderMenu
 		} 
 		else 
 		{
-			// TODO figure out if other things should happen if the offer is rejected.
 			System.out.println("The " + type + " was rejected, you will now be returned to the Order Menu.");
 		}
 	}

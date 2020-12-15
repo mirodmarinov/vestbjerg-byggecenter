@@ -157,10 +157,10 @@ public class OrderCtr
 			int quantity = p.getQuantity();
 			totalWithoutDiscount += product.getSalesPrice() * quantity;
 			totalWithDiscount += product.getSalesPrice() * quantity * (100 - product.getDiscount(quantity))/100;
+
 		}
-
 		totalWithDiscount *= (100 - customer.getDiscount())/100;
-
-		return totalWithDiscount / totalWithoutDiscount < 0.8 ? (int)0.8 * totalWithoutDiscount : totalWithDiscount;
+		
+		return totalWithDiscount / totalWithoutDiscount < 0.8 ? (long)(0.8 * totalWithoutDiscount) : totalWithDiscount;
 	}
 }
