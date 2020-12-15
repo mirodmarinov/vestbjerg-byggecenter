@@ -75,7 +75,6 @@ public class CustomerContainer implements Serializable
 
 	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException
 	{
-        System.out.println("in readObject()");
 		ois.defaultReadObject();
 		uniqueInstance = this;
 	}
