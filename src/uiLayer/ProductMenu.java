@@ -252,13 +252,16 @@ public class ProductMenu {
 	private void deleteProduct()
 	{
 		int choice = getProduct();
-		if(productCtr.deleteProduct(choice-1))
+		if (choice != -6)
 		{
-			System.out.println("Product successfully deleted!");
-		}
-		else
-		{
-			System.out.println("Product delete error!");
+			if(productCtr.deleteProduct(choice-1))
+			{
+				System.out.println("Product successfully deleted!");
+			}
+			else
+			{
+				System.out.println("Product delete error!");
+			}
 		}
 	}
 	

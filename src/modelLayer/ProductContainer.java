@@ -21,7 +21,7 @@ public class ProductContainer implements Serializable
 	
 	private static final long serialVersionUID = 1L;
 	private static ProductContainer uniqueInstance = new ProductContainer();
-	private ArrayList<Product> products = new ArrayList<>();
+	public ArrayList<Product> products = new ArrayList<>();
 	
 	private ProductContainer()
 	{
@@ -44,9 +44,9 @@ public class ProductContainer implements Serializable
 	{
 		ArrayList<Product> specifiedProducts = new ArrayList<Product>();
 		name = name.toLowerCase();
-		
 		for(Product a: products)
 		{
+			
 			if(a.getName().contains(name))
 			{
 				specifiedProducts.add(a);
@@ -77,12 +77,14 @@ public class ProductContainer implements Serializable
 	
 	public boolean deleteProduct(Product product)
 	{
+		System.out.println();
 		Iterator<Product> it = products.iterator();
 		while (it.hasNext())
 		{
 			Product p = it.next();
 			if (p.getBarcode().equals(p.getBarcode()))
 			{
+				System.out.println(p.getName());
 				return products.remove(p);
 			}
 		}
