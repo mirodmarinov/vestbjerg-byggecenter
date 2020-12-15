@@ -24,7 +24,7 @@ public class ProductMenu {
 		int choice;
 		while (running)
 		{
-			System.out.println("* Order Menu *");
+			System.out.println("* Product Menu *");
 			System.out.println(" (1) Create product");
 			System.out.println(" (2) Find product");
 			System.out.println(" (3) Update product information");
