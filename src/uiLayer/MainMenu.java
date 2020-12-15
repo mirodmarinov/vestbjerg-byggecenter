@@ -151,7 +151,7 @@ public class MainMenu
 	 * data, allowing us to check whether the rest of the code works.
 	 * 
 	 */
-	public void populateClasses()
+	private void populateClasses()
 	{
 		Customer customer1 = new Customer(12658989, 2, "Bob", "Aalborg 12", "Customer");
 		Customer customer2 = new Customer(16559898, 0, "Tobias", "Aarhus 50", "Customer");
@@ -169,13 +169,4 @@ public class MainMenu
 		ProductContainer.getInstance().addProduct(p3);
 
 	}
-
-	/*
-	 * private void readCustomer()
-	 * {
-	 * System.out.println(CustomerContainer.getInstance().getCustomer(126589).
-	 * getName());
-	 * }
-	 */
-
 }

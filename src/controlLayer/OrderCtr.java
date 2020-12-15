@@ -164,6 +164,4 @@ public class OrderCtr
 
 		return totalWithDiscount / totalWithoutDiscount < 0.8 ? (int)0.8 * totalWithoutDiscount : totalWithDiscount;
 	}
-
-
 }

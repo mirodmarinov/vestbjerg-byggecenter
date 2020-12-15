@@ -319,9 +319,6 @@ public class ProductMenu {
 			System.out.println("Please enter a number between 1 and " + place + "!");
 			choice = input.nextInt();
 		}
-		
-		
 		return choice;
-
 	}
 }

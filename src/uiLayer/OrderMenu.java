@@ -72,7 +72,7 @@ public class OrderMenu
 		confirm("offer");
 	}
 
-	public void createOrder() 
+	private void createOrder() 
 	{
 
 		String customerName = findCustomer();
@@ -127,6 +127,11 @@ public class OrderMenu
 	}
 	
 	/**
+	 * The method is used to ensure proper
+	 * input when asking for strings. We use it
+	 * to make sure that in specific
+	 * cases users are forced to input
+	 * more than 2 characters.
 	 * 
 	 * @return String
 	 */

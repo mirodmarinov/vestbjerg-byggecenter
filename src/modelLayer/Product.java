@@ -15,8 +15,7 @@ public class Product implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int threshold; // the minimum of products, once crossed, restock is
-	                       // initiated
+	private int threshold; // the minimum of products, once crossed, restock is initiated             
 	private int quantity;
 	private int discount;
 	private long purchasePrice;

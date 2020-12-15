@@ -57,34 +57,6 @@ public class ProductContainer implements Serializable
 		//TODO - check this code
 	}
 	
-	/**
-	 *
-	 *A method that overrides the instance with the object retrieved from deserialization
-	 * @param ois
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 */
-	
-	/*
-	public Product selectProduct(String barcode) //quantity removed for now?
-	{
-		boolean found = false;
-		Product product = null;
-		
-		for(int i = 0; i < products.size() && found == false; i++)
-		{
-			if(barcode.equals(products.get(i).getBarcode()))
-			{
-				product = products.get(i);
-				found = true;
-			}
-		}
-			
-		return product;
-		//TODO - quantity????
-	}
-	*/
-	
 	
 	/**
 	 * Made as a test method for the ProductContainerTest test class, the create offer
