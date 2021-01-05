@@ -1,7 +1,10 @@
 package modelLayer;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -111,9 +114,12 @@ public class Order implements Serializable
 		this.orderNumber = orderNumber;
 	}
 
-	public Calendar getPurchaseDate() 
+	public String getPurchaseDate() 
 	{
-		return purchaseDate;
+		Date date = Calendar.getInstance().getTime(); 
+		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yy");
+		String strDate = dateFormat.format(date);
+		return strDate;
 	}
 
 	public void setPurchaseDate(Calendar purchaseDate) 

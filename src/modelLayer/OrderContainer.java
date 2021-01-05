@@ -75,5 +75,19 @@ public class OrderContainer implements Serializable
 	{
 		return orders;
 	}
+	
+	public Order generateInvoice(int orderNumber)
+	{
+		Order order = null;
+		for (Order e : orders)
+		{
+			if (e.getOrderNumber() == orderNumber)
+			{
+				order = e;
+				break;
+			}
+		}
+		return order;
+	}
 
 }

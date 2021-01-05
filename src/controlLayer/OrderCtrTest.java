@@ -100,6 +100,8 @@ class OrderCtrTest
 		catch(Exception e) {}
 		orderCtr.getProducts("Ham");
 		orderCtr.selectProduct(0, 2);
+		orderCtr.getProducts("nai");
+		orderCtr.selectProduct(0, 2);
 		int currentthreshold = orderCtr.getOrderProducts().get(0).getProduct().getThreshold();
 		int currentquantity = 2;
 		
@@ -131,6 +133,15 @@ class OrderCtrTest
 		assertEquals(OrderContainer.getInstance().getOrders().get(1).getProducts().get(0).getProduct().getQuantity(), currentquantity-2); //Product amount left in the stock
 		assertEquals(OrderContainer.getInstance().getOrders().get(1).getProducts().size(),1);
 	}
+	
 
+	
+	@Test
+	void isGenerateInvoiceNull()
+	{
+		orderCtr = new OrderCtr();
+		assertNotNull(orderCtr.generateInvoice(1));
+		System.out.println(orderCtr.generateInvoice(1));
+	}
 
 }

@@ -3,6 +3,7 @@ package controlLayer;
 import modelLayer.*;
 import java.util.ArrayList;
 
+
 /**
  * This class is a part of the System developed for Vestbjerg Byggecenter. It
  * acts as a controller for all of the order objects.
@@ -88,7 +89,6 @@ public class OrderCtr
 	{
 		Product product = foundProducts.get(placeInList);
 		OrderLineItem orderLineItem = new OrderLineItem(product, quantity);
-
 		return orderProducts.add(orderLineItem);
 	}
 
@@ -105,6 +105,8 @@ public class OrderCtr
 		Order offer = new Order(customer, orderProducts);
 		offer.calculateExpirationDate();
 		offer.setStatus("pending");
+		offer.setTotalPrice((int)calculateTotal());
+		offer.setDiscount(customer.getDiscount());
 
 		/*
 		 * Here we update the threshold of the product, to make sure that the
@@ -129,7 +131,8 @@ public class OrderCtr
 	{
 		Order order = new Order(customer, orderProducts);
 		order.setStatus("confirmed");
-
+		order.setTotalPrice((int)calculateTotal());
+		order.setDiscount(customer.getDiscount());
 		/*
 		 * Here we update the stock, by changing the quantity of the product in
 		 * stock based on the quantity of the orderline item.
@@ -155,12 +158,35 @@ public class OrderCtr
 		{
 			Product product = p.getProduct();
 			int quantity = p.getQuantity();
+			System.out.println(quantity);
 			totalWithoutDiscount += product.getSalesPrice() * quantity;
 			totalWithDiscount += product.getSalesPrice() * quantity * (100 - product.getDiscount(quantity))/100;
 
 		}
 		totalWithDiscount *= (100 - customer.getDiscount())/100;
-		
+		System.out.println(totalWithDiscount / totalWithoutDiscount < 0.8 ? (long)(0.8 * totalWithoutDiscount) : totalWithDiscount);
 		return totalWithDiscount / totalWithoutDiscount < 0.8 ? (long)(0.8 * totalWithoutDiscount) : totalWithDiscount;
+	}
+	
+	public String generateInvoice(int orderNumber)
+	{
+		Order order = OrderContainer.getInstance().generateInvoice(orderNumber);
+		String invoice, productInfo = "";
+		ArrayList<OrderLineItem> products = order.getProducts();
+		for (OrderLineItem e : products)
+		{
+			productInfo += "\n "+ e.getProduct().getQuantity()+"x " +
+		e.getProduct().getName().substring(0,1).toUpperCase() + e.getProduct().getName().substring(1) + ": " +
+		(e.getProduct().getSalesPrice()*e.getProduct().getQuantity()) +" DKK";
+		}
+		invoice = "\t  Vestbjerg Byggecenter" + "\n\t    Imaginepark 1536"  + "\n\t*************************" +
+				"\n\t   phone: 52 96 52 63" + "\n\t*************************" +
+				"\n\nName: "+order.getCustomer().getName() + "\nDate: " + order.getPurchaseDate() +
+				"\nProducts: "+productInfo + "\n\nPrice before discount: " + order.getTotalPrice() + 
+				"\nDiscount: "+ order.getDiscount() + " %" +
+				"\n\nTotal: " + order.getTotalPrice()/100*(100-order.getDiscount()); 
+		
+			
+		return invoice;
 	}
 }
