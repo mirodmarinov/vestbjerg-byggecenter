@@ -52,16 +52,14 @@ public class OrderMenuGUI {
 		frame.setBounds(100, 100, 1680, 1050);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{17, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0};
-		gridBagLayout.columnWeights = new double[]{0.05, 0.95};
-		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{0, 0};
+		gridBagLayout.rowHeights = new int[]{0};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0};
+		gridBagLayout.rowWeights = new double[]{1.0};
 		frame.getContentPane().setLayout(gridBagLayout);
 		
 		JPanel sideBar = new JPanel();
 		sideBar.setBackground(new Color(16, 188, 171));
-		//sideBar.setBounds(0, 0, 271, 1050);
-		sideBar.setPreferredSize(new Dimension(50, 1050));
 		GridBagConstraints gbc_sideBar = new GridBagConstraints();
 		gbc_sideBar.fill = GridBagConstraints.BOTH;
 		gbc_sideBar.insets = new Insets(0, 0, 0, 0);
@@ -69,10 +67,10 @@ public class OrderMenuGUI {
 		gbc_sideBar.gridy = 0;
 		frame.getContentPane().add(sideBar, gbc_sideBar);
 		GridBagLayout gbl_sideBar = new GridBagLayout();
-		gbl_sideBar.columnWidths = new int[]{30};
-		gbl_sideBar.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_sideBar.columnWidths = new int[]{47};
+		gbl_sideBar.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_sideBar.columnWeights = new double[]{1.0};
-		gbl_sideBar.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_sideBar.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
 		sideBar.setLayout(gbl_sideBar);
 		
 		JButton orderMenuButton = new JButton("Orders");
@@ -80,9 +78,9 @@ public class OrderMenuGUI {
 		orderMenuButton.setFont(new Font("Lato", Font.PLAIN, 22));
 		GridBagConstraints gbc_orderMenuButton = new GridBagConstraints();
 		gbc_orderMenuButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_orderMenuButton.insets = new Insets(50, 33, 5, 22);
+		gbc_orderMenuButton.insets = new Insets(40, 20, 5, 22);
 		gbc_orderMenuButton.gridx = 0;
-		gbc_orderMenuButton.gridy = 1;
+		gbc_orderMenuButton.gridy = 0;
 		sideBar.add(orderMenuButton, gbc_orderMenuButton);
 		
 		JButton newOfferOrderButton = new JButton("Create Offer/Order");
@@ -90,9 +88,9 @@ public class OrderMenuGUI {
 		newOfferOrderButton.setFont(new Font("Lato", Font.PLAIN, 15));
 		GridBagConstraints gbc_newOfferOrderButton = new GridBagConstraints();
 		gbc_newOfferOrderButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_newOfferOrderButton.insets = new Insets(0, 93, 5, 22);
+		gbc_newOfferOrderButton.insets = new Insets(0, 60, 5, 22);
 		gbc_newOfferOrderButton.gridx = 0;
-		gbc_newOfferOrderButton.gridy = 2;
+		gbc_newOfferOrderButton.gridy = 1;
 		sideBar.add(newOfferOrderButton, gbc_newOfferOrderButton);
 		
 		JButton confirmOfferButton = new JButton("Confirm Offer");
@@ -100,9 +98,9 @@ public class OrderMenuGUI {
 		confirmOfferButton.setFont(new Font("Lato", Font.PLAIN, 15));
 		GridBagConstraints gbc_confirmOfferButton = new GridBagConstraints();
 		gbc_confirmOfferButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_confirmOfferButton.insets = new Insets(0, 93, 5, 22);
+		gbc_confirmOfferButton.insets = new Insets(0, 60, 5, 22);
 		gbc_confirmOfferButton.gridx = 0;
-		gbc_confirmOfferButton.gridy = 3;
+		gbc_confirmOfferButton.gridy = 2;
 		sideBar.add(confirmOfferButton, gbc_confirmOfferButton);
 		
 		JButton customerMenuButton = new JButton("Customers");
@@ -110,9 +108,9 @@ public class OrderMenuGUI {
 		customerMenuButton.setFont(new Font("Lato", Font.PLAIN, 22));
 		GridBagConstraints gbc_customerMenuButton = new GridBagConstraints();
 		gbc_customerMenuButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_customerMenuButton.insets = new Insets(0, 33, 5, 22);
+		gbc_customerMenuButton.insets = new Insets(0, 20, 5, 22);
 		gbc_customerMenuButton.gridx = 0;
-		gbc_customerMenuButton.gridy = 4;
+		gbc_customerMenuButton.gridy = 3;
 		sideBar.add(customerMenuButton, gbc_customerMenuButton);
 		
 		JButton productsButton = new JButton("Products");
@@ -120,9 +118,9 @@ public class OrderMenuGUI {
 		productsButton.setFont(new Font("Lato", Font.PLAIN, 22));
 		GridBagConstraints gbc_productsButton = new GridBagConstraints();
 		gbc_productsButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_productsButton.insets = new Insets(0, 33, 5, 22);
+		gbc_productsButton.insets = new Insets(0, 20, 5, 22);
 		gbc_productsButton.gridx = 0;
-		gbc_productsButton.gridy = 5;
+		gbc_productsButton.gridy = 4;
 		sideBar.add(productsButton, gbc_productsButton);
 		
 		mainFrame = new JPanel();
