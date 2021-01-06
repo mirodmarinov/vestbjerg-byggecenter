@@ -88,7 +88,10 @@ public class OrderCtr
 	public boolean selectProduct(int placeInList, int quantity)
 	{
 		Product product = foundProducts.get(placeInList);
-		OrderLineItem orderLineItem = new OrderLineItem(product, quantity);
+		Product productcopy = new Product(product.getThreshold(), product.getQuantity(), product.getDiscount(0),
+				product.getPurchasePrice(), product.getSalesPrice(), product.getBarcode(), product.getName(),
+				product.getDescription(), product.getGroup(), product.getLocation());
+		OrderLineItem orderLineItem = new OrderLineItem(productcopy, quantity);
 		return orderProducts.add(orderLineItem);
 	}
 

@@ -111,7 +111,7 @@ class OrderCtrTest
 		assertEquals(OrderContainer.getInstance().getOrders().get(0).getProducts().get(0).getProduct().getName(),"hammer");
 		assertEquals(OrderContainer.getInstance().getOrders().get(0).getProducts().get(0).getProduct().getThreshold(),
 				currentthreshold+currentquantity);
-		assertEquals(OrderContainer.getInstance().getOrders().get(0).getProducts().size(),1);
+		assertEquals(OrderContainer.getInstance().getOrders().get(0).getProducts().size(),2);
 	}
 	
 	@Test
