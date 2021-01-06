@@ -150,22 +150,20 @@ public class OrderCtr
 	 * 
 	 * @return total cost of order/offer
 	 */
-	public long calculateTotal()
+	public int calculateTotal()
 	{
-		long totalWithoutDiscount = 0;
-		long totalWithDiscount = 0;
+		int totalWithoutDiscount = 0;
+		int totalWithDiscount = 0;
 		for (OrderLineItem p : orderProducts)
 		{
 			Product product = p.getProduct();
 			int quantity = p.getQuantity();
-			System.out.println(quantity);
 			totalWithoutDiscount += product.getSalesPrice() * quantity;
-			totalWithDiscount += product.getSalesPrice() * quantity * (100 - product.getDiscount(quantity))/100;
+			totalWithDiscount += product.getSalesPrice() * quantity * (float)(100 - product.getDiscount(quantity))/100;
 
 		}
-		totalWithDiscount *= (100 - customer.getDiscount())/100;
-		System.out.println(totalWithDiscount / totalWithoutDiscount < 0.8 ? (long)(0.8 * totalWithoutDiscount) : totalWithDiscount);
-		return totalWithDiscount / totalWithoutDiscount < 0.8 ? (long)(0.8 * totalWithoutDiscount) : totalWithDiscount;
+		totalWithDiscount *= (float)(100 - customer.getDiscount())/100;
+		return (float)totalWithDiscount / (float)totalWithoutDiscount < 0.8 ? (int)(0.8 * totalWithoutDiscount) : totalWithDiscount;
 	}
 	
 	public String generateInvoice(int orderNumber)
@@ -175,16 +173,16 @@ public class OrderCtr
 		ArrayList<OrderLineItem> products = order.getProducts();
 		for (OrderLineItem e : products)
 		{
-			productInfo += "\n "+ e.getProduct().getQuantity()+"x " +
+			productInfo += "\n "+ e.getQuantity()+"x " +
 		e.getProduct().getName().substring(0,1).toUpperCase() + e.getProduct().getName().substring(1) + ": " +
-		(e.getProduct().getSalesPrice()*e.getProduct().getQuantity()) +" DKK";
+		(e.getProduct().getSalesPrice()*e.getQuantity()) +" DKK";
 		}
 		invoice = "\t  Vestbjerg Byggecenter" + "\n\t    Imaginepark 1536"  + "\n\t*************************" +
 				"\n\t   phone: 52 96 52 63" + "\n\t*************************" +
 				"\n\nName: "+order.getCustomer().getName() + "\nDate: " + order.getPurchaseDate() +
-				"\nProducts: "+productInfo + "\n\nPrice before discount: " + order.getTotalPrice() + 
+				"\nProducts: "+productInfo + "\n\nPrice before discount: " + (int)(order.getTotalPrice() / ((float)(100-order.getDiscount())/100)) + 
 				"\nDiscount: "+ order.getDiscount() + " %" +
-				"\n\nTotal: " + order.getTotalPrice()/100*(100-order.getDiscount()); 
+				"\n\nTotal: " + order.getTotalPrice(); 
 		
 			
 		return invoice;
