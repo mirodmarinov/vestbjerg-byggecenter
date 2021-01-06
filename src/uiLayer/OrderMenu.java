@@ -318,13 +318,13 @@ public class OrderMenu
 
 
 		temp = String.valueOf(priceWithoutDiscount);
-		String withoutDiscount = temp.substring(0, temp.length()-1) + "." +  temp.substring(temp.length() - 2, temp.length());
+		String withoutDiscount = temp.substring(0, temp.length()-1) + "." +  temp.substring(temp.length() - 2);
 
 		System.out.println("Price before discount: " + withoutDiscount + " kr.");
 		
 
 		temp = String.valueOf(orderCtr.calculateTotal());
-		String withDiscount = temp.substring(0, temp.length()-1) + "." +  temp.substring(temp.length() - 2, temp.length());
+		String withDiscount = temp.substring(0, temp.length()-1) + "." +  temp.substring(temp.length() - 2);
 			
 		System.out.println("Total: " + withDiscount + " kr.");
 

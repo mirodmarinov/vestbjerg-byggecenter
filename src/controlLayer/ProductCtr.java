@@ -159,9 +159,9 @@ public class ProductCtr
 	
 	/**
 	 * Checks the parameter validation for the updateParameter method.
-	 * Whenever the value is a number returs true otherwise it returs false
+	 * Whenever the value is a number returns true otherwise it returns false
 	 * 
-	 * @param value
+	 * @param value 
 	 * @return
 	 */
 	private boolean tryCatch(String value)
