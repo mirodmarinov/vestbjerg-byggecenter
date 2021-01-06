@@ -178,7 +178,8 @@ public class OrderCtr
 		{
 			productInfo += "\n "+ e.getQuantity()+"x " +
 		e.getProduct().getName().substring(0,1).toUpperCase() + e.getProduct().getName().substring(1) + ": " +
-		(e.getProduct().getSalesPrice()*e.getQuantity()) +" DKK";
+		(e.getProduct().getSalesPrice()*e.getQuantity()) +" DKK - " + e.getProduct().getDiscount(0) + "%" + ": "
+		+ (int)(e.getProduct().getSalesPrice() * ((float)(100-e.getProduct().getDiscount(0))/100))*e.getQuantity();
 		}
 		invoice = "\t  Vestbjerg Byggecenter" + "\n\t    Imaginepark 1536"  + "\n\t*************************" +
 				"\n\t   phone: 52 96 52 63" + "\n\t*************************" +

@@ -29,7 +29,7 @@ class OrderCtrTest
 		Customer customer2 = new Customer(16559898,0,"Tobias", "Aarhus 50", "Customer");
 		CustomerContainer.getInstance().addCustomer(customer1);
 		CustomerContainer.getInstance().addCustomer(customer2);
-		Product p1 = new Product(10, 50, 0, 5000, 10000, "123456789", "nails", "Huge nails , fix houses", "the nail shelf", "3.12.50");
+		Product p1 = new Product(10, 50, 2, 5000, 10000, "123456789", "nails", "Huge nails , fix houses", "the nail shelf", "3.12.50");
 		Product p2 = new Product(10, 50, 0, 6000, 11000, "123456788", "different nails", "Bigger nails , used for fixing different houses", "the nail shelf", "3.12.51");
 		Product p3 = new Product(10, 10, 0, 2500, 2000, "123456787", "hammer", "A construction hammer", "Tools", "3.12.52");
 		
