@@ -88,6 +88,10 @@ public class OrderCtr
 	public boolean selectProduct(int placeInList, int quantity)
 	{
 		Product product = foundProducts.get(placeInList);
+		/**
+		 * Creating a copy of the product so we don't save the reference of the product but an actualy copy
+		 * of it inside the OrderLineItem. In that way we can prevent some errors in the future.
+		 */
 		Product productcopy = new Product(product.getThreshold(), product.getQuantity(), product.getDiscount(0),
 				product.getPurchasePrice(), product.getSalesPrice(), product.getBarcode(), product.getName(),
 				product.getDescription(), product.getGroup(), product.getLocation());
@@ -169,20 +173,30 @@ public class OrderCtr
 		return (float)totalWithDiscount / (float)totalWithoutDiscount < 0.8 ? (int)(0.8 * totalWithoutDiscount) : totalWithDiscount;
 	}
 	
+	/**
+	 * This method is used for generating invoice. We save the whole invoice inside a single string
+	 * and we return that to the upper layer.
+	 * 
+	 * @param orderNumber
+	 * @return returns a String of the invoice to the menu
+	 */
 	public String generateInvoice(int orderNumber)
 	{
 		Order order = OrderContainer.getInstance().generateInvoice(orderNumber);
 		String invoice, productInfo = "";
 		ArrayList<OrderLineItem> products = order.getProducts();
-		for (OrderLineItem e : products)
+		// Adding all the products into the productInfo String so it's easier to combine with the whole invoice.
+		for (OrderLineItem e : products) 
 		{
 			productInfo += "\n "+ e.getQuantity()+"x " +
 		e.getProduct().getName().substring(0,1).toUpperCase() + e.getProduct().getName().substring(1) + ": " +
 		(e.getProduct().getSalesPrice()*e.getQuantity()) +" DKK - " + e.getProduct().getDiscount(0) + "%" + ": "
 		+ (int)(e.getProduct().getSalesPrice() * ((float)(100-e.getProduct().getDiscount(0))/100))*e.getQuantity();
 		}
+		
+		//Saving every data into the invoice String
 		invoice = "\t  Vestbjerg Byggecenter" + "\n\t    Imaginepark 1536"  + "\n\t*************************" +
-				"\n\t   phone: 52 96 52 63" + "\n\t*************************" +
+				"\n\t   Phone: 52 96 52 63" + "\n\t*************************" +
 				"\n\nName: "+order.getCustomer().getName() + "\nDate: " + order.getPurchaseDate() +
 				"\nProducts: "+productInfo + "\n\nPrice before discount: " + (int)(order.getTotalPrice() / ((float)(100-order.getDiscount())/100)) + 
 				"\nDiscount: "+ order.getDiscount() + " %" +
