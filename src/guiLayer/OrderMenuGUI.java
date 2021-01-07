@@ -11,11 +11,17 @@ import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.CardLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class OrderMenuGUI {
 
@@ -77,13 +83,24 @@ public class OrderMenuGUI {
 		sideBar.setLayout(gbl_sideBar);
 		
 		JButton orderMenuButton = new JButton("Orders");
+		orderMenuButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				onTheButton(orderMenuButton);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				offTheButton(orderMenuButton);
+			}
+		});
 		orderMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cards.show(mainFrame, "Orders");
 			}
 		});
-		orderMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
-		orderMenuButton.setFont(new Font("Lato", Font.PLAIN, 22));
+		orderMenuButton.setFocusable(false);
+		orderMenuButton.setFont(new Font("Lato", Font.BOLD, 22));
+		orderMenuButton.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_orderMenuButton = new GridBagConstraints();
 		gbc_orderMenuButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_orderMenuButton.insets = new Insets(40, 20, 5, 22);
@@ -92,8 +109,19 @@ public class OrderMenuGUI {
 		sideBar.add(orderMenuButton, gbc_orderMenuButton);
 		
 		JButton newOfferOrderButton = new JButton("Create Offer/Order");
+		newOfferOrderButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				onTheButton(newOfferOrderButton);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				offTheButton(newOfferOrderButton);
+			}
+		});
 		newOfferOrderButton.setHorizontalAlignment(SwingConstants.LEFT);
-		newOfferOrderButton.setFont(new Font("Lato", Font.PLAIN, 15));
+		newOfferOrderButton.setFont(new Font("Lato", Font.BOLD, 15));
+		newOfferOrderButton.setFocusable(false);
 		GridBagConstraints gbc_newOfferOrderButton = new GridBagConstraints();
 		gbc_newOfferOrderButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_newOfferOrderButton.insets = new Insets(0, 60, 5, 22);
@@ -102,8 +130,19 @@ public class OrderMenuGUI {
 		sideBar.add(newOfferOrderButton, gbc_newOfferOrderButton);
 		
 		JButton confirmOfferButton = new JButton("Confirm Offer");
+		confirmOfferButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				onTheButton(confirmOfferButton);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				offTheButton(confirmOfferButton);
+			}
+		});
 		confirmOfferButton.setHorizontalAlignment(SwingConstants.LEFT);
-		confirmOfferButton.setFont(new Font("Lato", Font.PLAIN, 15));
+		confirmOfferButton.setFont(new Font("Lato", Font.BOLD, 15));
+		confirmOfferButton.setFocusable(false);
 		GridBagConstraints gbc_confirmOfferButton = new GridBagConstraints();
 		gbc_confirmOfferButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_confirmOfferButton.insets = new Insets(0, 60, 5, 22);
@@ -112,8 +151,19 @@ public class OrderMenuGUI {
 		sideBar.add(confirmOfferButton, gbc_confirmOfferButton);
 		
 		JButton customerMenuButton = new JButton("Customers");
+		customerMenuButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				onTheButton(customerMenuButton);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				offTheButton(customerMenuButton);
+			}
+		});
 		customerMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
-		customerMenuButton.setFont(new Font("Lato", Font.PLAIN, 22));
+		customerMenuButton.setFont(new Font("Lato", Font.BOLD, 22));
+		customerMenuButton.setFocusable(false);
 		GridBagConstraints gbc_customerMenuButton = new GridBagConstraints();
 		gbc_customerMenuButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_customerMenuButton.insets = new Insets(0, 20, 5, 22);
@@ -122,8 +172,19 @@ public class OrderMenuGUI {
 		sideBar.add(customerMenuButton, gbc_customerMenuButton);
 		
 		JButton productsButton = new JButton("Products");
+		productsButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				onTheButton(productsButton);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				offTheButton(productsButton);
+			}
+		});
 		productsButton.setHorizontalAlignment(SwingConstants.LEFT);
-		productsButton.setFont(new Font("Lato", Font.PLAIN, 22));
+		productsButton.setFont(new Font("Lato", Font.BOLD, 22));
+		productsButton.setFocusable(false);
 		GridBagConstraints gbc_productsButton = new GridBagConstraints();
 		gbc_productsButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_productsButton.insets = new Insets(0, 20, 5, 22);
@@ -144,6 +205,16 @@ public class OrderMenuGUI {
 	private void init() {
 		cards = (CardLayout)(mainFrame.getLayout());
 		mainFrame.add(new OrderPanel(), "Orders");
+	}
+	
+	private void onTheButton(JButton button)
+	{
+		button.setBackground(Color.LIGHT_GRAY);
+	}
+	
+	private void offTheButton(JButton button)
+	{
+		button.setBackground(new Color(240,240,240));
 	}
 
 }
