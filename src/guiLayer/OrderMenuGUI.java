@@ -7,12 +7,15 @@ import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.CardLayout;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class OrderMenuGUI {
 
@@ -74,6 +77,11 @@ public class OrderMenuGUI {
 		sideBar.setLayout(gbl_sideBar);
 		
 		JButton orderMenuButton = new JButton("Orders");
+		orderMenuButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cards.show(mainFrame, "Orders");
+			}
+		});
 		orderMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		orderMenuButton.setFont(new Font("Lato", Font.PLAIN, 22));
 		GridBagConstraints gbc_orderMenuButton = new GridBagConstraints();
@@ -135,6 +143,7 @@ public class OrderMenuGUI {
 	
 	private void init() {
 		cards = (CardLayout)(mainFrame.getLayout());
+		mainFrame.add(new OrderPanel(), "Orders");
 	}
 
 }
