@@ -2,6 +2,7 @@ package guiLayer;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -47,6 +48,7 @@ public class OrderPanel extends JPanel {
 		add(ordersLabel, gbc_ordersLabel);
 
 		table = new JTable();
+		table.setFocusable(false);
 		table.setFillsViewportHeight(true);
 		table.setFont(new Font("Lato", Font.PLAIN, 14));
 		table.setShowVerticalLines(false);
@@ -79,6 +81,12 @@ public class OrderPanel extends JPanel {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
 		});
 		table.getColumnModel().getColumn(0).setPreferredWidth(85);
 		table.getColumnModel().getColumn(0).setMinWidth(85);
@@ -96,8 +104,10 @@ public class OrderPanel extends JPanel {
 		gbc_table.fill = GridBagConstraints.BOTH;
 		gbc_table.gridx = 1;
 		gbc_table.gridy = 3;
-		add(new JScrollPane(table), gbc_table);
-        
+		
+		JScrollPane tablePane = new JScrollPane(table);
+		tablePane.setBorder(BorderFactory.createEmptyBorder());
+		add(tablePane, gbc_table);
 		fillTable();
 	}
 
@@ -108,6 +118,13 @@ public class OrderPanel extends JPanel {
 		table.setValueAt("confirmed", 0, 3);
 		table.setValueAt("2.1.2021", 0, 4);
 		table.setValueAt(400, 0, 5);
+		
+		table.setValueAt(2, 1, 0);
+		table.setValueAt("Not Bob", 1, 1);
+		table.setValueAt("5.1.2021", 1, 2);
+		table.setValueAt("pending", 1, 3);
+		table.setValueAt("7.1.2021", 1, 4);
+		table.setValueAt(1500, 1, 5);
 		
 	}
 	
