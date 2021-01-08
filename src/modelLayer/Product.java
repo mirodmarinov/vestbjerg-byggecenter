@@ -106,6 +106,11 @@ public class Product implements Serializable
 		this.quantity = quantity;
 	}
 
+	public int getDiscount()
+	{
+		return discount;
+	}
+	
 	public int getDiscount(int quantity)
 	{
 		return discount;
