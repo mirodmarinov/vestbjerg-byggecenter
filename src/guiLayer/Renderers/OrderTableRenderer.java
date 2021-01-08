@@ -1,4 +1,4 @@
-package guiLayer;
+package guiLayer.Renderers;
 
 import java.awt.Color;
 import java.awt.Component;
