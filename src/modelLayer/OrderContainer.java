@@ -90,29 +90,29 @@ public class OrderContainer implements Serializable
 		return order;
 	}
 	
-	public Order getOrder(int orderNumber)
+	public Order getOffer(int orderNumber)
 	{
-		Order order = null;
+		Order offer = null;
 		boolean found = false;
 		int i = 0;
 		while(!found && i < orders.size())
 		{
-			if(orders.get(i).getOrderNumber() == orderNumber)
+			if(orders.get(i).getOrderNumber() == orderNumber && orders.get(i).getStatus().equals("pending"))
 			{
 				found = true;
-				order = orders.get(i);
+				offer = orders.get(i);
 			}
 			else
 			{
 				i++;
 			}
 		}
-		return order;
+		return offer;
 	}
 	
 	public boolean confirmOffer(int orderNumber)
 	{
-		Order order = getOrder(orderNumber);
+		Order order = getOffer(orderNumber);
 		return order.setStatus("confirmed");
 	}
 

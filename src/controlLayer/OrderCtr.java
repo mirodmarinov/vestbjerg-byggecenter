@@ -214,7 +214,11 @@ public class OrderCtr
 	 */
 	public ArrayList<String[]> findOffer(int orderNumber)
 	{
-		Order order = OrderContainer.getInstance().getOrder(orderNumber);
+		Order order = OrderContainer.getInstance().getOffer(orderNumber);
+		if (order == null)
+		{
+			return null;
+		}
 		customer = order.getCustomer();
 		orderProducts = order.getProducts();
 		
