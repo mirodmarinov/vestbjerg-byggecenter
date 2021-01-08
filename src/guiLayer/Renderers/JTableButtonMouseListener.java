@@ -10,7 +10,7 @@ import guiLayer.RoundedButton;
 
 public class JTableButtonMouseListener extends MouseAdapter {
     private final JTable table;
-    private static int x = 1, y = 1;
+    private static int x = 0, y = 0;
     private int recolor = 0;
 
     public JTableButtonMouseListener(JTable table) {
@@ -40,7 +40,9 @@ public class JTableButtonMouseListener extends MouseAdapter {
         int row = e.getY()/table.getRowHeight(); //get the row of the button
 
         //Checking the row or column is valid or not
+        //System.out.println(column + " != " + y + " && " + row + " != " + x);
         if (column != y && row != x) {
+        	//System.out.println("PASSED!!!!!!!!!!!!");
         	if (recolor == 1)
         	{
         		Object value = table.getValueAt(y, x);
