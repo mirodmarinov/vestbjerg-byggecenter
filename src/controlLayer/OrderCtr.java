@@ -205,4 +205,31 @@ public class OrderCtr
 			
 		return invoice;
 	}
+	
+	/**This method find an offer by its number and returns its details for gui purposes
+	 * the customer and orderProducts are again assigned to their fields to make sure any changes are saved
+	 * 
+	 * @param orderNumber
+	 * @return returns strings for gui purposes
+	 */
+	public ArrayList<String[]> findOffer(int orderNumber)
+	{
+		Order order = OrderContainer.getInstance().getOrder(orderNumber);
+		customer = order.getCustomer();
+		orderProducts = order.getProducts();
+		
+		return order.toStrings();
+	}
+	
+	/** This method changes the status of the offer to "confirmed" making it an order
+	 * 
+	 * @param orderNumber
+	 * @return returns success
+	 */
+	public boolean confirmOffer(int orderNumber)
+	{
+		return OrderContainer.getInstance().confirmOffer(orderNumber);
+	}
+	
+	
 }

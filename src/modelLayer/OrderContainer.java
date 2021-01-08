@@ -89,5 +89,31 @@ public class OrderContainer implements Serializable
 		}
 		return order;
 	}
+	
+	public Order getOrder(int orderNumber)
+	{
+		Order order = null;
+		boolean found = false;
+		int i = 0;
+		while(!found && i < orders.size())
+		{
+			if(orders.get(i).getOrderNumber() == orderNumber)
+			{
+				found = true;
+				order = orders.get(i);
+			}
+			else
+			{
+				i++;
+			}
+		}
+		return order;
+	}
+	
+	public boolean confirmOffer(int orderNumber)
+	{
+		Order order = getOrder(orderNumber);
+		return order.setStatus("confirmed");
+	}
 
 }
