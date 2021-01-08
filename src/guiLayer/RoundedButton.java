@@ -1,5 +1,7 @@
 package guiLayer;
 
+import java.awt.AWTEvent;
+import java.awt.AWTEventMulticaster;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -53,7 +55,11 @@ public class RoundedButton extends Component {
         }
     }
 
-
+    public void addActionListener(ActionListener actionListener) {
+    	this.actionListener = AWTEventMulticaster.add(actionListener, actionListener);
+        enableEvents(AWTEvent.MOUSE_EVENT_MASK);
+    }
+    
     public void setBorderColor(Color c) {
     	borderColor = c;
     	repaint();

@@ -2,6 +2,8 @@ package guiLayer.Renderers;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
@@ -22,9 +24,9 @@ public class JTableButtonRenderer implements TableCellRenderer {
 		   if(value instanceof RoundedButton) {
 			   	RoundedButton button = (RoundedButton) value;
 				//button.setOpaque(true);
-				//button.setBackground(Color.RED);
+				//button.setBackground(Color.RED);\  
 			  }
-		   
+
 	      if(value instanceof Component) {
 	    	  return (Component)value;
 	      }
