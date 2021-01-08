@@ -23,8 +23,8 @@ public class RoundedButton extends Component {
      */
     public RoundedButton(String label) {
         this.label = label;
-        //this.bg = Color.WHITE;
-        //this.borderColor = Color.BLACK;
+        this.bg = Color.WHITE;
+        this.borderColor = Color.BLACK;
     }
     
     public RoundedButton(String label, Color bg, Color borderColor) {
@@ -55,11 +55,17 @@ public class RoundedButton extends Component {
 
 
     public void setBorderColor(Color c) {
-    	//Graphics g = getGraphics();
-    	//g.setColor(c);
-        //g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
     	borderColor = c;
-    	//repaint();
+    	repaint();
     }
-
+    
+    public void setBackgroundColor(Color c) {
+    	bg = c;
+    	repaint();
+    }
+    
+    public void doClick() {
+    	setBorderColor(Color.RED);
+    	repaint();
+    }
 }

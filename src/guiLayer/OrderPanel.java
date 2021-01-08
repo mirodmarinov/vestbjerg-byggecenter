@@ -60,6 +60,7 @@ public class OrderPanel extends JPanel {
 		table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 50));
 		
 		table.addMouseListener(new JTableButtonMouseListener(table));
+		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 		TableCellRenderer tableRenderer = table.getDefaultRenderer(RoundedButton.class);
 	    table.setDefaultRenderer(RoundedButton.class, new JTableButtonRenderer(tableRenderer));
 	      

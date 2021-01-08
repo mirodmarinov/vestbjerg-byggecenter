@@ -16,6 +16,7 @@ public class JTableButtonMouseListener extends MouseAdapter {
     }
 
     public void mouseClicked(MouseEvent e) {
+
         int column = table.getColumnModel().getColumnIndexAtX(e.getX()); // get the coloum of the button
         int row = e.getY()/table.getRowHeight(); //get the row of the button
 
@@ -25,8 +26,28 @@ public class JTableButtonMouseListener extends MouseAdapter {
             if (value instanceof RoundedButton) {
                 //perform a click event
             	System.out.println("CLICKED BUTTON!");
+            	//((RoundedButton)value).doClick();
             	((RoundedButton)value).setBorderColor(Color.RED);
-            	((RoundedButton)value).repaint();
+            	//((RoundedButton)value).repaint();
+            	table.repaint();
+            }
+        }
+    }
+
+    public void mouseMoved(MouseEvent e) {
+    	System.out.println("ENTERED!");
+    	int column = table.getColumnModel().getColumnIndexAtX(e.getX()); // get the coloum of the button
+        int row = e.getY()/table.getRowHeight(); //get the row of the button
+
+        //Checking the row or column is valid or not
+        if (row < table.getRowCount() && row >= 0 && column < table.getColumnCount() && column >= 0) {
+            Object value = table.getValueAt(row, column);
+            if (value instanceof RoundedButton) {
+                //hover
+            	System.out.println("BUTTON ENTERED!");
+            	((RoundedButton)value).setBackgroundColor(Color.GREEN);
+            	//((RoundedButton)value).repaint();
+            	table.repaint();
             }
         }
     }
