@@ -1,5 +1,8 @@
 package guiLayer;
 
+import guiLayer.Renderers.JTableButtonMouseListener;
+import guiLayer.Renderers.JTableButtonRenderer;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.BorderFactory;
@@ -20,6 +23,7 @@ import java.util.Enumeration;
 
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 public class OrderPanel extends JPanel {
@@ -55,6 +59,10 @@ public class OrderPanel extends JPanel {
 		table.setRowHeight(50);
 		table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 50));
 		
+		table.addMouseListener(new JTableButtonMouseListener(table));
+		TableCellRenderer tableRenderer = table.getDefaultRenderer(RoundedButton.class);
+	    table.setDefaultRenderer(RoundedButton.class, new JTableButtonRenderer(tableRenderer));
+	      
 		// Could be moved to a custom header renderer
 		DefaultTableCellRenderer defaultHeaderRenderer = (DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer();
 		defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
@@ -62,27 +70,27 @@ public class OrderPanel extends JPanel {
 
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"Order Number", "Customer", "Purchase Date", "Status", "Expiration Date", "Total"
+				"Order Number", "Customer", "Purchase Date", "Status", "Expiration Date", "Total", ""
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, String.class
+				String.class, String.class, String.class, String.class, String.class, String.class, RoundedButton.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false
+				false, false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
@@ -118,6 +126,7 @@ public class OrderPanel extends JPanel {
 		table.setValueAt("confirmed", 0, 3);
 		table.setValueAt("2.1.2021", 0, 4);
 		table.setValueAt(400, 0, 5);
+		table.setValueAt(new RoundedButton("Confirm"), 0, 6);
 		
 		table.setValueAt(2, 1, 0);
 		table.setValueAt("Not Bob", 1, 1);
@@ -125,6 +134,7 @@ public class OrderPanel extends JPanel {
 		table.setValueAt("pending", 1, 3);
 		table.setValueAt("7.1.2021", 1, 4);
 		table.setValueAt(1500, 1, 5);
+		table.setValueAt(new RoundedButton("Confirm"), 1, 6);
 		
 	}
 	
