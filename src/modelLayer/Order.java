@@ -116,6 +116,7 @@ public class Order implements Serializable
 		this.orderNumber = orderNumber;
 	}
 
+	//TODO fix the date return
 	public String getPurchaseDate() 
 	{
 		Date date = Calendar.getInstance().getTime(); 
@@ -129,9 +130,13 @@ public class Order implements Serializable
 		this.purchaseDate = purchaseDate;
 	}
 	
-	public Calendar getExpirationDate() 
+	//TODO fix the date return
+	public String getExpirationDate() 
 	{
-		return expirationDate;
+		Date date = Calendar.getInstance().getTime(); 
+		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yy");
+		String strDate = dateFormat.format(date);
+		return strDate;
 	}
 
 	public void setExpirationDate(Calendar expirationDate) 

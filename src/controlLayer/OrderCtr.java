@@ -235,5 +235,29 @@ public class OrderCtr
 		return OrderContainer.getInstance().confirmOffer(orderNumber);
 	}
 	
+	public ArrayList<String[]> getOrders(int orderAmount)
+	{
+		ArrayList<String[]> returnValue = new ArrayList<>();
+		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();
+		Order order;
+		String[] string;
+		orderAmount = orderAmount > orders.size() ? orders.size() : orderAmount;
+		for (int e = 0;e<orderAmount;e++)
+		{
+			order = orders.get(e);
+			string = new String[6];
+			string[0] =  Integer.toString(order.getOrderNumber());
+			string[1] = order.getCustomer().getName();
+			string[2] = order.getPurchaseDate();
+			string[3] = order.getStatus();
+			string[4] = order.getExpirationDate();
+			string[5] = Long.toString(order.getTotalPrice());
+			
+			returnValue.add(string);
+		}
+		return returnValue;
+		
+	}
+	
 	
 }

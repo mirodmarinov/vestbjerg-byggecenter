@@ -1,7 +1,11 @@
 package guiLayer;
+import controlLayer.*;
+
 
 import guiLayer.Renderers.JTableButtonMouseListener;
 import guiLayer.Renderers.JTableButtonRenderer;
+import modelLayer.OrderContainer;
+import modelLayer.ProductContainer;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,6 +23,7 @@ import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
 import java.awt.Insets;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.swing.table.DefaultTableCellRenderer;
@@ -28,6 +33,7 @@ import javax.swing.table.TableColumn;
 
 public class OrderPanel extends JPanel {
 	private JTable table;
+	private OrderCtr orderCtr;
 
 	/**
 	 * Create the panel.
@@ -116,6 +122,23 @@ public class OrderPanel extends JPanel {
 	}
 
 	private void fillTable() {
+		orderCtr = new OrderCtr();
+		int columncount = table.getColumnCount() > 7 ? 7 : table.getColumnCount();
+		ArrayList<String[]> data = orderCtr.getOrders(columncount);
+		columncount = data.size() > columncount ? columncount : data.size();
+		for (int e = 0; e<columncount;e++)
+		{
+			
+			for (int element = 0; element < 6; element++)
+			{
+				
+				table.setValueAt(data.get(e)[element], e, element);
+			}
+			table.setValueAt(new RoundedButton("Confirm"), e, 6);
+			
+		}
+		
+		/*
 		table.setValueAt(1, 0, 0);
 		table.setValueAt("Bob", 0, 1);
 		table.setValueAt("1.1.2021", 0, 2);
@@ -131,7 +154,7 @@ public class OrderPanel extends JPanel {
 		table.setValueAt("7.1.2021", 1, 4);
 		table.setValueAt(1500, 1, 5);
 		table.setValueAt(new RoundedButton("Confirm"), 1, 6);
-		
+		*/
 	}
 	
 }
