@@ -235,6 +235,14 @@ public class OrderCtr
 		return OrderContainer.getInstance().confirmOffer(orderNumber);
 	}
 	
+	
+	/**
+	 * This method is for the fillTable method in the OrderPanel. Returns x amount of order's data
+	 * so we can write it to the table in the UI layer.
+	 * 
+	 * @param orderAmount
+	 * @return
+	 */
 	public ArrayList<String[]> getOrders(int orderAmount)
 	{
 		ArrayList<String[]> returnValue = new ArrayList<>();

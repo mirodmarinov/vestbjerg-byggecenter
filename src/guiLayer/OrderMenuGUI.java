@@ -100,7 +100,7 @@ public class OrderMenuGUI {
 		});
 		orderMenuButton.setFocusable(false);
 		orderMenuButton.setFont(new Font("Lato", Font.BOLD, 22));
-		orderMenuButton.setHorizontalAlignment(SwingConstants.CENTER);
+		orderMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_orderMenuButton = new GridBagConstraints();
 		gbc_orderMenuButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_orderMenuButton.insets = new Insets(40, 20, 5, 22);

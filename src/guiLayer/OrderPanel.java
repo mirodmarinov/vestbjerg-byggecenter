@@ -121,11 +121,18 @@ public class OrderPanel extends JPanel {
 		fillTable();
 	}
 
+	/**
+	 * This method fills the table with the first x elements from the orderContainer
+	 * 
+	 */
 	private void fillTable() {
 		orderCtr = new OrderCtr();
-		int columncount = table.getColumnCount() > 7 ? 7 : table.getColumnCount();
-		ArrayList<String[]> data = orderCtr.getOrders(columncount);
-		columncount = data.size() > columncount ? columncount : data.size();
+		//we get the order information from the orderContainer
+		ArrayList<String[]> data = orderCtr.getOrders(table.getColumnCount());
+		//Check if the order quantity is less the the row amount,
+		//we fill the table with the order data quantity, otherwise we fill
+		//the whole table with information
+		int columncount = data.size() > table.getColumnCount() ? table.getColumnCount() : data.size();
 		for (int e = 0; e<columncount;e++)
 		{
 			
