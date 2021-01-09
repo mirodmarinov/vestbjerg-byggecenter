@@ -164,7 +164,7 @@ public class MainMenu
 	 * data, allowing us to check whether the rest of the code works.
 	 * 
 	 */
-	public void populateClasses()
+	private void populateClasses()
 	{
 		Customer customer1 = new Customer(12658989, 5, "Bob", "Aalborg 12", "Customer");
 		Customer customer2 = new Customer(16559898, 0, "Tobias", "Aarhus 50", "Customer");
