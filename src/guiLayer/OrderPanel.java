@@ -1,11 +1,13 @@
 package guiLayer;
 import controlLayer.*;
+import uiLayer.MainMenu;
 
 
 import guiLayer.Renderers.JTableButtonMouseListener;
 import guiLayer.Renderers.JTableButtonRenderer;
 import modelLayer.OrderContainer;
 import modelLayer.ProductContainer;
+
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,10 +21,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -30,10 +35,17 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.xml.crypto.Data;
+
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class OrderPanel extends JPanel {
 	private JTable table;
 	private OrderCtr orderCtr;
+	private JTextField searchTextField;
 
 	/**
 	 * Create the panel.
@@ -42,9 +54,9 @@ public class OrderPanel extends JPanel {
 	public OrderPanel() {
 		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{50, 0, 0, 50};
+		gridBagLayout.columnWidths = new int[]{50, 0, 0, 0, 50};
 		gridBagLayout.rowHeights = new int[]{100, 0, 0, 0, 0, 100};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.1, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -52,7 +64,7 @@ public class OrderPanel extends JPanel {
 		ordersLabel.setFont(new Font("Lato", Font.PLAIN, 35));
 		GridBagConstraints gbc_ordersLabel = new GridBagConstraints();
 		gbc_ordersLabel.anchor = GridBagConstraints.WEST;
-		gbc_ordersLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_ordersLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_ordersLabel.gridx = 1;
 		gbc_ordersLabel.gridy = 1;
 		add(ordersLabel, gbc_ordersLabel);
@@ -96,6 +108,12 @@ public class OrderPanel extends JPanel {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false, true
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
 		});
 		table.getColumnModel().getColumn(0).setPreferredWidth(85);
 		table.getColumnModel().getColumn(0).setMinWidth(85);
@@ -110,7 +128,48 @@ public class OrderPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setPreferredWidth(70);
 		table.getColumnModel().getColumn(5).setMinWidth(70);
 		table.getColumnModel().getColumn(6).setMinWidth(75);
+		
+		searchTextField = new JTextField();
+		searchTextField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					searchTextField.setFocusable(false);
+					searchTextField.setFocusable(true);
+					if (searchTextField.getText().equals(""))
+					{
+						searchTextField.setText("🔍 Search...");
+					}
+					else
+					{
+						searchBar();
+					}
+			}
+		});
+		searchTextField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				searchTextField.setFocusable(true);
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (searchTextField.getText().equals("🔍 Search..."))
+				{
+					searchTextField.setText("");
+				}
+			}
+		});
+		searchTextField.setFocusable(false);
+		GridBagConstraints gbc_searchTextField = new GridBagConstraints();
+		gbc_searchTextField.insets = new Insets(0, 0, 5, 5);
+		gbc_searchTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_searchTextField.gridx = 2;
+		gbc_searchTextField.gridy = 1;
+		searchTextField.setText("🔍 Search...");
+		add(searchTextField, gbc_searchTextField);
+		searchTextField.setColumns(10);
 		GridBagConstraints gbc_table = new GridBagConstraints();
+		gbc_table.gridwidth = 2;
+		gbc_table.insets = new Insets(0, 0, 5, 5);
 		gbc_table.fill = GridBagConstraints.BOTH;
 		gbc_table.gridx = 1;
 		gbc_table.gridy = 3;
@@ -118,14 +177,17 @@ public class OrderPanel extends JPanel {
 		JScrollPane tablePane = new JScrollPane(table);
 		tablePane.setBorder(BorderFactory.createEmptyBorder());
 		add(tablePane, gbc_table);
-		fillTable();
+		defaultFillTable();
+		
+
+		
 	}
 
 	/**
 	 * This method fills the table with the first x elements from the orderContainer
 	 * 
 	 */
-	private void fillTable() {
+	private void defaultFillTable() {
 		orderCtr = new OrderCtr();
 		//we get the order information from the orderContainer
 		ArrayList<String[]> data = orderCtr.getOrders(table.getColumnCount());
@@ -145,7 +207,7 @@ public class OrderPanel extends JPanel {
 			
 		}
 		
-		/*
+		
 		table.setValueAt(1, 0, 0);
 		table.setValueAt("Bob", 0, 1);
 		table.setValueAt("1.1.2021", 0, 2);
@@ -161,7 +223,36 @@ public class OrderPanel extends JPanel {
 		table.setValueAt("7.1.2021", 1, 4);
 		table.setValueAt(1500, 1, 5);
 		table.setValueAt(new RoundedButton("Confirm"), 1, 6);
-		*/
+		
 	}
+	
+	private void searchBar()
+	{
+		MainMenu mn = new MainMenu();
+		mn.populateClasses();
+		if (!searchTextField.getText().equals(""))
+		{
+			orderCtr = new OrderCtr();
+			String[] data = orderCtr.searchBar(Integer.parseInt(searchTextField.getText())); // TODO Check this
+			if (data != null)
+			{
+				DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+				dtm.setRowCount(1);
+				table.setValueAt(searchTextField.getText(), 0, 0);
+				table.setValueAt(data[0], 0, 1);
+				table.setValueAt(data[1], 0, 2);
+				table.setValueAt(data[2], 0, 3);
+				table.setValueAt(data[3], 0, 4);
+				table.setValueAt(data[4], 0, 5);
+				table.setValueAt(new RoundedButton("Confirm"), 0, 6);
+			}
+			else
+			{
+				//TODO write error message
+			}
+			
+		}
+	}
+	
 	
 }

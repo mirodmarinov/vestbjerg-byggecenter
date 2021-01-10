@@ -1,11 +1,14 @@
 package guiLayer.Renderers;
 
+
+
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JTable;
 
+import controlLayer.OrderCtr;
 import guiLayer.RoundedButton;
 
 public class JTableButtonMouseListener extends MouseAdapter {
@@ -27,8 +30,7 @@ public class JTableButtonMouseListener extends MouseAdapter {
             Object value = table.getValueAt(row, column);
             if (value instanceof RoundedButton) {
                 //perform a click event
-            	System.out.println("CLICKED BUTTON!");
-            	//((RoundedButton)value).doClick();
+            	//doClick();
             	((RoundedButton)value).setBorderColor(Color.RED);
             	table.repaint();
             }
@@ -69,5 +71,12 @@ public class JTableButtonMouseListener extends MouseAdapter {
             ((RoundedButton)prevValue).setBackgroundColor(Color.WHITE);
         }
         table.repaint();
+    }
+    
+    public void doClick() 
+    {
+    	OrderCtr orderCtr = new OrderCtr();
+    	orderCtr.confirmOffer((int)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex()));
+    	System.out.println(orderCtr.getOrders(1));
     }
 }

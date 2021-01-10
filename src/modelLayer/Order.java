@@ -196,4 +196,14 @@ public class Order implements Serializable
 		return allInfo;
 	}
 	
+	public String[] searchBar()
+	{
+		String[] data = new String[5];
+		data[0] = customer.getName();
+		data[1] = getPurchaseDate();
+		data[2] = getStatus();
+		data[3] = getExpirationDate();
+		data[4] = Long.toString(getTotalPrice());
+		return data;
+	}
 }

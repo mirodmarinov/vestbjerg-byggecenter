@@ -267,5 +267,16 @@ public class OrderCtr
 		
 	}
 	
+	public String[] searchBar(int id)
+	{
+		Order order = OrderContainer.getInstance().getOffer(id);
+		if (order == null)
+		{
+			return null;
+		}
+		String[] data = order.searchBar();
+		return data;
+	}
+	
 	
 }

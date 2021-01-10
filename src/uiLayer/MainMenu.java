@@ -9,6 +9,8 @@ package uiLayer;
  *
  */
 import modelLayer.*;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.reflect.Method;
 import java.io.*;
@@ -164,7 +166,7 @@ public class MainMenu
 	 * data, allowing us to check whether the rest of the code works.
 	 * 
 	 */
-	private void populateClasses()
+	public void populateClasses()
 	{
 		Customer customer1 = new Customer(12658989, 5, "Bob", "Aalborg 12", "Customer");
 		Customer customer2 = new Customer(16559898, 0, "Tobias", "Aarhus 50", "Customer");
@@ -176,7 +178,18 @@ public class MainMenu
 		                "Bigger nails , used for fixing different houses", "the nail shelf", "3.12.51");
 		Product p3 = new Product(10, 10, 0, 2500, 2000, "123456787", "hammer", "A construction hammer", "Tools",
 		                "3.12.52");
-
+		
+		OrderLineItem oli = new OrderLineItem(p3, 5);
+		ArrayList<OrderLineItem> oliarray = new ArrayList<>();
+		oliarray.add(oli);
+		Order order = new Order(customer1, oliarray);
+		order.calculateExpirationDate();
+		order.setStatus("pending");
+		order.setTotalPrice(10000);
+		order.setDiscount(5);
+		OrderContainer.getInstance().addOrder(order);
+		OrderContainer.getInstance().addOrder(order);
+		
 		ProductContainer.getInstance().addProduct(p1);
 		ProductContainer.getInstance().addProduct(p2);
 		ProductContainer.getInstance().addProduct(p3);
