@@ -169,7 +169,7 @@ public class MainMenu
 	public void populateClasses()
 	{
 		Customer customer1 = new Customer(12658989, 5, "Bob", "Aalborg 12", "Customer");
-		Customer customer2 = new Customer(16559898, 0, "Tobias", "Aarhus 50", "Customer");
+		Customer customer2 = new Customer(16559898, 0, "Frank", "Aarhus 50", "Customer");
 		CustomerContainer.getInstance().addCustomer(customer1);
 		CustomerContainer.getInstance().addCustomer(customer2);
 		Product p1 = new Product(10, 50, 0, 5000, 1000, "123456789", "nails", "Huge nails , fix houses",
@@ -187,8 +187,17 @@ public class MainMenu
 		order.setStatus("pending");
 		order.setTotalPrice(10000);
 		order.setDiscount(5);
+
+		OrderLineItem oli2 = new OrderLineItem(p1, 8);
+		ArrayList<OrderLineItem> oliarray2 = new ArrayList<>();
+		oliarray2.add(oli2);
+		Order order2 = new Order(customer2, oliarray2);
+		order2.calculateExpirationDate();
+		order2.setStatus("confirmed");
+		order2.setTotalPrice(8000);
+		order2.setDiscount(0);
 		OrderContainer.getInstance().addOrder(order);
-		OrderContainer.getInstance().addOrder(order);
+		OrderContainer.getInstance().addOrder(order2);
 		
 		ProductContainer.getInstance().addProduct(p1);
 		ProductContainer.getInstance().addProduct(p2);

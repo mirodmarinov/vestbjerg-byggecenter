@@ -5,10 +5,13 @@ package guiLayer.Renderers;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import controlLayer.OrderCtr;
+import guiLayer.OrderPanel;
 import guiLayer.RoundedButton;
 
 public class JTableButtonMouseListener extends MouseAdapter {
@@ -30,7 +33,7 @@ public class JTableButtonMouseListener extends MouseAdapter {
             Object value = table.getValueAt(row, column);
             if (value instanceof RoundedButton) {
                 //perform a click event
-            	//doClick();
+            	doClick();
             	((RoundedButton)value).setBorderColor(Color.RED);
             	table.repaint();
             }
@@ -43,6 +46,7 @@ public class JTableButtonMouseListener extends MouseAdapter {
 
         //Checking the row or column is valid or not
         if (column != y || row != x) {
+        	      	        	
         	if (recolor == 1)
         	{
         		Object value = table.getValueAt(y, x);
@@ -76,7 +80,8 @@ public class JTableButtonMouseListener extends MouseAdapter {
     public void doClick() 
     {
     	OrderCtr orderCtr = new OrderCtr();
-    	orderCtr.confirmOffer((int)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex()));
-    	System.out.println(orderCtr.getOrders(1));
+    	System.out.println(orderCtr.confirmOffer(Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex()))));
+    	
+    	
     }
 }

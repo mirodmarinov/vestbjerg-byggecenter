@@ -23,9 +23,9 @@ public class RoundedButton extends Component {
      *
      * @param label the label of the button
      */
-    public RoundedButton(String label) {
+    public RoundedButton(String label, Color color) {
         this.label = label;
-        this.bg = Color.WHITE;
+        this.bg = color;
         this.borderColor = Color.BLACK;
     }
     

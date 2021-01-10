@@ -46,17 +46,20 @@ public class OrderPanel extends JPanel {
 	private JTable table;
 	private OrderCtr orderCtr;
 	private JTextField searchTextField;
+	JLabel foundLabel;
 
 	/**
 	 * Create the panel.
 	 */
 	@SuppressWarnings("serial")
 	public OrderPanel() {
+		MainMenu mn = new MainMenu();
+		mn.populateClasses();
 		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{50, 0, 0, 0, 50};
+		gridBagLayout.columnWidths = new int[]{50, 811, -69, 0, 0, 50};
 		gridBagLayout.rowHeights = new int[]{100, 0, 0, 0, 0, 100};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.1, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.1, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -158,17 +161,29 @@ public class OrderPanel extends JPanel {
 				}
 			}
 		});
+		
+		//****** TODO SIZE MUST BE FIXED AT THIS LABEL ***** \\
+		foundLabel = new JLabel("Order not found!");
+		foundLabel.setVisible(false);
+		foundLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		foundLabel.setForeground(Color.RED);
+		GridBagConstraints gbc_foundLabel = new GridBagConstraints();
+		gbc_foundLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_foundLabel.anchor = GridBagConstraints.EAST;
+		gbc_foundLabel.gridx = 2;
+		gbc_foundLabel.gridy = 1;
+		add(foundLabel, gbc_foundLabel);
 		searchTextField.setFocusable(false);
 		GridBagConstraints gbc_searchTextField = new GridBagConstraints();
 		gbc_searchTextField.insets = new Insets(0, 0, 5, 5);
 		gbc_searchTextField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_searchTextField.gridx = 2;
+		gbc_searchTextField.gridx = 3;
 		gbc_searchTextField.gridy = 1;
 		searchTextField.setText("🔍 Search...");
 		add(searchTextField, gbc_searchTextField);
 		searchTextField.setColumns(10);
 		GridBagConstraints gbc_table = new GridBagConstraints();
-		gbc_table.gridwidth = 2;
+		gbc_table.gridwidth = 3;
 		gbc_table.insets = new Insets(0, 0, 5, 5);
 		gbc_table.fill = GridBagConstraints.BOTH;
 		gbc_table.gridx = 1;
@@ -203,11 +218,20 @@ public class OrderPanel extends JPanel {
 				
 				table.setValueAt(data.get(e)[element], e, element);
 			}
-			table.setValueAt(new RoundedButton("Confirm"), e, 6);
+
+			//********** TODO EDIT NEEDED TO DISABLE THE CONFIRMED ORDER'S BUTTON ******** \\
+			if (data.get(e)[3].equals("pending"))
+			{
+			table.setValueAt(new RoundedButton("Confirm",Color.LIGHT_GRAY), e, 6);
+			}
+			else
+			{
+				table.setValueAt(new RoundedButton("Confirmed",Color.WHITE), e, 6);
+			}
 			
 		}
 		
-		
+		/*
 		table.setValueAt(1, 0, 0);
 		table.setValueAt("Bob", 0, 1);
 		table.setValueAt("1.1.2021", 0, 2);
@@ -223,19 +247,19 @@ public class OrderPanel extends JPanel {
 		table.setValueAt("7.1.2021", 1, 4);
 		table.setValueAt(1500, 1, 5);
 		table.setValueAt(new RoundedButton("Confirm"), 1, 6);
-		
+		*/
 	}
 	
 	private void searchBar()
 	{
-		MainMenu mn = new MainMenu();
-		mn.populateClasses();
+		
 		if (!searchTextField.getText().equals(""))
 		{
 			orderCtr = new OrderCtr();
 			String[] data = orderCtr.searchBar(Integer.parseInt(searchTextField.getText())); // TODO Check this
 			if (data != null)
 			{
+				foundLabel.setVisible(false);
 				DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 				dtm.setRowCount(1);
 				table.setValueAt(searchTextField.getText(), 0, 0);
@@ -244,11 +268,11 @@ public class OrderPanel extends JPanel {
 				table.setValueAt(data[2], 0, 3);
 				table.setValueAt(data[3], 0, 4);
 				table.setValueAt(data[4], 0, 5);
-				table.setValueAt(new RoundedButton("Confirm"), 0, 6);
+				table.setValueAt(new RoundedButton("Confirm",Color.WHITE), 0, 6);
 			}
 			else
 			{
-				//TODO write error message
+				foundLabel.setVisible(true);
 			}
 			
 		}

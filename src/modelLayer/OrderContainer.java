@@ -97,7 +97,7 @@ public class OrderContainer implements Serializable
 		int i = 0;
 		while(!found && i < orders.size())
 		{
-			if(orders.get(i).getOrderNumber() == orderNumber && orders.get(i).getStatus().equals("pending"))
+			if(orders.get(i).getOrderNumber() == orderNumber)
 			{
 				found = true;
 				offer = orders.get(i);
