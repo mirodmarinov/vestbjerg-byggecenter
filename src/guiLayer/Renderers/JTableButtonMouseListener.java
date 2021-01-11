@@ -52,18 +52,25 @@ public class JTableButtonMouseListener extends MouseAdapter {
         		Object value = table.getValueAt(y, x);
         		recolor = 0;
         		if (value instanceof RoundedButton) {
-        			((RoundedButton)value).setBackgroundColor(Color.WHITE);
-        			table.repaint();
+        			if (((RoundedButton) value).getName().equals("Confirm"))
+        			{
+        				((RoundedButton)value).setBackgroundColor(Color.LIGHT_GRAY);
+        				table.repaint();
+        			}
         		}
         	}
         	if (row < table.getRowCount() && row >= 0 && column < table.getColumnCount() && column >= 0) {
         		Object value = table.getValueAt(row, column);
         		if (value instanceof RoundedButton) {
-        			((RoundedButton)value).setBackgroundColor(Color.GREEN);
-        			table.repaint();
+        			if (((RoundedButton) value).getName().equals("Confirm"))
+        			{
+        				((RoundedButton)value).setBackgroundColor(Color.GREEN);
+        				table.repaint();
+        			}
         			y = row;
         			x = column;
         			recolor = 1;
+        			
         		}
         	}
         }
@@ -72,7 +79,9 @@ public class JTableButtonMouseListener extends MouseAdapter {
     public void mouseExited(MouseEvent e) {
         Object prevValue = table.getValueAt(y, x);
         if (prevValue instanceof RoundedButton) {
-            ((RoundedButton)prevValue).setBackgroundColor(Color.WHITE);
+        	if (((RoundedButton) prevValue).getName().equals("Confirm")) {
+        		((RoundedButton)prevValue).setBackgroundColor(Color.LIGHT_GRAY);
+        	}
         }
         table.repaint();
     }
