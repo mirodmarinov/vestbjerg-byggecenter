@@ -102,7 +102,7 @@ public class OrderPanel extends JPanel {
 				{null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"Order Number", "Customer", "Purchase Date", "Status", "Expiration Date", "Total", ""
+				"Order Number", "Customer", "Purchase Date", "Status", "Expiration Date", "Total (DKK)", ""
 			}
 		) {
 			Class[] columnTypes = new Class[] {
@@ -205,11 +205,11 @@ public class OrderPanel extends JPanel {
 	private void defaultFillTable() {
 		orderCtr = new OrderCtr();
 		//we get the order information from the orderContainer
-		ArrayList<String[]> data = orderCtr.getOrders(table.getColumnCount());
+		ArrayList<String[]> data = orderCtr.getOrders(table.getRowCount());
 		//Check if the order quantity is less the the row amount,
 		//we fill the table with the order data quantity, otherwise we fill
 		//the whole table with information
-		int columncount = data.size() > table.getColumnCount() ? table.getColumnCount() : data.size();
+		int columncount = data.size() > table.getRowCount() ? table.getRowCount() : data.size();
 		for (int e = 0; e<columncount;e++)
 		{
 			

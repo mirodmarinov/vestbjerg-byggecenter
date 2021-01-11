@@ -27,7 +27,6 @@ public class RoundedButton extends Component {
         this.label = label;
         this.bg = color;
         this.borderColor = Color.BLACK;
-        System.out.println(label);
         this.setName(label);
     }
     
@@ -48,6 +47,7 @@ public class RoundedButton extends Component {
         g.setColor(borderColor);
         g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
 
+        
         // draw the label centered in the button
         Font f = getFont();
         if (f != null) {

@@ -212,9 +212,9 @@ public class OrderCtr
 	 * @param orderNumber
 	 * @return returns strings for gui purposes
 	 */
-	public ArrayList<String[]> findOffer(int orderNumber)
+	public ArrayList<String[]> findOrder(int orderNumber)
 	{
-		Order order = OrderContainer.getInstance().getOffer(orderNumber);
+		Order order = OrderContainer.getInstance().findOrder(orderNumber);
 		if (order == null)
 		{
 			return null;
@@ -243,6 +243,8 @@ public class OrderCtr
 	 * @param orderAmount
 	 * @return
 	 */
+	
+	// TODO SCROLLBARTTHINGY
 	public ArrayList<String[]> getOrders(int orderAmount)
 	{
 		ArrayList<String[]> returnValue = new ArrayList<>();
@@ -259,7 +261,7 @@ public class OrderCtr
 			string[2] = order.getPurchaseDate();
 			string[3] = order.getStatus();
 			string[4] = order.getExpirationDate();
-			string[5] = Long.toString(order.getTotalPrice());
+			string[5] = Long.toString(order.getTotalPrice()) + " DKK";
 			
 			returnValue.add(string);
 		}
@@ -277,7 +279,7 @@ public class OrderCtr
 	 */
 	public String[] searchBar(int id)
 	{
-		Order order = OrderContainer.getInstance().getOffer(id);
+		Order order = OrderContainer.getInstance().findOrder(id);
 		if (order == null)
 		{
 			return null;
