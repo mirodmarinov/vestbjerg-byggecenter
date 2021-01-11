@@ -57,9 +57,9 @@ public class OrderPanel extends JPanel {
 		mn.populateClasses();
 		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{50, 811, -69, 0, 0, 50};
+		gridBagLayout.columnWidths = new int[]{50, 0, 0, 0, 0, 50};
 		gridBagLayout.rowHeights = new int[]{100, 0, 0, 0, 0, 100};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.1, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -148,7 +148,7 @@ public class OrderPanel extends JPanel {
 			}
 		});
 		
-		//****** TODO SIZE MUST BE FIXED AT THIS LABEL ***** \\
+		
 		foundLabel = new JLabel("Order not found!");
 		foundLabel.setVisible(false);
 		foundLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -193,7 +193,7 @@ public class OrderPanel extends JPanel {
 		//we get the order information from the orderContainer
 		ArrayList<String[]> data = orderCtr.getOrders();
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-		dtm.setRowCount(50);
+		dtm.setRowCount(data.size());
 		//Check if the order quantity is less the the row amount,
 		//we fill the table with the order data quantity, otherwise we fill
 		//the whole table with information
@@ -207,7 +207,7 @@ public class OrderPanel extends JPanel {
 				table.setValueAt(data.get(e)[element], e, element);
 			}
 
-			//********** TODO EDIT NEEDED TO DISABLE THE CONFIRMED ORDER'S BUTTON ******** \\
+			
 			if (data.get(e)[3].equals("pending"))
 			{
 			table.setValueAt(new RoundedButton("Confirm",Color.LIGHT_GRAY), e, 6);

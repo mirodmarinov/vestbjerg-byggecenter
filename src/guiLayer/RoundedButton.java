@@ -41,34 +41,28 @@ public class RoundedButton extends Component {
     @Override
     public void paint(Graphics g) {
 
-        g.setColor(bg);
-        g.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
-
-        // draw the parameter of the button
-        //setBorderColor(getBackground().darker().darker().darker());
-        g.setColor(borderColor);
-        g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
+    	Graphics2D g2 = (Graphics2D) g;
+        RenderingHints rh = new RenderingHints(RenderingHints.KEY_TEXT_ANTIALIASING,
+        RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.setColor(bg);
+        g2.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
+       
+        g2.setRenderingHints(rh);
+        g2.setColor(borderColor);
+        g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
 
         
         // draw the label centered in the button
         Font f = getFont();
         if (f != null) {
             FontMetrics fm = getFontMetrics(getFont());
-            //g.setColor(getForeground());
-            //g.drawString(label, getWidth() / 2 - fm.stringWidth(label) / 2, getHeight() / 2 + fm.getMaxDescent());
-            Graphics2D g2 = (Graphics2D) g;
-            RenderingHints rh = new RenderingHints(RenderingHints.KEY_TEXT_ANTIALIASING,
-            RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            
             g2.setRenderingHints(rh);
             g2.setColor(getForeground());
             g2.drawString(label, getWidth() / 2 - fm.stringWidth(label) / 2, getHeight() / 2 + fm.getMaxDescent());
         }
     }
 
-    public void addActionListener(ActionListener actionListener) {
-    	this.actionListener = AWTEventMulticaster.add(actionListener, actionListener);
-        enableEvents(AWTEvent.MOUSE_EVENT_MASK);
-    }
     
     public void setBorderColor(Color c) {
     	borderColor = c;
@@ -77,11 +71,6 @@ public class RoundedButton extends Component {
     
     public void setBackgroundColor(Color c) {
     	bg = c;
-    	repaint();
-    }
-    
-    public void doClick() {
-    	setBorderColor(Color.RED);
     	repaint();
     }
 }

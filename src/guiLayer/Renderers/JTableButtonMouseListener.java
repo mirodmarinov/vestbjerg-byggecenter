@@ -16,7 +16,7 @@ import guiLayer.RoundedButton;
 
 public class JTableButtonMouseListener extends MouseAdapter {
     private final JTable table;
-    private static int x = 5, y = 4;
+    private static int x = 0, y = 0;
     private int recolor = 0;
 
     public JTableButtonMouseListener(JTable table) {
