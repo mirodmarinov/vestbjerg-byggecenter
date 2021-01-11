@@ -92,8 +92,9 @@ public class OrderMenuGUI {
 		 */
 		RoundedButton orderMenuButton = new RoundedButton("Orders", blueGreen);
 		
-		formatButton(orderMenuButton);
 		
+		formatButton(orderMenuButton);
+		//orderMenuButton.addOffset(-20, 0);
 		GridBagConstraints gbc_orderMenuButton = new GridBagConstraints();
 		gbc_orderMenuButton.fill = GridBagConstraints.BOTH;
 		gbc_orderMenuButton.insets = new Insets(20, 20, 5, 20);
