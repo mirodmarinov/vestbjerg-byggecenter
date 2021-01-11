@@ -19,6 +19,8 @@ public class RoundedButton extends Component {
     private Color bg;
     private Color borderColor;
     protected boolean pressed = false;
+    private int xAxis;
+    private int yAxis;
 
     /**
      * Constructs a RoundedButton with the specified label.
@@ -61,6 +63,12 @@ public class RoundedButton extends Component {
             g2.setColor(getForeground());
             g2.drawString(label, getWidth() / 2 - fm.stringWidth(label) / 2, getHeight() / 2 + fm.getMaxDescent());
         }
+    }
+    
+    public void alignLeft() {
+    	xAxis = 3;
+    	//FontMetrics fm = getFontMetrics(getFont());
+    	//g2.drawString(label, 3, getHeight() / 2 + fm.getMaxDescent());
     }
 
     

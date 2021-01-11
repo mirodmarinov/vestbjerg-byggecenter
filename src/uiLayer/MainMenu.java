@@ -196,6 +196,7 @@ public class MainMenu
 		order2.setStatus("confirmed");
 		order2.setTotalPrice(8000);
 		order2.setDiscount(0);
+		order2.generatePurchaseDate();
 		OrderContainer.getInstance().addOrder(order);
 		OrderContainer.getInstance().addOrder(order2);
 		

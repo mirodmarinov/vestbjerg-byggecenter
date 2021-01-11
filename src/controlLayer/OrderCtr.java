@@ -140,6 +140,7 @@ public class OrderCtr
 		order.setStatus("confirmed");
 		order.setTotalPrice((int)calculateTotal());
 		order.setDiscount(customer.getDiscount());
+		order.generatePurchaseDate();
 		/*
 		 * Here we update the stock, by changing the quantity of the product in
 		 * stock based on the quantity of the orderline item.

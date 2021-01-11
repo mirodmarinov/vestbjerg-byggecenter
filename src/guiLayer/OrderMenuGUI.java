@@ -81,7 +81,7 @@ public class OrderMenuGUI {
 		gbc_sideBar.gridy = 0;
 		frame.getContentPane().add(sideBar, gbc_sideBar);
 		GridBagLayout gbl_sideBar = new GridBagLayout();
-		gbl_sideBar.columnWidths = new int[]{150};
+		gbl_sideBar.columnWidths = new int[]{200};
 		gbl_sideBar.rowHeights = new int[]{75, 50, 50, 50, 50, 50, 0};
 		gbl_sideBar.columnWeights = new double[]{1.0};
 		gbl_sideBar.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
@@ -91,14 +91,17 @@ public class OrderMenuGUI {
 		 * Here we create the buttons for the side bar
 		 */
 		RoundedButton orderMenuButton = new RoundedButton("Orders", blueGreen);
-		orderMenuButton.setPreferredSize(new Dimension(150, 50));
-		orderMenuButton.setFont(new Font("Lato", Font.PLAIN, 20));
+		
+		formatButton(orderMenuButton);
+		
 		GridBagConstraints gbc_orderMenuButton = new GridBagConstraints();
 		gbc_orderMenuButton.fill = GridBagConstraints.BOTH;
-		gbc_orderMenuButton.insets = new Insets(20, 0, 0, 0);
+		gbc_orderMenuButton.insets = new Insets(20, 20, 5, 20);
 		gbc_orderMenuButton.gridx = 0;
 		gbc_orderMenuButton.gridy = 1;
 		sideBar.add(orderMenuButton, gbc_orderMenuButton);
+		
+		
 		
 		
 		
@@ -117,14 +120,21 @@ public class OrderMenuGUI {
 		mainFrame.add(new OrderPanel(), "Orders");
 	}
 	
-	private void onTheButton(JButton button)
-	{
-		button.setBackground(Color.LIGHT_GRAY);
-	}
-	
-	private void offTheButton(JButton button)
-	{
-		button.setBackground(new Color(240,240,240));
+	private void formatButton(RoundedButton button) {
+		button.setPreferredSize(new Dimension(150, 50));
+		button.setFont(new Font("Lato", Font.PLAIN, 20));
+		
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			button.setBackgroundColor(Color.WHITE);
+				
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				button.setBackgroundColor(blueGreen);
+			}
+		});
 	}
 
 }

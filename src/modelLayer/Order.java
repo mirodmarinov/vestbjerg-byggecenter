@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * This class defines orders in the System for
  * Vestbjerg Byggecenter. It defines all the elements
  * of knowledge that is necessary to manage orders.
- * It implement Serializable in order ot be able to save it to a file.
+ * It implement Serializable in order to be able to save it to a file.
  */
 public class Order implements Serializable
 {
@@ -22,7 +22,7 @@ public class Order implements Serializable
 	private int orderNumber; // The unique identifier
 	private int discount;
 	private long totalPrice;
-	private Calendar expirationDate; //and Order object is order if expirationDate is null, if it isnt, it is and offer
+	private Calendar expirationDate; //and Order object is offer if expirationDate is null, if it isnt, it is and offer
 	private Calendar purchaseDate;
 	private String status; // The status of the sales process, is it still just an offer or how far along has it come
 	private String delivery;
@@ -122,7 +122,10 @@ public class Order implements Serializable
 	public String getPurchaseDate() 
 	{
 		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-		String date = dateFormat.format(purchaseDate.getTime());
+		String date = "...";
+		if(purchaseDate != null) {
+			date = dateFormat.format(purchaseDate.getTime());
+		}
 		return date;
 	}
 
@@ -137,7 +140,10 @@ public class Order implements Serializable
 	public String getExpirationDate() 
 	{
 		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-		String date = dateFormat.format(expirationDate.getTime());
+		String date = "...";
+		if(status.equalsIgnoreCase("Pending")) {
+			date = dateFormat.format(expirationDate.getTime());
+		}
 		return date;
 	}
 
