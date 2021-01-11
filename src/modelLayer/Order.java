@@ -116,13 +116,14 @@ public class Order implements Serializable
 		this.orderNumber = orderNumber;
 	}
 
-	//TODO fix the date return
+	/**
+	 * @return purchase date as String
+	 */
 	public String getPurchaseDate() 
 	{
-		Date date = Calendar.getInstance().getTime(); 
-		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yy");
-		String strDate = dateFormat.format(date);
-		return strDate;
+		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		String date = dateFormat.format(purchaseDate.getTime());
+		return date;
 	}
 
 	public void setPurchaseDate(Calendar purchaseDate) 
@@ -130,13 +131,14 @@ public class Order implements Serializable
 		this.purchaseDate = purchaseDate;
 	}
 	
-	//TODO fix the date return
+	/**
+	 * @return expiration date as String
+	 */
 	public String getExpirationDate() 
 	{
-		Date date = Calendar.getInstance().getTime(); 
-		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yy");
-		String strDate = dateFormat.format(date);
-		return strDate;
+		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		String date = dateFormat.format(expirationDate.getTime());
+		return date;
 	}
 
 	public void setExpirationDate(Calendar expirationDate) 
@@ -148,6 +150,7 @@ public class Order implements Serializable
 	{
 		Calendar generateExpirationDate = Calendar.getInstance();
 		generateExpirationDate.roll(Calendar.MONTH, true);
+		expirationDate = generateExpirationDate; // saves it to the field
 		return generateExpirationDate;
 	}
 	
@@ -157,8 +160,6 @@ public class Order implements Serializable
 	}
 	
 	/** This method creates an array list of string arrays
-	 * 
-	 * 
 	 * 
 	 * @return
 	 */
