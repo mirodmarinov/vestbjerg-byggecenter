@@ -41,7 +41,7 @@ public class JTableButtonMouseListener extends MouseAdapter {
     }
 
     public void mouseMoved(MouseEvent e) {
-        int column = table.getColumnModel().getColumnIndexAtX(e.getX()); // get the coloum of the button
+        int column = table.getColumnModel().getColumnIndexAtX(e.getX()); // get the column of the button
         int row = e.getY()/table.getRowHeight(); //get the row of the button
 
         //Checking the row or column is valid or not
@@ -55,6 +55,7 @@ public class JTableButtonMouseListener extends MouseAdapter {
         			if (((RoundedButton) value).getName().equals("Confirm"))
         			{
         				((RoundedButton)value).setBackgroundColor(Color.LIGHT_GRAY);
+        				((RoundedButton)value).setForeground(Color.BLACK);
         				table.repaint();
         			}
         		}
@@ -64,7 +65,8 @@ public class JTableButtonMouseListener extends MouseAdapter {
         		if (value instanceof RoundedButton) {
         			if (((RoundedButton) value).getName().equals("Confirm"))
         			{
-        				((RoundedButton)value).setBackgroundColor(Color.GREEN);
+        				((RoundedButton)value).setBackgroundColor(new Color(16, 188, 171));
+        				((RoundedButton)value).setForeground(Color.WHITE);
         				table.repaint();
         			}
         			y = row;
