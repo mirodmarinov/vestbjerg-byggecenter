@@ -83,6 +83,7 @@ public class JTableButtonMouseListener extends MouseAdapter {
         if (prevValue instanceof RoundedButton) {
         	if (((RoundedButton) prevValue).getName().equals("Confirm")) {
         		((RoundedButton)prevValue).setBackgroundColor(Color.LIGHT_GRAY);
+        		((RoundedButton)prevValue).setForeground(Color.BLACK);
         	}
         }
         table.repaint();
