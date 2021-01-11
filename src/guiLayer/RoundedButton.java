@@ -21,6 +21,7 @@ public class RoundedButton extends Component {
     protected boolean pressed = false;
     private int xAxis = 0;
     private int yAxis = 0;
+    private Font font;
 
     /**
      * Constructs a RoundedButton with the specified label.
@@ -32,18 +33,28 @@ public class RoundedButton extends Component {
         this.bg = color;
         this.borderColor = color;
         this.setName(label);
+        this.font = new Font("Latto",Font.BOLD,14);
     }
     
     public RoundedButton(String label, Color bg, Color borderColor) {
         this.label = label;
         this.bg = bg;
         this.borderColor = borderColor;
+        this.font = new Font("Latto",Font.BOLD,14);
+    }
+    
+    public RoundedButton(String label, Color bg, Color borderColor, Font font) {
+        this.label = label;
+        this.bg = bg;
+        this.borderColor = borderColor;
+        this.font = font;
     }
 
     @Override
     public void paint(Graphics g) {
 
     	Graphics2D g2 = (Graphics2D) g;
+    	
         RenderingHints rh = new RenderingHints(RenderingHints.KEY_TEXT_ANTIALIASING,
         RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2.setColor(bg);
@@ -61,6 +72,7 @@ public class RoundedButton extends Component {
             
             g2.setRenderingHints(rh);
             g2.setColor(getForeground());
+            g2.setFont(font);
             g2.drawString(label, getWidth() / 2 - fm.stringWidth(label) / 2  + xAxis, getHeight() / 2 + fm.getMaxDescent() + yAxis);
         }
     }
@@ -84,5 +96,4 @@ public class RoundedButton extends Component {
     	bg = c;
     	repaint();
     }
-    
 }

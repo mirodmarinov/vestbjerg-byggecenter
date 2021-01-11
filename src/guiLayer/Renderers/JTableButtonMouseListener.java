@@ -36,7 +36,7 @@ public class JTableButtonMouseListener extends MouseAdapter {
             	{
                 //perform a click event
             	doClick();
-            	((RoundedButton)value).setBorderColor(Color.RED);
+            	//((RoundedButton)value).setBorderColor(Color.RED);
             	table.repaint();
             	}
             }
@@ -100,3 +100,4 @@ public class JTableButtonMouseListener extends MouseAdapter {
     	
     }
 }
+

@@ -212,7 +212,7 @@ public class OrderPanel extends JPanel {
 			
 			if (data.get(e)[3].equals("pending"))
 			{
-			table.setValueAt(new RoundedButton("Confirm",Color.LIGHT_GRAY), e, 6);
+				table.setValueAt(new RoundedButton("Confirm",Color.LIGHT_GRAY), e, 6);
 			}
 			else
 			{
