@@ -64,7 +64,7 @@ public class OrderPanel extends JPanel {
 		setLayout(gridBagLayout);
 		
 		JLabel ordersLabel = new JLabel("Orders");
-		ordersLabel.setFont(new Font("Lato", Font.PLAIN, 35));
+		ordersLabel.setFont(new Font("Lato", Font.BOLD, 35));
 		GridBagConstraints gbc_ordersLabel = new GridBagConstraints();
 		gbc_ordersLabel.anchor = GridBagConstraints.WEST;
 		gbc_ordersLabel.insets = new Insets(0, 0, 5, 5);
@@ -193,7 +193,7 @@ public class OrderPanel extends JPanel {
 		//we get the order information from the orderContainer
 		ArrayList<String[]> data = orderCtr.getOrders();
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-		dtm.setRowCount(data.size());
+		dtm.setRowCount(50);
 		//Check if the order quantity is less the the row amount,
 		//we fill the table with the order data quantity, otherwise we fill
 		//the whole table with information

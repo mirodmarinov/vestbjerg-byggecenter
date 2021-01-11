@@ -7,6 +7,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.ActionListener;
 
 
@@ -52,8 +54,14 @@ public class RoundedButton extends Component {
         Font f = getFont();
         if (f != null) {
             FontMetrics fm = getFontMetrics(getFont());
-            g.setColor(getForeground());
-            g.drawString(label, getWidth() / 2 - fm.stringWidth(label) / 2, getHeight() / 2 + fm.getMaxDescent());
+            //g.setColor(getForeground());
+            //g.drawString(label, getWidth() / 2 - fm.stringWidth(label) / 2, getHeight() / 2 + fm.getMaxDescent());
+            Graphics2D g2 = (Graphics2D) g;
+            RenderingHints rh = new RenderingHints(RenderingHints.KEY_TEXT_ANTIALIASING,
+            RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            g2.setRenderingHints(rh);
+            g2.setColor(getForeground());
+            g2.drawString(label, getWidth() / 2 - fm.stringWidth(label) / 2, getHeight() / 2 + fm.getMaxDescent());
         }
     }
 

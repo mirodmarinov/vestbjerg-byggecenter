@@ -22,12 +22,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
 
 public class OrderMenuGUI {
 
 	private JFrame frame;
 	private CardLayout cards = new CardLayout();
 	private JPanel mainFrame = new JPanel();
+	private Color blueGreen = new Color(16, 188, 171);
 
 	/**
 	 * Launch the application.
@@ -67,8 +69,11 @@ public class OrderMenuGUI {
 		gridBagLayout.rowWeights = new double[]{1.0};
 		frame.getContentPane().setLayout(gridBagLayout);
 		
+		/*
+		 * TODO write comment
+		 */
 		JPanel sideBar = new JPanel();
-		sideBar.setBackground(new Color(16, 188, 171));
+		sideBar.setBackground(blueGreen);
 		GridBagConstraints gbc_sideBar = new GridBagConstraints();
 		gbc_sideBar.fill = GridBagConstraints.BOTH;
 		gbc_sideBar.insets = new Insets(0, 0, 0, 0);
@@ -76,121 +81,26 @@ public class OrderMenuGUI {
 		gbc_sideBar.gridy = 0;
 		frame.getContentPane().add(sideBar, gbc_sideBar);
 		GridBagLayout gbl_sideBar = new GridBagLayout();
-		gbl_sideBar.columnWidths = new int[]{47};
-		gbl_sideBar.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_sideBar.columnWidths = new int[]{150};
+		gbl_sideBar.rowHeights = new int[]{75, 50, 50, 50, 50, 50, 0};
 		gbl_sideBar.columnWeights = new double[]{1.0};
 		gbl_sideBar.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
 		sideBar.setLayout(gbl_sideBar);
 		
-		JButton orderMenuButton = new JButton("Orders");
-		orderMenuButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				onTheButton(orderMenuButton);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				offTheButton(orderMenuButton);
-			}
-		});
-		orderMenuButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cards.show(mainFrame, "Orders");
-			}
-		});
-		orderMenuButton.setFocusable(false);
-		orderMenuButton.setFont(new Font("Lato", Font.BOLD, 22));
-		orderMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
+		/*
+		 * Here we create the buttons for the side bar
+		 */
+		RoundedButton orderMenuButton = new RoundedButton("Orders", blueGreen);
+		orderMenuButton.setPreferredSize(new Dimension(150, 50));
+		orderMenuButton.setFont(new Font("Lato", Font.PLAIN, 20));
 		GridBagConstraints gbc_orderMenuButton = new GridBagConstraints();
-		gbc_orderMenuButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_orderMenuButton.insets = new Insets(40, 20, 5, 22);
+		gbc_orderMenuButton.fill = GridBagConstraints.BOTH;
+		gbc_orderMenuButton.insets = new Insets(20, 0, 0, 0);
 		gbc_orderMenuButton.gridx = 0;
-		gbc_orderMenuButton.gridy = 0;
+		gbc_orderMenuButton.gridy = 1;
 		sideBar.add(orderMenuButton, gbc_orderMenuButton);
 		
-		JButton newOfferOrderButton = new JButton("Create Offer/Order");
-		newOfferOrderButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				onTheButton(newOfferOrderButton);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				offTheButton(newOfferOrderButton);
-			}
-		});
-		newOfferOrderButton.setHorizontalAlignment(SwingConstants.LEFT);
-		newOfferOrderButton.setFont(new Font("Lato", Font.BOLD, 15));
-		newOfferOrderButton.setFocusable(false);
-		GridBagConstraints gbc_newOfferOrderButton = new GridBagConstraints();
-		gbc_newOfferOrderButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_newOfferOrderButton.insets = new Insets(0, 60, 5, 22);
-		gbc_newOfferOrderButton.gridx = 0;
-		gbc_newOfferOrderButton.gridy = 1;
-		sideBar.add(newOfferOrderButton, gbc_newOfferOrderButton);
 		
-		JButton confirmOfferButton = new JButton("Confirm Offer");
-		confirmOfferButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				onTheButton(confirmOfferButton);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				offTheButton(confirmOfferButton);
-			}
-		});
-		confirmOfferButton.setHorizontalAlignment(SwingConstants.LEFT);
-		confirmOfferButton.setFont(new Font("Lato", Font.BOLD, 15));
-		confirmOfferButton.setFocusable(false);
-		GridBagConstraints gbc_confirmOfferButton = new GridBagConstraints();
-		gbc_confirmOfferButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_confirmOfferButton.insets = new Insets(0, 60, 5, 22);
-		gbc_confirmOfferButton.gridx = 0;
-		gbc_confirmOfferButton.gridy = 2;
-		sideBar.add(confirmOfferButton, gbc_confirmOfferButton);
-		
-		JButton customerMenuButton = new JButton("Customers");
-		customerMenuButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				onTheButton(customerMenuButton);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				offTheButton(customerMenuButton);
-			}
-		});
-		customerMenuButton.setHorizontalAlignment(SwingConstants.LEFT);
-		customerMenuButton.setFont(new Font("Lato", Font.BOLD, 22));
-		customerMenuButton.setFocusable(false);
-		GridBagConstraints gbc_customerMenuButton = new GridBagConstraints();
-		gbc_customerMenuButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_customerMenuButton.insets = new Insets(0, 20, 5, 22);
-		gbc_customerMenuButton.gridx = 0;
-		gbc_customerMenuButton.gridy = 3;
-		sideBar.add(customerMenuButton, gbc_customerMenuButton);
-		
-		JButton productsButton = new JButton("Products");
-		productsButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				onTheButton(productsButton);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				offTheButton(productsButton);
-			}
-		});
-		productsButton.setHorizontalAlignment(SwingConstants.LEFT);
-		productsButton.setFont(new Font("Lato", Font.BOLD, 22));
-		productsButton.setFocusable(false);
-		GridBagConstraints gbc_productsButton = new GridBagConstraints();
-		gbc_productsButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_productsButton.insets = new Insets(0, 20, 5, 22);
-		gbc_productsButton.gridx = 0;
-		gbc_productsButton.gridy = 4;
-		sideBar.add(productsButton, gbc_productsButton);
 		
 		mainFrame = new JPanel();
 		mainFrame.setBackground(new Color(252, 252, 252));
