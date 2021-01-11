@@ -2,6 +2,7 @@ package guiLayer.Renderers;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,10 +24,9 @@ public class JTableButtonRenderer implements TableCellRenderer {
 		   
 		   if(value instanceof RoundedButton) {
 			   	RoundedButton button = (RoundedButton) value;
-				//button.setOpaque(true);
-				//button.setBackground(Color.RED);\  
+				button.setFont(new Font("Lato", Font.BOLD, 14));
 			  }
-
+		  
 	      if(value instanceof Component) {
 	    	  return (Component)value;
 	      }

@@ -73,6 +73,7 @@ public class OrderPanel extends JPanel {
 		add(ordersLabel, gbc_ordersLabel);
 
 		table = new JTable();
+		table.setRowSelectionAllowed(false);
 		table.setFocusable(false);
 		table.setFillsViewportHeight(true);
 		table.setFont(new Font("Lato", Font.PLAIN, 14));
@@ -88,6 +89,7 @@ public class OrderPanel extends JPanel {
 		// Could be moved to a custom header renderer
 		DefaultTableCellRenderer defaultHeaderRenderer = (DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer();
 		defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
+		table.getTableHeader().setFont(new Font("Lato", Font.BOLD, 14));
 		table.getTableHeader().setDefaultRenderer(defaultHeaderRenderer);
 
 		table.setModel(new DefaultTableModel(

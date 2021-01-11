@@ -65,6 +65,8 @@ public class RoundedButton extends Component {
         }
     }
     
+    
+    
     public void addOffset(int xAxis, int yAxis)
     {
     	this.xAxis = xAxis;
@@ -82,4 +84,5 @@ public class RoundedButton extends Component {
     	bg = c;
     	repaint();
     }
+    
 }

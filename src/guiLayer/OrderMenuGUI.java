@@ -70,7 +70,9 @@ public class OrderMenuGUI {
 		frame.getContentPane().setLayout(gridBagLayout);
 		
 		/*
-		 * TODO write comment
+		 * Here we format the side bar, and prepare it
+		 * for the buttons that will be put inside it.
+		 * This is done by adding a grid bag layout.
 		 */
 		JPanel sideBar = new JPanel();
 		sideBar.setBackground(blueGreen);
@@ -90,22 +92,70 @@ public class OrderMenuGUI {
 		/*
 		 * Here we create the buttons for the side bar
 		 */
+		/********************************************** Order Button **********************************************/
 		RoundedButton orderMenuButton = new RoundedButton("Orders", blueGreen);
-		
-		
 		formatButton(orderMenuButton);
-		//orderMenuButton.addOffset(-20, 0);
+		orderMenuButton.addOffset(-64, 0);
 		GridBagConstraints gbc_orderMenuButton = new GridBagConstraints();
 		gbc_orderMenuButton.fill = GridBagConstraints.BOTH;
-		gbc_orderMenuButton.insets = new Insets(20, 20, 5, 20);
+		gbc_orderMenuButton.insets = new Insets(20, 40, 0, 20);
 		gbc_orderMenuButton.gridx = 0;
 		gbc_orderMenuButton.gridy = 1;
 		sideBar.add(orderMenuButton, gbc_orderMenuButton);
 		
 		
+		/********************************************** Create Order/Offer Button **********************************************/                                 
+		RoundedButton createOrderButton = new RoundedButton("Create Offer/Order", blueGreen);
+		createOrderButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		formatButton(createOrderButton);
+		createOrderButton.addOffset(-4, 0);
+		GridBagConstraints gbc_createOrderButton = new GridBagConstraints();
+		gbc_createOrderButton.fill = GridBagConstraints.BOTH;
+		gbc_createOrderButton.insets = new Insets(0, 60, 0, 20);
+		gbc_createOrderButton.gridx = 0;
+		gbc_createOrderButton.gridy = 2;
+		sideBar.add(createOrderButton, gbc_createOrderButton);
 		
 		
+		/********************************************** Products Button**********************************************/
+		RoundedButton productMenuButton = new RoundedButton("Products", blueGreen);
+		productMenuButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		formatButton(productMenuButton);
+		productMenuButton.addOffset(-53, 0);
+		GridBagConstraints gbc_productMenuButton = new GridBagConstraints();
+		gbc_productMenuButton.fill = GridBagConstraints.BOTH;
+		gbc_productMenuButton.insets = new Insets(0, 40, 0, 20);
+		gbc_productMenuButton.gridx = 0;
+		gbc_productMenuButton.gridy = 3;
+		sideBar.add(productMenuButton, gbc_productMenuButton);
 		
+		
+		/********************************************** Customers Button **********************************************/
+		RoundedButton customerMenuButton = new RoundedButton("Customers", blueGreen);
+		customerMenuButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		formatButton(customerMenuButton);
+		customerMenuButton.addOffset(-45, 0);
+		GridBagConstraints gbc_customerMenuButton = new GridBagConstraints();
+		gbc_customerMenuButton.fill = GridBagConstraints.BOTH;
+		gbc_customerMenuButton.insets = new Insets(0, 40, 0, 20);
+		gbc_customerMenuButton.gridx = 0;
+		gbc_customerMenuButton.gridy = 4;
+		sideBar.add(customerMenuButton, gbc_customerMenuButton);
+		
+		
+		/********************************************** Customers **********************************************/
 		mainFrame = new JPanel();
 		mainFrame.setBackground(new Color(252, 252, 252));
 		GridBagConstraints gbc_mainFrame = new GridBagConstraints();
@@ -121,11 +171,16 @@ public class OrderMenuGUI {
 		mainFrame.add(new OrderPanel(), "Orders");
 	}
 	
+	/**
+	 * The method is used to format the buttons inside
+	 * the side panel, to ensure we do not have
+	 * to rewrite the code numerous time.
+	 * 
+	 * @param button
+	 */
 	private void formatButton(RoundedButton button) {
-		button.setPreferredSize(new Dimension(150, 50));
-		button.setFont(new Font("Lato", Font.PLAIN, 20));
-		
-		button.addOffset(-20, 0);
+		button.setPreferredSize(new Dimension(200, 50));
+		button.setFont(new Font("Lato", Font.PLAIN, 18));
 		
 		button.addMouseListener(new MouseAdapter() {
 			@Override
