@@ -125,6 +125,8 @@ public class OrderMenuGUI {
 		button.setPreferredSize(new Dimension(150, 50));
 		button.setFont(new Font("Lato", Font.PLAIN, 20));
 		
+		button.addOffset(-20, 0);
+		
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {

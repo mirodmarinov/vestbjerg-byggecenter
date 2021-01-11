@@ -62,8 +62,6 @@ public class RoundedButton extends Component {
             g2.setRenderingHints(rh);
             g2.setColor(getForeground());
             g2.drawString(label, getWidth() / 2 - fm.stringWidth(label) / 2  + xAxis, getHeight() / 2 + fm.getMaxDescent() + yAxis);
-            xAxis = 0;
-            yAxis = 0;
         }
     }
     
@@ -72,8 +70,6 @@ public class RoundedButton extends Component {
     	this.xAxis = xAxis;
     	this.yAxis = yAxis;
     	this.repaint();
-    	//FontMetrics fm = getFontMetrics(getFont());
-    	//g2.drawString(label, 3, getHeight() / 2 + fm.getMaxDescent());
     }
 
     
