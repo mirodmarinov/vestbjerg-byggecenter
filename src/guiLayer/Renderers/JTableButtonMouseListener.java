@@ -32,10 +32,13 @@ public class JTableButtonMouseListener extends MouseAdapter {
         if (row < table.getRowCount() && row >= 0 && column < table.getColumnCount() && column >= 0) {
             Object value = table.getValueAt(row, column);
             if (value instanceof RoundedButton) {
+            	if (((RoundedButton) value).getName().equals("Confirm"))
+            	{
                 //perform a click event
             	doClick();
             	((RoundedButton)value).setBorderColor(Color.RED);
             	table.repaint();
+            	}
             }
         }
     }
@@ -92,8 +95,8 @@ public class JTableButtonMouseListener extends MouseAdapter {
     public void doClick() 
     {
     	OrderCtr orderCtr = new OrderCtr();
-    	System.out.println(orderCtr.confirmOffer(Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex()))));
-    	
+    	orderCtr.confirmOffer(Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex())));
+		table.setValueAt(new RoundedButton("Confirmed",Color.WHITE), table.getSelectedRow(), table.getColumn("").getModelIndex());
     	
     }
 }

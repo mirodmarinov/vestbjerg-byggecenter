@@ -92,14 +92,6 @@ public class OrderPanel extends JPanel {
 
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
 			},
 			new String[] {
 				"Order Number", "Customer", "Purchase Date", "Status", "Expiration Date", "Total (DKK)", ""
@@ -110,12 +102,6 @@ public class OrderPanel extends JPanel {
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, true
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
 			}
 		});
 		table.getColumnModel().getColumn(0).setPreferredWidth(85);
@@ -205,7 +191,9 @@ public class OrderPanel extends JPanel {
 	private void defaultFillTable() {
 		orderCtr = new OrderCtr();
 		//we get the order information from the orderContainer
-		ArrayList<String[]> data = orderCtr.getOrders(table.getRowCount());
+		ArrayList<String[]> data = orderCtr.getOrders();
+		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+		dtm.setRowCount(data.size());
 		//Check if the order quantity is less the the row amount,
 		//we fill the table with the order data quantity, otherwise we fill
 		//the whole table with information
@@ -273,7 +261,15 @@ public class OrderPanel extends JPanel {
 				table.setValueAt(data[2], 0, 3);
 				table.setValueAt(data[3], 0, 4);
 				table.setValueAt(data[4], 0, 5);
-				table.setValueAt(new RoundedButton("Confirm",Color.WHITE), 0, 6);
+				if (data[2].equals("pending"))
+				{
+					table.setValueAt(new RoundedButton("Confirm",Color.LIGHT_GRAY), 0, 6);
+				}
+				else
+				{
+					table.setValueAt(new RoundedButton("Confirmed",Color.WHITE), 0, 6);
+				}
+				
 			}
 			else
 			{

@@ -245,8 +245,9 @@ public class OrderCtr
 	 */
 	
 	// TODO SCROLLBARTTHINGY
-	public ArrayList<String[]> getOrders(int orderAmount)
+	public ArrayList<String[]> getOrders()
 	{
+		int orderAmount = 50;
 		ArrayList<String[]> returnValue = new ArrayList<>();
 		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();
 		Order order;
