@@ -250,6 +250,11 @@ public class OrderPanel extends JPanel {
 		*/
 	}
 	
+	/**
+	 * This method gets the data from the searchField and displays the found order.
+	 * If the order couldn't be found it shows an error message. The error message
+	 * disappears when an order is found.
+	 */
 	private void searchBar()
 	{
 		

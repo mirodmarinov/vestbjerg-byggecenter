@@ -196,6 +196,11 @@ public class Order implements Serializable
 		return allInfo;
 	}
 	
+	/**
+	 * Returns the 5 information what the GUI need to display.
+	 * 
+	 * @return
+	 */
 	public String[] searchBar()
 	{
 		String[] data = new String[5];

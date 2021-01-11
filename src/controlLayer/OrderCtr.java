@@ -267,6 +267,14 @@ public class OrderCtr
 		
 	}
 	
+	/**
+	 * This method is used only for the searchField in the GUI. We had to implement a new
+	 * method because the findOffer method doesn't return every necessary information.
+	 * 
+	 * 
+	 * @param id
+	 * @return If order is found returns the data from it, otherwise returns null
+	 */
 	public String[] searchBar(int id)
 	{
 		Order order = OrderContainer.getInstance().getOffer(id);
