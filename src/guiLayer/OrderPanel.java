@@ -221,9 +221,14 @@ public class OrderPanel extends JPanel {
 			
 			if (data.get(e)[3].equals("pending"))
 			{
-				
+
 				table.setValueAt(new RoundedButton("Confirm", babyBlue,Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14)), e, 6);
 				
+
+				RoundedButton button = new RoundedButton("Confirm", new Color(28, 150, 202),Color.WHITE, new Color(28, 150, 202), new Font("Lato", Font.BOLD, 14));
+				button.setBounds(0, 0, 20, 20);
+				//table.setValueAt(new RoundedButton("Confirm", new Color(28, 150, 202),Color.WHITE, new Color(28, 150, 202), new Font("Lato", Font.BOLD, 14)), e, 6);
+				table.setValueAt(button, e, 6);
 			}
 			else
 			{
