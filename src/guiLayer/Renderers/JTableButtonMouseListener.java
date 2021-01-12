@@ -3,11 +3,13 @@ package guiLayer.Renderers;
 
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import controlLayer.OrderCtr;
@@ -101,13 +103,21 @@ public class JTableButtonMouseListener extends MouseAdapter {
     {
     	OrderCtr orderCtr = new OrderCtr();
     	orderCtr.confirmOffer(Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex())));
-		table.setValueAt(new RoundedButton("Confirmed",Color.WHITE), table.getSelectedRow(), table.getColumn("").getModelIndex());
-    	
+    	RoundedButton button = (RoundedButton) table.getValueAt(table.getSelectedRow(), table.getColumn("").getModelIndex());
+    	button.setText("Confirmed");
+    	button.setBackground(Color.WHITE);
+    	button.setBorderColor(Color.WHITE);
+    	button.setForeground(Color.BLACK);
+    	button.setFont(new Font("Lato", Font.PLAIN, 14));
+    	((AbstractTableModel) table.getModel()).fireTableDataChanged();
+    	table.revalidate();
+    	table.repaint();
     }
     
     public void mouseExited(RoundedButton button) {
     	 button.setBackground(babyBlue);
     	 button.setForeground(Color.WHITE);
+    	 button.setBorderColor(Color.WHITE);
     }
 }
 

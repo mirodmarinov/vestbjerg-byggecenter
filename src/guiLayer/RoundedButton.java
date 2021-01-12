@@ -55,6 +55,7 @@ public class RoundedButton extends Component {
         this.font = font;
     }
 
+    
     @Override
     public void paint(Graphics g) {
 
@@ -110,7 +111,15 @@ public class RoundedButton extends Component {
     	repaint();
     }
     
+    public void setText(String label) {
+    	this.label = label;
+    	this.setName(label);
+    	repaint();
+    }
     
+    public void setFont(Font font) {
+    	this.font = font;
+    }
     
     
 }

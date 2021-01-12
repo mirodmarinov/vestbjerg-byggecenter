@@ -113,7 +113,9 @@ public class OrderContainer implements Serializable
 	public boolean confirmOffer(int orderNumber)
 	{
 		Order order = findOrder(orderNumber);
+		order.generatePurchaseDate();
 		return order.setStatus("confirmed");
+		
 	}
 
 }

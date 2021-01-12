@@ -268,14 +268,8 @@ public class OrderPanel extends JPanel {
 			if (data.get(e)[3].equals("pending"))
 			{
 
-				table.setValueAt(new RoundedButton("Confirm", babyBlue,Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14)), e, 6);
+				table.setValueAt(new RoundedButton("Confirm", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 6);
 				
-
-				//RoundedButton button = new RoundedButton("Confirm", new Color(28, 150, 202),Color.WHITE, new Color(28, 150, 202), new Font("Lato", Font.BOLD, 14));
-				//button.setBounds(0, 0, 20, 20);
-				//table.setValueAt(new RoundedButton("Confirm", new Color(28, 150, 202),Color.WHITE, new Color(28, 150, 202), new Font("Lato", Font.BOLD, 14)), e, 6);
-				//table.setValueAt(button, e, 6);
-
 			}
 			else
 			{
@@ -283,24 +277,6 @@ public class OrderPanel extends JPanel {
 			}
 			
 		}
-		
-		/*
-		table.setValueAt(1, 0, 0);
-		table.setValueAt("Bob", 0, 1);
-		table.setValueAt("1.1.2021", 0, 2);
-		table.setValueAt("confirmed", 0, 3);
-		table.setValueAt("2.1.2021", 0, 4);
-		table.setValueAt(400, 0, 5);
-		table.setValueAt(new RoundedButton("Confirm"), 0, 6);
-		
-		table.setValueAt(2, 1, 0);
-		table.setValueAt("Not Bob", 1, 1);
-		table.setValueAt("5.1.2021", 1, 2);
-		table.setValueAt("pending", 1, 3);
-		table.setValueAt("7.1.2021", 1, 4);
-		table.setValueAt(1500, 1, 5);
-		table.setValueAt(new RoundedButton("Confirm"), 1, 6);
-		*/
 	}
 	
 	/**
@@ -328,7 +304,7 @@ public class OrderPanel extends JPanel {
 				table.setValueAt(data[4], 0, 5);
 				if (data[2].equals("pending"))
 				{
-					table.setValueAt(new RoundedButton("Confirm", babyBlue, babyBlue, new Font("Lato", Font.BOLD, 14)), 0, 6);
+					table.setValueAt(new RoundedButton("Confirm", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), 0, 6);
 				}
 				else
 				{

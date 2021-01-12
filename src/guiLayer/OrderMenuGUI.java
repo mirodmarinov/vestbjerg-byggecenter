@@ -125,7 +125,7 @@ public class OrderMenuGUI {
 			}
 		});
 		formatButton(createOrderButton);
-		createOrderButton.addOffset(-4, 0);
+		createOrderButton.addOffset(-20, 0);
 		GridBagConstraints gbc_createOrderButton = new GridBagConstraints();
 		gbc_createOrderButton.fill = GridBagConstraints.BOTH;
 		gbc_createOrderButton.insets = new Insets(0, 60, 0, 20);
