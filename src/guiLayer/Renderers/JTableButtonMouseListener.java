@@ -57,8 +57,8 @@ public class JTableButtonMouseListener extends MouseAdapter {
         		if (value instanceof RoundedButton) {
         			if (((RoundedButton) value).getName().equals("Confirm"))
         			{
-        				((RoundedButton)value).setBackgroundColor(Color.LIGHT_GRAY);
-        				((RoundedButton)value).setForeground(Color.BLACK);
+        				((RoundedButton)value).setBackgroundColor(new Color(16, 188, 171));
+        				((RoundedButton)value).setForeground(Color.WHITE);
         				table.repaint();
         			}
         		}
@@ -68,8 +68,7 @@ public class JTableButtonMouseListener extends MouseAdapter {
         		if (value instanceof RoundedButton) {
         			if (((RoundedButton) value).getName().equals("Confirm"))
         			{
-        				((RoundedButton)value).setBackgroundColor(new Color(16, 188, 171));
-        				((RoundedButton)value).setForeground(Color.WHITE);
+        				mouseExited((RoundedButton) value);
         				table.repaint();
         			}
         			y = row;
@@ -85,8 +84,7 @@ public class JTableButtonMouseListener extends MouseAdapter {
         Object prevValue = table.getValueAt(y, x);
         if (prevValue instanceof RoundedButton) {
         	if (((RoundedButton) prevValue).getName().equals("Confirm")) {
-        		((RoundedButton)prevValue).setBackgroundColor(Color.LIGHT_GRAY);
-        		((RoundedButton)prevValue).setForeground(Color.BLACK);
+        		mouseExited((RoundedButton) prevValue);
         	}
         }
         table.repaint();
@@ -98,6 +96,11 @@ public class JTableButtonMouseListener extends MouseAdapter {
     	orderCtr.confirmOffer(Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex())));
 		table.setValueAt(new RoundedButton("Confirmed",Color.WHITE), table.getSelectedRow(), table.getColumn("").getModelIndex());
     	
+    }
+    
+    public void mouseExited(RoundedButton button) {
+    	 button.setBackgroundColor(new Color(16, 188, 171));
+    	 button.setForeground(Color.WHITE);
     }
 }
 

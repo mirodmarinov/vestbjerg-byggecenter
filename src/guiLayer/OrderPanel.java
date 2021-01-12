@@ -212,11 +212,11 @@ public class OrderPanel extends JPanel {
 			
 			if (data.get(e)[3].equals("pending"))
 			{
-				table.setValueAt(new RoundedButton("Confirm",Color.LIGHT_GRAY), e, 6);
+				table.setValueAt(new RoundedButton("Confirm", new Color(16, 188, 171), Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 6);
 			}
 			else
 			{
-				table.setValueAt(new RoundedButton("Confirmed",Color.WHITE), e, 6);
+				table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.BLACK, new Font("Lato", Font.PLAIN, 14)), e, 6);
 			}
 			
 		}
@@ -265,11 +265,11 @@ public class OrderPanel extends JPanel {
 				table.setValueAt(data[4], 0, 5);
 				if (data[2].equals("pending"))
 				{
-					table.setValueAt(new RoundedButton("Confirm",Color.LIGHT_GRAY), 0, 6);
+					table.setValueAt(new RoundedButton("Confirm", new Color(16, 188, 171), Color.WHITE, new Font("Lato", Font.BOLD, 14)), 0, 6);
 				}
 				else
 				{
-					table.setValueAt(new RoundedButton("Confirmed",Color.WHITE), 0, 6);
+					table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.BLACK, new Font("Lato", Font.PLAIN, 14)), 0, 6);
 				}
 				
 			}

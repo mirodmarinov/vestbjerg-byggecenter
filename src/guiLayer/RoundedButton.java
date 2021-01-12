@@ -17,6 +17,7 @@ public class RoundedButton extends Component {
     private ActionListener actionListener;
     private String label;
     private Color bg;
+    private Color fg;
     private Color borderColor;
     protected boolean pressed = false;
     private int xAxis = 0;
@@ -31,22 +32,26 @@ public class RoundedButton extends Component {
     public RoundedButton(String label, Color color) {
         this.label = label;
         this.bg = color;
+        this.fg = getForeground();
         this.borderColor = color;
         this.setName(label);
-        this.font = new Font("Latto",Font.BOLD,14);
-    }
-    
-    public RoundedButton(String label, Color bg, Color borderColor) {
-        this.label = label;
-        this.bg = bg;
-        this.borderColor = borderColor;
-        this.font = new Font("Latto",Font.BOLD,14);
     }
     
     public RoundedButton(String label, Color bg, Color borderColor, Font font) {
         this.label = label;
         this.bg = bg;
+        this.fg = getForeground();
         this.borderColor = borderColor;
+        this.setName(label);
+        this.font = font;
+    }
+    
+    public RoundedButton(String label, Color bgColor, Color fgColor, Color borderColor, Font font) {
+        this.label = label;
+        this.bg = bgColor;
+        this.fg = fgColor;
+        this.borderColor = borderColor;
+        this.setName(label);
         this.font = font;
     }
 
@@ -71,7 +76,7 @@ public class RoundedButton extends Component {
             FontMetrics fm = getFontMetrics(getFont());
             
             g2.setRenderingHints(rh);
-            g2.setColor(getForeground());
+            g2.setColor(fg);
             g2.setFont(font);
             g2.drawString(label, getWidth() / 2 - fm.stringWidth(label) / 2  + xAxis, getHeight() / 2 + fm.getMaxDescent() + yAxis);
         }

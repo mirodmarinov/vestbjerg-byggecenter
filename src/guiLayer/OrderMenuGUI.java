@@ -98,7 +98,7 @@ public class OrderMenuGUI {
 		orderMenuButton.addOffset(-64, 0);
 		GridBagConstraints gbc_orderMenuButton = new GridBagConstraints();
 		gbc_orderMenuButton.fill = GridBagConstraints.BOTH;
-		gbc_orderMenuButton.insets = new Insets(20, 40, 0, 20);
+		gbc_orderMenuButton.insets = new Insets(30, 40, 0, 20);
 		gbc_orderMenuButton.gridx = 0;
 		gbc_orderMenuButton.gridy = 1;
 		sideBar.add(orderMenuButton, gbc_orderMenuButton);
@@ -180,17 +180,20 @@ public class OrderMenuGUI {
 	 */
 	private void formatButton(RoundedButton button) {
 		button.setPreferredSize(new Dimension(200, 50));
-		button.setFont(new Font("Lato", Font.PLAIN, 18));
+		button.setFont(new Font("Lato", Font.BOLD, 18));
+		button.setForeground(Color.WHITE);
 		
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 			button.setBackgroundColor(Color.WHITE);
+			button.setForeground(Color.BLACK);
 				
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				button.setBackgroundColor(blueGreen);
+				button.setForeground(Color.WHITE);
 			}
 		});
 	}
