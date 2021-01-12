@@ -30,6 +30,8 @@ public class OrderMenuGUI {
 	private CardLayout cards = new CardLayout();
 	private JPanel mainFrame = new JPanel();
 	private Color babyBlue = new Color(28, 150, 202);
+	private RoundedButton orderMenuButton,createOrderButton,productMenuButton,customerMenuButton;
+	private RoundedButton selected;
 
 	/**
 	 * Launch the application.
@@ -93,7 +95,8 @@ public class OrderMenuGUI {
 		 * Here we create the buttons for the side bar
 		 */
 		/********************************************** Order Button **********************************************/
-		RoundedButton orderMenuButton = new RoundedButton("Orders", babyBlue);
+		orderMenuButton = new RoundedButton("Orders", babyBlue);
+		selected = orderMenuButton;
 		formatButton(orderMenuButton);
 		orderMenuButton.addOffset(-64, 0);
 		GridBagConstraints gbc_orderMenuButton = new GridBagConstraints();
@@ -105,7 +108,7 @@ public class OrderMenuGUI {
 		
 		
 		/********************************************** Create Order/Offer Button **********************************************/                                 
-		RoundedButton createOrderButton = new RoundedButton("Create Offer/Order", babyBlue);
+		createOrderButton = new RoundedButton("Create Offer/Order", babyBlue);
 		createOrderButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -122,7 +125,7 @@ public class OrderMenuGUI {
 		
 		
 		/********************************************** Products Button**********************************************/
-		RoundedButton productMenuButton = new RoundedButton("Products", babyBlue);
+		productMenuButton = new RoundedButton("Products", babyBlue);
 		productMenuButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -139,7 +142,7 @@ public class OrderMenuGUI {
 		
 		
 		/********************************************** Customers Button **********************************************/
-		RoundedButton customerMenuButton = new RoundedButton("Customers", babyBlue);
+		customerMenuButton = new RoundedButton("Customers", babyBlue);
 		customerMenuButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -169,6 +172,9 @@ public class OrderMenuGUI {
 	private void init() {
 		cards = (CardLayout)(mainFrame.getLayout());
 		mainFrame.add(new OrderPanel(), "Orders");
+		orderMenuButton.setBackground(babyBlue.darker());
+		orderMenuButton.setFocusable(false);
+		
 	}
 	
 	/**
@@ -179,23 +185,33 @@ public class OrderMenuGUI {
 	 * @param button
 	 */
 	private void formatButton(RoundedButton button) {
+
 		button.setPreferredSize(new Dimension(200, 50));
 		button.setFont(new Font("Lato", Font.BOLD, 18));
 		button.setForeground(Color.WHITE);
-		
+		System.out.println(selected.getName() == button.getName());
 		button.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseEntered(MouseEvent e) {
-			button.setBackground(Color.WHITE);
-			button.setForeground(Color.BLACK);
+			public void mouseEntered(MouseEvent e) 
+			{
+				if (selected != button)
+				{
+					button.setBackground(Color.WHITE);
+					button.setForeground(Color.BLACK);
+				}
 				
 			}
+			
 			@Override
-			public void mouseExited(MouseEvent e) {
-				button.setBackground(babyBlue);
-				button.setForeground(Color.WHITE);
+			public void mouseExited(MouseEvent e) 
+			{
+				if (selected != button)
+				{
+					button.setBackground(babyBlue);
+					button.setForeground(Color.WHITE);
+				}
 			}
 		});
-	}
+		}
 
 }
