@@ -240,21 +240,26 @@ public class OrderCtr
 	/**
 	 * This method is for the fillTable method in the OrderPanel. Returns x amount of order's data
 	 * so we can write it to the table in the UI layer.
+	 * @param index 
 	 * 
 	 * @param orderAmount
 	 * @return
 	 */
 	
 	// TODO SCROLLBARTTHINGY
-	public ArrayList<String[]> getOrders()
+	public ArrayList<String[]> getOrders(int index)
 	{
-		int orderAmount = 50;
+		//int orderAmount = 50;
 		ArrayList<String[]> returnValue = new ArrayList<>();
 		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();
+		if (Math.floor(orders.size() / 50) < index) // 70/50 = 1.4 floor(1.4) = 1; 30/50 = 0.6 floor(0.6) = 0; 124/50 = 2.48 floor(2.48) = 2;
+		{
+			return returnValue;
+		}
 		Order order;
 		String[] string;
-		orderAmount = orderAmount > orders.size() ? orders.size() : orderAmount;
-		for (int e = 0;e<orderAmount;e++)
+		//orderAmount = orderAmount > orders.size() ? orders.size() : orderAmount;
+		for (int e = index; e < index + 49; e++)
 		{
 			order = orders.get(e);
 			string = new String[6];
@@ -264,8 +269,8 @@ public class OrderCtr
 			string[3] = order.getStatus();
 			string[4] = order.getExpirationDate();
 			string[5] = Long.toString(order.getTotalPrice()) + " DKK";
-			
 			returnValue.add(string);
+			
 		}
 		return returnValue;
 		
