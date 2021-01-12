@@ -155,7 +155,7 @@ public class OrderMenuGUI {
 		sideBar.add(customerMenuButton, gbc_customerMenuButton);
 		
 		
-		/********************************************** Customers **********************************************/
+		
 		mainFrame = new JPanel();
 		mainFrame.setBackground(new Color(252, 252, 252));
 		GridBagConstraints gbc_mainFrame = new GridBagConstraints();
