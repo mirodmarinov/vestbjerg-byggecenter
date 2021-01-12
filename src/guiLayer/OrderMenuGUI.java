@@ -100,6 +100,7 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Orders");
+				changeSelectedButton(orderMenuButton);
 			}
 		});
 		selected = orderMenuButton;
@@ -119,6 +120,8 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Create Order");
+				changeSelectedButton(createOrderButton);
+				
 			}
 		});
 		formatButton(createOrderButton);
@@ -137,6 +140,7 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Products");
+				changeSelectedButton(productMenuButton);
 			}
 		});
 		formatButton(productMenuButton);
@@ -155,6 +159,8 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Customers");
+				changeSelectedButton(customerMenuButton);
+				
 			}
 		});
 		formatButton(customerMenuButton);
@@ -203,6 +209,7 @@ public class OrderMenuGUI {
 		button.setPreferredSize(new Dimension(200, 50));
 		button.setFont(new Font("Lato", Font.BOLD, 18));
 		button.setForeground(Color.WHITE);
+		button.setBackground(babyBlue);
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) 
@@ -226,5 +233,20 @@ public class OrderMenuGUI {
 			}
 		});
 		}
+	
+	
+	/**
+	 * Changed the current selected button to the other selected one
+	 * TODO Edit this comment so it won't be that brief
+	 * 
+	 * @param button
+	 */
+	private void changeSelectedButton(RoundedButton button)
+	{
+		formatButton(selected);
+		selected = button;
+		button.setBackground(babyBlue.darker());
+		button.setForeground(Color.WHITE);
+	}
 
 }
