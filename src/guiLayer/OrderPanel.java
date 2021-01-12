@@ -49,7 +49,7 @@ public class OrderPanel extends JPanel {
 	private JTextField searchTextField;
 	private Color babyBlue = new Color(28, 150, 202);
 	JLabel foundLabel;
-	private JLabel tablePageLabel;
+	public JLabel tablePageLabel;
 	private JLabel leftArrowLabel;
 	private JLabel rightArrowLabel;
 
@@ -93,8 +93,6 @@ public class OrderPanel extends JPanel {
 		table.setRowHeight(50);
 		table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 50));
 		
-		table.addMouseListener(new JTableButtonMouseListener(table));
-		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 		TableCellRenderer tableRenderer = table.getDefaultRenderer(RoundedButton.class);
 	    table.setDefaultRenderer(RoundedButton.class, new JTableButtonRenderer(tableRenderer));
 	      
@@ -143,7 +141,7 @@ public class OrderPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				searchTextField.setText("🔍 Search...");
-				loadPage(Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", "")) - 1);
+				loadPage(getPageIndex() - 1);
 			}
 		});
 		leftArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -166,8 +164,10 @@ public class OrderPanel extends JPanel {
 		rightArrowLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				searchTextField.setFocusable(false);
+				searchTextField.setFocusable(true);
 				searchTextField.setText("🔍 Search...");
-				loadPage(Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", "")) + 1);
+				loadPage(getPageIndex() + 1);
 			}
 		});
 		rightArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -189,10 +189,13 @@ public class OrderPanel extends JPanel {
 		searchTextField = new JTextField();
 		searchTextField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+					foundLabel.setVisible(false);
 					searchTextField.setFocusable(false);
 					searchTextField.setFocusable(true);
 					if (searchTextField.getText().equals(""))
 					{
+						System.out.println("inside");
+						loadPage(1);
 						searchTextField.setText("🔍 Search...");
 					}
 					else
@@ -236,7 +239,9 @@ public class OrderPanel extends JPanel {
 		add(tablePane, gbc_table);
 		loadPage(1);
 		
-
+		//table listeners moved to the bottom, in order for the page to be initialized
+		table.addMouseListener(new JTableButtonMouseListener(table, getPageIndex()));
+		table.addMouseMotionListener(new JTableButtonMouseListener(table, getPageIndex()));
 		
 	}
 
@@ -286,7 +291,7 @@ public class OrderPanel extends JPanel {
 	 */
 	private void searchBar()
 	{
-		
+		foundLabel.setVisible(false);
 		if (!searchTextField.getText().equals(""))
 		{
 			orderCtr = new OrderCtr();
@@ -320,8 +325,9 @@ public class OrderPanel extends JPanel {
 		}
 	}
 	
-	private void loadPage(int index)
+	public void loadPage(int index)
 	{
+		foundLabel.setVisible(false);
 		if(index == 0) {
 			return;
 		}
@@ -332,7 +338,6 @@ public class OrderPanel extends JPanel {
 		{
 			return;
 		}
-		
 		defaultFillTable(index);
 
 		
@@ -340,5 +345,14 @@ public class OrderPanel extends JPanel {
 		tablePageLabel.setText("<html><u>" + index + "</u></html>");
 
 		
+	}
+	
+	/**
+	 * Returns the current page index
+	 * @return an integer based on the current page index.
+	 */
+	public int getPageIndex()  
+	{
+		return Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", ""));
 	}
 }
