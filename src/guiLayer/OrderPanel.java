@@ -47,6 +47,7 @@ public class OrderPanel extends JPanel {
 	private JTable table;
 	private OrderCtr orderCtr;
 	private JTextField searchTextField;
+	private Color babyBlue = new Color(28, 150, 202);
 	JLabel foundLabel;
 
 	/**
@@ -74,8 +75,10 @@ public class OrderPanel extends JPanel {
 		add(ordersLabel, gbc_ordersLabel);
 
 		table = new JTable();
+		
+		//Changes the Color of the header
 		JTableHeader header = table.getTableHeader();
-		header.setBackground(new Color(28, 150, 202));
+		header.setBackground(babyBlue);
 		header.setForeground(Color.WHITE);
 
 
@@ -219,7 +222,7 @@ public class OrderPanel extends JPanel {
 			if (data.get(e)[3].equals("pending"))
 			{
 				
-				table.setValueAt(new RoundedButton("Confirm", new Color(28, 150, 202),Color.WHITE, new Color(28, 150, 202), new Font("Lato", Font.BOLD, 14)), e, 6);
+				table.setValueAt(new RoundedButton("Confirm", babyBlue,Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14)), e, 6);
 				
 			}
 			else
@@ -273,7 +276,7 @@ public class OrderPanel extends JPanel {
 				table.setValueAt(data[4], 0, 5);
 				if (data[2].equals("pending"))
 				{
-					table.setValueAt(new RoundedButton("Confirm", new Color(28, 150, 202), new Color(28, 150, 202), new Font("Lato", Font.BOLD, 14)), 0, 6);
+					table.setValueAt(new RoundedButton("Confirm", babyBlue, babyBlue, new Font("Lato", Font.BOLD, 14)), 0, 6);
 				}
 				else
 				{

@@ -18,6 +18,7 @@ public class JTableButtonMouseListener extends MouseAdapter {
     private final JTable table;
     private static int x = 0, y = 0;
     private int recolor = 0;
+    private Color babyBlue = new Color(28, 150, 202);
 
     public JTableButtonMouseListener(JTable table) {
         this.table = table;
@@ -72,9 +73,9 @@ public class JTableButtonMouseListener extends MouseAdapter {
         			if (((RoundedButton) value).getName().equals("Confirm"))
         			{
 
-        				((RoundedButton)value).setBackground(new Color(28, 150, 202));
+        				((RoundedButton)value).setBackground(babyBlue);
         				((RoundedButton)value).setForeground(Color.BLACK);
-        				((RoundedButton)value).setBorderColor(new Color(28, 150, 202));
+        				((RoundedButton)value).setBorderColor(babyBlue);
         				table.repaint();
         			}
         			y = row;
@@ -105,7 +106,7 @@ public class JTableButtonMouseListener extends MouseAdapter {
     }
     
     public void mouseExited(RoundedButton button) {
-    	 button.setBackground(new Color(28, 150, 202));
+    	 button.setBackground(babyBlue);
     	 button.setForeground(Color.WHITE);
     }
 }
