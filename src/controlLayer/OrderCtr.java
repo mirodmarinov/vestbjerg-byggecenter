@@ -251,10 +251,7 @@ public class OrderCtr
 	{
 		int orderAmount = 0;
 		ArrayList<String[]> returnValue = new ArrayList<>();
-		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();
-		if ((int)(Math.floor(orders.size() / 50)) >= index)
-
-		
+		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();	
 		if ((int)(Math.floor(orders.size() / 50))+1 > index)
 		{
 			orderAmount = 50;
