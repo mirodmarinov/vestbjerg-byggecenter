@@ -33,6 +33,7 @@ import java.util.Enumeration;
 
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.xml.crypto.Data;
@@ -57,7 +58,7 @@ public class OrderPanel extends JPanel {
 		mn.populateClasses();
 		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{50, 0, 0, 0, 0, 50};
+		gridBagLayout.columnWidths = new int[]{20, 0, 0, 0, 0, 20};
 		gridBagLayout.rowHeights = new int[]{100, 0, 0, 0, 0, 100};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
@@ -73,6 +74,11 @@ public class OrderPanel extends JPanel {
 		add(ordersLabel, gbc_ordersLabel);
 
 		table = new JTable();
+		JTableHeader header = table.getTableHeader();
+		header.setBackground(new Color(28, 150, 202));
+		header.setForeground(Color.WHITE);
+
+
 		table.setRowSelectionAllowed(false);
 		table.setFocusable(false);
 		table.setFillsViewportHeight(true);
@@ -212,11 +218,13 @@ public class OrderPanel extends JPanel {
 			
 			if (data.get(e)[3].equals("pending"))
 			{
-				table.setValueAt(new RoundedButton("Confirm", new Color(16, 188, 171), Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 6);
+				
+				table.setValueAt(new RoundedButton("Confirm", new Color(28, 150, 202),Color.WHITE, new Color(28, 150, 202), new Font("Lato", Font.BOLD, 14)), e, 6);
+				
 			}
 			else
 			{
-				table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.BLACK, new Font("Lato", Font.PLAIN, 14)), e, 6);
+				table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.WHITE, new Font("Lato", Font.PLAIN, 14)), e, 6);
 			}
 			
 		}
@@ -265,11 +273,11 @@ public class OrderPanel extends JPanel {
 				table.setValueAt(data[4], 0, 5);
 				if (data[2].equals("pending"))
 				{
-					table.setValueAt(new RoundedButton("Confirm", new Color(16, 188, 171), Color.WHITE, new Font("Lato", Font.BOLD, 14)), 0, 6);
+					table.setValueAt(new RoundedButton("Confirm", new Color(28, 150, 202), new Color(28, 150, 202), new Font("Lato", Font.BOLD, 14)), 0, 6);
 				}
 				else
 				{
-					table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.BLACK, new Font("Lato", Font.PLAIN, 14)), 0, 6);
+					table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.WHITE, new Font("Lato", Font.PLAIN, 14)), 0, 6);
 				}
 				
 			}

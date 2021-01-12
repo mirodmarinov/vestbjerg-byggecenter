@@ -49,7 +49,9 @@ public class JTableButtonMouseListener extends MouseAdapter {
 
         //Checking the row or column is valid or not
         if (column != y || row != x) {
-        	      	        	
+        	      
+        	
+        	//Leave the button
         	if (recolor == 1)
         	{
         		Object value = table.getValueAt(y, x);
@@ -57,18 +59,22 @@ public class JTableButtonMouseListener extends MouseAdapter {
         		if (value instanceof RoundedButton) {
         			if (((RoundedButton) value).getName().equals("Confirm"))
         			{
-        				((RoundedButton)value).setBackgroundColor(new Color(16, 188, 171));
-        				((RoundedButton)value).setForeground(Color.WHITE);
+        				mouseExited((RoundedButton) value);
         				table.repaint();
         			}
         		}
         	}
+        	
+        	//Enter the button
         	if (row < table.getRowCount() && row >= 0 && column < table.getColumnCount() && column >= 0) {
         		Object value = table.getValueAt(row, column);
         		if (value instanceof RoundedButton) {
         			if (((RoundedButton) value).getName().equals("Confirm"))
         			{
-        				mouseExited((RoundedButton) value);
+
+        				((RoundedButton)value).setBackground(new Color(28, 150, 202));
+        				((RoundedButton)value).setForeground(Color.BLACK);
+        				((RoundedButton)value).setBorderColor(new Color(28, 150, 202));
         				table.repaint();
         			}
         			y = row;
@@ -99,7 +105,7 @@ public class JTableButtonMouseListener extends MouseAdapter {
     }
     
     public void mouseExited(RoundedButton button) {
-    	 button.setBackgroundColor(new Color(16, 188, 171));
+    	 button.setBackground(new Color(28, 150, 202));
     	 button.setForeground(Color.WHITE);
     }
 }

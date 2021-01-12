@@ -32,7 +32,7 @@ public class RoundedButton extends Component {
     public RoundedButton(String label, Color color) {
         this.label = label;
         this.bg = color;
-        this.fg = getForeground();
+        this.fg = Color.BLACK;
         this.borderColor = color;
         this.setName(label);
     }
@@ -40,7 +40,7 @@ public class RoundedButton extends Component {
     public RoundedButton(String label, Color bg, Color borderColor, Font font) {
         this.label = label;
         this.bg = bg;
-        this.fg = getForeground();
+        this.fg = Color.BLACK;
         this.borderColor = borderColor;
         this.setName(label);
         this.font = font;
@@ -91,14 +91,25 @@ public class RoundedButton extends Component {
     	this.repaint();
     }
 
-    
+   
     public void setBorderColor(Color c) {
     	borderColor = c;
     	repaint();
     }
     
-    public void setBackgroundColor(Color c) {
+    @Override
+    public void setBackground(Color c) {
     	bg = c;
     	repaint();
     }
+    
+    @Override
+    public void setForeground(Color c)
+    {
+    	fg = c;
+    	repaint();
+    }
+    
+    
+    
 }
