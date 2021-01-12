@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 
 /**
- * This class is a part of the System developed for Vestbjerg Byggecenter. It
- * acts as a controller for all of the order objects.
+ * This class is a part of the System developed for Vestbjerg Byggecenter. 
+ * It acts as a controller for all of the order objects.
  */
 
 public class OrderCtr
@@ -252,6 +252,8 @@ public class OrderCtr
 		int orderAmount = 50;
 		ArrayList<String[]> returnValue = new ArrayList<>();
 		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();
+		//System.out.println((int)(Math.floor(orders.size() / 50)));
+		//System.out.println(index);
 		if ((int)(Math.floor(orders.size() / 50)) >= index)
 		{
 			return returnValue;

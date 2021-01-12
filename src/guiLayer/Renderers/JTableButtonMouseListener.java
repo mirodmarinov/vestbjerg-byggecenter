@@ -73,8 +73,8 @@ public class JTableButtonMouseListener extends MouseAdapter {
         			if (((RoundedButton) value).getName().equals("Confirm"))
         			{
 
-        				((RoundedButton)value).setBackground(babyBlue);
-        				((RoundedButton)value).setForeground(Color.BLACK);
+        				((RoundedButton)value).setBackground(Color.WHITE);
+        				((RoundedButton)value).setForeground(babyBlue);
         				((RoundedButton)value).setBorderColor(babyBlue);
         				table.repaint();
         			}
