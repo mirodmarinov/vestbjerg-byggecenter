@@ -201,8 +201,6 @@ public class MainMenu
 			order.setTotalPrice(10000);
 			order.setDiscount(5);
 			
-			System.out.println(order.getOrderNumber());
-			
 			OrderContainer.getInstance().addOrder(order);
 		}
 		

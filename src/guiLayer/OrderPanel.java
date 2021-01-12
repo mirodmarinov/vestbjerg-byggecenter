@@ -118,6 +118,7 @@ public class OrderPanel extends JPanel {
 				return columnTypes[columnIndex];
 			}
 		});
+		
 		table.getColumnModel().getColumn(0).setPreferredWidth(85);
 		table.getColumnModel().getColumn(0).setMinWidth(85);
 		table.getColumnModel().getColumn(1).setPreferredWidth(70);
@@ -137,10 +138,11 @@ public class OrderPanel extends JPanel {
 		foundLabel.setVisible(false);
 		
 		leftArrowLabel = new JLabel(" < ");
+		
 		leftArrowLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("PAGE BACK!");
+				searchTextField.setText("🔍 Search...");
 				loadPage(Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", "")) - 1);
 			}
 		});
@@ -164,6 +166,7 @@ public class OrderPanel extends JPanel {
 		rightArrowLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				searchTextField.setText("🔍 Search...");
 				loadPage(Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", "")) + 1);
 			}
 		});
@@ -231,7 +234,7 @@ public class OrderPanel extends JPanel {
 		JScrollPane tablePane = new JScrollPane(table);
 		tablePane.setBorder(BorderFactory.createEmptyBorder());
 		add(tablePane, gbc_table);
-		defaultFillTable();
+		loadPage(1);
 		
 
 		
@@ -241,11 +244,12 @@ public class OrderPanel extends JPanel {
 	 * This method fills the table with the first x elements from the orderContainer
 	 * 
 	 */
-	private void defaultFillTable() {
+	private void defaultFillTable(int index) {
 		orderCtr = new OrderCtr();
 		//we get the order information from the orderContainer
-		ArrayList<String[]> data = orderCtr.getOrders(1);
+		ArrayList<String[]> data = orderCtr.getOrders(index);
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+		dtm.setRowCount(0);
 		dtm.setRowCount(data.size());
 		//Check if the order quantity is less the the row amount,
 		//we fill the table with the order data quantity, otherwise we fill
@@ -267,10 +271,11 @@ public class OrderPanel extends JPanel {
 				table.setValueAt(new RoundedButton("Confirm", babyBlue,Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14)), e, 6);
 				
 
-				RoundedButton button = new RoundedButton("Confirm", new Color(28, 150, 202),Color.WHITE, new Color(28, 150, 202), new Font("Lato", Font.BOLD, 14));
-				button.setBounds(0, 0, 20, 20);
+				//RoundedButton button = new RoundedButton("Confirm", new Color(28, 150, 202),Color.WHITE, new Color(28, 150, 202), new Font("Lato", Font.BOLD, 14));
+				//button.setBounds(0, 0, 20, 20);
 				//table.setValueAt(new RoundedButton("Confirm", new Color(28, 150, 202),Color.WHITE, new Color(28, 150, 202), new Font("Lato", Font.BOLD, 14)), e, 6);
-				table.setValueAt(button, e, 6);
+				//table.setValueAt(button, e, 6);
+
 			}
 			else
 			{
@@ -347,10 +352,16 @@ public class OrderPanel extends JPanel {
 		
 		
 		orderCtr = new OrderCtr();
-		orderCtr.getOrders(index);
+		if (orderCtr.getOrders(index).isEmpty())
+		{
+			return;
+		}
+		
+		defaultFillTable(index);
+
+		
 		
 		tablePageLabel.setText("<html><u>" + index + "</u></html>");
-		System.out.println((index-1)*50 + " - " + (index*50-1));
 
 		
 	}

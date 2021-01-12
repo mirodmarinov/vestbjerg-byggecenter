@@ -249,19 +249,28 @@ public class OrderCtr
 
 	public ArrayList<String[]> getOrders(int index)
 	{
-		int orderAmount = 50;
+		int orderAmount = 0;
 		ArrayList<String[]> returnValue = new ArrayList<>();
 		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();
-		//System.out.println((int)(Math.floor(orders.size() / 50)));
-		//System.out.println(index);
 		if ((int)(Math.floor(orders.size() / 50)) >= index)
+
+		
+		if ((int)(Math.floor(orders.size() / 50))+1 > index)
+		{
+			orderAmount = 50;
+		}
+		else if ((int)(Math.floor(orders.size() / 50))+1 == index)
+		{
+			orderAmount = (int)(orders.size()%50);
+		}
+		else
 		{
 			return returnValue;
 		}
+		
 		Order order;
 		String[] string;
-		orderAmount = (int)(orders.size()%50);
-		for (int e = (index-1)*50; e < orderAmount; e++)
+		for (int e = (index-1)*50; e < (index-1)*50+orderAmount; e++)
 		{
 			order = orders.get(e);
 			string = new String[6];
