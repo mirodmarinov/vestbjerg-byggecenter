@@ -197,6 +197,7 @@ public class OrderPanel extends JPanel {
 						System.out.println("inside");
 						loadPage(1);
 						searchTextField.setText("🔍 Search...");
+						loadPage(Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", "")));
 					}
 					else
 					{
@@ -272,9 +273,7 @@ public class OrderPanel extends JPanel {
 			
 			if (data.get(e)[3].equals("pending"))
 			{
-
 				table.setValueAt(new RoundedButton("Confirm", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 6);
-				
 			}
 			else
 			{

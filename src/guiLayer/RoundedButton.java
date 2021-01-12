@@ -1,7 +1,5 @@
 package guiLayer;
 
-import java.awt.AWTEvent;
-import java.awt.AWTEventMulticaster;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -9,12 +7,10 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionListener;
 
 
 public class RoundedButton extends Component {
 
-    private ActionListener actionListener;
     private String label;
     private Color bg;
     private Color fg;
@@ -63,10 +59,11 @@ public class RoundedButton extends Component {
     	
         RenderingHints rh = new RenderingHints(RenderingHints.KEY_TEXT_ANTIALIASING,
         RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.setRenderingHints(rh);
         g2.setColor(bg);
         g2.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
        
-        g2.setRenderingHints(rh);
+       
         g2.setColor(borderColor);
         g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
 
