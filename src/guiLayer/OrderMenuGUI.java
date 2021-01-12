@@ -96,6 +96,12 @@ public class OrderMenuGUI {
 		 */
 		/********************************************** Order Button **********************************************/
 		orderMenuButton = new RoundedButton("Orders", babyBlue);
+		orderMenuButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cards.show(mainFrame, "Orders");
+			}
+		});
 		selected = orderMenuButton;
 		formatButton(orderMenuButton);
 		orderMenuButton.addOffset(-64, 0);
@@ -112,6 +118,7 @@ public class OrderMenuGUI {
 		createOrderButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				cards.show(mainFrame, "Create Order");
 			}
 		});
 		formatButton(createOrderButton);
@@ -172,8 +179,11 @@ public class OrderMenuGUI {
 	private void init() {
 		cards = (CardLayout)(mainFrame.getLayout());
 		mainFrame.add(new OrderPanel(), "Orders");
+		mainFrame.add(new CreateOrderPanel(), "Create Order");
 		orderMenuButton.setBackground(babyBlue.darker());
 		orderMenuButton.setFocusable(false);
+		
+		
 		
 	}
 	
