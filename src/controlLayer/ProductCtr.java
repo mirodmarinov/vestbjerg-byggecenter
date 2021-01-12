@@ -54,7 +54,8 @@ public class ProductCtr
 		}
 		return productInfo;
 	}
-
+	
+	
 	/**
 	 * Finds a product by its place on the generated ArrayList
 	 * 
