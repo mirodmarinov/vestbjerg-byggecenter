@@ -49,6 +49,9 @@ public class OrderPanel extends JPanel {
 	private JTextField searchTextField;
 	private Color babyBlue = new Color(28, 150, 202);
 	JLabel foundLabel;
+	private JLabel tablePageLabel;
+	private JLabel leftArrowLabel;
+	private JLabel rightArrowLabel;
 
 	/**
 	 * Create the panel.
@@ -59,9 +62,9 @@ public class OrderPanel extends JPanel {
 		mn.populateClasses();
 		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{20, 0, 0, 0, 0, 20};
+		gridBagLayout.columnWidths = new int[]{20, 0, 0, 0, 0, 122, 0, 0, 20};
 		gridBagLayout.rowHeights = new int[]{100, 0, 0, 0, 0, 100};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.5, 0.0, 0.5, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -129,6 +132,57 @@ public class OrderPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setMinWidth(70);
 		table.getColumnModel().getColumn(6).setMinWidth(75);
 		
+		
+		foundLabel = new JLabel("Order not found!");
+		foundLabel.setVisible(false);
+		
+		leftArrowLabel = new JLabel(" < ");
+		leftArrowLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("PAGE BACK!");
+				loadPage(Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", "")) - 1);
+			}
+		});
+		leftArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_leftArrowLabel = new GridBagConstraints();
+		gbc_leftArrowLabel.anchor = GridBagConstraints.EAST;
+		gbc_leftArrowLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_leftArrowLabel.gridx = 2;
+		gbc_leftArrowLabel.gridy = 1;
+		add(leftArrowLabel, gbc_leftArrowLabel);
+		
+		tablePageLabel = new JLabel("<html><u>1</u></html>");
+		tablePageLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		GridBagConstraints gbc_tablePageLabel = new GridBagConstraints();
+		gbc_tablePageLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_tablePageLabel.gridx = 3;
+		gbc_tablePageLabel.gridy = 1;
+		add(tablePageLabel, gbc_tablePageLabel);
+		
+		rightArrowLabel = new JLabel(" > ");
+		rightArrowLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadPage(Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", "")) + 1);
+			}
+		});
+		rightArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_rightArrowLabel = new GridBagConstraints();
+		gbc_rightArrowLabel.anchor = GridBagConstraints.WEST;
+		gbc_rightArrowLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_rightArrowLabel.gridx = 4;
+		gbc_rightArrowLabel.gridy = 1;
+		add(rightArrowLabel, gbc_rightArrowLabel);
+		foundLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		foundLabel.setForeground(Color.RED);
+		GridBagConstraints gbc_foundLabel = new GridBagConstraints();
+		gbc_foundLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_foundLabel.anchor = GridBagConstraints.EAST;
+		gbc_foundLabel.gridx = 5;
+		gbc_foundLabel.gridy = 1;
+		add(foundLabel, gbc_foundLabel);
+		
 		searchTextField = new JTextField();
 		searchTextField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -158,29 +212,17 @@ public class OrderPanel extends JPanel {
 				}
 			}
 		});
-		
-		
-		foundLabel = new JLabel("Order not found!");
-		foundLabel.setVisible(false);
-		foundLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		foundLabel.setForeground(Color.RED);
-		GridBagConstraints gbc_foundLabel = new GridBagConstraints();
-		gbc_foundLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_foundLabel.anchor = GridBagConstraints.EAST;
-		gbc_foundLabel.gridx = 2;
-		gbc_foundLabel.gridy = 1;
-		add(foundLabel, gbc_foundLabel);
 		searchTextField.setFocusable(false);
 		GridBagConstraints gbc_searchTextField = new GridBagConstraints();
 		gbc_searchTextField.insets = new Insets(0, 0, 5, 5);
 		gbc_searchTextField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_searchTextField.gridx = 3;
+		gbc_searchTextField.gridx = 6;
 		gbc_searchTextField.gridy = 1;
 		searchTextField.setText("🔍 Search...");
 		add(searchTextField, gbc_searchTextField);
 		searchTextField.setColumns(10);
 		GridBagConstraints gbc_table = new GridBagConstraints();
-		gbc_table.gridwidth = 3;
+		gbc_table.gridwidth = 6;
 		gbc_table.insets = new Insets(0, 0, 5, 5);
 		gbc_table.fill = GridBagConstraints.BOTH;
 		gbc_table.gridx = 1;
@@ -202,7 +244,7 @@ public class OrderPanel extends JPanel {
 	private void defaultFillTable() {
 		orderCtr = new OrderCtr();
 		//we get the order information from the orderContainer
-		ArrayList<String[]> data = orderCtr.getOrders();
+		ArrayList<String[]> data = orderCtr.getOrders(1);
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(data.size());
 		//Check if the order quantity is less the the row amount,
@@ -297,5 +339,17 @@ public class OrderPanel extends JPanel {
 		}
 	}
 	
-	
+	private void loadPage(int index)
+	{
+		if(index == 0) {
+			return;
+		}
+		
+		tablePageLabel.setText("<html><u>" + index + "</u></html>");
+		System.out.println((index-1)*50 + " - " + (index*50-1));
+		
+		orderCtr = new OrderCtr();
+		orderCtr.getOrders(index);
+		
+	}
 }
