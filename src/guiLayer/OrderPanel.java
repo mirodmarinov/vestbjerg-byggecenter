@@ -245,6 +245,7 @@ public class OrderPanel extends JPanel {
 		orderCtr = new OrderCtr();
 		//we get the order information from the orderContainer
 		ArrayList<String[]> data = orderCtr.getOrders(1);
+		System.out.println(data);
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(data.size());
 		//Check if the order quantity is less the the row amount,
@@ -345,11 +346,13 @@ public class OrderPanel extends JPanel {
 			return;
 		}
 		
-		tablePageLabel.setText("<html><u>" + index + "</u></html>");
-		System.out.println((index-1)*50 + " - " + (index*50-1));
 		
 		orderCtr = new OrderCtr();
 		orderCtr.getOrders(index);
+		
+		tablePageLabel.setText("<html><u>" + index + "</u></html>");
+		System.out.println((index-1)*50 + " - " + (index*50-1));
+
 		
 	}
 }

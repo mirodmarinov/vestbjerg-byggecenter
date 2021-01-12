@@ -203,7 +203,6 @@ public class OrderMenuGUI {
 		button.setPreferredSize(new Dimension(200, 50));
 		button.setFont(new Font("Lato", Font.BOLD, 18));
 		button.setForeground(Color.WHITE);
-		System.out.println(selected.getName() == button.getName());
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) 

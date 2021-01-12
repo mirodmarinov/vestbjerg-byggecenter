@@ -246,20 +246,22 @@ public class OrderCtr
 	 * @return
 	 */
 	
-	// TODO SCROLLBARTTHINGY
+
 	public ArrayList<String[]> getOrders(int index)
 	{
-		//int orderAmount = 50;
+		int orderAmount = 50;
 		ArrayList<String[]> returnValue = new ArrayList<>();
 		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();
-		if (Math.floor(orders.size() / 50) < index) // 70/50 = 1.4 floor(1.4) = 1; 30/50 = 0.6 floor(0.6) = 0; 124/50 = 2.48 floor(2.48) = 2;
+		//System.out.println((int)(Math.floor(orders.size() / 50)));
+		//System.out.println(index);
+		if ((int)(Math.floor(orders.size() / 50)) >= index)
 		{
 			return returnValue;
 		}
 		Order order;
 		String[] string;
-		//orderAmount = orderAmount > orders.size() ? orders.size() : orderAmount;
-		for (int e = index; e < index + 49; e++)
+		orderAmount = (int)(orders.size()%50);
+		for (int e = (index-1)*50; e < orderAmount; e++)
 		{
 			order = orders.get(e);
 			string = new String[6];
