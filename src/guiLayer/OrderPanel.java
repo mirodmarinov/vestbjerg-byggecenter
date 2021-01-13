@@ -194,7 +194,6 @@ public class OrderPanel extends JPanel {
 					searchTextField.setFocusable(true);
 					if (searchTextField.getText().equals(""))
 					{
-						System.out.println("inside");
 						loadPage(1);
 						searchTextField.setText("🔍 Search...");
 						loadPage(Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", "")));

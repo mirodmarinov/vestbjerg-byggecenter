@@ -29,12 +29,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 	public void mouseClicked(MouseEvent e)
 	{
 
-		int column = table.getColumnModel().getColumnIndexAtX(e.getX()); // get
-		                                                                 // the
-		                                                                 // column
-		                                                                 // of
-		                                                                 // the
-		                                                                 // button
+		int column = table.getColumnModel().getColumnIndexAtX(e.getX()); // get the column of the button
 		int row = e.getY() / table.getRowHeight(); // get the row of the button
 		// Checking the row or column is valid or not
 		if (row < table.getRowCount() && row >= 0 && column < table.getColumnCount() && column >= 0)
@@ -55,12 +50,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 
 	public void mouseMoved(MouseEvent e)
 	{
-		int column = table.getColumnModel().getColumnIndexAtX(e.getX()); // get
-		                                                                 // the
-		                                                                 // column
-		                                                                 // of
-		                                                                 // the
-		                                                                 // button
+		int column = table.getColumnModel().getColumnIndexAtX(e.getX()); // get the column of the button
 		int row = e.getY() / table.getRowHeight(); // get the row of the button
 
 		// Checking the row or column is valid or not
@@ -128,11 +118,9 @@ public class JTableButtonMouseListener extends MouseAdapter
 		// confirm offer
 		int index = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex()));
 		
-		orderCtr.confirmOffer(Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex())));
+		orderCtr.confirmOffer(index);
 		// get new data
-		String[] data = orderCtr.searchBar(Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex())));
-
-		
+		String[] data = orderCtr.searchBar(index);
 		
 		// change the button to COnfirmed and inactive
 		RoundedButton button = (RoundedButton)table.getValueAt(table.getSelectedRow(), table.getColumn("").getModelIndex());
