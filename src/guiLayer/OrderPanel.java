@@ -82,7 +82,7 @@ public class OrderPanel extends JPanel {
 	public OrderPanel() {
 		MainMenu mn = new MainMenu();
 		mn.populateClasses();
-		setBackground(Color.WHITE);
+		setBackground(new Color(252, 252, 252));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{20, 0, 0, 0, 0, 122, 0, 0, 20};
 		gridBagLayout.rowHeights = new int[]{100, 0, 0, 0, 0, 100};
