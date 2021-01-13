@@ -322,7 +322,7 @@ public class OrderPanel extends JPanel {
 	private void searchBar(Boolean Notdynamic)
 	{
 		foundLabel.setVisible(false);
-		if (!searchTextField.getText().equals(""))
+		if ((!searchTextField.getText().equals(""))&&(!searchTextField.getText().equals("🔍 Search...")))
 		{
 			orderCtr = new OrderCtr();
 			ArrayList<String[]> data = orderCtr.searchBar(Integer.parseInt(searchTextField.getText())); // TODO Check this
