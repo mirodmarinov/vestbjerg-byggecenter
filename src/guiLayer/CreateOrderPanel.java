@@ -263,9 +263,6 @@ public class CreateOrderPanel extends JPanel {
 		gbc_cancelButton.gridx = 5;
 		gbc_cancelButton.gridy = 4;
 		productPanel.add(cancelButton, gbc_cancelButton);
-		
-		
-
 
 	}
 }
