@@ -11,6 +11,9 @@ import java.awt.GridBagConstraints;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JTextField;
@@ -23,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 public class CreateOrderPanel extends JPanel {
 	private JTextField searchBar;
 	private JTable orderTable;
+	private Color babyBlue = new Color(28, 150, 202);
 
 	/**
 	 * Create the panel.
@@ -64,7 +68,7 @@ public class CreateOrderPanel extends JPanel {
 		gbl_customerPanel.rowWeights = new double[]{0.0, 0.0, 0.1, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		customerPanel.setLayout(gbl_customerPanel);
 		
-		//************Customer Panel Header
+		//Customer Panel Header********************************************************
 		JLabel customerLabel = new JLabel("Customer Details");
 		customerLabel.setFont(new Font("Lato", Font.PLAIN, 20));
 		GridBagConstraints gbc_customerLabel = new GridBagConstraints();
@@ -75,7 +79,7 @@ public class CreateOrderPanel extends JPanel {
 		gbc_customerLabel.gridy = 1;
 		customerPanel.add(customerLabel, gbc_customerLabel);
 		
-		//************Customer Panel Search Bar
+		//Customer Panel Search Bar********************************************************
 		searchBar = new JTextField();
 		searchBar.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 		searchBar.setText("  \uD83D\uDD0D Phone number...");
@@ -89,10 +93,11 @@ public class CreateOrderPanel extends JPanel {
 		searchBar.setColumns(10);
 		
 
-		//************Customer Panel Add Customer Button
-		RoundedButton addCustomerButton = new RoundedButton("➕ Add Customer", new Color(234, 234, 234),
-				new Color(143, 143, 143), new Color(143, 143, 143), new Font("Lato", Font.PLAIN, 15));
+		//Customer Panel Add Customer Button********************************************************
+		RoundedButton addCustomerButton = new RoundedButton("➕ Add Customer", babyBlue,
+				Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14));
 		addCustomerButton.addOffset(-17, 2);
+		blueButton(addCustomerButton);
 		GridBagConstraints gbc_addCustomerButton = new GridBagConstraints();
 		gbc_addCustomerButton.fill = GridBagConstraints.BOTH;
 		gbc_addCustomerButton.insets = new Insets(0, 0, 5, 5);
@@ -100,9 +105,9 @@ public class CreateOrderPanel extends JPanel {
 		gbc_addCustomerButton.gridy = 1;
 		customerPanel.add(addCustomerButton, gbc_addCustomerButton);
 		
-		//************Customer Panel Separator Line
+		//Customer Panel Separator Line********************************************************
 		JSeparator separator = new JSeparator();
-		separator.setBackground(new Color(237, 237, 237));
+		separator.setBackground(babyBlue);
 		separator.setOpaque(true);
 		GridBagConstraints gbc_separator = new GridBagConstraints();
 		gbc_separator.fill = GridBagConstraints.HORIZONTAL;
@@ -112,10 +117,10 @@ public class CreateOrderPanel extends JPanel {
 		gbc_separator.gridy = 2;
 		customerPanel.add(separator, gbc_separator);
 		
-		//************Customer Panel Name Label
+		//Customer Panel Name Label********************************************************
 		JLabel nameLabel = new JLabel("Name:");
-		nameLabel.setFont(new Font("Lato", Font.PLAIN, 15));
-		nameLabel.setForeground(new Color(196, 196, 196));
+		nameLabel.setFont(new Font("Lato", Font.PLAIN, 14));
+		nameLabel.setForeground(babyBlue);
 		GridBagConstraints gbc_nameLabel = new GridBagConstraints();
 		gbc_nameLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_nameLabel.anchor = GridBagConstraints.WEST;
@@ -123,10 +128,10 @@ public class CreateOrderPanel extends JPanel {
 		gbc_nameLabel.gridy = 3;
 		customerPanel.add(nameLabel, gbc_nameLabel);
 		
-		//************Customer Panel Group Label
+		//Customer Panel Group Label********************************************************
 		JLabel groupLabel = new JLabel("Group:");
-		groupLabel.setFont(new Font("Lato", Font.PLAIN, 15));
-		groupLabel.setForeground(new Color(196, 196, 196));
+		groupLabel.setFont(new Font("Lato", Font.PLAIN, 14));
+		groupLabel.setForeground(babyBlue);
 		GridBagConstraints gbc_groupLabel = new GridBagConstraints();
 		gbc_groupLabel.anchor = GridBagConstraints.WEST;
 		gbc_groupLabel.insets = new Insets(0, 0, 5, 5);
@@ -134,10 +139,10 @@ public class CreateOrderPanel extends JPanel {
 		gbc_groupLabel.gridy = 3;
 		customerPanel.add(groupLabel, gbc_groupLabel);
 		
-		//************Customer Panel Phone Number Label
+		//Customer Panel Phone Number Label********************************************************
 		JLabel phoneLabel = new JLabel("Phone Number:");
-		phoneLabel.setFont(new Font("Lato", Font.PLAIN, 15));
-		phoneLabel.setForeground(new Color(196, 196, 196));
+		phoneLabel.setFont(new Font("Lato", Font.PLAIN, 14));
+		phoneLabel.setForeground(babyBlue);
 		GridBagConstraints gbc_phoneLabel = new GridBagConstraints();
 		gbc_phoneLabel.anchor = GridBagConstraints.WEST;
 		gbc_phoneLabel.insets = new Insets(0, 0, 5, 5);
@@ -145,9 +150,9 @@ public class CreateOrderPanel extends JPanel {
 		gbc_phoneLabel.gridy = 3;
 		customerPanel.add(phoneLabel, gbc_phoneLabel);
 		
-		//************Customer Panel Name Value Label
+		//Customer Panel Name Value Label********************************************************
 		JLabel nameValueLabel = new JLabel("...");
-		nameValueLabel.setFont(new Font("Lato", Font.PLAIN, 15));
+		nameValueLabel.setFont(new Font("Lato", Font.PLAIN, 14));
 		GridBagConstraints gbc_nameValueLabel = new GridBagConstraints();
 		gbc_nameValueLabel.anchor = GridBagConstraints.WEST;
 		gbc_nameValueLabel.insets = new Insets(0, 0, 0, 5);
@@ -155,9 +160,9 @@ public class CreateOrderPanel extends JPanel {
 		gbc_nameValueLabel.gridy = 4;
 		customerPanel.add(nameValueLabel, gbc_nameValueLabel);
 		
-		//************Customer Panel Group Value Label
+		//Customer Panel Group Value Label********************************************************
 		JLabel groupValueLabel = new JLabel("...");
-		groupValueLabel.setFont(new Font("Lato", Font.PLAIN, 15));
+		groupValueLabel.setFont(new Font("Lato", Font.PLAIN, 14));
 		GridBagConstraints gbc_groupValueLabel = new GridBagConstraints();
 		gbc_groupValueLabel.anchor = GridBagConstraints.WEST;
 		gbc_groupValueLabel.insets = new Insets(0, 0, 0, 5);
@@ -165,9 +170,9 @@ public class CreateOrderPanel extends JPanel {
 		gbc_groupValueLabel.gridy = 4;
 		customerPanel.add(groupValueLabel, gbc_groupValueLabel);
 		
-		//************Customer Panel Phone Value Label
+		//Customer Panel Phone Value Label********************************************************
 		JLabel phoneValueLabel = new JLabel("...");
-		phoneValueLabel.setFont(new Font("Lato", Font.PLAIN, 15));
+		phoneValueLabel.setFont(new Font("Lato", Font.PLAIN, 14));
 		GridBagConstraints gbc_phoneValueLabel = new GridBagConstraints();
 		gbc_phoneValueLabel.anchor = GridBagConstraints.WEST;
 		gbc_phoneValueLabel.insets = new Insets(0, 0, 0, 5);
@@ -192,6 +197,7 @@ public class CreateOrderPanel extends JPanel {
 		gbl_productPanel.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		productPanel.setLayout(gbl_productPanel);
 		
+		//Product Panel Header********************************************************
 		JLabel detailsLabel = new JLabel("Order Details");
 		detailsLabel.setFont(new Font("Lato", Font.PLAIN, 20));
 		GridBagConstraints gbc_detailsLabel = new GridBagConstraints();
@@ -201,9 +207,11 @@ public class CreateOrderPanel extends JPanel {
 		gbc_detailsLabel.gridy = 1;
 		productPanel.add(detailsLabel, gbc_detailsLabel);
 		
-		RoundedButton addProductsButton = new RoundedButton("➕ Add Products", new Color(234, 234, 234),
-						new Color(143, 143, 143), new Color(143, 143, 143), new Font("Lato", Font.PLAIN, 15));
+		//Product Panel Add Product Button********************************************************
+		RoundedButton addProductsButton = new RoundedButton("➕ Add Products", babyBlue,
+						Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
 		addProductsButton.addOffset(-17, 2);
+		blueButton(addProductsButton);
 		GridBagConstraints gbc_addProductsButton = new GridBagConstraints();
 		gbc_addProductsButton.insets = new Insets(0, 0, 5, 5);
 		gbc_addProductsButton.fill = GridBagConstraints.BOTH;
@@ -211,6 +219,7 @@ public class CreateOrderPanel extends JPanel {
 		gbc_addProductsButton.gridy = 1;
 		productPanel.add(addProductsButton, gbc_addProductsButton);
 		
+		//Product Panel Table of Products********************************************************
 		orderTable = new JTable();
 		orderTable.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -255,6 +264,7 @@ public class CreateOrderPanel extends JPanel {
 		productPanel.add(new JScrollPane(orderTable), gbc_orderTable);
 		
 		
+		//Product Panel Total price Label********************************************************
 		JLabel totalLabel = new JLabel("Total Price");
 		totalLabel.setFont(new Font("Lato", Font.PLAIN, 20));
 		GridBagConstraints gbc_totalLabel = new GridBagConstraints();
@@ -263,6 +273,7 @@ public class CreateOrderPanel extends JPanel {
 		gbc_totalLabel.gridy = 3;
 		productPanel.add(totalLabel, gbc_totalLabel);
 		
+		//Product Panel Total Price Calculated********************************************************
 		JLabel totalValueLabel = new JLabel("... DKK");
 		totalValueLabel.setFont(new Font("Lato", Font.PLAIN, 20));
 		GridBagConstraints gbc_totalValueLabel = new GridBagConstraints();
@@ -271,9 +282,11 @@ public class CreateOrderPanel extends JPanel {
 		gbc_totalValueLabel.gridy = 3;
 		productPanel.add(totalValueLabel, gbc_totalValueLabel);
 		
-		RoundedButton createOfferButton = new RoundedButton("Create Offer", new Color(234, 234, 234),
-						new Color(143, 143, 143), new Color(143, 143, 143), new Font("Lato", Font.PLAIN, 15));
-		createOfferButton.addOffset(-17, 2);
+		//Product Panel Create Offer Button********************************************************
+		RoundedButton createOfferButton = new RoundedButton("Create Offer", babyBlue,
+						Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
+		createOfferButton.addOffset(-8, 2);
+		blueButton(createOfferButton);
 		GridBagConstraints gbc_createOfferButton = new GridBagConstraints();
 		gbc_createOfferButton.fill = GridBagConstraints.BOTH;
 		gbc_createOfferButton.insets = new Insets(0, 0, 5, 5);
@@ -281,9 +294,11 @@ public class CreateOrderPanel extends JPanel {
 		gbc_createOfferButton.gridy = 4;
 		productPanel.add(createOfferButton, gbc_createOfferButton);
 		
-		RoundedButton placeOrderButton = new RoundedButton("Place Order", new Color(234, 234, 234),
-						new Color(143, 143, 143), new Color(143, 143, 143), new Font("Lato", Font.PLAIN, 15));
-		placeOrderButton.addOffset(-17, 2);
+		//Product Panel Place Order Button********************************************************
+		RoundedButton placeOrderButton = new RoundedButton("Place Order", babyBlue,
+						Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
+		placeOrderButton.addOffset(-6, 2);
+		blueButton(placeOrderButton);
 		GridBagConstraints gbc_placeOrderButton = new GridBagConstraints();
 		gbc_placeOrderButton.fill = GridBagConstraints.BOTH;
 		gbc_placeOrderButton.insets = new Insets(0, 0, 5, 5);
@@ -291,15 +306,55 @@ public class CreateOrderPanel extends JPanel {
 		gbc_placeOrderButton.gridy = 4;
 		productPanel.add(placeOrderButton, gbc_placeOrderButton);
 		
-		RoundedButton cancelButton = new RoundedButton("Cancel", new Color(234, 234, 234),
-						new Color(143, 143, 143), new Color(143, 143, 143), new Font("Lato", Font.PLAIN, 15));
-		cancelButton.addOffset(-17, 2);
+		//Product Panel Cancel Button********************************************************
+		RoundedButton cancelButton = new RoundedButton("Cancel", Color.WHITE,
+						babyBlue, babyBlue, new Font("Lato", Font.BOLD, 15));
+		cancelButton.addOffset(-6, 2);
+		whiteButton(cancelButton);
 		GridBagConstraints gbc_cancelButton = new GridBagConstraints();
 		gbc_cancelButton.fill = GridBagConstraints.BOTH;
 		gbc_cancelButton.insets = new Insets(0, 0, 5, 5);
 		gbc_cancelButton.gridx = 5;
 		gbc_cancelButton.gridy = 4;
 		productPanel.add(cancelButton, gbc_cancelButton);
+	}
 
+	
+	public void blueButton(RoundedButton button) {
+		
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) 
+			{
+					button.setBackground(Color.WHITE);
+					button.setForeground(babyBlue);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) 
+			{
+					button.setBackground(babyBlue);
+					button.setForeground(Color.WHITE);
+			}
+		});
+	}
+	
+	public void whiteButton(RoundedButton button) {
+		button.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseEntered(MouseEvent e) 
+			{
+					button.setBackground(babyBlue);
+					button.setForeground(Color.WHITE);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) 
+			{
+					button.setBackground(Color.WHITE);
+					button.setForeground(babyBlue);
+			}
+		});
 	}
 }
