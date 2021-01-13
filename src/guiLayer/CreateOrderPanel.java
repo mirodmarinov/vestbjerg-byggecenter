@@ -1,6 +1,8 @@
 package guiLayer;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 
@@ -16,6 +18,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class CreateOrderPanel extends JPanel {
 	private JTextField searchBar;
@@ -209,6 +212,33 @@ public class CreateOrderPanel extends JPanel {
 		productPanel.add(addProductsButton, gbc_addProductsButton);
 		
 		orderTable = new JTable();
+		orderTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null},
+			},
+			new String[] {
+				"Barcode", "Name", "Price", "Quantity", "Discount", "Total"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		orderTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+		orderTable.getColumnModel().getColumn(0).setMinWidth(50);
+		orderTable.getColumnModel().getColumn(1).setPreferredWidth(50);
+		orderTable.getColumnModel().getColumn(1).setMinWidth(50);
+		orderTable.getColumnModel().getColumn(2).setPreferredWidth(50);
+		orderTable.getColumnModel().getColumn(2).setMinWidth(50);
+		orderTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+		orderTable.getColumnModel().getColumn(3).setMinWidth(50);
+		orderTable.getColumnModel().getColumn(4).setPreferredWidth(50);
+		orderTable.getColumnModel().getColumn(4).setMinWidth(50);
+		orderTable.getColumnModel().getColumn(5).setPreferredWidth(50);
+		orderTable.getColumnModel().getColumn(5).setMinWidth(50);
 		orderTable.setFont(new Font("Lato", Font.PLAIN, 14));
 		GridBagConstraints gbc_orderTable = new GridBagConstraints();
 		gbc_orderTable.gridwidth = 5;
@@ -216,7 +246,14 @@ public class CreateOrderPanel extends JPanel {
 		gbc_orderTable.fill = GridBagConstraints.BOTH;
 		gbc_orderTable.gridx = 1;
 		gbc_orderTable.gridy = 2;
-		productPanel.add(orderTable, gbc_orderTable);
+		
+		/*
+		JScrollPane tablePane = new JScrollPane(orderTable);
+		tablePane.setBorder(BorderFactory.createEmptyBorder());
+		productPanel.add(tablePane, gbc_orderTable);
+		*/
+		productPanel.add(new JScrollPane(orderTable), gbc_orderTable);
+		
 		
 		JLabel totalLabel = new JLabel("Total Price");
 		totalLabel.setFont(new Font("Lato", Font.PLAIN, 20));
