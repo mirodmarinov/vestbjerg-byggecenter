@@ -132,7 +132,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 		}
 		
 		// change the button to COnfirmed and inactive
-		RoundedButton button = (RoundedButton)table.getValueAt(table.getSelectedRow(), table.getColumn("").getModelIndex());
+		RoundedButton button = (RoundedButton)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("").getModelIndex()));
 		button.setText("Confirmed");
 		button.setBackground(Color.WHITE);
 		button.setBorderColor(Color.WHITE);

@@ -298,17 +298,17 @@ public class OrderPanel extends JPanel {
 			for (int element = 0; element < 6; element++)
 			{
 				
-				table.setValueAt(data.get(e)[element], e, element);
+				table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 			}
 
 			
 			if (data.get(e)[3].equals("pending"))
 			{
-				table.setValueAt(new RoundedButton("Confirm", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 6);
+				table.setValueAt(new RoundedButton("Confirm", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
 			}
 			else
 			{
-				table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.WHITE, new Font("Lato", Font.PLAIN, 14)), e, 6);
+				table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.WHITE, new Font("Lato", Font.PLAIN, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
 			}
 			
 		}
