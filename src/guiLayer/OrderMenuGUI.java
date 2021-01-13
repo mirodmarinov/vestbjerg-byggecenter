@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Panel;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.CardLayout;
@@ -15,6 +17,8 @@ import java.awt.CardLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
@@ -63,7 +67,9 @@ public class OrderMenuGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1680, 1050);
+		//frame.setBounds(0, 0, 1680, 1050);
+		Rectangle height = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		frame.setBounds(0, 0, (int)height.getWidth(), (int)height.getHeight());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
@@ -79,6 +85,8 @@ public class OrderMenuGUI {
 		 */
 		JPanel sideBar = new JPanel();
 		sideBar.setBackground(babyBlue);
+		sideBar.setMinimumSize(new Dimension(800,1080));
+		sideBar.setLocation(200, (int)height.getHeight());
 		GridBagConstraints gbc_sideBar = new GridBagConstraints();
 		gbc_sideBar.fill = GridBagConstraints.BOTH;
 		gbc_sideBar.insets = new Insets(0, 0, 0, 0);
@@ -90,6 +98,7 @@ public class OrderMenuGUI {
 		gbl_sideBar.rowHeights = new int[]{75, 50, 50, 50, 50, 50, 0};
 		gbl_sideBar.columnWeights = new double[]{1.0};
 		gbl_sideBar.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
+		gbl_sideBar.minimumLayoutSize(sideBar);
 		sideBar.setLayout(gbl_sideBar);
 		
 		/*

@@ -24,6 +24,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
+import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -87,9 +88,9 @@ public class OrderPanel extends JPanel {
 		setBackground(new Color(252, 252, 252));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{20, 0, 0, 0, 0, 122, 0, 0, 20};
-		gridBagLayout.rowHeights = new int[]{100, 0, 0, 0, 0, 100};
+		gridBagLayout.rowHeights = new int[]{100, 0, 0, 0, 0, 100, 21};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.5, 0.0, 0.5, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 2.0, 0.0, 1.0, 0.2};
 		setLayout(gridBagLayout);
 		
 		JLabel ordersLabel = new JLabel("Orders");
@@ -102,7 +103,6 @@ public class OrderPanel extends JPanel {
 		add(ordersLabel, gbc_ordersLabel);
 
 		table = new JTable();
-		
 		//Changes the Color of the header
 		JTableHeader header = table.getTableHeader();
 		header.setBackground(babyBlue);
@@ -224,7 +224,6 @@ public class OrderPanel extends JPanel {
 						searchTextField.getDocument().removeDocumentListener(cl);
 						searchTextField.setText("🔍 Search...");
 						searchTextField.getDocument().addDocumentListener(cl);
-						//loadPage(Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", "")));
 					}
 					else
 					{
@@ -260,6 +259,7 @@ public class OrderPanel extends JPanel {
 		add(searchTextField, gbc_searchTextField);
 		searchTextField.setColumns(10);
 		GridBagConstraints gbc_table = new GridBagConstraints();
+		gbc_table.gridheight = 3;
 		gbc_table.gridwidth = 6;
 		gbc_table.insets = new Insets(0, 0, 5, 5);
 		gbc_table.fill = GridBagConstraints.BOTH;
