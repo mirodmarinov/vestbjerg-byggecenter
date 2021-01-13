@@ -197,6 +197,9 @@ public class Order implements Serializable
 		String[] orderInfo = new String[1];
 		
 		orderInfo[0] = String.valueOf(getTotalPrice());
+		orderInfo[1] = String.valueOf(getPurchaseDate());
+		orderInfo[2] = getStatus();
+		orderInfo[3] = String.valueOf(getExpirationDate());
 		//Total price
 		allInfo.add(orderInfo);
 		
