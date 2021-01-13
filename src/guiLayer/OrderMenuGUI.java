@@ -30,6 +30,7 @@ public class OrderMenuGUI {
 	private CardLayout cards = new CardLayout();
 	private JPanel mainFrame = new JPanel();
 	private Color babyBlue = new Color(28, 150, 202);
+	private OrderPanel orderPanel = new OrderPanel();
 	private RoundedButton orderMenuButton,createOrderButton,productMenuButton,customerMenuButton;
 	private RoundedButton selected;
 
@@ -100,6 +101,9 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Orders");
+				orderPanel.getSearchTextField().setText("🔍 Search...");
+				orderPanel.loadPage(1);
+				orderPanel.getTablePageLabel().setText("1");
 				changeSelectedButton(orderMenuButton);
 			}
 		});
@@ -186,7 +190,7 @@ public class OrderMenuGUI {
 	
 	private void init() {
 		cards = (CardLayout)(mainFrame.getLayout());
-		mainFrame.add(new OrderPanel(), "Orders");
+		mainFrame.add(orderPanel, "Orders");
 		mainFrame.add(new CreateOrderPanel(), "Create Order");
 		mainFrame.add(new ProductsPanel(), "Products");
 		mainFrame.add(new CustomersPanel(), "Customers");

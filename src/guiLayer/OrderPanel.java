@@ -353,4 +353,16 @@ public class OrderPanel extends JPanel {
 	{
 		return Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", ""));
 	}
+	
+	public JTextField getSearchTextField()
+	{
+		
+		return searchTextField;
+	}
+	
+	public JLabel getTablePageLabel()
+	{
+		return tablePageLabel;
+	}
+	
 }
