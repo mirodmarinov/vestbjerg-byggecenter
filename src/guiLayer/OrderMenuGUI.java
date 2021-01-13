@@ -168,7 +168,7 @@ public class OrderMenuGUI {
 			}
 		});
 		formatButton(customerMenuButton);
-		customerMenuButton.addOffset(-57, 3);
+		customerMenuButton.addOffset(-59, 3);
 		GridBagConstraints gbc_customerMenuButton = new GridBagConstraints();
 		gbc_customerMenuButton.fill = GridBagConstraints.BOTH;
 		gbc_customerMenuButton.insets = new Insets(0, 40, 0, 20);
