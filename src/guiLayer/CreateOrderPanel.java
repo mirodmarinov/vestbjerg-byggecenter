@@ -26,9 +26,9 @@ public class CreateOrderPanel extends JPanel {
 		setBackground(new Color(252, 252, 252));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{20, 0, 0, 20};
-		gridBagLayout.rowHeights = new int[]{100, 0, 0, 0, 0, 0, 100};
+		gridBagLayout.rowHeights = new int[]{100, 0, 0, 123, 0, 0, 100};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.2, 0.8, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.8, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel createOrderLabel = new JLabel("Create Offer/Order");
@@ -43,6 +43,7 @@ public class CreateOrderPanel extends JPanel {
 		
 		JPanel customerPanel = new JPanel();
 		customerPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		customerPanel.setBorder(BorderFactory.createLineBorder(new Color(243, 243, 243), 2, true));
 		customerPanel.setBackground(Color.WHITE);
 		GridBagConstraints gbc_customerPanel = new GridBagConstraints();
 		gbc_customerPanel.insets = new Insets(0, 0, 5, 0);
@@ -54,7 +55,7 @@ public class CreateOrderPanel extends JPanel {
 		gbl_customerPanel.columnWidths = new int[]{15, 0, 0, 0, 0, 0, 0, 15};
 		gbl_customerPanel.rowHeights = new int[]{10, 0, 0, 0, 0, 0};
 		gbl_customerPanel.columnWeights = new double[]{0.0, 0.2, 0.2, 0.2, 0.2, 0.2, 0.0, Double.MIN_VALUE};
-		gbl_customerPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_customerPanel.rowWeights = new double[]{0.0, 0.0, 0.1, 0.0, 0.0, Double.MIN_VALUE};
 		customerPanel.setLayout(gbl_customerPanel);
 		
 		JLabel customerLabel = new JLabel("Customer Details");
@@ -68,6 +69,7 @@ public class CreateOrderPanel extends JPanel {
 		customerPanel.add(customerLabel, gbc_customerLabel);
 		
 		searchBar = new JTextField();
+		searchBar.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 		searchBar.setText("  \uD83D\uDD0D Phone number...");
 		searchBar.setForeground(new Color(149, 149, 149));
 		GridBagConstraints gbc_searchBar = new GridBagConstraints();
@@ -93,8 +95,8 @@ public class CreateOrderPanel extends JPanel {
 		separator.setBackground(new Color(237, 237, 237));
 		separator.setOpaque(true);
 		GridBagConstraints gbc_separator = new GridBagConstraints();
-		gbc_separator.fill = GridBagConstraints.BOTH;
-		gbc_separator.gridwidth = 7;
+		gbc_separator.fill = GridBagConstraints.HORIZONTAL;
+		gbc_separator.gridwidth = 8;
 		gbc_separator.insets = new Insets(0, 0, 0, 0);
 		gbc_separator.gridx = 0;
 		gbc_separator.gridy = 2;
@@ -159,7 +161,7 @@ public class CreateOrderPanel extends JPanel {
 		customerPanel.add(phoneValueLabel, gbc_phoneValueLabel);
 		
 		JPanel productPanel = new JPanel();
-		productPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		productPanel.setBorder(BorderFactory.createLineBorder(new Color(243, 243, 243), 2, true));
 		productPanel.setBackground(Color.WHITE);
 		GridBagConstraints gbc_productPanel = new GridBagConstraints();
 		gbc_productPanel.fill = GridBagConstraints.BOTH;
