@@ -24,6 +24,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -52,6 +54,26 @@ public class OrderPanel extends JPanel {
 	public JLabel tablePageLabel;
 	private JLabel leftArrowLabel;
 	private JLabel rightArrowLabel;
+	private DocumentListener cl = new DocumentListener()
+	{
+		@Override
+		public void insertUpdate(DocumentEvent e)
+		{
+			searchBar();
+		}
+
+		@Override
+		public void removeUpdate(DocumentEvent e)
+		{
+			searchBar();
+		}
+
+		@Override
+		public void changedUpdate(DocumentEvent e)
+		{
+			searchBar();
+		}
+	};
 
 	/**
 	 * Create the panel.
@@ -140,7 +162,9 @@ public class OrderPanel extends JPanel {
 		leftArrowLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				searchTextField.getDocument().removeDocumentListener(cl);
 				searchTextField.setText("🔍 Search...");
+				searchTextField.getDocument().addDocumentListener(cl);
 				loadPage(getPageIndex() - 1);
 			}
 		});
@@ -166,7 +190,9 @@ public class OrderPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				searchTextField.setFocusable(false);
 				searchTextField.setFocusable(true);
+				searchTextField.getDocument().removeDocumentListener(cl);
 				searchTextField.setText("🔍 Search...");
+				searchTextField.getDocument().addDocumentListener(cl);
 				loadPage(getPageIndex() + 1);
 			}
 		});
@@ -194,10 +220,11 @@ public class OrderPanel extends JPanel {
 					searchTextField.setFocusable(true);
 					if (searchTextField.getText().equals(""))
 					{
-						System.out.println("inside");
 						loadPage(1);
+						searchTextField.getDocument().removeDocumentListener(cl);
 						searchTextField.setText("🔍 Search...");
-						loadPage(Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", "")));
+						searchTextField.getDocument().addDocumentListener(cl);
+						//loadPage(Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", "")));
 					}
 					else
 					{
@@ -215,17 +242,21 @@ public class OrderPanel extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				if (searchTextField.getText().equals("🔍 Search..."))
 				{
+					searchTextField.getDocument().removeDocumentListener(cl);
 					searchTextField.setText("");
+					searchTextField.getDocument().addDocumentListener(cl);
 				}
 			}
 		});
 		searchTextField.setFocusable(false);
+		
 		GridBagConstraints gbc_searchTextField = new GridBagConstraints();
 		gbc_searchTextField.insets = new Insets(0, 0, 5, 5);
 		gbc_searchTextField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_searchTextField.gridx = 6;
 		gbc_searchTextField.gridy = 1;
 		searchTextField.setText("🔍 Search...");
+		searchTextField.getDocument().addDocumentListener(cl);
 		add(searchTextField, gbc_searchTextField);
 		searchTextField.setColumns(10);
 		GridBagConstraints gbc_table = new GridBagConstraints();
@@ -321,6 +352,10 @@ public class OrderPanel extends JPanel {
 				foundLabel.setVisible(true);
 			}
 			
+		}
+		else
+		{
+			loadPage(1);
 		}
 	}
 	
