@@ -15,7 +15,6 @@ import guiLayer.RoundedButton;
 public class JTableButtonMouseListener extends MouseAdapter
 {
 	private final JTable table;
-	private final int pageIndex;
 	private static int x = 0, y = 0;
 	private int recolor = 0;
 	private Color babyBlue = new Color(28, 150, 202);
@@ -23,7 +22,6 @@ public class JTableButtonMouseListener extends MouseAdapter
 	public JTableButtonMouseListener(JTable table, int pageIndex)
 	{
 		this.table = table;
-		this.pageIndex = pageIndex;
 	}
 
 	public void mouseClicked(MouseEvent e)
@@ -120,7 +118,16 @@ public class JTableButtonMouseListener extends MouseAdapter
 		
 		orderCtr.confirmOffer(index);
 		// get new data
-		String[] data = orderCtr.searchBar(index);
+		ArrayList<String[]> data = orderCtr.searchBar(index);
+		String[] ourData = new String[6];
+		for (String[] e : data)
+		{
+			if (Integer.parseInt(e[0]) == index)
+			{
+				ourData = e;
+				break;
+			}
+		}
 		
 		// change the button to COnfirmed and inactive
 		RoundedButton button = (RoundedButton)table.getValueAt(table.getSelectedRow(), table.getColumn("").getModelIndex());
@@ -132,11 +139,12 @@ public class JTableButtonMouseListener extends MouseAdapter
 
 		// update the table model row with the new content
 		DefaultTableModel m = (DefaultTableModel)table.getModel();
-		m.setValueAt(index, table.getSelectedRow(), table.getColumn("Order Number").getModelIndex());
-		for (int i = 1; i < 6; i++)
+		
+		
+		for (int i = 0; i < 6; i++)
 		{
 
-			m.setValueAt(data[i-1], table.getSelectedRow(), i);
+			m.setValueAt(ourData[i], table.getSelectedRow(), i);
 		}
 
 	}

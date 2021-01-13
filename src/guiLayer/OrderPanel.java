@@ -59,19 +59,19 @@ public class OrderPanel extends JPanel {
 		@Override
 		public void insertUpdate(DocumentEvent e)
 		{
-			searchBar();
+			searchBar(false);
 		}
 
 		@Override
 		public void removeUpdate(DocumentEvent e)
 		{
-			searchBar();
+			searchBar(false);
 		}
 
 		@Override
 		public void changedUpdate(DocumentEvent e)
 		{
-			searchBar();
+			searchBar(false);
 		}
 	};
 
@@ -228,7 +228,7 @@ public class OrderPanel extends JPanel {
 					}
 					else
 					{
-						searchBar();
+						searchBar(true);
 					}
 			}
 		});
@@ -319,37 +319,42 @@ public class OrderPanel extends JPanel {
 	 * If the order couldn't be found it shows an error message. The error message
 	 * disappears when an order is found.
 	 */
-	private void searchBar()
+	private void searchBar(Boolean Notdynamic)
 	{
 		foundLabel.setVisible(false);
 		if (!searchTextField.getText().equals(""))
 		{
 			orderCtr = new OrderCtr();
-			String[] data = orderCtr.searchBar(Integer.parseInt(searchTextField.getText())); // TODO Check this
+			ArrayList<String[]> data = orderCtr.searchBar(Integer.parseInt(searchTextField.getText())); // TODO Check this
 			if (data != null)
 			{
 				foundLabel.setVisible(false);
 				DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-				dtm.setRowCount(1);
-				table.setValueAt(searchTextField.getText(), 0, 0);
-				table.setValueAt(data[0], 0, 1);
-				table.setValueAt(data[1], 0, 2);
-				table.setValueAt(data[2], 0, 3);
-				table.setValueAt(data[3], 0, 4);
-				table.setValueAt(data[4], 0, 5);
-				if (data[2].equals("pending"))
+				dtm.setRowCount(data.size());
+				for (int e = 0; e < data.size();e++)
 				{
-					table.setValueAt(new RoundedButton("Confirm", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), 0, 6);
-				}
-				else
-				{
-					table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.WHITE, new Font("Lato", Font.PLAIN, 14)), 0, 6);
+					for (int element = 0; element < 6; element++)
+					{
+						table.setValueAt(data.get(e)[element], e, element);
+						if (data.get(e)[3].equals("pending"))
+						{
+							table.setValueAt(new RoundedButton("Confirm", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 6);
+						}
+						else
+						{
+							table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.WHITE, new Font("Lato", Font.PLAIN, 14)), e, 6);
+						}
+					}
+					
 				}
 				
 			}
 			else
 			{
+				if (Notdynamic)
+				{
 				foundLabel.setVisible(true);
+				}
 			}
 			
 		}

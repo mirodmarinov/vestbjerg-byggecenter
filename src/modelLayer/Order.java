@@ -213,12 +213,14 @@ public class Order implements Serializable
 	 */
 	public String[] searchBar()
 	{
-		String[] data = new String[5];
-		data[0] = customer.getName();
-		data[1] = getPurchaseDate();
-		data[2] = getStatus();
-		data[3] = getExpirationDate();
-		data[4] = Long.toString(getTotalPrice());
+		String[] data = new String[6];
+		
+		data[0] = Integer.toString(getOrderNumber());
+		data[1] = customer.getName();
+		data[2] = getPurchaseDate();
+		data[3] = getStatus();
+		data[4] = getExpirationDate();
+		data[5] = Long.toString(getTotalPrice());
 		return data;
 	}
 }
