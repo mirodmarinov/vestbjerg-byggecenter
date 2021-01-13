@@ -51,10 +51,12 @@ public class OrderPanel extends JPanel {
 	private JTextField searchTextField;
 	private Color babyBlue = new Color(28, 150, 202);
 	JLabel foundLabel;
+	private String[] tableElements = new String[] {"Order Number", "Customer", "Purchase Date", "Status", "Expiration Date", "Total (DKK)", ""};
 	public JLabel tablePageLabel;
 	private JLabel leftArrowLabel;
 	private JLabel rightArrowLabel;
 	private DocumentListener cl = new DocumentListener()
+	
 	{
 		@Override
 		public void insertUpdate(DocumentEvent e)
@@ -127,9 +129,7 @@ public class OrderPanel extends JPanel {
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
-			new String[] {
-				"Order Number", "Customer", "Purchase Date", "Status", "Expiration Date", "Total (DKK)", ""
-			}
+			tableElements
 		) {
 			Class[] columnTypes = new Class[] {
 				String.class, String.class, String.class, String.class, String.class, String.class, RoundedButton.class
@@ -327,7 +327,7 @@ public class OrderPanel extends JPanel {
 			orderCtr = new OrderCtr();
 			ArrayList<String[]> data = orderCtr.searchBar(Integer.parseInt(searchTextField.getText())); // TODO Check this
 			if (data != null)
-			{
+			{ 
 				foundLabel.setVisible(false);
 				DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 				dtm.setRowCount(data.size());
@@ -335,7 +335,7 @@ public class OrderPanel extends JPanel {
 				{
 					for (int element = 0; element < 6; element++)
 					{
-						table.setValueAt(data.get(e)[element], e, element);
+						table.setValueAt(data.get(e)[element], table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 						if (data.get(e)[3].equals("pending"))
 						{
 							table.setValueAt(new RoundedButton("Confirm", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 6);
@@ -345,6 +345,7 @@ public class OrderPanel extends JPanel {
 							table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.WHITE, new Font("Lato", Font.PLAIN, 14)), e, 6);
 						}
 					}
+						
 					
 				}
 				

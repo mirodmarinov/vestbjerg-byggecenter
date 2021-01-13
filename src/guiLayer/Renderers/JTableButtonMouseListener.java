@@ -18,6 +18,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 	private static int x = 0, y = 0;
 	private int recolor = 0;
 	private Color babyBlue = new Color(28, 150, 202);
+	private String[] tableElements = new String[] {"Order Number", "Customer", "Purchase Date", "Status", "Expiration Date", "Total (DKK)", ""};
 
 	public JTableButtonMouseListener(JTable table, int pageIndex)
 	{
@@ -114,8 +115,9 @@ public class JTableButtonMouseListener extends MouseAdapter
 		OrderCtr orderCtr = new OrderCtr();
 
 		// confirm offer
-		int index = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex()));
-		
+		int index = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("Order Number").getModelIndex())));
+		//int index = 1;
+
 		orderCtr.confirmOffer(index);
 		// get new data
 		ArrayList<String[]> data = orderCtr.searchBar(index);
@@ -139,13 +141,12 @@ public class JTableButtonMouseListener extends MouseAdapter
 
 		// update the table model row with the new content
 		DefaultTableModel m = (DefaultTableModel)table.getModel();
-		
-		
-		for (int i = 0; i < 6; i++)
-		{
 
-			m.setValueAt(ourData[i], table.getSelectedRow(), i);
+		for (int e = 0;e<6;e++)
+		{
+			table.setValueAt(ourData[e], table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn(tableElements[e]).getModelIndex()));
 		}
+
 
 	}
 
