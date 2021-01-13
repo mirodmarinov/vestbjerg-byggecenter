@@ -276,7 +276,7 @@ public class OrderCtr
 			string[2] = order.getPurchaseDate();
 			string[3] = order.getStatus();
 			string[4] = order.getExpirationDate();
-			string[5] = Long.toString(order.getTotalPrice()) + " DKK";
+			string[5] = Long.toString(order.getTotalPrice());
 			returnValue.add(string);
 			
 		}

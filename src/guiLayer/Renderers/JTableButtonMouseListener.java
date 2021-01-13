@@ -126,11 +126,14 @@ public class JTableButtonMouseListener extends MouseAdapter
 		OrderCtr orderCtr = new OrderCtr();
 
 		// confirm offer
+		int index = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex()));
+		
 		orderCtr.confirmOffer(Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex())));
-
 		// get new data
-		ArrayList<String[]> data = orderCtr.getOrders(pageIndex);
+		String[] data = orderCtr.searchBar(Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Order Number").getModelIndex())));
 
+		
+		
 		// change the button to COnfirmed and inactive
 		RoundedButton button = (RoundedButton)table.getValueAt(table.getSelectedRow(), table.getColumn("").getModelIndex());
 		button.setText("Confirmed");
@@ -141,9 +144,11 @@ public class JTableButtonMouseListener extends MouseAdapter
 
 		// update the table model row with the new content
 		DefaultTableModel m = (DefaultTableModel)table.getModel();
-		for (int i = 0; i < 6; i++)
+		m.setValueAt(index, table.getSelectedRow(), table.getColumn("Order Number").getModelIndex());
+		for (int i = 1; i < 6; i++)
 		{
-			m.setValueAt(data.get(table.getSelectedRow())[i], table.getSelectedRow(), i);
+
+			m.setValueAt(data[i-1], table.getSelectedRow(), i);
 		}
 
 	}
