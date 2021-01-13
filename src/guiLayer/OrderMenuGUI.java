@@ -109,7 +109,7 @@ public class OrderMenuGUI {
 		});
 		selected = orderMenuButton;
 		formatButton(orderMenuButton);
-		orderMenuButton.addOffset(-64, 0);
+		orderMenuButton.addOffset(-70, 3);
 		GridBagConstraints gbc_orderMenuButton = new GridBagConstraints();
 		gbc_orderMenuButton.fill = GridBagConstraints.BOTH;
 		gbc_orderMenuButton.insets = new Insets(30, 40, 0, 20);
@@ -129,7 +129,7 @@ public class OrderMenuGUI {
 			}
 		});
 		formatButton(createOrderButton);
-		createOrderButton.addOffset(-20, 0);
+		createOrderButton.addOffset(-30, 3);
 		GridBagConstraints gbc_createOrderButton = new GridBagConstraints();
 		gbc_createOrderButton.fill = GridBagConstraints.BOTH;
 		gbc_createOrderButton.insets = new Insets(0, 60, 0, 20);
@@ -148,7 +148,7 @@ public class OrderMenuGUI {
 			}
 		});
 		formatButton(productMenuButton);
-		productMenuButton.addOffset(-53, 0);
+		productMenuButton.addOffset(-65, 3);
 		GridBagConstraints gbc_productMenuButton = new GridBagConstraints();
 		gbc_productMenuButton.fill = GridBagConstraints.BOTH;
 		gbc_productMenuButton.insets = new Insets(0, 40, 0, 20);
@@ -168,7 +168,7 @@ public class OrderMenuGUI {
 			}
 		});
 		formatButton(customerMenuButton);
-		customerMenuButton.addOffset(-45, 0);
+		customerMenuButton.addOffset(-57, 3);
 		GridBagConstraints gbc_customerMenuButton = new GridBagConstraints();
 		gbc_customerMenuButton.fill = GridBagConstraints.BOTH;
 		gbc_customerMenuButton.insets = new Insets(0, 40, 0, 20);
