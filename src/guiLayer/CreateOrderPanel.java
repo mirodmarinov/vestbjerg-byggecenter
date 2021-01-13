@@ -15,9 +15,11 @@ import javax.swing.JTextField;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 
 public class CreateOrderPanel extends JPanel {
 	private JTextField searchBar;
+	private JTable orderTable;
 
 	/**
 	 * Create the panel.
@@ -54,9 +56,9 @@ public class CreateOrderPanel extends JPanel {
 		add(customerPanel, gbc_customerPanel);
 		GridBagLayout gbl_customerPanel = new GridBagLayout();
 		gbl_customerPanel.columnWidths = new int[]{15, 0, 0, 0, 0, 0, 0, 15};
-		gbl_customerPanel.rowHeights = new int[]{10, 0, 0, 0, 0, 0};
+		gbl_customerPanel.rowHeights = new int[]{10, 0, 0, 0, 0, 0, 10};
 		gbl_customerPanel.columnWeights = new double[]{0.0, 0.2, 0.2, 0.2, 0.2, 0.2, 0.0, Double.MIN_VALUE};
-		gbl_customerPanel.rowWeights = new double[]{0.0, 0.0, 0.1, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_customerPanel.rowWeights = new double[]{0.0, 0.0, 0.1, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		customerPanel.setLayout(gbl_customerPanel);
 		
 		//************Customer Panel Header
@@ -83,16 +85,17 @@ public class CreateOrderPanel extends JPanel {
 		customerPanel.add(searchBar, gbc_searchBar);
 		searchBar.setColumns(10);
 		
+
 		//************Customer Panel Add Customer Button
-		RoundedButton addButton = new RoundedButton("➕ Add Customer", new Color(234, 234, 234),
+		RoundedButton addCustomerButton = new RoundedButton("➕ Add Customer", new Color(234, 234, 234),
 				new Color(143, 143, 143), new Color(143, 143, 143), new Font("Lato", Font.PLAIN, 15));
-		addButton.addOffset(-17, 2);
-		GridBagConstraints gbc_addButton = new GridBagConstraints();
-		gbc_addButton.fill = GridBagConstraints.BOTH;
-		gbc_addButton.insets = new Insets(0, 0, 5, 5);
-		gbc_addButton.gridx = 5;
-		gbc_addButton.gridy = 1;
-		customerPanel.add(addButton, gbc_addButton);
+		addCustomerButton.addOffset(-17, 2);
+		GridBagConstraints gbc_addCustomerButton = new GridBagConstraints();
+		gbc_addCustomerButton.fill = GridBagConstraints.BOTH;
+		gbc_addCustomerButton.insets = new Insets(0, 0, 5, 5);
+		gbc_addCustomerButton.gridx = 5;
+		gbc_addCustomerButton.gridy = 1;
+		customerPanel.add(addCustomerButton, gbc_addCustomerButton);
 		
 		//************Customer Panel Separator Line
 		JSeparator separator = new JSeparator();
@@ -178,6 +181,82 @@ public class CreateOrderPanel extends JPanel {
 		gbc_productPanel.gridx = 1;
 		gbc_productPanel.gridy = 4;
 		add(productPanel, gbc_productPanel);
+
+		GridBagLayout gbl_productPanel = new GridBagLayout();
+		gbl_productPanel.columnWidths = new int[]{15, 0, 0, 0, 0, 0, 0, 15};
+		gbl_productPanel.rowHeights = new int[]{10, 0, 0, 0, 0, 0, 0};
+		gbl_productPanel.columnWeights = new double[]{0.0, 1.0, 0.2, 0.0, 0.2, 0.2, 0.0, Double.MIN_VALUE};
+		gbl_productPanel.rowWeights = new double[]{0.0, 0.0, 1.0, 0.2, 0.0, 0.2, Double.MIN_VALUE};
+		productPanel.setLayout(gbl_productPanel);
+		
+		JLabel detailsLabel = new JLabel("Order Details");
+		detailsLabel.setFont(new Font("Lato", Font.PLAIN, 20));
+		GridBagConstraints gbc_detailsLabel = new GridBagConstraints();
+		gbc_detailsLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_detailsLabel.anchor = GridBagConstraints.WEST;
+		gbc_detailsLabel.gridx = 1;
+		gbc_detailsLabel.gridy = 1;
+		productPanel.add(detailsLabel, gbc_detailsLabel);
+		
+		RoundedButton addProductsButton = new RoundedButton("➕ Add Products", new Color(234, 234, 234),
+						new Color(143, 143, 143), new Color(143, 143, 143), new Font("Lato", Font.PLAIN, 15));
+		addProductsButton.addOffset(-17, 2);
+		GridBagConstraints gbc_addProductsButton = new GridBagConstraints();
+		gbc_addProductsButton.insets = new Insets(0, 0, 5, 5);
+		gbc_addProductsButton.fill = GridBagConstraints.BOTH;
+		gbc_addProductsButton.gridx = 5;
+		gbc_addProductsButton.gridy = 1;
+		productPanel.add(addProductsButton, gbc_addProductsButton);
+		
+		orderTable = new JTable();
+		orderTable.setFont(new Font("Lato", Font.PLAIN, 14));
+		GridBagConstraints gbc_orderTable = new GridBagConstraints();
+		gbc_orderTable.gridwidth = 5;
+		gbc_orderTable.insets = new Insets(0, 0, 5, 5);
+		gbc_orderTable.fill = GridBagConstraints.BOTH;
+		gbc_orderTable.gridx = 1;
+		gbc_orderTable.gridy = 2;
+		productPanel.add(orderTable, gbc_orderTable);
+		
+		JLabel totalLabel = new JLabel("Total Price");
+		totalLabel.setFont(new Font("Lato", Font.PLAIN, 20));
+		GridBagConstraints gbc_totalLabel = new GridBagConstraints();
+		gbc_totalLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_totalLabel.gridx = 4;
+		gbc_totalLabel.gridy = 3;
+		productPanel.add(totalLabel, gbc_totalLabel);
+		
+		JLabel totalValueLabel = new JLabel("... DKK");
+		totalValueLabel.setFont(new Font("Lato", Font.PLAIN, 20));
+		GridBagConstraints gbc_totalValueLabel = new GridBagConstraints();
+		gbc_totalValueLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_totalValueLabel.gridx = 5;
+		gbc_totalValueLabel.gridy = 3;
+		productPanel.add(totalValueLabel, gbc_totalValueLabel);
+		
+		JButton btnNewButton_2 = new JButton("New button");
+		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_2.gridx = 3;
+		gbc_btnNewButton_2.gridy = 4;
+		productPanel.add(btnNewButton_2, gbc_btnNewButton_2);
+		
+		JButton btnNewButton = new JButton("New button");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton.gridx = 4;
+		gbc_btnNewButton.gridy = 4;
+		productPanel.add(btnNewButton, gbc_btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_1.gridx = 5;
+		gbc_btnNewButton_1.gridy = 4;
+		productPanel.add(btnNewButton_1, gbc_btnNewButton_1);
+		
+		
+
 
 	}
 }
