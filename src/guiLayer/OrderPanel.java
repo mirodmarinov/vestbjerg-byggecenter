@@ -326,6 +326,7 @@ public class OrderPanel extends JPanel {
 		{
 			orderCtr = new OrderCtr();
 			ArrayList<String[]> data = orderCtr.searchBar(Integer.parseInt(searchTextField.getText())); // TODO Check this
+			
 			if (data != null)
 			{ 
 				foundLabel.setVisible(false);
@@ -334,8 +335,9 @@ public class OrderPanel extends JPanel {
 				for (int e = 0; e < data.size();e++)
 				{
 					for (int element = 0; element < 6; element++)
-					{
-						table.setValueAt(data.get(e)[element], table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
+					{						
+						table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
+						
 						if (data.get(e)[3].equals("pending"))
 						{
 							table.setValueAt(new RoundedButton("Confirm", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 6);
