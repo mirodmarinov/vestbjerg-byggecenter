@@ -183,10 +183,10 @@ public class CreateOrderPanel extends JPanel {
 		add(productPanel, gbc_productPanel);
 
 		GridBagLayout gbl_productPanel = new GridBagLayout();
-		gbl_productPanel.columnWidths = new int[]{15, 0, 0, 0, 0, 0, 0, 15};
-		gbl_productPanel.rowHeights = new int[]{10, 0, 0, 0, 0, 0, 0};
-		gbl_productPanel.columnWeights = new double[]{0.0, 1.0, 0.2, 0.0, 0.2, 0.2, 0.0, Double.MIN_VALUE};
-		gbl_productPanel.rowWeights = new double[]{0.0, 0.0, 1.0, 0.2, 0.0, 0.2, Double.MIN_VALUE};
+		gbl_productPanel.columnWidths = new int[]{15, 0, 0, 135, 135, 135, 15};
+		gbl_productPanel.rowHeights = new int[]{10, 0, 0, 0, 33};
+		gbl_productPanel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_productPanel.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		productPanel.setLayout(gbl_productPanel);
 		
 		JLabel detailsLabel = new JLabel("Order Details");
@@ -234,26 +234,35 @@ public class CreateOrderPanel extends JPanel {
 		gbc_totalValueLabel.gridy = 3;
 		productPanel.add(totalValueLabel, gbc_totalValueLabel);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_2.gridx = 3;
-		gbc_btnNewButton_2.gridy = 4;
-		productPanel.add(btnNewButton_2, gbc_btnNewButton_2);
+		RoundedButton createOfferButton = new RoundedButton("Create Offer", new Color(234, 234, 234),
+						new Color(143, 143, 143), new Color(143, 143, 143), new Font("Lato", Font.PLAIN, 15));
+		createOfferButton.addOffset(-17, 2);
+		GridBagConstraints gbc_createOfferButton = new GridBagConstraints();
+		gbc_createOfferButton.fill = GridBagConstraints.BOTH;
+		gbc_createOfferButton.insets = new Insets(0, 0, 5, 5);
+		gbc_createOfferButton.gridx = 3;
+		gbc_createOfferButton.gridy = 4;
+		productPanel.add(createOfferButton, gbc_createOfferButton);
 		
-		JButton btnNewButton = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 4;
-		gbc_btnNewButton.gridy = 4;
-		productPanel.add(btnNewButton, gbc_btnNewButton);
+		RoundedButton placeOrderButton = new RoundedButton("Place Order", new Color(234, 234, 234),
+						new Color(143, 143, 143), new Color(143, 143, 143), new Font("Lato", Font.PLAIN, 15));
+		placeOrderButton.addOffset(-17, 2);
+		GridBagConstraints gbc_placeOrderButton = new GridBagConstraints();
+		gbc_placeOrderButton.fill = GridBagConstraints.BOTH;
+		gbc_placeOrderButton.insets = new Insets(0, 0, 5, 5);
+		gbc_placeOrderButton.gridx = 4;
+		gbc_placeOrderButton.gridy = 4;
+		productPanel.add(placeOrderButton, gbc_placeOrderButton);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_1.gridx = 5;
-		gbc_btnNewButton_1.gridy = 4;
-		productPanel.add(btnNewButton_1, gbc_btnNewButton_1);
+		RoundedButton cancelButton = new RoundedButton("Cancel", new Color(234, 234, 234),
+						new Color(143, 143, 143), new Color(143, 143, 143), new Font("Lato", Font.PLAIN, 15));
+		cancelButton.addOffset(-17, 2);
+		GridBagConstraints gbc_cancelButton = new GridBagConstraints();
+		gbc_cancelButton.fill = GridBagConstraints.BOTH;
+		gbc_cancelButton.insets = new Insets(0, 0, 5, 5);
+		gbc_cancelButton.gridx = 5;
+		gbc_cancelButton.gridy = 4;
+		productPanel.add(cancelButton, gbc_cancelButton);
 		
 		
 
