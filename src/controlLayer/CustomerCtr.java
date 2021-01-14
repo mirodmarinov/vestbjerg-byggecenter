@@ -88,7 +88,7 @@ public class CustomerCtr
 	 * @param id
 	 * @return If order is found returns the data from it, otherwise returns null
 	 */
-	public ArrayList<String[]> searchField(int phone)
+	public ArrayList<String[]> searchField(String phone)
 	{
 		ArrayList<Customer> customers = CustomerContainer.getInstance().getCustomers();	
 		ArrayList<String[]> data = new ArrayList<>();
@@ -97,7 +97,13 @@ public class CustomerCtr
 			return data;
 		}
 		
-		data.add(CustomerContainer.getInstance().getCustomer(phone).tableFill());
+		for (Customer customer : customers)
+		{
+			if (Integer.toString(customer.getPhone()).contains(phone))
+			{
+				data.add(customer.tableFill());
+			}
+		}
 		
 		
 		return data;

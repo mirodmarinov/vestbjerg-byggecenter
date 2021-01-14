@@ -287,19 +287,21 @@ public class OrderCtr
 	 * @param id
 	 * @return If order is found returns the data from it, otherwise returns null
 	 */
-	public ArrayList<String[]> searchBar(int id)
+	public ArrayList<String[]> searchBar(String id)
 	{
 		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();
 		ArrayList<String[]> data = new ArrayList<>();
+
 		if (orders == null)
 		{
 			return data;
 		}
 		
 		
+		
 		for (Order order : orders)
 		{
-			if(Integer.toString(order.getOrderNumber()).contains(Integer.toString(id)))
+			if(Integer.toString(order.getOrderNumber()).contains(id))
 			{
 				data.add(order.searchBar());
 			}

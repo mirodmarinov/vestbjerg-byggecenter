@@ -326,17 +326,10 @@ public class OrderPanel extends JPanel {
 		if ((!searchTextField.getText().equals(""))&&(!searchTextField.getText().equals("🔍 Search...")))
 		{
 			orderCtr = new OrderCtr();
-			try
-			{
-				Integer.parseInt(searchTextField.getText());
-			}
-			catch(Exception e)
-			{
-				foundLabel.setText("Please enter numbers!");
-				foundLabel.setVisible(true);
-			}
+
 			
-			ArrayList<String[]> data = orderCtr.searchBar(Integer.parseInt(searchTextField.getText())); // TODO Check this
+			ArrayList<String[]> data = orderCtr.searchBar(searchTextField.getText()); // TODO Check this
+			
 			if (data.size() != 0)
 			{ 
 				foundLabel.setVisible(false);

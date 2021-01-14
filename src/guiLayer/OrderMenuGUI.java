@@ -67,9 +67,9 @@ public class OrderMenuGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		//frame.setBounds(0, 0, 1680, 1050);
-		Rectangle height = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-		frame.setBounds(0, 0, (int)height.getWidth(), (int)height.getHeight());
+		frame.setBounds(0, 0, 1680, 1050);
+		//Rectangle height = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		//frame.setBounds(0, 0, (int)height.getWidth(), (int)height.getHeight());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
@@ -85,8 +85,8 @@ public class OrderMenuGUI {
 		 */
 		JPanel sideBar = new JPanel();
 		sideBar.setBackground(babyBlue);
-		sideBar.setMinimumSize(new Dimension(800,1080));
-		sideBar.setLocation(200, (int)height.getHeight());
+		//sideBar.setMinimumSize(new Dimension(800,1080));
+		//sideBar.setLocation(200, (int)height.getHeight());
 		GridBagConstraints gbc_sideBar = new GridBagConstraints();
 		gbc_sideBar.fill = GridBagConstraints.BOTH;
 		gbc_sideBar.insets = new Insets(0, 0, 0, 0);

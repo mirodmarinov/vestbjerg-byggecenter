@@ -120,7 +120,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 
 		orderCtr.confirmOffer(index);
 		// get new data
-		ArrayList<String[]> data = orderCtr.searchBar(index);
+		ArrayList<String[]> data = orderCtr.searchBar(Integer.toString(index));
 		String[] ourData = new String[6];
 		for (String[] e : data)
 		{

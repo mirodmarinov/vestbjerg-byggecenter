@@ -334,24 +334,13 @@ public class CustomersPanel extends JPanel {
 	private void searchBar(Boolean Notdynamic)
 	{
 		
-		/*
+		
 		foundLabel.setVisible(false);
 		if ((!searchTextField.getText().equals(""))&&(!searchTextField.getText().equals("🔍 Search...")))
 		{
 			customerCtr = new CustomerCtr();
 			
-			try
-			{
-				Integer.parseInt(searchTextField.getText());
-			}
-			catch(Exception e)
-			{
-					foundLabel.setText("Please enter only numbers!");
-					foundLabel.setVisible(true);
-				
-			}
-			
-			ArrayList<String[]> data = customerCtr.searchField(Integer.parseInt(searchTextField.getText())); // TODO CHECK IF ITS STRING FOR REAL
+			ArrayList<String[]> data = customerCtr.searchField(searchTextField.getText()); // TODO CHECK IF ITS STRING FOR REAL
 			
 			if (data.size() != 0)
 			{ 
@@ -384,7 +373,7 @@ public class CustomersPanel extends JPanel {
 		{
 			loadPage(1);
 		}
-		*/
+		
 	}
 	
 	public void loadPage(int index)
