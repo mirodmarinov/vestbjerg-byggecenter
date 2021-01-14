@@ -47,6 +47,7 @@ public class CreateOrderPanel extends JPanel {
 	private JLabel nameValueLabel;
 	private JLabel groupValueLabel;
 	private JLabel phoneValueLabel;
+	private JLabel deleteButton;
 
 	/**
 	 * Create the panel.
@@ -55,7 +56,7 @@ public class CreateOrderPanel extends JPanel {
 		System.setProperty("file.encoding","UTF-8");
 		setBackground(new Color(252, 252, 252));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{20, 0, 0, 20};
+		gridBagLayout.columnWidths = new int[]{20, 0, 10, 20};
 		gridBagLayout.rowHeights = new int[]{100, 0, 0, 123, 0, 0, 100};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.8, 0.0, Double.MIN_VALUE};
@@ -83,7 +84,7 @@ public class CreateOrderPanel extends JPanel {
 		gbc_customerPanel.gridy = 3;
 		add(customerPanel, gbc_customerPanel);
 		GridBagLayout gbl_customerPanel = new GridBagLayout();
-		gbl_customerPanel.columnWidths = new int[]{15, 0, 0, 130, 0, 0, 0, 0, 15};
+		gbl_customerPanel.columnWidths = new int[]{15, 0, 0, 200, 10, 0, 0, 0, 15};
 		gbl_customerPanel.rowHeights = new int[]{10, 0, 0, 0, 0, 0, 10};
 		gbl_customerPanel.columnWeights = new double[]{0.0, 0.2, 0.2, 0.2, 0.0, 0.2, 0.2, 0.0, Double.MIN_VALUE};
 		gbl_customerPanel.rowWeights = new double[]{0.0, 0.0, 0.1, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -251,11 +252,13 @@ public class CreateOrderPanel extends JPanel {
 		gbc_phoneValueLabel.gridy = 4;
 		customerPanel.add(phoneValueLabel, gbc_phoneValueLabel);
 		
-		JLabel deleteButton = new JLabel("X");
+		deleteButton = new JLabel("X");
+		deleteButton.setVisible(false);
 		deleteButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				clearCustomerLabels();
+				deleteButton.setVisible(false);
 			}
 		});
 		deleteButton.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -499,7 +502,7 @@ public class CreateOrderPanel extends JPanel {
 			clearCustomerLabels();
 			return;
 		}
-		
+		deleteButton.setVisible(true);
 		nameValueLabel.setText(info[0]);
 		groupValueLabel.setText(info[1]);
 		phoneValueLabel.setText(Integer.toString(phone));
