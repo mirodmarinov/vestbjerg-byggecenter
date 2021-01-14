@@ -48,13 +48,14 @@ public class OrderCtr
 		return customer.getName();
 	}
 	
-	public String[] getCustomerInfo(int phone) throws CustomerNotFoundException
+	public String[] getCustomerInfo(int phone)// throws CustomerNotFoundException
 	{
 		Customer customer = customerCtr.getCustomer(phone);
 		this.customer = customer;
 		if (customer == null)
 		{
-			throw new CustomerNotFoundException("No customer exists with this phone number: " + phone + "\n Make sure to write the phone number without the country code.");
+			return new String[] {"", ""};
+			//throw new CustomerNotFoundException("No customer exists with this phone number: " + phone + "\n Make sure to write the phone number without the country code.");
 		}
 		
 		String[] info = new String[2];

@@ -32,6 +32,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import controlLayer.*;
+import modelLayer.CustomerNotFoundException;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class CreateOrderPanel extends JPanel {
 	private JTextField searchBar;
@@ -39,6 +42,10 @@ public class CreateOrderPanel extends JPanel {
 	private Color babyBlue = new Color(28, 150, 202);
 	private CustomerCtr customerCtr = new CustomerCtr();
 	private OrderCtr orderCtr = new OrderCtr();
+	private JLabel customerErrorLabel;
+	private JLabel nameValueLabel;
+	private JLabel groupValueLabel;
+	private JLabel phoneValueLabel;
 	private DocumentListener cl = new DocumentListener()
 	
 	{
@@ -108,7 +115,7 @@ public class CreateOrderPanel extends JPanel {
 		JLabel customerLabel = new JLabel("Customer Details");
 		customerLabel.setFont(new Font("Lato", Font.PLAIN, 20));
 		GridBagConstraints gbc_customerLabel = new GridBagConstraints();
-		gbc_customerLabel.gridwidth = 3;
+		gbc_customerLabel.gridwidth = 2;
 		gbc_customerLabel.anchor = GridBagConstraints.WEST;
 		gbc_customerLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_customerLabel.gridx = 1;
@@ -154,6 +161,18 @@ public class CreateOrderPanel extends JPanel {
 				}
 			}
 		});
+		
+		customerErrorLabel = new JLabel("Customer not found!");
+		customerErrorLabel.setVisible(false);
+		customerErrorLabel.setForeground(Color.RED);
+		customerErrorLabel.setFont(new Font("Lato", Font.BOLD, 14));
+		GridBagConstraints gbc_customerErrorLabel = new GridBagConstraints();
+		gbc_customerErrorLabel.anchor = GridBagConstraints.EAST;
+		gbc_customerErrorLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_customerErrorLabel.gridx = 3;
+		gbc_customerErrorLabel.gridy = 1;
+		customerPanel.add(customerErrorLabel, gbc_customerErrorLabel);
+		
 		GridBagConstraints gbc_searchBar = new GridBagConstraints();
 		gbc_searchBar.insets = new Insets(0, 0, 5, 5);
 		gbc_searchBar.fill = GridBagConstraints.BOTH;
@@ -230,7 +249,7 @@ public class CreateOrderPanel extends JPanel {
 		customerPanel.add(phoneLabel, gbc_phoneLabel);
 		
 		//Customer Panel Name Value Label********************************************************
-		JLabel nameValueLabel = new JLabel("...");
+		nameValueLabel = new JLabel("...");
 		nameValueLabel.setFont(new Font("Lato", Font.PLAIN, 14));
 		GridBagConstraints gbc_nameValueLabel = new GridBagConstraints();
 		gbc_nameValueLabel.anchor = GridBagConstraints.WEST;
@@ -240,7 +259,7 @@ public class CreateOrderPanel extends JPanel {
 		customerPanel.add(nameValueLabel, gbc_nameValueLabel);
 		
 		//Customer Panel Group Value Label********************************************************
-		JLabel groupValueLabel = new JLabel("...");
+		groupValueLabel = new JLabel("...");
 		groupValueLabel.setFont(new Font("Lato", Font.PLAIN, 14));
 		GridBagConstraints gbc_groupValueLabel = new GridBagConstraints();
 		gbc_groupValueLabel.anchor = GridBagConstraints.WEST;
@@ -250,7 +269,7 @@ public class CreateOrderPanel extends JPanel {
 		customerPanel.add(groupValueLabel, gbc_groupValueLabel);
 		
 		//Customer Panel Phone Value Label********************************************************
-		JLabel phoneValueLabel = new JLabel("...");
+		phoneValueLabel = new JLabel("...");
 		phoneValueLabel.setFont(new Font("Lato", Font.PLAIN, 14));
 		GridBagConstraints gbc_phoneValueLabel = new GridBagConstraints();
 		gbc_phoneValueLabel.anchor = GridBagConstraints.WEST;
@@ -260,6 +279,12 @@ public class CreateOrderPanel extends JPanel {
 		customerPanel.add(phoneValueLabel, gbc_phoneValueLabel);
 		
 		JLabel deleteButton = new JLabel("X");
+		deleteButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				clearCustomerLabels();
+			}
+		});
 		deleteButton.setFont(new Font("Tahoma", Font.BOLD, 14));
 		deleteButton.setForeground(Color.RED);
 		GridBagConstraints gbc_deleteButton = new GridBagConstraints();
@@ -298,6 +323,12 @@ public class CreateOrderPanel extends JPanel {
 		//Product Panel Add Product Button********************************************************
 		RoundedButton addProductsButton = new RoundedButton("➕ Add Products", babyBlue,
 						Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
+		addProductsButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
 		addProductsButton.addOffset(-17, 2);
 		blueButton(addProductsButton);
 		GridBagConstraints gbc_addProductsButton = new GridBagConstraints();
@@ -419,6 +450,13 @@ public class CreateOrderPanel extends JPanel {
 						babyBlue, babyBlue, new Font("Lato", Font.BOLD, 15));
 		cancelButton.addOffset(-6, 2);
 		whiteButton(cancelButton);
+		cancelButton.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cancelOrder();
+			}
+		});
 		GridBagConstraints gbc_cancelButton = new GridBagConstraints();
 		gbc_cancelButton.fill = GridBagConstraints.BOTH;
 		gbc_cancelButton.insets = new Insets(0, 0, 5, 5);
@@ -469,13 +507,45 @@ public class CreateOrderPanel extends JPanel {
 	
 	public void searchCustomer()
 	{
-		int phone = Integer.parseInt(searchBar.getText());
-		orderCtr.getCustomerInfo(phone);
+		if(searchBar.getText().isEmpty() || searchBar.getText().equals("🔍 Phone number..."))
+		{
+			customerErrorLabel.setVisible(true);
+			clearCustomerLabels();
+			return;
+		}
 		
+		int phone = Integer.parseInt(searchBar.getText());
+		String[] info = orderCtr.getCustomerInfo(phone);
+		
+		customerErrorLabel.setVisible(false);
+		if(info[0].isEmpty())
+		{
+			customerErrorLabel.setVisible(true);
+			clearCustomerLabels();
+			return;
+		}
+		
+		nameValueLabel.setText(info[0]);
+		groupValueLabel.setText(info[1]);
+		phoneValueLabel.setText(Integer.toString(phone));
 	}
 	
 	public void searchProduct()
 	{
 		
+	}
+	
+	private void clearCustomerLabels()
+	{
+		nameValueLabel.setText("...");
+		groupValueLabel.setText("...");
+		phoneValueLabel.setText("...");
+		searchBar.setText((searchBar.isFocusOwner()) ? "" : "🔍 Phone number...");
+	}
+	
+	private void cancelOrder()
+	{
+		clearCustomerLabels();
+		//TODO clear tables
 	}
 }
