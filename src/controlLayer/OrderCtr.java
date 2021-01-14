@@ -47,6 +47,22 @@ public class OrderCtr
 		}
 		return customer.getName();
 	}
+	
+	public String[] getCustomerInfo(int phone) throws CustomerNotFoundException
+	{
+		Customer customer = customerCtr.getCustomer(phone);
+		this.customer = customer;
+		if (customer == null)
+		{
+			throw new CustomerNotFoundException("No customer exists with this phone number: " + phone + "\n Make sure to write the phone number without the country code.");
+		}
+		
+		String[] info = new String[2];
+		info[0] = customer.getName();
+		info[1] = customer.getGroup();
+		
+		return info;
+	}
 
 	/**
 	 * This method calls the getProducts() in the product controller and creates

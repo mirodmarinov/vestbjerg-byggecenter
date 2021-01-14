@@ -27,15 +27,18 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
-import controlLayer.CustomerCtr;
+import controlLayer.*;
 
 public class CreateOrderPanel extends JPanel {
 	private JTextField searchBar;
 	private JTable orderTable;
 	private Color babyBlue = new Color(28, 150, 202);
 	private CustomerCtr customerCtr = new CustomerCtr();
+	private OrderCtr orderCtr = new OrderCtr();
 	private DocumentListener cl = new DocumentListener()
 	
 	{
@@ -165,6 +168,15 @@ public class CreateOrderPanel extends JPanel {
 				Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14));
 		addCustomerButton.addOffset(-17, 2);
 		blueButton(addCustomerButton);
+		
+		addCustomerButton.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				searchCustomer();
+			}
+		});
+		
 		GridBagConstraints gbc_addCustomerButton = new GridBagConstraints();
 		gbc_addCustomerButton.fill = GridBagConstraints.BOTH;
 		gbc_addCustomerButton.insets = new Insets(0, 0, 5, 5);
@@ -297,6 +309,26 @@ public class CreateOrderPanel extends JPanel {
 		
 		//Product Panel Table of Products********************************************************
 		orderTable = new JTable();
+		JTableHeader header = orderTable.getTableHeader();
+		header.setFont(new Font("Lato", Font.BOLD, 14));
+		header.setBackground(babyBlue);
+		header.setForeground(Color.WHITE);
+		header.setPreferredSize(new Dimension(orderTable.getTableHeader().getWidth(), 50));
+		
+		// Here we format the table to make it look nice, and remove selections functions we do not wish to include
+		orderTable.setRowSelectionAllowed(false);
+		orderTable.setFocusable(false);
+		orderTable.setFillsViewportHeight(true);
+		orderTable.setFont(new Font("Lato", Font.PLAIN, 14));
+		orderTable.setShowVerticalLines(false);
+		orderTable.setRowHeight(50);
+		
+		
+		DefaultTableCellRenderer defaultHeaderRenderer = (DefaultTableCellRenderer) orderTable.getTableHeader().getDefaultRenderer();
+		defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
+		orderTable.getTableHeader().setDefaultRenderer(defaultHeaderRenderer);
+		
+		
 		orderTable.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null},
@@ -332,12 +364,12 @@ public class CreateOrderPanel extends JPanel {
 		gbc_orderTable.gridx = 1;
 		gbc_orderTable.gridy = 2;
 		
-		/*
-		JScrollPane tablePane = new JScrollPane(orderTable);
+		
+		//We remove the border of the table by making it empty
+		JScrollPane tablePane = new JScrollPane(orderTable); //It is added to a JScrollPane to ensure we have a header
 		tablePane.setBorder(BorderFactory.createEmptyBorder());
 		productPanel.add(tablePane, gbc_orderTable);
-		*/
-		productPanel.add(new JScrollPane(orderTable), gbc_orderTable);
+		
 		
 		
 		//Product Panel Total price Label********************************************************
@@ -437,6 +469,8 @@ public class CreateOrderPanel extends JPanel {
 	
 	public void searchCustomer()
 	{
+		int phone = Integer.parseInt(searchBar.getText());
+		orderCtr.getCustomerInfo(phone);
 		
 	}
 	

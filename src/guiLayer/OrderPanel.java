@@ -197,14 +197,14 @@ public class OrderPanel extends JPanel {
 				loadPage(getPageIndex() + 1);
 			}
 		});
-		rightArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		rightArrowLabel.setFont(new Font("Lato", Font.PLAIN, 15));
 		GridBagConstraints gbc_rightArrowLabel = new GridBagConstraints();
 		gbc_rightArrowLabel.anchor = GridBagConstraints.WEST;
 		gbc_rightArrowLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_rightArrowLabel.gridx = 4;
 		gbc_rightArrowLabel.gridy = 1;
 		add(rightArrowLabel, gbc_rightArrowLabel);
-		foundLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		foundLabel.setFont(new Font("Lato", Font.BOLD, 14));
 		foundLabel.setForeground(Color.RED);
 		GridBagConstraints gbc_foundLabel = new GridBagConstraints();
 		gbc_foundLabel.insets = new Insets(0, 0, 5, 5);
@@ -273,8 +273,8 @@ public class OrderPanel extends JPanel {
 		loadPage(1);
 		
 		//table listeners moved to the bottom, in order for the page to be initialized
-		table.addMouseListener(new JTableButtonMouseListener(table, getPageIndex()));
-		table.addMouseMotionListener(new JTableButtonMouseListener(table, getPageIndex()));
+		table.addMouseListener(new JTableButtonMouseListener(table));
+		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 		
 	}
 

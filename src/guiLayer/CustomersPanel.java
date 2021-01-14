@@ -275,8 +275,8 @@ public class CustomersPanel extends JPanel {
 		loadPage(1);
 		
 		//table listeners moved to the bottom, in order for the page to be initialized
-		table.addMouseListener(new JTableButtonMouseListener(table, getPageIndex()));
-		table.addMouseMotionListener(new JTableButtonMouseListener(table, getPageIndex()));
+		table.addMouseListener(new JTableButtonMouseListener(table));
+		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 		
 		//***** Add Products button ****\\
 		

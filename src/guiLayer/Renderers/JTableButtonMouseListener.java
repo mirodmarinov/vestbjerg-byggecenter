@@ -20,7 +20,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 	private Color babyBlue = new Color(28, 150, 202);
 	private String[] tableElements = new String[] {"Order Number", "Customer", "Purchase Date", "Status", "Expiration Date", "Total (DKK)", ""};
 
-	public JTableButtonMouseListener(JTable table, int pageIndex)
+	public JTableButtonMouseListener(JTable table)
 	{
 		this.table = table;
 	}

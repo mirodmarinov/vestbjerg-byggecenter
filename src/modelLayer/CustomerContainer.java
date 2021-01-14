@@ -32,8 +32,6 @@ public class CustomerContainer implements Serializable
     {
     	
     	
-    	
-    	
     }
     
     public static CustomerContainer getInstance()
