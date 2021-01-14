@@ -47,29 +47,6 @@ public class CreateOrderPanel extends JPanel {
 	private JLabel nameValueLabel;
 	private JLabel groupValueLabel;
 	private JLabel phoneValueLabel;
-	private DocumentListener cl = new DocumentListener()
-	
-	{
-		@Override
-		public void insertUpdate(DocumentEvent e)
-		{
-			
-		}
-
-		@Override
-		public void removeUpdate(DocumentEvent e)
-		{
-			
-		}
-
-		@Override
-		public void changedUpdate(DocumentEvent e)
-		{
-			
-		}
-	};
-	
-
 
 	/**
 	 * Create the panel.
@@ -134,10 +111,7 @@ public class CreateOrderPanel extends JPanel {
 					searchBar.setFocusable(true);
 					if (searchBar.getText().equals(""))
 					{
-						
-						searchBar.getDocument().removeDocumentListener(cl);
 						searchBar.setText("🔍 Phone number...");
-						searchBar.getDocument().addDocumentListener(cl);
 						
 					}
 					else
@@ -156,9 +130,7 @@ public class CreateOrderPanel extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				if (searchBar.getText().equals("🔍 Phone number..."))
 				{
-					searchBar.getDocument().removeDocumentListener(cl);
 					searchBar.setText("");
-					searchBar.getDocument().addDocumentListener(cl);
 				}
 			}
 		});

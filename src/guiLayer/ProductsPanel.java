@@ -109,7 +109,7 @@ public class ProductsPanel extends JPanel {
 		JTableHeader header = table.getTableHeader();
 		header.setBackground(babyBlue);
 		header.setForeground(Color.WHITE);
-
+		header.setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 50));
 
 		table.setRowSelectionAllowed(false);
 		table.setFocusable(false);
@@ -117,7 +117,6 @@ public class ProductsPanel extends JPanel {
 		table.setFont(new Font("Lato", Font.PLAIN, 14));
 		table.setShowVerticalLines(false);
 		table.setRowHeight(50);
-		table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 50));
 		
 		TableCellRenderer tableRenderer = table.getDefaultRenderer(RoundedButton.class);
 	    table.setDefaultRenderer(RoundedButton.class, new JTableButtonRenderer(tableRenderer));
@@ -125,7 +124,6 @@ public class ProductsPanel extends JPanel {
 		// Could be moved to a custom header renderer
 		DefaultTableCellRenderer defaultHeaderRenderer = (DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer();
 		defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
-		table.getTableHeader().setFont(new Font("Lato", Font.BOLD, 14));
 		table.getTableHeader().setDefaultRenderer(defaultHeaderRenderer);
 
 		table.setModel(new DefaultTableModel(
