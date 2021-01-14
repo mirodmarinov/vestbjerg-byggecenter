@@ -161,7 +161,7 @@ public class CreateOrderPanel extends JPanel {
 		
 
 		//Customer Panel Add Customer Button********************************************************
-		RoundedButton addCustomerButton = new RoundedButton("âž• Add Customer", babyBlue,
+		RoundedButton addCustomerButton = new RoundedButton("➕ Add Customer", babyBlue,
 				Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14));
 		addCustomerButton.addOffset(-17, 2);
 		blueButton(addCustomerButton);
@@ -284,7 +284,7 @@ public class CreateOrderPanel extends JPanel {
 		productPanel.add(detailsLabel, gbc_detailsLabel);
 		
 		//Product Panel Add Product Button********************************************************
-		RoundedButton addProductsButton = new RoundedButton("âž• Add Products", babyBlue,
+		RoundedButton addProductsButton = new RoundedButton("➕ Add Products", babyBlue,
 						Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
 		addProductsButton.addOffset(-17, 2);
 		blueButton(addProductsButton);

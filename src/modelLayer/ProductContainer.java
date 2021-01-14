@@ -117,4 +117,9 @@ public class ProductContainer implements Serializable
 	{
 		return uniqueInstance;
 	}
+	
+	public ArrayList<Product> getProductsArray()
+	{
+		return products;
+	}
 }

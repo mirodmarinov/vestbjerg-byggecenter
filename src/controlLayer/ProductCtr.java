@@ -1,6 +1,8 @@
 package controlLayer;
 
 import modelLayer.*;
+
+import java.awt.RenderingHints;
 import java.util.*;
 
 /**
@@ -176,6 +178,49 @@ public class ProductCtr
 		{
 			return false;
 		}
+		
+	}
+	
+	public ArrayList<String[]> searchField(String name)
+	{
+		ArrayList<Product> products = ProductContainer.getInstance().getProducts(name);
+		ArrayList<String[]> data = new ArrayList<>();
+		for (Product e : products)
+		{
+			data.add(e.tableFill());
+		}
+		return data;
+	}
+	
+	public ArrayList<String[]> defaultFill(int index)
+	{
+		int orderAmount = 0;
+		ArrayList<String[]> returnValue = new ArrayList<>();
+		ArrayList<Product> products = ProductContainer.getInstance().getProductsArray();	
+		if (products.size() == 0)
+		{
+			return returnValue;
+		}
+		if ((int)(Math.floor(products.size() / 50))+1 > index)
+		{
+			orderAmount = 50;
+		}
+		else if ((int)(Math.floor(products.size() / 50))+1 == index)
+		{
+			orderAmount = (int)(products.size()%50);
+		}
+		else
+		{
+			return returnValue;
+		}
+		
+		
+		for (int e = (index-1)*50; e < (index-1)*50+orderAmount; e++)
+		{
+			returnValue.add(products.get(e).tableFill());
+			
+		}
+		return returnValue;
 		
 	}
 }

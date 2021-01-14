@@ -180,6 +180,18 @@ public class Product implements Serializable
 		return new String[] { name, description, group, barcode,
                 location, Integer.toString(quantity), Integer.toString(threshold), Long.toString(salesPrice), Long.toString(purchasePrice), Integer.toString(discount)};
 	}
+	
+	public String[] tableFill()
+	{
+		String[] data = new String[6];
+		data[0] = barcode;
+		data[1] = name;
+		data[2] = group;
+		data[3] = location;
+		data[4] = Long.toString(purchasePrice);
+		data[5] = Integer.toString(quantity);
+		return data;
+	}
 
 
 }

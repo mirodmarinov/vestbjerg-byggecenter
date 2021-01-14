@@ -252,6 +252,10 @@ public class OrderCtr
 		int orderAmount = 0;
 		ArrayList<String[]> returnValue = new ArrayList<>();
 		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();	
+		if (orders.size() == 0)
+		{
+			return returnValue;
+		}
 		if ((int)(Math.floor(orders.size() / 50))+1 > index)
 		{
 			orderAmount = 50;
@@ -265,19 +269,10 @@ public class OrderCtr
 			return returnValue;
 		}
 		
-		Order order;
-		String[] string;
+
 		for (int e = (index-1)*50; e < (index-1)*50+orderAmount; e++)
 		{
-			order = orders.get(e);
-			string = new String[6];
-			string[0] =  Integer.toString(order.getOrderNumber());
-			string[1] = order.getCustomer().getName();
-			string[2] = order.getPurchaseDate();
-			string[3] = order.getStatus();
-			string[4] = order.getExpirationDate();
-			string[5] = Long.toString(order.getTotalPrice());
-			returnValue.add(string);
+			returnValue.add(orders.get(e).searchBar());
 			
 		}
 		return returnValue;
@@ -295,12 +290,13 @@ public class OrderCtr
 	public ArrayList<String[]> searchBar(int id)
 	{
 		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();
+		ArrayList<String[]> data = new ArrayList<>();
 		if (orders == null)
 		{
-			return null;
+			return data;
 		}
 		
-		ArrayList<String[]> data = new ArrayList<>();
+		
 		for (Order order : orders)
 		{
 			if(Integer.toString(order.getOrderNumber()).contains(Integer.toString(id)))

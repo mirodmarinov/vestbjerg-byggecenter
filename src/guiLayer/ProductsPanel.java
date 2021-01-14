@@ -29,6 +29,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import java.awt.Insets;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -87,9 +88,9 @@ public class ProductsPanel extends JPanel {
 	public ProductsPanel() {
 		setBackground(new Color(252, 252, 252));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{20, 0, 0, 0, 0, 122, 0, 0, 20};
-		gridBagLayout.rowHeights = new int[]{100, 0, 0, 0, 0, 100, 21};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.5, 0.0, 0.5, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{20, 40, 0, 0, 0, 122, 0, 0, 20};
+		gridBagLayout.rowHeights = new int[]{100, 0, 40, 0, 0, 100, 21};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.5, 0.0, 0.5, 0.0, 0.1, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 2.0, 0.0, 1.0, 0.2};
 		setLayout(gridBagLayout);
 		
@@ -153,10 +154,6 @@ public class ProductsPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setMinWidth(70);
 		table.getColumnModel().getColumn(6).setMinWidth(75);
 		
-		
-		foundLabel = new JLabel("Product not found!");
-		foundLabel.setVisible(false);
-		
 		leftArrowLabel = new JLabel(" < ");
 		
 		leftArrowLabel.addMouseListener(new MouseAdapter() {
@@ -203,13 +200,17 @@ public class ProductsPanel extends JPanel {
 		gbc_rightArrowLabel.gridx = 4;
 		gbc_rightArrowLabel.gridy = 1;
 		add(rightArrowLabel, gbc_rightArrowLabel);
+		
+		
+		foundLabel = new JLabel("Product not found!");
+		foundLabel.setVisible(false);
 		foundLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		foundLabel.setForeground(Color.RED);
 		GridBagConstraints gbc_foundLabel = new GridBagConstraints();
 		gbc_foundLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_foundLabel.anchor = GridBagConstraints.EAST;
 		gbc_foundLabel.gridx = 5;
-		gbc_foundLabel.gridy = 1;
+		gbc_foundLabel.gridy = 2;
 		add(foundLabel, gbc_foundLabel);
 		
 		searchTextField = new JTextField();
@@ -253,7 +254,7 @@ public class ProductsPanel extends JPanel {
 		gbc_searchTextField.insets = new Insets(0, 0, 5, 5);
 		gbc_searchTextField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_searchTextField.gridx = 6;
-		gbc_searchTextField.gridy = 1;
+		gbc_searchTextField.gridy = 2;
 		searchTextField.setText("🔍 Search...");
 		searchTextField.getDocument().addDocumentListener(cl);
 		add(searchTextField, gbc_searchTextField);
@@ -275,6 +276,21 @@ public class ProductsPanel extends JPanel {
 		table.addMouseListener(new JTableButtonMouseListener(table, getPageIndex()));
 		table.addMouseMotionListener(new JTableButtonMouseListener(table, getPageIndex()));
 		
+		//***** Add Products button ****\\
+		
+		RoundedButton addProductButton = new RoundedButton("➕ Add Customer", babyBlue,
+					Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14));
+		addProductButton.addOffset(-13, 2);
+		blueButton(addProductButton);
+		GridBagConstraints gbc_addCustomerButton = new GridBagConstraints();
+		gbc_addCustomerButton.fill = GridBagConstraints.BOTH;
+		gbc_addCustomerButton.insets = new Insets(0, 0, 5, 5);
+		gbc_addCustomerButton.gridx = 1;
+		gbc_addCustomerButton.gridy = 2;
+		add(addProductButton, gbc_addCustomerButton);
+		
+		
+		
 	}
 
 	/**
@@ -284,7 +300,7 @@ public class ProductsPanel extends JPanel {
 	private void defaultFillTable(int index) {
 		productCtr = new ProductCtr();
 		//we get the order information from the orderContainer
-		ArrayList<String[]> data = productCtr.getProduct("n");
+		ArrayList<String[]> data = productCtr.defaultFill(index);
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(0);
 		dtm.setRowCount(data.size());
@@ -318,9 +334,9 @@ public class ProductsPanel extends JPanel {
 		if ((!searchTextField.getText().equals(""))&&(!searchTextField.getText().equals("🔍 Search...")))
 		{
 			productCtr = new ProductCtr();
-			ArrayList<String[]> data = productCtr.getProduct(searchTextField.getText()); // TODO Check this
+			ArrayList<String[]> data = productCtr.searchField(searchTextField.getText()); // TODO Check this
 			
-			if (data != null)
+			if (data.size() != 0)
 			{ 
 				foundLabel.setVisible(false);
 				DefaultTableModel dtm = (DefaultTableModel) table.getModel();
@@ -330,9 +346,7 @@ public class ProductsPanel extends JPanel {
 					for (int element = 0; element < 6; element++)
 					{						
 						table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
-						
-					
-							
+	
 					}
 					table.setValueAt(new RoundedButton("Edit", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 6);
 					
@@ -362,12 +376,12 @@ public class ProductsPanel extends JPanel {
 		}
 		
 		
-		/*orderCtr = new OrderCtr();
-		if (orderCtr.getOrders(index).isEmpty())
+		productCtr = new ProductCtr();
+		if (productCtr.defaultFill(index).isEmpty())
 		{
 			return;
 		}
-		*/
+		
 		defaultFillTable(index);
 
 		
@@ -395,6 +409,25 @@ public class ProductsPanel extends JPanel {
 	public JLabel getTablePageLabel()
 	{
 		return tablePageLabel;
+	}
+	
+	public void blueButton(RoundedButton button) {
+		
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) 
+			{
+					button.setBackground(Color.WHITE);
+					button.setForeground(babyBlue);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) 
+			{
+					button.setBackground(babyBlue);
+					button.setForeground(Color.WHITE);
+			}
+		});
 	}
 	
 }

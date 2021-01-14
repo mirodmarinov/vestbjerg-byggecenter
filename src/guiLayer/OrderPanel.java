@@ -89,7 +89,7 @@ public class OrderPanel extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{20, 0, 0, 0, 0, 122, 0, 0, 20};
 		gridBagLayout.rowHeights = new int[]{100, 0, 0, 0, 0, 100, 21};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.5, 0.0, 0.5, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.5, 0.0, 0.5, 0.0, 0.1, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 2.0, 0.0, 1.0, 0.2};
 		setLayout(gridBagLayout);
 		
@@ -326,8 +326,7 @@ public class OrderPanel extends JPanel {
 		{
 			orderCtr = new OrderCtr();
 			ArrayList<String[]> data = orderCtr.searchBar(Integer.parseInt(searchTextField.getText())); // TODO Check this
-			
-			if (data != null)
+			if (data.size() != 0)
 			{ 
 				foundLabel.setVisible(false);
 				DefaultTableModel dtm = (DefaultTableModel) table.getModel();
@@ -352,7 +351,10 @@ public class OrderPanel extends JPanel {
 					
 				}
 				
+
+				
 			}
+
 			else
 			{
 				if (Notdynamic)
