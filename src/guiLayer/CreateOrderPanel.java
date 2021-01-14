@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -24,7 +26,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.JTextField;
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -32,10 +33,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import controlLayer.*;
-import modelLayer.CustomerNotFoundException;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.DefaultComboBoxModel;
 
 public class CreateOrderPanel extends JPanel {
 	private JTextField searchBar;
@@ -48,6 +46,7 @@ public class CreateOrderPanel extends JPanel {
 	private JLabel groupValueLabel;
 	private JLabel phoneValueLabel;
 	private JLabel deleteButton;
+	private ArrayList<String> ids = new ArrayList<>();
 
 	/**
 	 * Create the panel.
@@ -469,16 +468,15 @@ public class CreateOrderPanel extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) 
 			{
-					button.setBackground(babyBlue);
-					button.setForeground(Color.WHITE);
+				button.setBackground(babyBlue);
+				button.setForeground(Color.WHITE);
 			}
 			
 			@Override
 			public void mouseExited(MouseEvent e) 
 			{
-					System.out.println("Bent");
-					button.setBackground(Color.WHITE);
-					button.setForeground(babyBlue);
+				button.setBackground(Color.WHITE);
+				button.setForeground(babyBlue);
 			}
 		});
 	}
@@ -523,7 +521,11 @@ public class CreateOrderPanel extends JPanel {
 		nameValueLabel.setText("...");
 		groupValueLabel.setText("...");
 		phoneValueLabel.setText("...");
-		searchBar.setText((searchBar.isFocusOwner()) ? "" : "🔍 Phone number...");
+		if (searchBar.getText().equals(""))
+		{
+			searchBar.setText("🔍 Phone number...");
+		}
+		//searchBar.setText((searchBar.isFocusOwner()) ? "" : "🔍 Phone number...");
 	}
 	
 	private void cancelOrder()
