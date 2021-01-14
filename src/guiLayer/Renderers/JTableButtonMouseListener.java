@@ -27,7 +27,6 @@ public class JTableButtonMouseListener extends MouseAdapter
 
 	public void mouseClicked(MouseEvent e)
 	{
-
 		int column = table.getColumnModel().getColumnIndexAtX(e.getX()); // get the column of the button
 		int row = e.getY() / table.getRowHeight(); // get the row of the button
 		// Checking the row or column is valid or not
@@ -36,6 +35,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 			Object value = table.getValueAt(row, column);
 			if (value instanceof RoundedButton)
 			{
+				//Check table by name
 				if (((RoundedButton)value).getName().equals("Confirm"))
 				{
 					// perform a click event

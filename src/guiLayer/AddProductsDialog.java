@@ -161,6 +161,55 @@ public class AddProductsDialog extends JDialog {
 		gbc_productErrorLabel.gridy = 0;
 		contentPanel.add(productErrorLabel, gbc_productErrorLabel);
 		{
+			leftArrowLabel = new JLabel(" < ");
+			
+			leftArrowLabel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					searchBar.getDocument().removeDocumentListener(cl);
+					searchBar.setText("🔍 Product Name...");
+					searchBar.getDocument().addDocumentListener(cl);
+					loadPage(getPageIndex() - 1);
+				}
+			});
+			leftArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			GridBagConstraints gbc_leftArrowLabel = new GridBagConstraints();
+			gbc_leftArrowLabel.anchor = GridBagConstraints.EAST;
+			gbc_leftArrowLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_leftArrowLabel.gridx = 0;
+			gbc_leftArrowLabel.gridy = 1;
+			contentPanel.add(leftArrowLabel, gbc_leftArrowLabel);
+			
+			tablePageLabel = new JLabel("<html><u>1</u></html>");
+			tablePageLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_tablePageLabel = new GridBagConstraints();
+			gbc_tablePageLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_tablePageLabel.gridx = 1;
+			gbc_tablePageLabel.gridy = 1;
+			contentPanel.add(tablePageLabel, gbc_tablePageLabel);
+			
+			rightArrowLabel = new JLabel(" > ");
+			rightArrowLabel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					searchBar.setFocusable(false);
+					searchBar.setFocusable(true);
+					searchBar.getDocument().removeDocumentListener(cl);
+					searchBar.setText("🔍 Product Name...");
+					searchBar.getDocument().addDocumentListener(cl);
+					loadPage(getPageIndex() + 1);
+				}
+			});
+			
+			rightArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			GridBagConstraints gbc_rightArrowLabel = new GridBagConstraints();
+			gbc_rightArrowLabel.anchor = GridBagConstraints.WEST;
+			gbc_rightArrowLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_rightArrowLabel.gridx = 2;
+			gbc_rightArrowLabel.gridy = 1;
+			contentPanel.add(rightArrowLabel, gbc_rightArrowLabel);
+		}
+		{
 			table = new JTable();
 			//Changes the Color of the header
 			JTableHeader header = table.getTableHeader();
@@ -191,7 +240,7 @@ public class AddProductsDialog extends JDialog {
 				tableElements
 				) {
 				Class[] columnTypes = new Class[] {
-						String.class, String.class, String.class, String.class, String.class, String.class, RoundedButton.class
+						String.class, String.class, String.class, String.class, String.class, RoundedButton.class
 					};
 					public Class getColumnClass(int columnIndex) {
 						return columnTypes[columnIndex];
@@ -209,55 +258,6 @@ public class AddProductsDialog extends JDialog {
 			tablePane.setBorder(BorderFactory.createEmptyBorder());
 			contentPanel.add(tablePane, gbc_table);
 			loadPage(1);
-		}
-		{
-			leftArrowLabel = new JLabel(" < ");
-			
-			leftArrowLabel.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					searchBar.getDocument().removeDocumentListener(cl);
-					searchBar.setText("🔍 Search...");
-					searchBar.getDocument().addDocumentListener(cl);
-					loadPage(getPageIndex() - 1);
-				}
-			});
-			leftArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			GridBagConstraints gbc_leftArrowLabel = new GridBagConstraints();
-			gbc_leftArrowLabel.anchor = GridBagConstraints.EAST;
-			gbc_leftArrowLabel.insets = new Insets(0, 0, 5, 5);
-			gbc_leftArrowLabel.gridx = 0;
-			gbc_leftArrowLabel.gridy = 1;
-			contentPanel.add(leftArrowLabel, gbc_leftArrowLabel);
-			
-			tablePageLabel = new JLabel("<html><u>1</u></html>");
-			tablePageLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			GridBagConstraints gbc_tablePageLabel = new GridBagConstraints();
-			gbc_tablePageLabel.insets = new Insets(0, 0, 5, 5);
-			gbc_tablePageLabel.gridx = 1;
-			gbc_tablePageLabel.gridy = 1;
-			contentPanel.add(tablePageLabel, gbc_tablePageLabel);
-			
-			rightArrowLabel = new JLabel(" > ");
-			rightArrowLabel.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					searchBar.setFocusable(false);
-					searchBar.setFocusable(true);
-					searchBar.getDocument().removeDocumentListener(cl);
-					searchBar.setText("🔍 Search...");
-					searchBar.getDocument().addDocumentListener(cl);
-					loadPage(getPageIndex() + 1);
-				}
-			});
-			
-			rightArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			GridBagConstraints gbc_rightArrowLabel = new GridBagConstraints();
-			gbc_rightArrowLabel.anchor = GridBagConstraints.WEST;
-			gbc_rightArrowLabel.insets = new Insets(0, 0, 5, 5);
-			gbc_rightArrowLabel.gridx = 2;
-			gbc_rightArrowLabel.gridy = 1;
-			contentPanel.add(rightArrowLabel, gbc_rightArrowLabel);
 		}
 		{
 			RoundedButton okButton = new RoundedButton("Finish", new Color(28, 150, 202), Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
@@ -308,6 +308,22 @@ public class AddProductsDialog extends JDialog {
 	}
 	
 	private void whiteButton(RoundedButton button) {
+		button.addMouseListener(new MouseAdapter()
+		{	
+			@Override
+			public void mouseEntered(MouseEvent e) 
+			{
+				button.setBackground(babyBlue);
+				button.setForeground(Color.WHITE);
+			}
+					
+			@Override
+			public void mouseExited(MouseEvent e) 
+			{
+				button.setBackground(Color.WHITE);
+				button.setForeground(babyBlue);
+			}
+		});
 	}
 	
 	private void defaultFillTable(int index) {
@@ -328,9 +344,7 @@ public class AddProductsDialog extends JDialog {
 			{
 				table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 			}
-			table.setValueAt(new RoundedButton("Edit", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
-
-			
+			table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[5]).getModelIndex()));
 		}
 	}
 	
@@ -338,7 +352,7 @@ public class AddProductsDialog extends JDialog {
 	{
 		
 		productErrorLabel.setVisible(false);
-		if ((!searchBar.getText().equals(""))&&(!searchBar.getText().equals("🔍 Search...")))
+		if ((!searchBar.getText().equals(""))&&(!searchBar.getText().equals("🔍 Product Name...")))
 		{
 			productCtr = new ProductCtr();
 			ArrayList<String[]> data = productCtr.searchField(searchBar.getText()); // TODO Check this
@@ -350,12 +364,12 @@ public class AddProductsDialog extends JDialog {
 				dtm.setRowCount(data.size());
 				for (int e = 0; e < data.size();e++)
 				{
-					for (int element = 0; element < 6; element++)
+					for (int element = 0; element < 5; element++)
 					{						
 						table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 	
 					}
-					table.setValueAt(new RoundedButton("Edit", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+					table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[5]).getModelIndex()));
 					
 				}
 				

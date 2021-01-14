@@ -109,7 +109,7 @@ public class OrderPanel extends JPanel {
 		header.setBackground(babyBlue);
 		header.setForeground(Color.WHITE);
 
-
+		table.setName("OrderTable");
 		table.setRowSelectionAllowed(false);
 		table.setFocusable(false);
 		table.setFillsViewportHeight(true);
