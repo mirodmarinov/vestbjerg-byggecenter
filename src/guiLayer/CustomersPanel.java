@@ -52,7 +52,7 @@ public class CustomersPanel extends JPanel {
 	private JTextField searchTextField;
 	private Color babyBlue = new Color(28, 150, 202);
 	JLabel foundLabel;
-	private String[] tableElements = new String[] {"Barcode", "Name", "Group", "Location", "Price", ""};
+	private String[] tableElements = new String[] {"Name", "Phone number", "Address", "Group", "Discount", ""};
 	public JLabel tablePageLabel;
 	private JLabel leftArrowLabel;
 	private JLabel rightArrowLabel;
@@ -132,9 +132,7 @@ public class CustomersPanel extends JPanel {
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
-			new String[] {
-				"Barcode", "Name", "Group", "Location", "Price", "Quantity"
-			}
+			tableElements
 		) {
 			Class[] columnTypes = new Class[] {
 				String.class, String.class, String.class, String.class, String.class, RoundedButton.class
@@ -309,18 +307,14 @@ public class CustomersPanel extends JPanel {
 		//Check if the order quantity is less the the row amount,
 		//we fill the table with the order data quantity, otherwise we fill
 		//the whole table with information
-		int columncount = data.size() > table.getRowCount() ? table.getRowCount() : data.size();
-		for (int e = 0; e<columncount;e++)
+		for (int e = 0; e<data.size();e++)
 		{
 			
 			for (int element = 0; element < 5; element++)
 			{
-				
 				table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 			}
 			table.setValueAt(new RoundedButton("Edit", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 5);
-			//table.convertColumnIndexToView(table.getColumn(tableElements[5]).getModelIndex())
-			System.out.println(tableElements[5]);
 
 			
 		}

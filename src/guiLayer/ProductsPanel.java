@@ -306,8 +306,7 @@ public class ProductsPanel extends JPanel {
 		//Check if the order quantity is less the the row amount,
 		//we fill the table with the order data quantity, otherwise we fill
 		//the whole table with information
-		int columncount = data.size() > table.getRowCount() ? table.getRowCount() : data.size();
-		for (int e = 0; e<columncount;e++)
+		for (int e = 0; e<data.size();e++)
 		{
 			
 			for (int element = 0; element < 6; element++)
