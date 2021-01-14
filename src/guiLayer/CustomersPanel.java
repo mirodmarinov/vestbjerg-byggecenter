@@ -87,7 +87,6 @@ public class CustomersPanel extends JPanel {
 	 */
 	@SuppressWarnings("serial")
 	public CustomersPanel() {
-		System.setProperty("file.encoding", "UTF-8");
 		setBackground(new Color(252, 252, 252));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{20, 40, 0, 0, 0, 122, 0, 0, 20};
@@ -106,6 +105,7 @@ public class CustomersPanel extends JPanel {
 		add(ordersLabel, gbc_ordersLabel);
 
 		table = new JTable();
+		table.setName("CustomersPanel");
 		//Changes the Color of the header
 		JTableHeader header = table.getTableHeader();
 		header.setBackground(babyBlue);
@@ -153,6 +153,11 @@ public class CustomersPanel extends JPanel {
 		table.getColumnModel().getColumn(4).setMinWidth(85);
 		table.getColumnModel().getColumn(5).setPreferredWidth(70);
 		table.getColumnModel().getColumn(5).setMinWidth(70);
+		
+		table.addMouseListener(new JTableButtonMouseListener(table));
+		table.addMouseMotionListener(new JTableButtonMouseListener(table));
+		
+		
 		
 		leftArrowLabel = new JLabel(" < ");
 		

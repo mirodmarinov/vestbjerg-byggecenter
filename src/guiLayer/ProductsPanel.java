@@ -105,6 +105,7 @@ public class ProductsPanel extends JPanel {
 		add(ordersLabel, gbc_ordersLabel);
 
 		table = new JTable();
+		table.setName("ProductsPanel");
 		//Changes the Color of the header
 		JTableHeader header = table.getTableHeader();
 		header.setBackground(babyBlue);
@@ -152,6 +153,11 @@ public class ProductsPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setPreferredWidth(70);
 		table.getColumnModel().getColumn(5).setMinWidth(70);
 		table.getColumnModel().getColumn(6).setMinWidth(75);
+		
+		table.addMouseListener(new JTableButtonMouseListener(table));
+		table.addMouseMotionListener(new JTableButtonMouseListener(table));
+		
+		
 		
 		leftArrowLabel = new JLabel(" < ");
 		

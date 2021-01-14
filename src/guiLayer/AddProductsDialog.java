@@ -19,6 +19,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
 import controlLayer.ProductCtr;
+import guiLayer.Renderers.JTableButtonMouseListener;
 import guiLayer.Renderers.JTableButtonRenderer;
 
 import java.awt.GridBagLayout;
@@ -211,6 +212,7 @@ public class AddProductsDialog extends JDialog {
 		}
 		{
 			table = new JTable();
+			table.setName("AddProductsDialog");
 			//Changes the Color of the header
 			JTableHeader header = table.getTableHeader();
 			header.setBackground(babyBlue);
@@ -246,6 +248,10 @@ public class AddProductsDialog extends JDialog {
 						return columnTypes[columnIndex];
 					}
 				});
+			
+
+			table.addMouseListener(new JTableButtonMouseListener(table));
+			table.addMouseMotionListener(new JTableButtonMouseListener(table));
 			
 			GridBagConstraints gbc_table = new GridBagConstraints();
 			gbc_table.gridwidth = 5;

@@ -83,7 +83,6 @@ public class OrderPanel extends JPanel {
 	 */
 	@SuppressWarnings("serial")
 	public OrderPanel() {
-		System.setProperty("file.encoding", "UTF-8");
 		MainMenu mn = new MainMenu();
 		mn.populateClasses();
 		setBackground(new Color(252, 252, 252));
@@ -109,7 +108,7 @@ public class OrderPanel extends JPanel {
 		header.setBackground(babyBlue);
 		header.setForeground(Color.WHITE);
 
-		table.setName("OrderTable");
+		table.setName("OrderPanel");
 		table.setRowSelectionAllowed(false);
 		table.setFocusable(false);
 		table.setFillsViewportHeight(true);

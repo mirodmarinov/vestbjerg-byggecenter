@@ -402,7 +402,7 @@ public class CreateOrderPanel extends JPanel {
 		//Product Panel Create Offer Button********************************************************
 		RoundedButton createOfferButton = new RoundedButton("Create Offer", babyBlue,
 						Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
-		createOfferButton.addOffset(-8, 2);
+		createOfferButton.addOffset(-9, 2);
 		blueButton(createOfferButton);
 		GridBagConstraints gbc_createOfferButton = new GridBagConstraints();
 		gbc_createOfferButton.fill = GridBagConstraints.BOTH;
@@ -414,7 +414,7 @@ public class CreateOrderPanel extends JPanel {
 		//Product Panel Place Order Button********************************************************
 		RoundedButton placeOrderButton = new RoundedButton("Place Order", babyBlue,
 						Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
-		placeOrderButton.addOffset(-6, 2);
+		placeOrderButton.addOffset(-8, 2);
 		blueButton(placeOrderButton);
 		GridBagConstraints gbc_placeOrderButton = new GridBagConstraints();
 		gbc_placeOrderButton.fill = GridBagConstraints.BOTH;
@@ -476,6 +476,7 @@ public class CreateOrderPanel extends JPanel {
 			@Override
 			public void mouseExited(MouseEvent e) 
 			{
+					System.out.println("Bent");
 					button.setBackground(Color.WHITE);
 					button.setForeground(babyBlue);
 			}
@@ -526,4 +527,16 @@ public class CreateOrderPanel extends JPanel {
 		clearCustomerLabels();
 		//TODO clear tables
 	}
+	
+	
+	
+	public void reset()
+	{
+		
+		searchBar.setText("🔍 Phone number...");
+		clearCustomerLabels();
+		customerErrorLabel.setVisible(false);
+		deleteButton.setVisible(false);
+	}
+	
 }

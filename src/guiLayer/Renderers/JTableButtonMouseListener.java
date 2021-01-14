@@ -35,13 +35,26 @@ public class JTableButtonMouseListener extends MouseAdapter
 			Object value = table.getValueAt(row, column);
 			if (value instanceof RoundedButton)
 			{
-				//Check table by name
-				if (((RoundedButton)value).getName().equals("Confirm"))
+				if (table.getName().equals("OrderPanel"))
 				{
-					// perform a click event
-					doClick();
-					// ((RoundedButton)value).setBorderColor(Color.RED);
-					table.repaint();
+					if (((RoundedButton)value).getName().equals("Confirm"))
+					{
+						// perform a click event
+						confirmOffer();
+						table.repaint();
+					}
+				}
+				else if(table.getName().equals("CustomersPanel"))
+				{
+					
+				}
+				else if(table.getName().equals(("ProductsPanel")))
+				{
+					
+				}
+				else if(table.getName().equals("AddProductsDialog"))
+				{
+					
 				}
 			}
 		}
@@ -63,7 +76,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 				recolor = 0;
 				if (value instanceof RoundedButton)
 				{
-					if (((RoundedButton)value).getName().equals("Confirm"))
+					if (!((RoundedButton)value).getName().equals("Confirmed"))
 					{
 						mouseExited((RoundedButton)value);
 						table.repaint();
@@ -77,7 +90,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 				Object value = table.getValueAt(row, column);
 				if (value instanceof RoundedButton)
 				{
-					if (((RoundedButton)value).getName().equals("Confirm"))
+					if (!((RoundedButton)value).getName().equals("Confirmed"))
 					{
 
 						((RoundedButton)value).setBackground(Color.WHITE);
@@ -100,7 +113,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 		Object prevValue = table.getValueAt(y, x);
 		if (prevValue instanceof RoundedButton)
 		{
-			if (((RoundedButton)prevValue).getName().equals("Confirm"))
+			if (!((RoundedButton)prevValue).getName().equals("Confirmed"))
 			{
 				mouseExited((RoundedButton)prevValue);
 			}
@@ -110,7 +123,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 
 	}
 
-	public void doClick()
+	public void confirmOffer()
 	{
 		OrderCtr orderCtr = new OrderCtr();
 

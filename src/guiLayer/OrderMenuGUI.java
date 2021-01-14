@@ -35,6 +35,9 @@ public class OrderMenuGUI {
 	private JPanel mainFrame = new JPanel();
 	private Color babyBlue = new Color(28, 150, 202);
 	private OrderPanel orderPanel = new OrderPanel();
+	private ProductsPanel productsPanel = new ProductsPanel();
+	private CustomersPanel customersPanel = new CustomersPanel();
+	private CreateOrderPanel createOrderPanel = new CreateOrderPanel();
 	private RoundedButton orderMenuButton,createOrderButton,productMenuButton,customerMenuButton;
 	private RoundedButton selected;
 
@@ -113,6 +116,7 @@ public class OrderMenuGUI {
 				orderPanel.getSearchTextField().setText("🔍 Search...");
 				orderPanel.loadPage(1);
 				orderPanel.getTablePageLabel().setText("1");
+				orderPanel.getTablePageLabel().setVisible(true);
 				changeSelectedButton(orderMenuButton);
 			}
 		});
@@ -133,6 +137,7 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Create Order");
+				createOrderPanel.reset();
 				changeSelectedButton(createOrderButton);
 				
 			}
@@ -153,6 +158,10 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Products");
+				productsPanel.getSearchTextField().setText("🔍 Search...");
+				productsPanel.loadPage(1);
+				productsPanel.getTablePageLabel().setText("1");
+				productsPanel.getTablePageLabel().setVisible(true);
 				changeSelectedButton(productMenuButton);
 			}
 		});
@@ -172,6 +181,10 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Customers");
+				customersPanel.getSearchTextField().setText("🔍 Search...");
+				customersPanel.loadPage(1);
+				customersPanel.getTablePageLabel().setText("1");
+				customersPanel.getTablePageLabel().setVisible(true);
 				changeSelectedButton(customerMenuButton);
 				
 			}
@@ -200,9 +213,9 @@ public class OrderMenuGUI {
 	private void init() {
 		cards = (CardLayout)(mainFrame.getLayout());
 		mainFrame.add(orderPanel, "Orders");
-		mainFrame.add(new CreateOrderPanel(), "Create Order");
-		mainFrame.add(new ProductsPanel(), "Products");
-		mainFrame.add(new CustomersPanel(), "Customers");
+		mainFrame.add(createOrderPanel, "Create Order");
+		mainFrame.add(productsPanel, "Products");
+		mainFrame.add(customersPanel, "Customers");
 		orderMenuButton.setBackground(babyBlue.darker());
 		orderMenuButton.setFocusable(false);
 		
