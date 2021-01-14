@@ -493,8 +493,12 @@ public class CreateOrderPanel extends JPanel {
 			return;
 		}
 		
-		int phone = Integer.parseInt(searchBar.getText());
+		String phone = searchBar.getText();
 		String[] info = orderCtr.getCustomerInfo(phone);
+		if (info == null)
+		{
+			return;
+		}
 		
 		customerErrorLabel.setVisible(false);
 		if(info[0].isEmpty())
@@ -506,7 +510,7 @@ public class CreateOrderPanel extends JPanel {
 		deleteButton.setVisible(true);
 		nameValueLabel.setText(info[0]);
 		groupValueLabel.setText(info[1]);
-		phoneValueLabel.setText(Integer.toString(phone));
+		phoneValueLabel.setText(phone);
 	}
 	
 	public void searchProduct()

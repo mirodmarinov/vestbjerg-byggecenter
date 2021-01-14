@@ -153,7 +153,6 @@ public class JTableButtonMouseListener extends MouseAdapter
 		button.setFont(new Font("Lato", Font.PLAIN, 14));
 
 		// update the table model row with the new content
-		DefaultTableModel m = (DefaultTableModel)table.getModel();
 
 		for (int e = 0;e<6;e++)
 		{

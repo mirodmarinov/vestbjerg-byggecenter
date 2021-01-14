@@ -48,8 +48,19 @@ public class OrderCtr
 		return customer.getName();
 	}
 	
-	public String[] getCustomerInfo(int phone)// throws CustomerNotFoundException
+	public String[] getCustomerInfo(String stringPhone)// throws CustomerNotFoundException
 	{
+		int phone = 0;
+		try
+		{
+			phone = Integer.parseInt(stringPhone);
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
+		
+		
 		Customer customer = customerCtr.getCustomer(phone);
 		this.customer = customer;
 		if (customer == null)
