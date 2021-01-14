@@ -46,7 +46,6 @@ public class CreateOrderPanel extends JPanel {
 	private JLabel groupValueLabel;
 	private JLabel phoneValueLabel;
 	private JLabel deleteButton;
-	private ArrayList<String> ids = new ArrayList<>();
 
 	/**
 	 * Create the panel.

@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -285,6 +287,14 @@ public class CustomersPanel extends JPanel {
 		
 		RoundedButton addProductButton = new RoundedButton("➕ Add Customer", babyBlue,
 					Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14));
+		addProductButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CreateCustomerDialog dialog = new CreateCustomerDialog();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			}
+		});
 		addProductButton.addOffset(-13, 2);
 		blueButton(addProductButton);
 		GridBagConstraints gbc_addCustomerButton = new GridBagConstraints();
