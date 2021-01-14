@@ -181,6 +181,13 @@ public class ProductCtr
 		
 	}
 	
+	/**
+	 * Returns the found elements to the Products panel
+	 * 
+	 * @param name of the product
+	 * @return
+	 */
+	
 	public ArrayList<String[]> searchField(String name)
 	{
 		ArrayList<Product> products = ProductContainer.getInstance().getProducts(name);
@@ -191,6 +198,14 @@ public class ProductCtr
 		}
 		return data;
 	}
+	
+	/**
+	 * Returns the first up to 50 elements from the Products container.
+	 * Those datas fill up the products table in the UI.
+	 * 
+	 * @param index of the page
+	 * @return the data of the products
+	 */
 	
 	public ArrayList<String[]> defaultFill(int index)
 	{

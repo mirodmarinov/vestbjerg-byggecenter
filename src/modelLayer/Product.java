@@ -181,6 +181,12 @@ public class Product implements Serializable
                 location, Integer.toString(quantity), Integer.toString(threshold), Long.toString(salesPrice), Long.toString(purchasePrice), Integer.toString(discount)};
 	}
 	
+	
+	/**
+	 * Return only the necessary information to the product panel with the right order
+	 * 
+	 * @return
+	 */
 	public String[] tableFill()
 	{
 		String[] data = new String[6];

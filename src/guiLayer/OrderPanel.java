@@ -83,6 +83,7 @@ public class OrderPanel extends JPanel {
 	 */
 	@SuppressWarnings("serial")
 	public OrderPanel() {
+		System.setProperty("file.encoding", "UTF-8");
 		MainMenu mn = new MainMenu();
 		mn.populateClasses();
 		setBackground(new Color(252, 252, 252));

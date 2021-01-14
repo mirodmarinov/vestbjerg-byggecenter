@@ -86,6 +86,7 @@ public class ProductsPanel extends JPanel {
 	 */
 	@SuppressWarnings("serial")
 	public ProductsPanel() {
+		System.setProperty("file.encoding", "UTF-8");
 		setBackground(new Color(252, 252, 252));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{20, 40, 0, 0, 0, 122, 0, 0, 20};
