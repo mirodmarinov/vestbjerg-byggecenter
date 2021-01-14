@@ -326,6 +326,16 @@ public class OrderPanel extends JPanel {
 		if ((!searchTextField.getText().equals(""))&&(!searchTextField.getText().equals("🔍 Search...")))
 		{
 			orderCtr = new OrderCtr();
+			try
+			{
+				Integer.parseInt(searchTextField.getText());
+			}
+			catch(Exception e)
+			{
+				foundLabel.setText("Please enter numbers!");
+				foundLabel.setVisible(true);
+			}
+			
 			ArrayList<String[]> data = orderCtr.searchBar(Integer.parseInt(searchTextField.getText())); // TODO Check this
 			if (data.size() != 0)
 			{ 
@@ -342,11 +352,11 @@ public class OrderPanel extends JPanel {
 					}
 					if (data.get(e)[3].equals("pending"))
 					{
-						table.setValueAt(new RoundedButton("Confirm", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 6);
+						table.setValueAt(new RoundedButton("Confirm", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
 					}
 					else
 					{
-						table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.WHITE, new Font("Lato", Font.PLAIN, 14)), e, 6);
+						table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.WHITE, new Font("Lato", Font.PLAIN, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
 					}
 						
 					
@@ -360,7 +370,8 @@ public class OrderPanel extends JPanel {
 			{
 				if (Notdynamic)
 				{
-				foundLabel.setVisible(true);
+					foundLabel.setText("Order not found!");
+					foundLabel.setVisible(true);
 				}
 			}
 			

@@ -1,5 +1,7 @@
 package controlLayer;
 
+import java.util.ArrayList;
+
 import modelLayer.*;
 
 /**
@@ -41,5 +43,63 @@ public class CustomerCtr
 	{
 		Customer customer = new Customer(phone,discount,name,address,group);
 		CustomerContainer.getInstance().addCustomer(customer);
+	}
+	
+	
+	
+	
+	public ArrayList<String[]> getCustomers(int index)
+	{
+		int customerAmount = 0;
+		ArrayList<String[]> returnValue = new ArrayList<>();
+		ArrayList<Customer> customers = CustomerContainer.getInstance().getCustomers();	
+		if (customers.size() == 0)
+		{
+			return returnValue;
+		}
+		if ((int)(Math.floor(customers.size() / 50))+1 > index)
+		{
+			customerAmount = 50;
+		}
+		else if ((int)(Math.floor(customers.size() / 50))+1 == index)
+		{
+			customerAmount = (int)(customers.size()%50);
+		}
+		else
+		{
+			return returnValue;
+		}
+		
+
+		for (int e = (index-1)*50; e < (index-1)*50+customerAmount; e++)
+		{
+			returnValue.add(customers.get(e).tableFill());
+			
+		}
+		return returnValue;
+		
+	}
+	
+	/**
+	 * This method is used only for the searchField in the GUI. We had to implement a new
+	 * method because the findOffer method doesn't return every necessary information.
+	 * 
+	 * 
+	 * @param id
+	 * @return If order is found returns the data from it, otherwise returns null
+	 */
+	public ArrayList<String[]> searchField(int phone)
+	{
+		ArrayList<Customer> customers = CustomerContainer.getInstance().getCustomers();	
+		ArrayList<String[]> data = new ArrayList<>();
+		if (customers == null)
+		{
+			return data;
+		}
+		
+		data.add(CustomerContainer.getInstance().getCustomer(phone).tableFill());
+		
+		
+		return data;
 	}
 }

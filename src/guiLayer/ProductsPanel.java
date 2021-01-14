@@ -279,7 +279,7 @@ public class ProductsPanel extends JPanel {
 		
 		//***** Add Products button ****\\
 		
-		RoundedButton addProductButton = new RoundedButton("➕ Add Customer", babyBlue,
+		RoundedButton addProductButton = new RoundedButton("➕ Add Product", babyBlue,
 					Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14));
 		addProductButton.addOffset(-13, 2);
 		blueButton(addProductButton);
@@ -349,7 +349,7 @@ public class ProductsPanel extends JPanel {
 						table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 	
 					}
-					table.setValueAt(new RoundedButton("Edit", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 6);
+					table.setValueAt(new RoundedButton("Edit", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
 					
 				}
 				

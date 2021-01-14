@@ -83,4 +83,15 @@ public class Customer implements Serializable
 	{
 		this.group = group;
 	}
+	
+	public String[] tableFill()
+	{
+		String[] data = new String[5];
+		data[0] = name;
+		data[1] = Integer.toString(phone);
+		data[2] = address;
+		data[3] = group;
+		data[4] = Integer.toString(discount);
+		return data;
+	}
 }

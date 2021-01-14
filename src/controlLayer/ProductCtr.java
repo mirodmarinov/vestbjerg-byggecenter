@@ -209,7 +209,7 @@ public class ProductCtr
 	
 	public ArrayList<String[]> defaultFill(int index)
 	{
-		int orderAmount = 0;
+		int productAmount = 0;
 		ArrayList<String[]> returnValue = new ArrayList<>();
 		ArrayList<Product> products = ProductContainer.getInstance().getProductsArray();	
 		if (products.size() == 0)
@@ -218,11 +218,11 @@ public class ProductCtr
 		}
 		if ((int)(Math.floor(products.size() / 50))+1 > index)
 		{
-			orderAmount = 50;
+			productAmount = 50;
 		}
 		else if ((int)(Math.floor(products.size() / 50))+1 == index)
 		{
-			orderAmount = (int)(products.size()%50);
+			productAmount = (int)(products.size()%50);
 		}
 		else
 		{
@@ -230,7 +230,7 @@ public class ProductCtr
 		}
 		
 		
-		for (int e = (index-1)*50; e < (index-1)*50+orderAmount; e++)
+		for (int e = (index-1)*50; e < (index-1)*50+productAmount; e++)
 		{
 			returnValue.add(products.get(e).tableFill());
 			

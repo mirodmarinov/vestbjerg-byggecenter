@@ -55,10 +55,11 @@ public class CustomerContainer implements Serializable
 	{
 		Customer customer = null;
 		boolean found = false;
+		String phoneSearch = Integer.toString(phone);
 		
 		for(int i = 0; i < customers.size() && found == false; i++)
 		{
-			if(phone == customers.get(i).getPhone())
+			if(Integer.toString(customers.get(i).getPhone()).contains(phoneSearch))
 			{
 				customer = customers.get(i);
 				found = true;
@@ -107,5 +108,10 @@ public class CustomerContainer implements Serializable
 			}
 		}
 		return customers.add(customer);
+	}
+	
+	public ArrayList<Customer> getCustomers()
+	{
+		return customers;
 	}
 }
