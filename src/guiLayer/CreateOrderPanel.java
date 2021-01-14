@@ -34,6 +34,7 @@ import javax.swing.table.JTableHeader;
 import controlLayer.*;
 import modelLayer.CustomerNotFoundException;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.DefaultComboBoxModel;
 
 public class CreateOrderPanel extends JPanel {
@@ -105,7 +106,7 @@ public class CreateOrderPanel extends JPanel {
 		gbc_customerPanel.gridy = 3;
 		add(customerPanel, gbc_customerPanel);
 		GridBagLayout gbl_customerPanel = new GridBagLayout();
-		gbl_customerPanel.columnWidths = new int[]{15, 0, 0, 0, 0, 0, 0, 0, 15};
+		gbl_customerPanel.columnWidths = new int[]{15, 0, 0, 130, 0, 0, 0, 0, 15};
 		gbl_customerPanel.rowHeights = new int[]{10, 0, 0, 0, 0, 0, 10};
 		gbl_customerPanel.columnWeights = new double[]{0.0, 0.2, 0.2, 0.2, 0.0, 0.2, 0.2, 0.0, Double.MIN_VALUE};
 		gbl_customerPanel.rowWeights = new double[]{0.0, 0.0, 0.1, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -326,7 +327,9 @@ public class CreateOrderPanel extends JPanel {
 		addProductsButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				AddProductsDialog dialog = new AddProductsDialog();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
 			}
 		});
 		addProductsButton.addOffset(-17, 2);
