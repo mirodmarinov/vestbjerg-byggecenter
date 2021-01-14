@@ -39,6 +39,9 @@ public class AddProductsDialog extends JDialog {
 	private Color babyBlue = new Color(28, 150, 202);
 	private JTextField searchBar;
 	private JLabel productErrorLabel;
+	private JLabel leftArrowLabel;
+	private JLabel rightArrowLabel;
+	private JLabel tablePageLabel;
 	private ProductCtr productCtr;
 	private String[] tableElements = new String[] {"Name", "Stock", "Price", "Input Quantity", "Discount", ""};
 	private DocumentListener cl = new DocumentListener()
@@ -85,20 +88,21 @@ public class AddProductsDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public AddProductsDialog() {
-		setBounds(100, 100, 1042, 575);
+		setBounds(100, 100, 1042, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setBackground(new Color(252, 252, 252));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_contentPanel.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPanel.columnWeights = new double[]{1.0, 1.0, 1.0, 0.0, 0.0, 0.0};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.columnWeights = new double[]{0.5, 0.0, 0.5, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.2, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		
 		{
 			searchBar = new JTextField();
+			searchBar.setFocusable(false);
 			searchBar.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 			searchBar.setText("🔍 Product Name...");
 			searchBar.setForeground(new Color(149, 149, 149));
@@ -179,26 +183,7 @@ public class AddProductsDialog extends JDialog {
 			defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
 			table.getTableHeader().setDefaultRenderer(defaultHeaderRenderer);
 			
-			lblNewLabel = new JLabel("New label");
-			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-			gbc_lblNewLabel.gridx = 0;
-			gbc_lblNewLabel.gridy = 1;
-			contentPanel.add(lblNewLabel, gbc_lblNewLabel);
 			
-			lblNewLabel_1 = new JLabel("New label");
-			GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-			gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-			gbc_lblNewLabel_1.gridx = 1;
-			gbc_lblNewLabel_1.gridy = 1;
-			contentPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
-			
-			lblNewLabel_2 = new JLabel("New label");
-			GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-			gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-			gbc_lblNewLabel_2.gridx = 2;
-			gbc_lblNewLabel_2.gridy = 1;
-			contentPanel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 
 			table.setModel(new DefaultTableModel(
 				new Object[][] {
@@ -226,28 +211,76 @@ public class AddProductsDialog extends JDialog {
 			loadPage(1);
 		}
 		{
-			{
-				RoundedButton okButton = new RoundedButton("Finish", new Color(28, 150, 202), Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
-				formatButton(okButton);
-				blueButton(okButton);
-				GridBagConstraints gbc_okButton = new GridBagConstraints();
-				gbc_okButton.anchor = GridBagConstraints.SOUTHEAST;
-				gbc_okButton.insets = new Insets(0, 0, 0, 5);
-				gbc_okButton.gridx = 2;
-				gbc_okButton.gridy = 3;
-				contentPanel.add(okButton, gbc_okButton);
-			}
+			leftArrowLabel = new JLabel(" < ");
+			
+			leftArrowLabel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					searchBar.getDocument().removeDocumentListener(cl);
+					searchBar.setText("🔍 Search...");
+					searchBar.getDocument().addDocumentListener(cl);
+					loadPage(getPageIndex() - 1);
+				}
+			});
+			leftArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			GridBagConstraints gbc_leftArrowLabel = new GridBagConstraints();
+			gbc_leftArrowLabel.anchor = GridBagConstraints.EAST;
+			gbc_leftArrowLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_leftArrowLabel.gridx = 0;
+			gbc_leftArrowLabel.gridy = 1;
+			contentPanel.add(leftArrowLabel, gbc_leftArrowLabel);
+			
+			tablePageLabel = new JLabel("<html><u>1</u></html>");
+			tablePageLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			GridBagConstraints gbc_tablePageLabel = new GridBagConstraints();
+			gbc_tablePageLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_tablePageLabel.gridx = 1;
+			gbc_tablePageLabel.gridy = 1;
+			contentPanel.add(tablePageLabel, gbc_tablePageLabel);
+			
+			rightArrowLabel = new JLabel(" > ");
+			rightArrowLabel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					searchBar.setFocusable(false);
+					searchBar.setFocusable(true);
+					searchBar.getDocument().removeDocumentListener(cl);
+					searchBar.setText("🔍 Search...");
+					searchBar.getDocument().addDocumentListener(cl);
+					loadPage(getPageIndex() + 1);
+				}
+			});
+			
+			rightArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			GridBagConstraints gbc_rightArrowLabel = new GridBagConstraints();
+			gbc_rightArrowLabel.anchor = GridBagConstraints.WEST;
+			gbc_rightArrowLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_rightArrowLabel.gridx = 2;
+			gbc_rightArrowLabel.gridy = 1;
+			contentPanel.add(rightArrowLabel, gbc_rightArrowLabel);
+		}
+		{
+			RoundedButton okButton = new RoundedButton("Finish", new Color(28, 150, 202), Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
+			formatButton(okButton);
+			blueButton(okButton);
+			GridBagConstraints gbc_okButton = new GridBagConstraints();
+			gbc_okButton.anchor = GridBagConstraints.SOUTHEAST;
+			gbc_okButton.insets = new Insets(0, 0, 0, 5);
+			gbc_okButton.gridx = 3;
+			gbc_okButton.gridy = 3;
+			contentPanel.add(okButton, gbc_okButton);
 		}
 		
-		cancelButton = new RoundedButton("Cancel", Color.WHITE, new Color(28, 150, 202), new Color(28, 150, 202), new Font("Lato", Font.BOLD, 15));
-		formatButton(cancelButton);
-		whiteButton(cancelButton);
-		GridBagConstraints gbc_cancelButton = new GridBagConstraints();
-		gbc_cancelButton.insets = new Insets(0, 0, 0, 5);
-		gbc_cancelButton.gridx = 3;
-		gbc_cancelButton.gridy = 3;
-		contentPanel.add(cancelButton, gbc_cancelButton);
-	}
+			cancelButton = new RoundedButton("Cancel", Color.WHITE, new Color(28, 150, 202), new Color(28, 150, 202), new Font("Lato", Font.BOLD, 15));
+			formatButton(cancelButton);
+			whiteButton(cancelButton);
+			GridBagConstraints gbc_cancelButton = new GridBagConstraints();
+			gbc_cancelButton.anchor = GridBagConstraints.SOUTHEAST;
+			gbc_cancelButton.insets = new Insets(0, 0, 0, 5);
+			gbc_cancelButton.gridx = 4;
+			gbc_cancelButton.gridy = 3;
+			contentPanel.add(cancelButton, gbc_cancelButton);
+		}
 
 	
 	private void formatButton(RoundedButton button) {
@@ -279,12 +312,12 @@ public class AddProductsDialog extends JDialog {
 	
 	private void defaultFillTable(int index) {
 		productCtr = new ProductCtr();
-		//we get the order information from the orderContainer
+		//we get the product information from the productContainer
 		ArrayList<String[]> data = productCtr.defaultFill(index);
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(0);
 		dtm.setRowCount(data.size());
-		//Check if the order quantity is less the the row amount,
+		//Check if the product quantity is less the the row amount,
 		//we fill the table with the order data quantity, otherwise we fill
 		//the whole table with information
 		int columncount = data.size() > table.getRowCount() ? table.getRowCount() : data.size();
@@ -342,6 +375,11 @@ public class AddProductsDialog extends JDialog {
 		}
 	}
 	
+	public int getPageIndex()  
+	{
+		return Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", ""));
+	}
+	
 	public void loadPage(int index)
 	{
 		productErrorLabel.setVisible(false);
@@ -358,6 +396,6 @@ public class AddProductsDialog extends JDialog {
 		
 		defaultFillTable(index);
 
-		//tablePageLabel.setText("<html><u>" + index + "</u></html>");
+		tablePageLabel.setText("<html><u>" + index + "</u></html>");
 	}
 }
