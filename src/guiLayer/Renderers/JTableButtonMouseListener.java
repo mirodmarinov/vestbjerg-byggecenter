@@ -6,11 +6,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.JDialog;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlLayer.OrderCtr;
-import guiLayer.RoundedButton;
+import guiLayer.*;
 
 public class JTableButtonMouseListener extends MouseAdapter
 {
@@ -19,10 +20,17 @@ public class JTableButtonMouseListener extends MouseAdapter
 	private int recolor = 0;
 	private Color babyBlue = new Color(28, 150, 202);
 	private String[] tableElements = new String[] {"Order Number", "Customer", "Purchase Date", "Status", "Expiration Date", "Total (DKK)", ""};
+	private JDialog popup;
 
 	public JTableButtonMouseListener(JTable table)
 	{
 		this.table = table;
+	}
+	
+	public JTableButtonMouseListener(JTable table, JDialog popup)
+	{
+		this.table = table;
+		this.popup = popup;
 	}
 
 	public void mouseClicked(MouseEvent e)
@@ -46,15 +54,15 @@ public class JTableButtonMouseListener extends MouseAdapter
 				}
 				else if(table.getName().equals("CustomersPanel"))
 				{
-					
+					//((EditCustomerDialog)popup).addToList(); TODO Create these methods
 				}
 				else if(table.getName().equals(("ProductsPanel")))
 				{
-					
+					//((CreateProductDialog)popup).addToList(); TODO Create these methods
 				}
 				else if(table.getName().equals("AddProductsDialog"))
 				{
-					
+					((AddProductsDialog)popup).addToList(/*BARCODE OF PRODUCT HERE*/);
 				}
 			}
 		}

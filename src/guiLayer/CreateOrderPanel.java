@@ -294,26 +294,6 @@ public class CreateOrderPanel extends JPanel {
 		gbc_detailsLabel.gridy = 1;
 		productPanel.add(detailsLabel, gbc_detailsLabel);
 		
-		//Product Panel Add Product Button********************************************************
-		RoundedButton addProductsButton = new RoundedButton("➕ Add Products", babyBlue,
-						Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
-		addProductsButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				AddProductsDialog dialog = new AddProductsDialog();
-				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				dialog.setVisible(true);
-			}
-		});
-		addProductsButton.addOffset(-17, 2);
-		blueButton(addProductsButton);
-		GridBagConstraints gbc_addProductsButton = new GridBagConstraints();
-		gbc_addProductsButton.insets = new Insets(0, 0, 5, 5);
-		gbc_addProductsButton.fill = GridBagConstraints.BOTH;
-		gbc_addProductsButton.gridx = 5;
-		gbc_addProductsButton.gridy = 1;
-		productPanel.add(addProductsButton, gbc_addProductsButton);
-		
 		//Product Panel Table of Products********************************************************
 		orderTable = new JTable();
 		JTableHeader header = orderTable.getTableHeader();
@@ -377,6 +357,26 @@ public class CreateOrderPanel extends JPanel {
 		tablePane.setBorder(BorderFactory.createEmptyBorder());
 		productPanel.add(tablePane, gbc_orderTable);
 		
+		
+		//Product Panel Add Product Button********************************************************
+		RoundedButton addProductsButton = new RoundedButton("➕ Add Products", babyBlue,
+						Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
+		addProductsButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AddProductsDialog dialog = new AddProductsDialog(orderTable);
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			}
+		});
+		addProductsButton.addOffset(-17, 2);
+		blueButton(addProductsButton);
+		GridBagConstraints gbc_addProductsButton = new GridBagConstraints();
+		gbc_addProductsButton.insets = new Insets(0, 0, 5, 5);
+		gbc_addProductsButton.fill = GridBagConstraints.BOTH;
+		gbc_addProductsButton.gridx = 5;
+		gbc_addProductsButton.gridy = 1;
+		productPanel.add(addProductsButton, gbc_addProductsButton);
 		
 		
 		//Product Panel Total price Label********************************************************

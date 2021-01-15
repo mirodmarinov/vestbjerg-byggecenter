@@ -43,8 +43,14 @@ public class AddProductsDialog extends JDialog {
 	private JLabel leftArrowLabel;
 	private JLabel rightArrowLabel;
 	private JLabel tablePageLabel;
+	private JTable createOrderPanelTable;
+	private JTable table;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private RoundedButton cancelButton;
 	private ProductCtr productCtr;
-	private String[] tableElements = new String[] {"Name", "Stock", "Price", "Input Quantity", "Discount", ""};
+	private String[] tableElements = new String[] {"Barcode", "Name", "Discount", "Input Quantity", "Price", "Stock", ""};
 	private DocumentListener cl = new DocumentListener()
 	
 	{
@@ -66,29 +72,12 @@ public class AddProductsDialog extends JDialog {
 			searchProduct(false);
 		}
 	};
-	private JTable table;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
-	private RoundedButton cancelButton;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			AddProductsDialog dialog = new AddProductsDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public AddProductsDialog() {
+	public AddProductsDialog(JTable createOrderPanelTable) {
+		this.createOrderPanelTable = createOrderPanelTable;
 		setBounds(100, 100, 1042, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -240,14 +229,15 @@ public class AddProductsDialog extends JDialog {
 				new Object[][] {
 				},
 				tableElements
-				) {
+				
+			) {
 				Class[] columnTypes = new Class[] {
-						String.class, String.class, String.class, String.class, String.class, RoundedButton.class
-					};
-					public Class getColumnClass(int columnIndex) {
-						return columnTypes[columnIndex];
-					}
-				});
+						String.class, String.class, String.class, String.class, String.class, String.class, RoundedButton.class
+				};
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			});
 			
 
 			table.addMouseListener(new JTableButtonMouseListener(table));
@@ -267,6 +257,13 @@ public class AddProductsDialog extends JDialog {
 		}
 		{
 			RoundedButton okButton = new RoundedButton("Finish", new Color(28, 150, 202), Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
+			okButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) 
+				{
+					finishAddProduct();
+				}
+			});
 			formatButton(okButton);
 			blueButton(okButton);
 			GridBagConstraints gbc_okButton = new GridBagConstraints();
@@ -278,6 +275,13 @@ public class AddProductsDialog extends JDialog {
 		}
 		
 			cancelButton = new RoundedButton("Cancel", Color.WHITE, new Color(28, 150, 202), new Color(28, 150, 202), new Font("Lato", Font.BOLD, 15));
+			cancelButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) 
+				{
+					dispose();
+				}
+			});
 			formatButton(cancelButton);
 			whiteButton(cancelButton);
 			GridBagConstraints gbc_cancelButton = new GridBagConstraints();
@@ -329,12 +333,6 @@ public class AddProductsDialog extends JDialog {
 				button.setBackground(Color.WHITE);
 				button.setForeground(babyBlue);
 			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) 
-			{
-				dispose();
-			}
 		});
 	}
 	
@@ -349,6 +347,7 @@ public class AddProductsDialog extends JDialog {
 		//we fill the table with the order data quantity, otherwise we fill
 		//the whole table with information
 		int columncount = data.size() > table.getRowCount() ? table.getRowCount() : data.size();
+
 		for (int e = 0; e<columncount;e++)
 		{
 			
@@ -356,7 +355,9 @@ public class AddProductsDialog extends JDialog {
 			{
 				table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 			}
-			table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[5]).getModelIndex()));
+			table.setValueAt(data.get(e)[6], e, table.convertColumnIndexToView(table.getColumn("Discount").getModelIndex()));
+			table.setValueAt("", e, table.convertColumnIndexToView(table.getColumn("Input Quantity").getModelIndex()));
+			table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
 		}
 	}
 	
@@ -368,6 +369,8 @@ public class AddProductsDialog extends JDialog {
 		{
 			productCtr = new ProductCtr();
 			ArrayList<String[]> data = productCtr.searchField(searchBar.getText()); // TODO Check this
+			
+
 			
 			if (data.size() != 0)
 			{ 
@@ -381,7 +384,7 @@ public class AddProductsDialog extends JDialog {
 						table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 	
 					}
-					table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[5]).getModelIndex()));
+					table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
 					
 				}
 				
@@ -399,6 +402,15 @@ public class AddProductsDialog extends JDialog {
 		{
 			loadPage(1);
 		}
+	}
+	
+	public void addToList() {
+		
+	}
+	
+	private void finishAddProduct() {
+		// Update Add Product Table
+		dispose();
 	}
 	
 	public int getPageIndex()  

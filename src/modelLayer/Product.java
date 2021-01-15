@@ -189,13 +189,14 @@ public class Product implements Serializable
 	 */
 	public String[] tableFill()
 	{
-		String[] data = new String[6];
+		String[] data = new String[7];
 		data[0] = barcode;
 		data[1] = name;
 		data[2] = group;
 		data[3] = location;
 		data[4] = Long.toString(purchasePrice);
 		data[5] = Integer.toString(quantity);
+		data[6] = Integer.toString(discount);
 		return data;
 	}
 
