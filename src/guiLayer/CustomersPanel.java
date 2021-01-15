@@ -290,9 +290,6 @@ public class CustomersPanel extends JPanel {
 		addProductButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CreateCustomerDialog dialog = new CreateCustomerDialog();
-				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				dialog.setVisible(true);
 			}
 		});
 		addProductButton.addOffset(-13, 2);

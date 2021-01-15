@@ -41,11 +41,11 @@ import javax.swing.JTextPane;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-public class CreateCustomerDialog extends JDialog {
+public class EditCustomerDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private Color babyBlue = new Color(28, 150, 202);
-	private JLabel customerNameLabel;
+	private JLabel headerLabel;
 	private DocumentListener cl = new DocumentListener()
 	
 	{
@@ -90,13 +90,15 @@ public class CreateCustomerDialog extends JDialog {
 	private JLabel descriptionLabel;
 	private JTextPane descriptionTextField;
 	private JPanel header;
+	private ProductCtr productCtr;
+	private JLabel productName;
 
 	/**
 	 * Launch the application.
 	 */
 	/*public static void main(String[] args) {
 		try {
-			CreateCustomerDialog dialog = new CreateCustomerDialog(String productNameAndID);
+			EditCustomerDialog dialog = new EditCustomerDialog(String productNameAndID);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -107,7 +109,7 @@ public class CreateCustomerDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public CreateCustomerDialog() {
+	public EditCustomerDialog(String barcode) {
 		setBounds(100, 100, 1042, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -115,9 +117,9 @@ public class CreateCustomerDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{60, 0, 0, 0, 0, 0, 90, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.3, 0.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.2, 0.5, 0.3, 0.2, 0.2, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.2, 0.5, 0.3, 0.2, 0.2, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 		}
@@ -126,20 +128,28 @@ public class CreateCustomerDialog extends JDialog {
 			header.setBackground(babyBlue);
 			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 			gbc_panel_1.gridwidth = 8;
-			gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+			gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 			gbc_panel_1.fill = GridBagConstraints.BOTH;
 			gbc_panel_1.gridx = 0;
 			gbc_panel_1.gridy = 0;
 			contentPanel.add(header, gbc_panel_1);
 			{
 				
-				customerNameLabel = new JLabel("Create Customer");
+				headerLabel = new JLabel("Edit Product");
 				//customerNameLabel.setHorizontalAlignment(JLabel.LEFT); TODO IT DOESN't WOOORK ;((((((
-				header.add(customerNameLabel);
-				customerNameLabel.setVisible(true);
-				customerNameLabel.setForeground(Color.WHITE);
-				customerNameLabel.setFont(new Font("LATO", Font.BOLD, 20));
+				header.add(headerLabel);
+				headerLabel.setVisible(true);
+				headerLabel.setForeground(Color.WHITE);
+				headerLabel.setFont(new Font("LATO", Font.BOLD, 20));
 			}
+		}
+		{
+			productName = new JLabel("<ProductNamePlaceHolder>");
+			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel.gridx = 0;
+			gbc_lblNewLabel.gridy = 1;
+			contentPanel.add(productName, gbc_lblNewLabel);
 		}
 		{
 			panel = new JPanel();
@@ -152,7 +162,7 @@ public class CreateCustomerDialog extends JDialog {
 			gbc_panel.insets = new Insets(0, 0, 5, 5);
 			gbc_panel.fill = GridBagConstraints.BOTH;
 			gbc_panel.gridx = 1;
-			gbc_panel.gridy = 2;
+			gbc_panel.gridy = 3;
 			contentPanel.add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
 			gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
@@ -189,6 +199,20 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				nameTextField = new JTextField();
+				nameTextField.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (!nameTextField.getText().equals(""))
+						{
+							//TODO Check this if it's working
+							//It should split the string by ':', add the name to it and connect with the rest of the string (add barcode)
+							//And of course set it as the name label
+							//TODO if it's working, do the same at the barcode field
+							nameLabel.setText(nameTextField.getText() + " " +nameLabel.getText().substring(nameLabel.getText().indexOf(":"),nameLabel.getText().length()));
+						}
+							
+								
+					}
+				});
 				nameTextField.setName("Name");
 				textFieldFunctions(nameTextField);
 				GridBagConstraints gbc_nameTextField = new GridBagConstraints();
@@ -371,6 +395,7 @@ public class CreateCustomerDialog extends JDialog {
 				panel.add(salesPriceTextField, gbc_salesPriceTextField);
 				salesPriceTextField.setColumns(10);
 			}
+			fillFields(barcode);
 		}
 		{
 			RoundedButton okButton = new RoundedButton("Finish", new Color(28, 150, 202), Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
@@ -382,7 +407,7 @@ public class CreateCustomerDialog extends JDialog {
 			gbc_okButton.anchor = GridBagConstraints.SOUTHEAST;
 			gbc_okButton.insets = new Insets(0, 0, 0, 5);
 			gbc_okButton.gridx = 5;
-			gbc_okButton.gridy = 2;
+			gbc_okButton.gridy = 3;
 			contentPanel.add(okButton, gbc_okButton);
 		}
 		
@@ -393,7 +418,7 @@ public class CreateCustomerDialog extends JDialog {
 			gbc_cancelButton.gridheight = 4;
 			gbc_cancelButton.anchor = GridBagConstraints.SOUTHEAST;
 			gbc_cancelButton.gridx = 7;
-			gbc_cancelButton.gridy = 2;
+			gbc_cancelButton.gridy = 3;
 			contentPanel.add(cancelButton, gbc_cancelButton);
 		}
 
@@ -437,6 +462,12 @@ public class CreateCustomerDialog extends JDialog {
 			{
 				button.setBackground(Color.WHITE);
 				button.setForeground(babyBlue);
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				dispose();
 			}
 		});
 	}
@@ -516,6 +547,30 @@ public class CreateCustomerDialog extends JDialog {
 			}
 		});
 
+	}
+	
+	/**
+	 * Gets the barcode of the product, fills up all the fields with the current data.
+	 * Also changes the namelabel to the actual product name + barcode.
+	 * 
+	 * @param barcode
+	 */
+	private void fillFields(String barcode)
+	{
+		productCtr = new ProductCtr();
+		String[] data = productCtr.getProductrByBarcode(barcode);
+		nameTextField.setText(data[0]);
+		descriptionTextField.setText(data[1]);
+		groupTextField.setText(data[2]);
+		barcodeTextField.setText(data[3]);
+		locationTextField.setText(data[4]);
+		quantityTextField.setText(data[5]);
+		thresholdTextField.setText(data[6]);
+		salesPriceTextField.setText(data[7]);
+		purchasePriceTextField.setText(data[8]);
+		discountTextField.setText(data[9]);
+		productName.setText(data[0] + " : " + data[3]);
+		
 	}
 	
 }

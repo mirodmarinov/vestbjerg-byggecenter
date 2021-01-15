@@ -238,4 +238,26 @@ public class ProductCtr
 		return returnValue;
 		
 	}
+	
+	/**
+	 * gets only product by the barcode. Used in EditCustomerDialog UI. Return all the information about the product.
+	 * 
+	 * @param barcode
+	 * @return
+	 */
+	public String[] getProductrByBarcode(String barcode)
+	{
+		ArrayList<Product> products = ProductContainer.getInstance().getProductsArray();
+		String[] string = null;
+		for (Product product : products)
+		{
+			if (product.getBarcode().equals(barcode))
+			{
+				string = product.toStrings();
+				break;
+			}
+	
+		}
+		return string;
+	}
 }

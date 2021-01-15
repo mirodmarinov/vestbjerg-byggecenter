@@ -329,6 +329,12 @@ public class AddProductsDialog extends JDialog {
 				button.setBackground(Color.WHITE);
 				button.setForeground(babyBlue);
 			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				dispose();
+			}
 		});
 	}
 	
