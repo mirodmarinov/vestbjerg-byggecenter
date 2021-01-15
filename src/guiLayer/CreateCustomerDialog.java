@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -36,14 +38,14 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class CreateCustomerDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private Color babyBlue = new Color(28, 150, 202);
-	private JLabel productNameLabel;
-	private ProductCtr productCtr;
-	private String[] tableElements = new String[] {"Name", "Stock", "Price", "Input Quantity", "Discount", ""};
+	private JLabel customerNameLabel;
 	private DocumentListener cl = new DocumentListener()
 	
 	{
@@ -65,9 +67,6 @@ public class CreateCustomerDialog extends JDialog {
 			
 		}
 	};
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
 	private RoundedButton cancelButton;
 	private JPanel panel;
 	private JLabel nameLabel;
@@ -90,19 +89,20 @@ public class CreateCustomerDialog extends JDialog {
 	private JTextField discountTextField;
 	private JLabel descriptionLabel;
 	private JTextPane descriptionTextField;
+	private JPanel header;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
-			CreateCustomerDialog dialog = new CreateCustomerDialog();
+			CreateCustomerDialog dialog = new CreateCustomerDialog(String productNameAndID);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
@@ -116,28 +116,36 @@ public class CreateCustomerDialog extends JDialog {
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{60, 0, 0, 0, 0, 0, 90, 0};
 		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.2, 0.5, 0.5, 0.3, 0.2, Double.MIN_VALUE};
+		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.3, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 0.2, 0.5, 0.3, 0.2, 0.2, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
-			
-			productNameLabel = new JLabel("<ProductNamePlaceholder>");
-			productNameLabel.setVisible(true);
-			productNameLabel.setForeground(Color.BLACK);
-			productNameLabel.setFont(new Font("Lato", Font.BOLD, 20));
-			GridBagConstraints gbc_productErrorLabel = new GridBagConstraints();
-			gbc_productErrorLabel.gridwidth = 2;
-			gbc_productErrorLabel.anchor = GridBagConstraints.WEST;
-			gbc_productErrorLabel.insets = new Insets(0, 0, 5, 5);
-			gbc_productErrorLabel.gridx = 0;
-			gbc_productErrorLabel.gridy = 0;
-			contentPanel.add(productNameLabel, gbc_productErrorLabel);
 		}
 		{
+			header = new JPanel();
+			header.setBackground(babyBlue);
+			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+			gbc_panel_1.gridwidth = 8;
+			gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+			gbc_panel_1.fill = GridBagConstraints.BOTH;
+			gbc_panel_1.gridx = 0;
+			gbc_panel_1.gridy = 0;
+			contentPanel.add(header, gbc_panel_1);
+			{
+				
+				customerNameLabel = new JLabel("Create Customer");
+				//customerNameLabel.setHorizontalAlignment(JLabel.LEFT); TODO IT DOESN't WOOORK ;((((((
+				header.add(customerNameLabel);
+				customerNameLabel.setVisible(true);
+				customerNameLabel.setForeground(Color.WHITE);
+				customerNameLabel.setFont(new Font("LATO", Font.BOLD, 20));
+			}
 		}
 		{
 			panel = new JPanel();
-			panel.setBackground(Color.CYAN);
+			panel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+			panel.setBorder(BorderFactory.createLineBorder(new Color(243, 243, 243), 2, true));
+			panel.setBackground(Color.WHITE);
 			GridBagConstraints gbc_panel = new GridBagConstraints();
 			gbc_panel.gridheight = 3;
 			gbc_panel.gridwidth = 6;
@@ -148,9 +156,9 @@ public class CreateCustomerDialog extends JDialog {
 			contentPanel.add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
 			gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
-			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0};
 			gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			{
 				nameLabel = new JLabel("Name");
@@ -181,6 +189,8 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				nameTextField = new JTextField();
+				nameTextField.setName("Name");
+				textFieldFunctions(nameTextField);
 				GridBagConstraints gbc_nameTextField = new GridBagConstraints();
 				gbc_nameTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_nameTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -191,6 +201,8 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				groupTextField = new JTextField();
+				groupTextField.setName("Group");
+				textFieldFunctions(groupTextField);
 				GridBagConstraints gbc_groupTextField = new GridBagConstraints();
 				gbc_groupTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_groupTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -201,6 +213,8 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				discountTextField = new JTextField();
+				discountTextField.setName("Discount");
+				textFieldFunctions(discountTextField);
 				GridBagConstraints gbc_discountTextField = new GridBagConstraints();
 				gbc_discountTextField.insets = new Insets(0, 0, 5, 0);
 				gbc_discountTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -238,6 +252,8 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				barcodeTextField = new JTextField();
+				barcodeTextField.setName("Barcode");
+				textFieldFunctions(barcodeTextField);
 				GridBagConstraints gbc_barcodeTextField = new GridBagConstraints();
 				gbc_barcodeTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_barcodeTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -248,6 +264,8 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				locationTextField = new JTextField();
+				locationTextField.setName("Location");
+				textFieldFunctions(locationTextField);
 				GridBagConstraints gbc_locationTextField = new GridBagConstraints();
 				gbc_locationTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_locationTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -258,7 +276,11 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				descriptionTextField = new JTextPane();
+				descriptionTextField.setName("Description");
+				textPaneFunctions(descriptionTextField);
+				descriptionTextField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, false));
 				GridBagConstraints gbc_descriptionTextField = new GridBagConstraints();
+				gbc_descriptionTextField.gridheight = 2;
 				gbc_descriptionTextField.insets = new Insets(0, 0, 5, 0);
 				gbc_descriptionTextField.fill = GridBagConstraints.BOTH;
 				gbc_descriptionTextField.gridx = 3;
@@ -285,6 +307,8 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				thresholdTextField = new JTextField();
+				thresholdTextField.setName("Threshold");
+				textFieldFunctions(thresholdTextField);
 				GridBagConstraints gbc_thresholdTextField = new GridBagConstraints();
 				gbc_thresholdTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_thresholdTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -295,6 +319,8 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				purchasePriceTextField = new JTextField();
+				purchasePriceTextField.setName("Purchase price");
+				textFieldFunctions(purchasePriceTextField);
 				GridBagConstraints gbc_purchasePriceTextField = new GridBagConstraints();
 				gbc_purchasePriceTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_purchasePriceTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -323,6 +349,8 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				quantityTextField = new JTextField();
+				quantityTextField.setName("Quantity");
+				textFieldFunctions(quantityTextField);
 				GridBagConstraints gbc_quantityTextField = new GridBagConstraints();
 				gbc_quantityTextField.insets = new Insets(0, 0, 0, 5);
 				gbc_quantityTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -333,6 +361,8 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				salesPriceTextField = new JTextField();
+				salesPriceTextField.setName("Sale price");
+				textFieldFunctions(salesPriceTextField);
 				GridBagConstraints gbc_salesPriceTextField = new GridBagConstraints();
 				gbc_salesPriceTextField.insets = new Insets(0, 0, 0, 5);
 				gbc_salesPriceTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -409,6 +439,83 @@ public class CreateCustomerDialog extends JDialog {
 				button.setForeground(babyBlue);
 			}
 		});
+	}
+	
+	private void textFieldFunctions(JTextField field)
+	{
+		field.setText(field.getName()+"...");
+		field.setFocusable(false);
+		field.addMouseListener(new MouseAdapter()
+		{
+			
+			@Override
+			public void mouseEntered(MouseEvent e)
+			{
+				field.setFocusable(true);
+			}
+				
+		});
+		
+		field.addFocusListener(new FocusAdapter()
+		{
+			@Override
+			public void focusGained(FocusEvent e)
+			{
+				if (field.getText().equals(field.getName()+"..."))
+				{
+					field.setText("");
+				}
+			}
+			
+			@Override
+			public void focusLost(FocusEvent e)
+			{
+				if (field.getText().equals(""))
+				{
+					field.setText(field.getName()+"...");
+				}
+			}
+		});
+
+	}
+	
+	
+	private void textPaneFunctions(JTextPane pane)
+	{
+		pane.setText(pane.getName()+"...");
+		pane.setFocusable(false);
+		pane.addMouseListener(new MouseAdapter()
+		{
+			
+			@Override
+			public void mouseEntered(MouseEvent e)
+			{
+				pane.setFocusable(true);
+			}
+				
+		});
+		
+		pane.addFocusListener(new FocusAdapter()
+		{
+			@Override
+			public void focusGained(FocusEvent e)
+			{
+				if (pane.getText().equals(pane.getName()+"..."))
+				{
+					pane.setText("");
+				}
+			}
+			
+			@Override
+			public void focusLost(FocusEvent e)
+			{
+				if (pane.getText().equals(""))
+				{
+					pane.setText(pane.getName()+"...");
+				}
+			}
+		});
+
 	}
 	
 }
