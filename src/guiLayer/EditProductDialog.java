@@ -41,7 +41,7 @@ import javax.swing.JTextPane;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-public class EditCustomerDialog extends JDialog {
+public class EditProductDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private Color babyBlue = new Color(28, 150, 202);
@@ -92,6 +92,7 @@ public class EditCustomerDialog extends JDialog {
 	private JPanel header;
 	private ProductCtr productCtr;
 	private JLabel productName;
+	private String barcode = "";
 
 	/**
 	 * Launch the application.
@@ -109,7 +110,7 @@ public class EditCustomerDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public EditCustomerDialog(String barcode) {
+	public EditProductDialog() {
 		setBounds(100, 100, 1042, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -555,22 +556,30 @@ public class EditCustomerDialog extends JDialog {
 	 * 
 	 * @param barcode
 	 */
-	private void fillFields(String barcode)
+	public void fillFields(String barcode)
 	{
 		productCtr = new ProductCtr();
 		String[] data = productCtr.getProductrByBarcode(barcode);
-		nameTextField.setText(data[0]);
-		descriptionTextField.setText(data[1]);
-		groupTextField.setText(data[2]);
-		barcodeTextField.setText(data[3]);
-		locationTextField.setText(data[4]);
-		quantityTextField.setText(data[5]);
-		thresholdTextField.setText(data[6]);
-		salesPriceTextField.setText(data[7]);
-		purchasePriceTextField.setText(data[8]);
-		discountTextField.setText(data[9]);
-		productName.setText(data[0] + " : " + data[3]);
+		if (data != null)
+		{
+			nameTextField.setText(data[0]);
+			descriptionTextField.setText(data[1]);
+			groupTextField.setText(data[2]);
+			barcodeTextField.setText(data[3]);
+			locationTextField.setText(data[4]);
+			quantityTextField.setText(data[5]);
+			thresholdTextField.setText(data[6]);
+			salesPriceTextField.setText(data[7]);
+			purchasePriceTextField.setText(data[8]);
+			discountTextField.setText(data[9]);
+			productName.setText(data[0] + " : " + data[3]);
+		}
 		
+	}
+	
+	public void setBarcode(String barcode)
+	{
+		this.barcode = barcode;
 	}
 	
 }

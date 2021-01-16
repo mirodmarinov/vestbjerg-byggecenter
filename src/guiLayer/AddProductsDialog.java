@@ -212,6 +212,7 @@ public class AddProductsDialog extends JDialog {
 			table.setFocusable(false);
 			table.setFillsViewportHeight(true);
 			table.setFont(new Font("Lato", Font.PLAIN, 14));
+			table.getTableHeader().setFont(new Font("Lato", Font.BOLD, 14));
 			table.setShowVerticalLines(false);
 			table.setRowHeight(50);
 			

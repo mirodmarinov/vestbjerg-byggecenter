@@ -90,6 +90,7 @@ public class CreateProductDialog extends JDialog {
 	private JLabel descriptionLabel;
 	private JTextPane descriptionTextField;
 	private JPanel header;
+	private ProductCtr productCtr;
 
 	/**
 	 * Launch the application.
@@ -107,7 +108,7 @@ public class CreateProductDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public CreateProductDialog(String ID) {
+	public CreateProductDialog() {
 		setBounds(100, 100, 1042, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -419,6 +420,13 @@ public class CreateProductDialog extends JDialog {
 				button.setBackground(babyBlue);
 				button.setForeground(Color.WHITE);
 			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				finishCreation();
+			}
+			
 		});
 	}
 	
@@ -519,6 +527,13 @@ public class CreateProductDialog extends JDialog {
 				}
 			}
 		});
+
+	}
+	
+	private void finishCreation()
+	{
+		productCtr = new ProductCtr();
+		//TODO Check all fields's value and create the product then dispose the window
 
 	}
 

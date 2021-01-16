@@ -38,6 +38,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 		int column = table.getColumnModel().getColumnIndexAtX(e.getX()); // get the column of the button
 		int row = e.getY() / table.getRowHeight(); // get the row of the button
 		// Checking the row or column is valid or not
+
 		if (row < table.getRowCount() && row >= 0 && column < table.getColumnCount() && column >= 0)
 		{
 			Object value = table.getValueAt(row, column);
@@ -58,7 +59,9 @@ public class JTableButtonMouseListener extends MouseAdapter
 				}
 				else if(table.getName().equals(("ProductsPanel")))
 				{
-					//((CreateProductDialog)popup).addToList(); TODO Create these methods
+					table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex());
+					((EditProductDialog)popup).setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					((EditProductDialog)popup).setVisible(true);
 				}
 				else if(table.getName().equals("AddProductsDialog"))
 				{

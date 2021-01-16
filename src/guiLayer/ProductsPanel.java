@@ -127,6 +127,7 @@ public class ProductsPanel extends JPanel {
 		// Could be moved to a custom header renderer
 		DefaultTableCellRenderer defaultHeaderRenderer = (DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer();
 		defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
+		table.getTableHeader().setFont(new Font("Lato", Font.BOLD, 14));
 		table.getTableHeader().setDefaultRenderer(defaultHeaderRenderer);
 
 		table.setModel(new DefaultTableModel(
@@ -155,9 +156,7 @@ public class ProductsPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setPreferredWidth(70);
 		table.getColumnModel().getColumn(5).setMinWidth(70);
 		table.getColumnModel().getColumn(6).setMinWidth(75);
-		
-		table.addMouseListener(new JTableButtonMouseListener(table));
-		table.addMouseMotionListener(new JTableButtonMouseListener(table));
+	
 		
 		
 		
@@ -290,7 +289,7 @@ public class ProductsPanel extends JPanel {
 		addProductButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CreateProductDialog dialog = new CreateProductDialog("Bob");
+				CreateProductDialog dialog = new CreateProductDialog();
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
 			}
@@ -305,7 +304,9 @@ public class ProductsPanel extends JPanel {
 		add(addProductButton, gbc_addCustomerButton);
 		
 		
-		
+		EditProductDialog ecd = new EditProductDialog();
+		table.addMouseListener(new JTableButtonMouseListener(table,ecd));
+		table.addMouseMotionListener(new JTableButtonMouseListener(table,ecd));
 	}
 
 	/**
