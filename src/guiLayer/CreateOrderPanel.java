@@ -39,13 +39,14 @@ public class CreateOrderPanel extends JPanel {
 	private JTextField searchBar;
 	private JTable orderTable;
 	private Color babyBlue = new Color(28, 150, 202);
-	private CustomerCtr customerCtr = new CustomerCtr();
 	private OrderCtr orderCtr = new OrderCtr();
 	private JLabel customerErrorLabel;
 	private JLabel nameValueLabel;
 	private JLabel groupValueLabel;
 	private JLabel phoneValueLabel;
 	private JLabel deleteButton;
+	private String[] orderTableElements = {"Barcode", "Name", "Price", "Quantity", "Discount", "Total", ""};
+	private ProductCtr productCtr;
 
 	/**
 	 * Create the panel.
@@ -318,14 +319,12 @@ public class CreateOrderPanel extends JPanel {
 		
 		orderTable.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
 			},
-			new String[] {
-				"Barcode", "Name", "Price", "Quantity", "Discount", "Total"
-			}
+			orderTableElements
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, String.class
+				String.class, String.class, String.class, String.class, String.class, String.class, RoundedButton.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -542,6 +541,26 @@ public class CreateOrderPanel extends JPanel {
 		clearCustomerLabels();
 		customerErrorLabel.setVisible(false);
 		deleteButton.setVisible(false);
+	}
+	
+	public void setOrderPanelData(ArrayList<String> barcodes)
+	{
+		productCtr = new ProductCtr();
+		if (barcodes.size() == 0)
+		{
+			return;
+		}
+		DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
+		dtm.setRowCount(barcodes.size());
+		for (int e = 0; e< barcodes.size(); e++)
+		{
+			for (String data : productCtr.getProductrByBarcode(barcodes.get(e)))
+			{
+				orderTable.setValueAt(data, e, orderTable.getColumn(data).getModelIndex());
+			}
+			orderTable.setValueAt(new RoundedButton("Edit", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, orderTable.getColumn("").getModelIndex());
+		}
+		
 	}
 	
 }

@@ -45,11 +45,9 @@ public class AddProductsDialog extends JDialog {
 	private JLabel tablePageLabel;
 	private JTable createOrderPanelTable;
 	private JTable table;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
 	private RoundedButton cancelButton;
 	private ProductCtr productCtr;
+	private ArrayList<String> barcodes = new ArrayList<>();
 	private String[] tableElements = new String[] {"Barcode", "Name", "Discount", "Input Quantity", "Price", "Stock", ""};
 	private DocumentListener cl = new DocumentListener()
 	
@@ -241,7 +239,7 @@ public class AddProductsDialog extends JDialog {
 			});
 			
 
-			table.addMouseListener(new JTableButtonMouseListener(table));
+			table.addMouseListener(new JTableButtonMouseListener(table,this));
 			table.addMouseMotionListener(new JTableButtonMouseListener(table));
 			
 			GridBagConstraints gbc_table = new GridBagConstraints();
@@ -405,8 +403,9 @@ public class AddProductsDialog extends JDialog {
 		}
 	}
 	
-	public void addToList() {
-		
+	public void addToList(String barcode) 
+	{
+		barcodes.add(barcode);
 	}
 	
 	private void finishAddProduct() {

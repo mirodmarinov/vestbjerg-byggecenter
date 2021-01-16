@@ -110,7 +110,7 @@ public class EditProductDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public EditProductDialog() {
+	public EditProductDialog(ProductsPanel productsPanel) {
 		setBounds(100, 100, 1042, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -580,6 +580,13 @@ public class EditProductDialog extends JDialog {
 	public void setBarcode(String barcode)
 	{
 		this.barcode = barcode;
+	}
+	
+	private void finishCreation()
+	{
+		productCtr = new ProductCtr();
+		//TODO Check all fields's value and create the product then dispose the window
+
 	}
 	
 }

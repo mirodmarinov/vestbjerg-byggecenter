@@ -304,9 +304,9 @@ public class ProductsPanel extends JPanel {
 		add(addProductButton, gbc_addCustomerButton);
 		
 		
-		EditProductDialog ecd = new EditProductDialog();
+		EditProductDialog ecd = new EditProductDialog(this);
 		table.addMouseListener(new JTableButtonMouseListener(table,ecd));
-		table.addMouseMotionListener(new JTableButtonMouseListener(table,ecd));
+		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 	}
 
 	/**

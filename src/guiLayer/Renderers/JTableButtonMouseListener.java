@@ -65,7 +65,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 				}
 				else if(table.getName().equals("AddProductsDialog"))
 				{
-					((AddProductsDialog)popup).addToList(/*BARCODE OF PRODUCT HERE*/);
+					addToList();
 				}
 			}
 		}
@@ -178,5 +178,13 @@ public class JTableButtonMouseListener extends MouseAdapter
 		button.setBackground(babyBlue);
 		button.setForeground(Color.WHITE);
 		button.setBorderColor(Color.WHITE);
+	}
+	
+	
+	private void addToList()
+	{
+		table.setValueAt(new RoundedButton("Added", Color.BLACK, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), table.getSelectedRow(), table.getColumn("").getModelIndex());
+		//System.out.println(table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex()));
+		((AddProductsDialog)popup).addToList((String)(table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex())));
 	}
 }
