@@ -33,6 +33,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import controlLayer.*;
+import guiLayer.Renderers.JTableButtonMouseListener;
+
 import javax.swing.JDialog;
 
 public class CreateOrderPanel extends JPanel {
@@ -297,6 +299,7 @@ public class CreateOrderPanel extends JPanel {
 		
 		//Product Panel Table of Products********************************************************
 		orderTable = new JTable();
+		orderTable.setName("CreateORderPanel");
 		JTableHeader header = orderTable.getTableHeader();
 		header.setFont(new Font("Lato", Font.BOLD, 14));
 		header.setBackground(babyBlue);
@@ -349,6 +352,10 @@ public class CreateOrderPanel extends JPanel {
 		gbc_orderTable.fill = GridBagConstraints.BOTH;
 		gbc_orderTable.gridx = 1;
 		gbc_orderTable.gridy = 2;
+		
+
+		orderTable.addMouseListener(new JTableButtonMouseListener(orderTable));
+		orderTable.addMouseMotionListener(new JTableButtonMouseListener(orderTable));
 		
 		
 		//We remove the border of the table by making it empty
@@ -543,6 +550,8 @@ public class CreateOrderPanel extends JPanel {
 		deleteButton.setVisible(false);
 	}
 	
+	//Probably we don't even need this method
+	/*
 	public void setOrderPanelData(ArrayList<String> barcodes)
 	{
 		productCtr = new ProductCtr();
@@ -558,9 +567,9 @@ public class CreateOrderPanel extends JPanel {
 			{
 				orderTable.setValueAt(data, e, orderTable.getColumn(data).getModelIndex());
 			}
-			orderTable.setValueAt(new RoundedButton("Edit", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, orderTable.getColumn("").getModelIndex());
+			orderTable.setValueAt(new RoundedButton("Remove", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, orderTable.getColumn("").getModelIndex());
 		}
 		
-	}
+	}*/
 	
 }

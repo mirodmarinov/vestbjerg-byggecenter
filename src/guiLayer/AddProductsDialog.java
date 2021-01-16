@@ -260,7 +260,7 @@ public class AddProductsDialog extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) 
 				{
-					finishAddProduct();
+					finishCreation();
 				}
 			});
 			formatButton(okButton);
@@ -313,6 +313,7 @@ public class AddProductsDialog extends JDialog {
 				button.setBackground(babyBlue);
 				button.setForeground(Color.WHITE);
 			}
+			
 		});
 	}
 	
@@ -332,6 +333,7 @@ public class AddProductsDialog extends JDialog {
 				button.setBackground(Color.WHITE);
 				button.setForeground(babyBlue);
 			}
+			
 		});
 	}
 	
@@ -383,7 +385,15 @@ public class AddProductsDialog extends JDialog {
 						table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 	
 					}
-					table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+					if (!barcodes.contains(table.getValueAt(e, table.convertColumnIndexToView(table.getColumn("Barcode").getModelIndex()))))
+					{
+						table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+					}
+					else
+					{
+						table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), table.getSelectedRow(), table.getColumn("").getModelIndex());
+					}
+					
 					
 				}
 				
@@ -408,8 +418,25 @@ public class AddProductsDialog extends JDialog {
 		barcodes.add(barcode);
 	}
 	
-	private void finishAddProduct() {
-		// Update Add Product Table
+	private void finishCreation() {
+		productCtr = new ProductCtr();
+		if (barcodes.size() == 0)
+		{
+			return;
+		}
+		DefaultTableModel dtm = (DefaultTableModel) createOrderPanelTable.getModel();
+		dtm.setRowCount(0);
+		//dtm.setRowCount(barcodes.size());
+		for (int e = 0; e< barcodes.size(); e++)
+		{
+			for (String data : productCtr.getProductrByBarcode(barcodes.get(e)))
+			{
+				//TODO returns more data than necessary. We have to filter them.
+				//createOrderPanelTable.setValueAt(data, e, createOrderPanelTable.getColumn(data).getModelIndex());
+			}
+			//createOrderPanelTable.setValueAt(new RoundedButton("Remove", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, createOrderPanelTable.getColumn("").getModelIndex());
+		}
+		//TODO Check data and send it back to the CreateOrderPanel with the method setOrderPanelData(barcodes)
 		dispose();
 	}
 	
@@ -436,4 +463,5 @@ public class AddProductsDialog extends JDialog {
 
 		tablePageLabel.setText("<html><u>" + index + "</u></html>");
 	}
+
 }

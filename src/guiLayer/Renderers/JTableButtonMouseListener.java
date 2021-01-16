@@ -67,6 +67,11 @@ public class JTableButtonMouseListener extends MouseAdapter
 				{
 					addToList();
 				}
+				
+				else if(table.getName().equals("CreateOrderPanel"))
+				{
+					table.remove(table.getSelectedRow());
+				}
 			}
 		}
 	}
@@ -87,7 +92,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 				recolor = 0;
 				if (value instanceof RoundedButton)
 				{
-					if (!((RoundedButton)value).getName().equals("Confirmed"))
+					if (!((RoundedButton)value).getName().equals("Confirmed") && !((RoundedButton)value).getName().equals("Added"))
 					{
 						mouseExited((RoundedButton)value);
 						table.repaint();
@@ -101,7 +106,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 				Object value = table.getValueAt(row, column);
 				if (value instanceof RoundedButton)
 				{
-					if (!((RoundedButton)value).getName().equals("Confirmed"))
+					if (!((RoundedButton)value).getName().equals("Confirmed") && !((RoundedButton)value).getName().equals("Added"))
 					{
 
 						((RoundedButton)value).setBackground(Color.WHITE);
@@ -124,7 +129,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 		Object prevValue = table.getValueAt(y, x);
 		if (prevValue instanceof RoundedButton)
 		{
-			if (!((RoundedButton)prevValue).getName().equals("Confirmed"))
+			if (!((RoundedButton)prevValue).getName().equals("Confirmed") && !((RoundedButton)prevValue).getName().equals("Added"))
 			{
 				mouseExited((RoundedButton)prevValue);
 			}
@@ -183,8 +188,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 	
 	private void addToList()
 	{
-		table.setValueAt(new RoundedButton("Added", Color.BLACK, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), table.getSelectedRow(), table.getColumn("").getModelIndex());
-		//System.out.println(table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex()));
+		table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), table.getSelectedRow(), table.getColumn("").getModelIndex());
 		((AddProductsDialog)popup).addToList((String)(table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex())));
 	}
 }
