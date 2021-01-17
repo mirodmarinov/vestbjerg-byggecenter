@@ -204,11 +204,11 @@ public class EditProductDialog extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if (!nameTextField.getText().equals(""))
 						{
-							//TODO Check this if it's working
 							//It should split the string by ':', add the name to it and connect with the rest of the string (add barcode)
 							//And of course set it as the name label
-							//TODO if it's working, do the same at the barcode field
-							nameLabel.setText(nameTextField.getText() + " " +nameLabel.getText().substring(nameLabel.getText().indexOf(":"),nameLabel.getText().length()));
+							//TODO Do the same for the barcode
+
+							productName.setText(nameTextField.getText() + " " +productName.getText().substring(productName.getText().indexOf(":"),productName.getText().length()));
 						}
 							
 								

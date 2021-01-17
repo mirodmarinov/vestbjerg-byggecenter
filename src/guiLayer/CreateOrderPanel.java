@@ -31,9 +31,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 
 import controlLayer.*;
 import guiLayer.Renderers.JTableButtonMouseListener;
+import guiLayer.Renderers.JTableButtonRenderer;
 
 import javax.swing.JDialog;
 
@@ -299,7 +301,7 @@ public class CreateOrderPanel extends JPanel {
 		
 		//Product Panel Table of Products********************************************************
 		orderTable = new JTable();
-		orderTable.setName("CreateORderPanel");
+		orderTable.setName("CreateOrderPanel");
 		JTableHeader header = orderTable.getTableHeader();
 		header.setFont(new Font("Lato", Font.BOLD, 14));
 		header.setBackground(babyBlue);
@@ -314,6 +316,8 @@ public class CreateOrderPanel extends JPanel {
 		orderTable.setShowVerticalLines(false);
 		orderTable.setRowHeight(50);
 		
+		TableCellRenderer tableRenderer = orderTable.getDefaultRenderer(RoundedButton.class);
+		orderTable.setDefaultRenderer(RoundedButton.class, new JTableButtonRenderer(tableRenderer));
 		
 		DefaultTableCellRenderer defaultHeaderRenderer = (DefaultTableCellRenderer) orderTable.getTableHeader().getDefaultRenderer();
 		defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
@@ -353,7 +357,8 @@ public class CreateOrderPanel extends JPanel {
 		gbc_orderTable.gridx = 1;
 		gbc_orderTable.gridy = 2;
 		
-
+		DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
+		dtm.setRowCount(0);
 		orderTable.addMouseListener(new JTableButtonMouseListener(orderTable));
 		orderTable.addMouseMotionListener(new JTableButtonMouseListener(orderTable));
 		
@@ -408,6 +413,22 @@ public class CreateOrderPanel extends JPanel {
 						Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
 		createOfferButton.addOffset(-9, 2);
 		blueButton(createOfferButton);
+		createOfferButton.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
+				if (dtm.getRowCount() == 0 || phoneValueLabel.equals("..."))
+				{
+					//TODO DO ERROR MESSAGE, right returns on purpose
+					return;
+				}
+				//TODO Discuss the future of the createOffer & createOrder method. From TUI it works much differently
+			}
+			
+			
+		});
 		GridBagConstraints gbc_createOfferButton = new GridBagConstraints();
 		gbc_createOfferButton.fill = GridBagConstraints.BOTH;
 		gbc_createOfferButton.insets = new Insets(0, 0, 5, 5);
@@ -419,6 +440,22 @@ public class CreateOrderPanel extends JPanel {
 		RoundedButton placeOrderButton = new RoundedButton("Place Order", babyBlue,
 						Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
 		placeOrderButton.addOffset(-8, 2);
+		placeOrderButton.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
+				if (dtm.getRowCount() == 0 || phoneValueLabel.equals("..."))
+				{
+					//TODO DO ERROR MESSAGE, right returns on purpose
+					return;
+				}
+				//TODO Discuss the future of the createOffer & createOrder method. From TUI it works much differently
+			}
+			
+			
+		});
 		blueButton(placeOrderButton);
 		GridBagConstraints gbc_placeOrderButton = new GridBagConstraints();
 		gbc_placeOrderButton.fill = GridBagConstraints.BOTH;
@@ -516,10 +553,6 @@ public class CreateOrderPanel extends JPanel {
 		phoneValueLabel.setText(phone);
 	}
 	
-	public void searchProduct()
-	{
-		
-	}
 	
 	private void clearCustomerLabels()
 	{

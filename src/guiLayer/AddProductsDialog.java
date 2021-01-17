@@ -342,23 +342,42 @@ public class AddProductsDialog extends JDialog {
 		//we get the product information from the productContainer
 		ArrayList<String[]> data = productCtr.defaultFill(index);
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+		DefaultTableModel createOrderPanelTabledtm = (DefaultTableModel) createOrderPanelTable.getModel();
 		dtm.setRowCount(0);
 		dtm.setRowCount(data.size());
-		//Check if the product quantity is less the the row amount,
-		//we fill the table with the order data quantity, otherwise we fill
-		//the whole table with information
-		int columncount = data.size() > table.getRowCount() ? table.getRowCount() : data.size();
+		
+		//used for detecting if the table already contains the barcode.
+		//if yes, we created the "Added" button instead of "Add"
+		boolean tableContains = false;
 
-		for (int e = 0; e<columncount;e++)
+		for (int e = 0; e<data.size();e++)
 		{
 			
 			for (int element = 0; element < 6; element++)
 			{
 				table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 			}
+			
 			table.setValueAt(data.get(e)[6], e, table.convertColumnIndexToView(table.getColumn("Discount").getModelIndex()));
 			table.setValueAt("", e, table.convertColumnIndexToView(table.getColumn("Input Quantity").getModelIndex()));
-			table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+			//TODO Check if the barcode is already in the other table THIS IS A REALLY A REALL STUPID SYINTAX WHAT I JUST WROTE, JUST DELETE IT <3
+			for (int rows = 0; rows<createOrderPanelTabledtm.getRowCount();rows++)
+			{
+				if (createOrderPanelTable.getValueAt(rows, createOrderPanelTable.getColumn("Barcode").getModelIndex()).equals(data.get(e)[0]))
+				{
+					tableContains = true;
+				}
+			}
+			
+			if (tableContains)
+			{
+				table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+			}
+			else
+			{
+				table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+			}
+			
 		}
 	}
 	
@@ -425,16 +444,24 @@ public class AddProductsDialog extends JDialog {
 			return;
 		}
 		DefaultTableModel dtm = (DefaultTableModel) createOrderPanelTable.getModel();
-		dtm.setRowCount(0);
-		//dtm.setRowCount(barcodes.size());
+		//dtm.setRowCount(0);
+		dtm.setRowCount(barcodes.size());
+		String[] data;
+		int quantity,price;
 		for (int e = 0; e< barcodes.size(); e++)
 		{
-			for (String data : productCtr.getProductrByBarcode(barcodes.get(e)))
-			{
-				//TODO returns more data than necessary. We have to filter them.
-				//createOrderPanelTable.setValueAt(data, e, createOrderPanelTable.getColumn(data).getModelIndex());
-			}
-			//createOrderPanelTable.setValueAt(new RoundedButton("Remove", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, createOrderPanelTable.getColumn("").getModelIndex());
+			data = productCtr.getProductrByBarcode(barcodes.get(e));
+			//TODO ERRORHANDLING TO FOR THE QUANTITY
+			quantity = Integer.parseInt((String)table.getValueAt(e, table.getColumn("Input Quantity").getModelIndex()));
+			price = Integer.parseInt(data[8]);
+			createOrderPanelTable.setValueAt(data[0], e, createOrderPanelTable.getColumn("Name").getModelIndex());
+			createOrderPanelTable.setValueAt(data[3], e, createOrderPanelTable.getColumn("Barcode").getModelIndex());
+			createOrderPanelTable.setValueAt(data[9], e, createOrderPanelTable.getColumn("Discount").getModelIndex());
+			createOrderPanelTable.setValueAt(price, e, createOrderPanelTable.getColumn("Price").getModelIndex());
+			createOrderPanelTable.setValueAt(table.getValueAt(e, table.getColumn("Input Quantity").getModelIndex()), e, createOrderPanelTable.getColumn("Quantity").getModelIndex());
+			createOrderPanelTable.setValueAt((quantity+price),e, createOrderPanelTable.getColumn("Total").getModelIndex());
+
+			createOrderPanelTable.setValueAt(new RoundedButton("Remove", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, createOrderPanelTable.getColumn("").getModelIndex());
 		}
 		//TODO Check data and send it back to the CreateOrderPanel with the method setOrderPanelData(barcodes)
 		dispose();

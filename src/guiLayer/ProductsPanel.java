@@ -277,10 +277,7 @@ public class ProductsPanel extends JPanel {
 		tablePane.setBorder(BorderFactory.createEmptyBorder());
 		add(tablePane, gbc_table);
 		loadPage(1);
-		
-		//table listeners moved to the bottom, in order for the page to be initialized
-		table.addMouseListener(new JTableButtonMouseListener(table));
-		table.addMouseMotionListener(new JTableButtonMouseListener(table));
+
 		
 		//***** Add Products button ****\\
 		

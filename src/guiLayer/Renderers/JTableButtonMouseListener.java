@@ -39,6 +39,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 		int row = e.getY() / table.getRowHeight(); // get the row of the button
 		// Checking the row or column is valid or not
 
+		//TODO TODO TODO MAKE SURE THE DIALOGS NEVER OPEN TWICE TODO TODO TODO
 		if (row < table.getRowCount() && row >= 0 && column < table.getColumnCount() && column >= 0)
 		{
 			Object value = table.getValueAt(row, column);
@@ -59,7 +60,8 @@ public class JTableButtonMouseListener extends MouseAdapter
 				}
 				else if(table.getName().equals(("ProductsPanel")))
 				{
-					table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex());
+					
+					((EditProductDialog)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex()));
 					((EditProductDialog)popup).setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					((EditProductDialog)popup).setVisible(true);
 				}
@@ -70,7 +72,8 @@ public class JTableButtonMouseListener extends MouseAdapter
 				
 				else if(table.getName().equals("CreateOrderPanel"))
 				{
-					table.remove(table.getSelectedRow());
+					DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+					dtm.removeRow(table.getSelectedRow());
 				}
 			}
 		}

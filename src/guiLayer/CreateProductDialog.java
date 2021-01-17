@@ -534,7 +534,7 @@ public class CreateProductDialog extends JDialog {
 	{
 		productCtr = new ProductCtr();
 		//TODO Check all fields's value and create the product then dispose the window
-
+		dispose();
 	}
 
 	
