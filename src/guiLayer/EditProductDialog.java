@@ -46,27 +46,6 @@ public class EditProductDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private Color babyBlue = new Color(28, 150, 202);
 	private JLabel headerLabel;
-	private DocumentListener cl = new DocumentListener()
-	
-	{
-		@Override
-		public void insertUpdate(DocumentEvent e)
-		{
-			
-		}
-
-		@Override
-		public void removeUpdate(DocumentEvent e)
-		{
-			
-		}
-
-		@Override
-		public void changedUpdate(DocumentEvent e)
-		{
-			
-		}
-	};
 	private RoundedButton cancelButton;
 	private JPanel panel;
 	private JLabel nameLabel;
@@ -111,6 +90,7 @@ public class EditProductDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public EditProductDialog(ProductsPanel productsPanel) {
+		//TODO redraw the productsPanel table after finish the editing (update the table)
 		setBounds(100, 100, 1042, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

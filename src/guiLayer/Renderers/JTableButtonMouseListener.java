@@ -56,7 +56,9 @@ public class JTableButtonMouseListener extends MouseAdapter
 				}
 				else if(table.getName().equals("CustomersPanel"))
 				{
-					//((EditCustomerDialog)popup).addToList(); TODO Create these methods
+					((EditCustomerDialog)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Phone number").getModelIndex()));
+					((EditCustomerDialog)popup).setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					((EditCustomerDialog)popup).setVisible(true);
 				}
 				else if(table.getName().equals(("ProductsPanel")))
 				{
@@ -163,7 +165,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 			}
 		}
 		
-		// change the button to COnfirmed and inactive
+		// change the button to Confirmed and inactive
 		RoundedButton button = (RoundedButton)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("").getModelIndex()));
 		button.setText("Confirmed");
 		button.setBackground(Color.WHITE);

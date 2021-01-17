@@ -156,7 +156,8 @@ public class CustomersPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setPreferredWidth(70);
 		table.getColumnModel().getColumn(5).setMinWidth(70);
 		
-		table.addMouseListener(new JTableButtonMouseListener(table));
+		EditCustomerDialog ecd = new EditCustomerDialog(this);
+		table.addMouseListener(new JTableButtonMouseListener(table,ecd));
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 		
 		
@@ -279,9 +280,6 @@ public class CustomersPanel extends JPanel {
 		add(tablePane, gbc_table);
 		loadPage(1);
 		
-		//table listeners moved to the bottom, in order for the page to be initialized
-		table.addMouseListener(new JTableButtonMouseListener(table));
-		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 		
 		//***** Add Products button ****\\
 		
@@ -290,6 +288,10 @@ public class CustomersPanel extends JPanel {
 		addProductButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+
+				CreateCustomerDialog dialog = new CreateCustomerDialog();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
 			}
 		});
 		addProductButton.addOffset(-13, 2);

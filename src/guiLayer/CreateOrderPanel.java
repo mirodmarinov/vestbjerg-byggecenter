@@ -473,7 +473,7 @@ public class CreateOrderPanel extends JPanel {
 		{
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				cancelOrder();
+				reset();
 			}
 		});
 		GridBagConstraints gbc_cancelButton = new GridBagConstraints();
@@ -565,44 +565,18 @@ public class CreateOrderPanel extends JPanel {
 		}
 		//searchBar.setText((searchBar.isFocusOwner()) ? "" : "🔍 Phone number...");
 	}
-	
-	private void cancelOrder()
-	{
-		clearCustomerLabels();
-		//TODO clear tables
-	}
-	
+
 	
 	
 	public void reset()
 	{
-		
+		DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
+		dtm.setRowCount(0);
 		searchBar.setText("🔍 Phone number...");
 		clearCustomerLabels();
 		customerErrorLabel.setVisible(false);
 		deleteButton.setVisible(false);
 	}
 	
-	//Probably we don't even need this method
-	/*
-	public void setOrderPanelData(ArrayList<String> barcodes)
-	{
-		productCtr = new ProductCtr();
-		if (barcodes.size() == 0)
-		{
-			return;
-		}
-		DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
-		dtm.setRowCount(barcodes.size());
-		for (int e = 0; e< barcodes.size(); e++)
-		{
-			for (String data : productCtr.getProductrByBarcode(barcodes.get(e)))
-			{
-				orderTable.setValueAt(data, e, orderTable.getColumn(data).getModelIndex());
-			}
-			orderTable.setValueAt(new RoundedButton("Remove", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, orderTable.getColumn("").getModelIndex());
-		}
-		
-	}*/
 	
 }

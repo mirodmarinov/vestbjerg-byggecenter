@@ -46,27 +46,6 @@ public class CreateProductDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private Color babyBlue = new Color(28, 150, 202);
 	private JLabel headerLabel;
-	private DocumentListener cl = new DocumentListener()
-	
-	{
-		@Override
-		public void insertUpdate(DocumentEvent e)
-		{
-			
-		}
-
-		@Override
-		public void removeUpdate(DocumentEvent e)
-		{
-			
-		}
-
-		@Override
-		public void changedUpdate(DocumentEvent e)
-		{
-			
-		}
-	};
 	private RoundedButton cancelButton;
 	private JPanel panel;
 	private JLabel nameLabel;
@@ -135,7 +114,6 @@ public class CreateProductDialog extends JDialog {
 			{
 				
 				headerLabel = new JLabel("Create Product");
-				//customerNameLabel.setHorizontalAlignment(JLabel.LEFT); TODO IT DOESN't WOOORK ;((((((
 				header.add(headerLabel);
 				headerLabel.setVisible(true);
 				headerLabel.setForeground(Color.WHITE);
