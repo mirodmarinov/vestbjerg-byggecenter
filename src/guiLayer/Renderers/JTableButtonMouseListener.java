@@ -1,6 +1,7 @@
 package guiLayer.Renderers;
 
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -57,15 +58,17 @@ public class JTableButtonMouseListener extends MouseAdapter
 				else if(table.getName().equals("CustomersPanel"))
 				{
 					((EditCustomerDialog)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Phone number").getModelIndex()));
-					((EditCustomerDialog)popup).setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					((EditCustomerDialog)popup).setVisible(true);
+					popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					popup.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+					popup.setVisible(true);
 				}
 				else if(table.getName().equals(("ProductsPanel")))
 				{
 					
 					((EditProductDialog)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex()));
-					((EditProductDialog)popup).setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					((EditProductDialog)popup).setVisible(true);
+					popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					popup.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+					popup.setVisible(true);
 				}
 				else if(table.getName().equals("AddProductsDialog"))
 				{
@@ -93,14 +96,17 @@ public class JTableButtonMouseListener extends MouseAdapter
 			// Leave the button
 			if (recolor == 1)
 			{
-				Object value = table.getValueAt(y, x);
-				recolor = 0;
-				if (value instanceof RoundedButton)
+				if (y<table.getRowCount() && x<table.getColumnCount())
 				{
-					if (!((RoundedButton)value).getName().equals("Confirmed") && !((RoundedButton)value).getName().equals("Added"))
+					Object value = table.getValueAt(y, x);
+					recolor = 0;
+					if (value instanceof RoundedButton)
 					{
-						mouseExited((RoundedButton)value);
-						table.repaint();
+						if (!((RoundedButton)value).getName().equals("Confirmed") && !((RoundedButton)value).getName().equals("Added"))
+						{
+							mouseExited((RoundedButton)value);
+							table.repaint();
+						}
 					}
 				}
 			}

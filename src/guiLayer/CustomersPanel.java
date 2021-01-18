@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Dimension;
 
 import javax.swing.JTable;
@@ -291,6 +292,7 @@ public class CustomersPanel extends JPanel {
 
 				CreateCustomerDialog dialog = new CreateCustomerDialog();
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 				dialog.setVisible(true);
 			}
 		});
