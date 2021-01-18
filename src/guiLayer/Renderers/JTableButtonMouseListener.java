@@ -201,6 +201,6 @@ public class JTableButtonMouseListener extends MouseAdapter
 	private void addToList()
 	{
 		table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), table.getSelectedRow(), table.getColumn("").getModelIndex());
-		((AddProductsDialog)popup).addToList((String)(table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex())));
+		((AddProductsDialog)popup).addToList(table.getSelectedRow());
 	}
 }
