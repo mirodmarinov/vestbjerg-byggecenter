@@ -73,8 +73,6 @@ public class AddProductsDialog extends JDialog {
 			searchProduct(false);
 		}
 	};
-
-	
 	
 	/**
 	 * Create the dialog.
@@ -95,6 +93,7 @@ public class AddProductsDialog extends JDialog {
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.2, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		
+		//Product SearchBar********************************************************
 		{
 			searchBar = new JTextField();
 			searchBar.setFocusable(false);
@@ -144,6 +143,7 @@ public class AddProductsDialog extends JDialog {
 			contentPanel.add(searchBar, gbc_searchBar);
 			searchBar.setColumns(10);
 		}
+		
 		
 		productErrorLabel = new JLabel("Product not found!");
 		productErrorLabel.setVisible(false);
@@ -346,6 +346,11 @@ public class AddProductsDialog extends JDialog {
 		});
 	}
 	
+	/**
+	 * The method helps us fill the table, by retrieving data and 
+	 * inserting it. 
+	 * 
+	 */
 	private void defaultFillTable(int index) {
 		//we get the product information from the productContainer
 		ArrayList<String[]> data = orderCtr.fillTable(index, "");
