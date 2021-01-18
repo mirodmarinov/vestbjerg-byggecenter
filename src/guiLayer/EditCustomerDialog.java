@@ -386,15 +386,13 @@ public class EditCustomerDialog extends JDialog {
 		
 		customerCtr = new CustomerCtr();
 		ArrayList<String[]> data = customerCtr.searchField(phone);
-		System.out.println(phone);
-		System.out.println(data.size());
 		if (data.size() != 0)
 		{
 			nameTextField.setText(data.get(0)[0]);
 			phoneTextField.setText(data.get(0)[1]);
 			addressTextField.setText(data.get(0)[2]);
 			groupTextField.setText(data.get(0)[3]);
-			addressTextField.setText(data.get(0)[4]);
+			discountTextField.setText(data.get(0)[4]);
 			customerName.setText(data.get(0)[0]);
 		}
 		

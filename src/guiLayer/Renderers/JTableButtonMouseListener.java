@@ -130,16 +130,18 @@ public class JTableButtonMouseListener extends MouseAdapter
 
 	public void mouseExited(MouseEvent e)
 	{
-
-		Object prevValue = table.getValueAt(y, x);
-		if (prevValue instanceof RoundedButton)
+		if (y<table.getRowCount() && x<table.getColumnCount())
 		{
-			if (!((RoundedButton)prevValue).getName().equals("Confirmed") && !((RoundedButton)prevValue).getName().equals("Added"))
+			Object prevValue = table.getValueAt(y, x);
+			if (prevValue instanceof RoundedButton)
 			{
-				mouseExited((RoundedButton)prevValue);
-			}
+				if (!((RoundedButton)prevValue).getName().equals("Confirmed") && !((RoundedButton)prevValue).getName().equals("Added"))
+				{
+					mouseExited((RoundedButton)prevValue);
+				}
 
-			table.repaint();
+				table.repaint();
+			}
 		}
 
 	}
