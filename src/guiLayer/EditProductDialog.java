@@ -188,7 +188,6 @@ public class EditProductDialog extends JDialog {
 						{
 							//It should split the string by ':', add the name to it and connect with the rest of the string (add barcode)
 							//And of course set it as the name label
-							//TODO Do the same for the barcode
 
 							productName.setText(nameTextField.getText() + " " +productName.getText().substring(productName.getText().indexOf(":"),productName.getText().length()));
 						}
@@ -261,6 +260,21 @@ public class EditProductDialog extends JDialog {
 				barcodeTextField = new JTextField();
 				barcodeTextField.setName("Barcode");
 				textFieldFunctions(barcodeTextField);
+				barcodeTextField.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (!barcodeTextField.getText().equals(""))
+						{
+							//It should split the string by ':', add the name to it and connect with the rest of the string (add barcode)
+							//And of course set it as the name label
+							//TODO Do the same for the barcode
+							
+							productName.setText(productName.getText().substring(0,productName.getText().indexOf(":")) + ": " + barcodeTextField.getText());
+							//productName.setText(nameTextField.getText() + " " +productName.getText().substring(productName.getText().indexOf(":"),productName.getText().length()));
+						}
+							
+								
+					}
+				});
 				GridBagConstraints gbc_barcodeTextField = new GridBagConstraints();
 				gbc_barcodeTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_barcodeTextField.fill = GridBagConstraints.HORIZONTAL;
