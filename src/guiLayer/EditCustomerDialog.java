@@ -57,11 +57,12 @@ public class EditCustomerDialog extends JDialog {
 	private JTextField phoneTextField;
 	private JLabel groupLabel;
 	private JTextField groupTextField;
-	private JLabel Address;
+	private JLabel addressLabel;
 	private JTextField addressTextField;
 	private JPanel header;
 	private CustomerCtr customerCtr;
 	private JLabel customerName;
+	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -81,25 +82,23 @@ public class EditCustomerDialog extends JDialog {
 	 */
 	public EditCustomerDialog(CustomersPanel customersPanel) {
 		//TODO redraw the customersPanel table after finish the editing (update the table)
-		setBounds(100, 100, 1042, 600);
+		setBounds(100, 100, 567, 599);
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setBackground(new Color(252, 252, 252));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{60, 0, 0, 0, 0, 0, 90, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.3, 0.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.2, 0.5, 0.3, 0.2, 0.2, Double.MIN_VALUE};
+		gbl_contentPanel.columnWidths = new int[]{0, 0};
+		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_contentPanel.columnWeights = new double[]{1.0, 0.0};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
-		{
-		}
 		{
 			header = new JPanel();
 			header.setBackground(babyBlue);
 			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-			gbc_panel_1.gridwidth = 8;
+			gbc_panel_1.gridwidth = 2;
 			gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 			gbc_panel_1.fill = GridBagConstraints.BOTH;
 			gbc_panel_1.gridx = 0;
@@ -107,8 +106,7 @@ public class EditCustomerDialog extends JDialog {
 			contentPanel.add(header, gbc_panel_1);
 			{
 				
-				headerLabel = new JLabel("Edit Customer");
-				//customerNameLabel.setHorizontalAlignment(JLabel.LEFT); TODO IT DOESN't WOOORK ;((((((
+				headerLabel = new JLabel("Create Customer");
 				header.add(headerLabel);
 				headerLabel.setVisible(true);
 				headerLabel.setForeground(Color.WHITE);
@@ -116,58 +114,57 @@ public class EditCustomerDialog extends JDialog {
 			}
 		}
 		{
-			customerName = new JLabel("<ProductNamePlaceHolder>");
+			customerName = new JLabel("<CustomerNamePlaceHolder>");
 			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
+			gbc_lblNewLabel.insets = new Insets(5, 50, 5, 5);
 			gbc_lblNewLabel.gridx = 0;
 			gbc_lblNewLabel.gridy = 1;
 			contentPanel.add(customerName, gbc_lblNewLabel);
 		}
 		{
 			panel = new JPanel();
-			panel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 			panel.setBorder(BorderFactory.createLineBorder(new Color(243, 243, 243), 2, true));
 			panel.setBackground(Color.WHITE);
 			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.gridheight = 3;
-			gbc_panel.gridwidth = 6;
-			gbc_panel.insets = new Insets(0, 0, 5, 5);
+			gbc_panel.gridwidth = 2;
+			gbc_panel.insets = new Insets(20, 50, 20, 50);
 			gbc_panel.fill = GridBagConstraints.BOTH;
-			gbc_panel.gridx = 1;
-			gbc_panel.gridy = 3;
+			gbc_panel.gridx = 0;
+			gbc_panel.gridy = 2;
 			contentPanel.add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
-			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0};
-			gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel.columnWidths = new int[]{0};
+			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+			gbl_panel.columnWeights = new double[]{1.0};
+			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			{
 				nameLabel = new JLabel("Name");
 				GridBagConstraints gbc_nameLabel = new GridBagConstraints();
 				gbc_nameLabel.anchor = GridBagConstraints.WEST;
-				gbc_nameLabel.insets = new Insets(0, 0, 5, 5);
-				gbc_nameLabel.gridx = 1;
-				gbc_nameLabel.gridy = 0;
+				gbc_nameLabel.insets = new Insets(0, 10, 5, 0);
+				gbc_nameLabel.gridx = 0;
+				gbc_nameLabel.gridy = 1;
 				panel.add(nameLabel, gbc_nameLabel);
 			}
 			{
 				phoneLabel = new JLabel("Phone");
 				GridBagConstraints gbc_phoneLabel = new GridBagConstraints();
 				gbc_phoneLabel.anchor = GridBagConstraints.WEST;
-				gbc_phoneLabel.insets = new Insets(0, 0, 5, 5);
-				gbc_phoneLabel.gridx = 2;
-				gbc_phoneLabel.gridy = 0;
+				gbc_phoneLabel.insets = new Insets(0, 10, 5, 0);
+				gbc_phoneLabel.gridx = 0;
+				gbc_phoneLabel.gridy = 3;
 				panel.add(phoneLabel, gbc_phoneLabel);
 			}
 			{
-				Address = new JLabel("Address");
-				GridBagConstraints gbc_Address = new GridBagConstraints();
-				gbc_Address.anchor = GridBagConstraints.WEST;
-				gbc_Address.insets = new Insets(0, 0, 5, 0);
-				gbc_Address.gridx = 3;
-				gbc_Address.gridy = 0;
-				panel.add(Address, gbc_Address);
+				addressLabel = new JLabel("Address");
+				GridBagConstraints gbc_addressLabel = new GridBagConstraints();
+				gbc_addressLabel.anchor = GridBagConstraints.WEST;
+				gbc_addressLabel.insets = new Insets(0, 10, 5, 0);
+				gbc_addressLabel.gridx = 0;
+				gbc_addressLabel.gridy = 5;
+				panel.add(addressLabel, gbc_addressLabel);
 			}
 			{
 				nameTextField = new JTextField();
@@ -184,10 +181,10 @@ public class EditCustomerDialog extends JDialog {
 				nameTextField.setName("Name");
 				textFieldFunctions(nameTextField);
 				GridBagConstraints gbc_nameTextField = new GridBagConstraints();
-				gbc_nameTextField.insets = new Insets(0, 0, 5, 5);
+				gbc_nameTextField.insets = new Insets(0, 10, 20, 10);
 				gbc_nameTextField.fill = GridBagConstraints.HORIZONTAL;
-				gbc_nameTextField.gridx = 1;
-				gbc_nameTextField.gridy = 1;
+				gbc_nameTextField.gridx = 0;
+				gbc_nameTextField.gridy = 2;
 				panel.add(nameTextField, gbc_nameTextField);
 				nameTextField.setColumns(10);
 			}
@@ -196,10 +193,10 @@ public class EditCustomerDialog extends JDialog {
 				phoneTextField.setName("Phone");
 				textFieldFunctions(phoneTextField);
 				GridBagConstraints gbc_phoneTextField = new GridBagConstraints();
-				gbc_phoneTextField.insets = new Insets(0, 0, 5, 5);
+				gbc_phoneTextField.insets = new Insets(0, 10, 20, 10);
 				gbc_phoneTextField.fill = GridBagConstraints.HORIZONTAL;
-				gbc_phoneTextField.gridx = 2;
-				gbc_phoneTextField.gridy = 1;
+				gbc_phoneTextField.gridx = 0;
+				gbc_phoneTextField.gridy = 4;
 				panel.add(phoneTextField, gbc_phoneTextField);
 				phoneTextField.setColumns(10);
 			}
@@ -208,29 +205,29 @@ public class EditCustomerDialog extends JDialog {
 				addressTextField.setName("Address");
 				textFieldFunctions(addressTextField);
 				GridBagConstraints gbc_addressTextField = new GridBagConstraints();
-				gbc_addressTextField.insets = new Insets(0, 0, 5, 0);
+				gbc_addressTextField.insets = new Insets(0, 10, 20, 10);
 				gbc_addressTextField.fill = GridBagConstraints.HORIZONTAL;
-				gbc_addressTextField.gridx = 3;
-				gbc_addressTextField.gridy = 1;
+				gbc_addressTextField.gridx = 0;
+				gbc_addressTextField.gridy = 6;
 				panel.add(addressTextField, gbc_addressTextField);
 				addressTextField.setColumns(10);
 			}
 			{
-				discountLabel = new JLabel("Discount");
+				JLabel discountLabel = new JLabel("Discount");
 				GridBagConstraints gbc_discountLabel = new GridBagConstraints();
 				gbc_discountLabel.anchor = GridBagConstraints.WEST;
-				gbc_discountLabel.insets = new Insets(0, 0, 5, 5);
-				gbc_discountLabel.gridx = 1;
-				gbc_discountLabel.gridy = 3;
+				gbc_discountLabel.insets = new Insets(0, 10, 5, 0);
+				gbc_discountLabel.gridx = 0;
+				gbc_discountLabel.gridy = 8;
 				panel.add(discountLabel, gbc_discountLabel);
 			}
 			{
 				groupLabel = new JLabel("Group");
 				GridBagConstraints gbc_groupLabel = new GridBagConstraints();
 				gbc_groupLabel.anchor = GridBagConstraints.WEST;
-				gbc_groupLabel.insets = new Insets(0, 0, 5, 5);
-				gbc_groupLabel.gridx = 2;
-				gbc_groupLabel.gridy = 3;
+				gbc_groupLabel.insets = new Insets(0, 10, 5, 0);
+				gbc_groupLabel.gridx = 0;
+				gbc_groupLabel.gridy = 11;
 				panel.add(groupLabel, gbc_groupLabel);
 			}
 			{
@@ -238,10 +235,10 @@ public class EditCustomerDialog extends JDialog {
 				discountTextField.setName("Discount");
 				textFieldFunctions(discountTextField);
 				GridBagConstraints gbc_discountTextField = new GridBagConstraints();
-				gbc_discountTextField.insets = new Insets(0, 0, 5, 5);
+				gbc_discountTextField.insets = new Insets(0, 10, 20, 10);
 				gbc_discountTextField.fill = GridBagConstraints.HORIZONTAL;
-				gbc_discountTextField.gridx = 1;
-				gbc_discountTextField.gridy = 4;
+				gbc_discountTextField.gridx = 0;
+				gbc_discountTextField.gridy = 9;
 				panel.add(discountTextField, gbc_discountTextField);
 				discountTextField.setColumns(10);
 			}
@@ -250,10 +247,10 @@ public class EditCustomerDialog extends JDialog {
 				groupTextField.setName("Group");
 				textFieldFunctions(groupTextField);
 				GridBagConstraints gbc_groupTextField = new GridBagConstraints();
-				gbc_groupTextField.insets = new Insets(0, 0, 5, 5);
+				gbc_groupTextField.insets = new Insets(0, 10, 20, 10);
 				gbc_groupTextField.fill = GridBagConstraints.HORIZONTAL;
-				gbc_groupTextField.gridx = 2;
-				gbc_groupTextField.gridy = 4;
+				gbc_groupTextField.gridx = 0;
+				gbc_groupTextField.gridy = 12;
 				panel.add(groupTextField, gbc_groupTextField);
 				groupTextField.setColumns(10);
 			}
@@ -263,11 +260,9 @@ public class EditCustomerDialog extends JDialog {
 			formatButton(okButton);
 			blueButton(okButton);
 			GridBagConstraints gbc_okButton = new GridBagConstraints();
-			gbc_okButton.gridwidth = 2;
-			gbc_okButton.gridheight = 4;
 			gbc_okButton.anchor = GridBagConstraints.SOUTHEAST;
-			gbc_okButton.insets = new Insets(0, 0, 0, 5);
-			gbc_okButton.gridx = 5;
+			gbc_okButton.insets = new Insets(0, 0, 5, 5);
+			gbc_okButton.gridx = 0;
 			gbc_okButton.gridy = 3;
 			contentPanel.add(okButton, gbc_okButton);
 		}
@@ -276,9 +271,9 @@ public class EditCustomerDialog extends JDialog {
 			formatButton(cancelButton);
 			whiteButton(cancelButton);
 			GridBagConstraints gbc_cancelButton = new GridBagConstraints();
-			gbc_cancelButton.gridheight = 4;
 			gbc_cancelButton.anchor = GridBagConstraints.SOUTHEAST;
-			gbc_cancelButton.gridx = 7;
+			gbc_cancelButton.insets = new Insets(0, 0, 5, 5);
+			gbc_cancelButton.gridx = 1;
 			gbc_cancelButton.gridy = 3;
 			contentPanel.add(cancelButton, gbc_cancelButton);
 		}
