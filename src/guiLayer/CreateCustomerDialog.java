@@ -144,10 +144,10 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				discountTextField = new JTextField();
-				discountTextField.setName("Barcode");
+				discountTextField.setName("Discount");
 				textFieldFunctions(discountTextField);
 				GridBagConstraints gbc_discountTextField = new GridBagConstraints();
-				gbc_discountTextField.insets = new Insets(0, 0, 20, 10);
+				gbc_discountTextField.insets = new Insets(0, 0, 20, 0);
 				gbc_discountTextField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_discountTextField.gridx = 2;
 				gbc_discountTextField.gridy = 2;
@@ -174,7 +174,7 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				phoneTextField = new JTextField();
-				phoneTextField.setName("Group");
+				phoneTextField.setName("Phone");
 				textFieldFunctions(phoneTextField);
 				GridBagConstraints gbc_phoneTextField = new GridBagConstraints();
 				gbc_phoneTextField.insets = new Insets(0, 0, 20, 10);
@@ -186,10 +186,10 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				groupTextField = new JTextField();
-				groupTextField.setName("Location");
+				groupTextField.setName("Group");
 				textFieldFunctions(groupTextField);
 				GridBagConstraints gbc_groupTextField = new GridBagConstraints();
-				gbc_groupTextField.insets = new Insets(0, 0, 20, 10);
+				gbc_groupTextField.insets = new Insets(0, 0, 20, 0);
 				gbc_groupTextField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_groupTextField.gridx = 2;
 				gbc_groupTextField.gridy = 4;
@@ -207,7 +207,7 @@ public class CreateCustomerDialog extends JDialog {
 			}
 			{
 				addressTextField = new JTextField();
-				addressTextField.setName("Discount");
+				addressTextField.setName("Address");
 				textFieldFunctions(addressTextField);
 				GridBagConstraints gbc_addressTextField = new GridBagConstraints();
 				gbc_addressTextField.insets = new Insets(0, 0, 0, 10);

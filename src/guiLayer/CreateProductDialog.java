@@ -514,7 +514,7 @@ public class CreateProductDialog extends JDialog {
 		barcodeTextField.setText("Barcode...");
 		locationTextField.setText("Location...");
 		quantityTextField.setText("Quantity...");
-		thresholdTextField.setText("Treshold...");
+		thresholdTextField.setText("Threshold...");
 		salesPriceTextField.setText("Sale price...");
 		purchasePriceTextField.setText("Purchase price...");
 		discountTextField.setText("Discount...");
