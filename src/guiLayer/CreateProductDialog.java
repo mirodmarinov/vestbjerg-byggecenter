@@ -71,19 +71,7 @@ public class CreateProductDialog extends JDialog {
 	private JPanel header;
 	private ProductCtr productCtr;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		try {
-			CreateCustomerDialog dialog = new CreateCustomerDialog(String productNameAndID);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
-
+	
 	/**
 	 * Create the dialog.
 	 */
@@ -350,6 +338,7 @@ public class CreateProductDialog extends JDialog {
 				panel.add(salesPriceTextField, gbc_salesPriceTextField);
 				salesPriceTextField.setColumns(10);
 			}
+			fillFields();
 		}
 		{
 			RoundedButton okButton = new RoundedButton("Finish", new Color(28, 150, 202), Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
@@ -515,5 +504,17 @@ public class CreateProductDialog extends JDialog {
 		dispose();
 	}
 
-	
+	private void fillFields()
+	{
+		nameTextField.setText("Name...");
+		descriptionTextField.setText("Description...");
+		groupTextField.setText("Group...");
+		barcodeTextField.setText("Barcode...");
+		locationTextField.setText("Location...");
+		quantityTextField.setText("Quantity...");
+		thresholdTextField.setText("Treshold...");
+		salesPriceTextField.setText("Sale price...");
+		purchasePriceTextField.setText("Purchase price...");
+		discountTextField.setText("Discount...");
+	}
 }

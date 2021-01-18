@@ -547,6 +547,7 @@ public class CreateOrderPanel extends JPanel {
 		{
 			customerErrorLabel.setVisible(true);
 			clearCustomerLabels();
+			deleteButton.setVisible(false);
 			return;
 		}
 		deleteButton.setVisible(true);
@@ -565,7 +566,6 @@ public class CreateOrderPanel extends JPanel {
 		{
 			searchBar.setText("🔍 Phone number...");
 		}
-		//searchBar.setText((searchBar.isFocusOwner()) ? "" : "🔍 Phone number...");
 	}
 
 	
