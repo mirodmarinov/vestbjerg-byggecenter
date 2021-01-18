@@ -99,10 +99,10 @@ public class EditProductDialog extends JDialog {
 		contentPanel.setBackground(new Color(252, 252, 252));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{60, 0, 0, 0, 0, 0, 90, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.3, 0.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.2, 0.5, 0.3, 0.2, 0.2, Double.MIN_VALUE};
+		gbl_contentPanel.columnWidths = new int[]{60, 20, 0, 0, 0, 0, 0, 0};
+		gbl_contentPanel.rowHeights = new int[]{0, 20, 50, 0, 50, 50, 30};
+		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.1, 0.1, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 		}
@@ -110,9 +110,10 @@ public class EditProductDialog extends JDialog {
 			header = new JPanel();
 			header.setBackground(babyBlue);
 			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+			gbc_panel_1.anchor = GridBagConstraints.NORTH;
 			gbc_panel_1.gridwidth = 8;
 			gbc_panel_1.insets = new Insets(0, 0, 5, 0);
-			gbc_panel_1.fill = GridBagConstraints.BOTH;
+			gbc_panel_1.fill = GridBagConstraints.HORIZONTAL;
 			gbc_panel_1.gridx = 0;
 			gbc_panel_1.gridy = 0;
 			contentPanel.add(header, gbc_panel_1);
@@ -128,7 +129,9 @@ public class EditProductDialog extends JDialog {
 		}
 		{
 			productName = new JLabel("<ProductNamePlaceHolder>");
+			productName.setFont(new Font("LATO", Font.BOLD, 18));
 			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+			gbc_lblNewLabel.gridwidth = 2;
 			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 			gbc_lblNewLabel.gridx = 0;
 			gbc_lblNewLabel.gridy = 1;
@@ -140,7 +143,7 @@ public class EditProductDialog extends JDialog {
 			panel.setBorder(BorderFactory.createLineBorder(new Color(243, 243, 243), 2, true));
 			panel.setBackground(Color.WHITE);
 			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.gridheight = 3;
+			gbc_panel.gridheight = 2;
 			gbc_panel.gridwidth = 6;
 			gbc_panel.insets = new Insets(0, 0, 5, 5);
 			gbc_panel.fill = GridBagConstraints.BOTH;
@@ -149,7 +152,7 @@ public class EditProductDialog extends JDialog {
 			contentPanel.add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
 			gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
-			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0};
+			gbl_panel.rowHeights = new int[]{0, 0, 50, 0, 0, 50, 0, 0, 50, 0, 0, 0};
 			gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
@@ -301,7 +304,7 @@ public class EditProductDialog extends JDialog {
 				textPaneFunctions(descriptionTextField);
 				descriptionTextField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, false));
 				GridBagConstraints gbc_descriptionTextField = new GridBagConstraints();
-				gbc_descriptionTextField.gridheight = 2;
+				gbc_descriptionTextField.gridheight = 3;
 				gbc_descriptionTextField.insets = new Insets(0, 0, 5, 0);
 				gbc_descriptionTextField.fill = GridBagConstraints.BOTH;
 				gbc_descriptionTextField.gridx = 3;
@@ -399,11 +402,10 @@ public class EditProductDialog extends JDialog {
 			formatButton(okButton);
 			blueButton(okButton);
 			GridBagConstraints gbc_okButton = new GridBagConstraints();
-			gbc_okButton.gridwidth = 2;
 			gbc_okButton.gridheight = 4;
 			gbc_okButton.anchor = GridBagConstraints.SOUTHEAST;
 			gbc_okButton.insets = new Insets(0, 0, 0, 5);
-			gbc_okButton.gridx = 5;
+			gbc_okButton.gridx = 6;
 			gbc_okButton.gridy = 3;
 			contentPanel.add(okButton, gbc_okButton);
 		}

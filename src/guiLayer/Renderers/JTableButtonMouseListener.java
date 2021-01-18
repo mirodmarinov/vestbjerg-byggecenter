@@ -40,7 +40,6 @@ public class JTableButtonMouseListener extends MouseAdapter
 		int row = e.getY() / table.getRowHeight(); // get the row of the button
 		// Checking the row or column is valid or not
 
-		//TODO TODO TODO MAKE SURE THE DIALOGS NEVER OPEN TWICE TODO TODO TODO
 		if (row < table.getRowCount() && row >= 0 && column < table.getColumnCount() && column >= 0)
 		{
 			Object value = table.getValueAt(row, column);
