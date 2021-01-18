@@ -21,7 +21,7 @@ public class ProductContainer implements Serializable
 
 	private static final long serialVersionUID = 1L;
 	private static ProductContainer uniqueInstance = new ProductContainer();
-	public ArrayList<Product> products = new ArrayList<>();
+	private ArrayList<Product> products = new ArrayList<>();
 
 	private ProductContainer()
 	{
