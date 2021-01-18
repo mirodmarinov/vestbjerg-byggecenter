@@ -7,7 +7,7 @@ import guiLayer.Renderers.JTableButtonMouseListener;
 import guiLayer.Renderers.JTableButtonRenderer;
 import modelLayer.OrderContainer;
 import modelLayer.ProductContainer;
-
+import modelLayer.Serialization;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -268,7 +268,6 @@ public class OrderPanel extends JPanel {
 		tablePane.setBorder(BorderFactory.createEmptyBorder());
 		add(tablePane, gbc_table);
 		loadPage(1);
-		
 		//table listeners moved to the bottom, in order for the page to be initialized
 		table.addMouseListener(new JTableButtonMouseListener(table));
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));

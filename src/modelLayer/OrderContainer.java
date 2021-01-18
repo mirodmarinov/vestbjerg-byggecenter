@@ -40,8 +40,12 @@ public class OrderContainer implements Serializable
 	 */
 	public boolean addOrder(Order order)
 	{
-		return orders.add(order);
-		//TODO - any checks?
+		if (orders.add(order))
+		{
+			Serialization.getInstance().serializeClass("modelLayer.OrderContainer");
+			return true;
+		}
+		return false;
 	}
 	
 		/**
@@ -114,7 +118,13 @@ public class OrderContainer implements Serializable
 	{
 		Order order = findOrder(orderNumber);
 		order.generatePurchaseDate();
-		return order.setStatus("confirmed");
+		
+		if (order.setStatus("confirmed"))
+		{
+			Serialization.getInstance().serializeClass("modelLayer.OrderContainer");
+			return true;
+		}
+		return false;
 		
 	}
 

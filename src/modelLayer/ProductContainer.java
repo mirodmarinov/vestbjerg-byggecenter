@@ -71,7 +71,9 @@ public class ProductContainer implements Serializable
 				return false;
 			}
 		}
-		return products.add(product);
+		products.add(product);
+		Serialization.getInstance().serializeClass("modelLayer.ProductContainer");
+		return true;
 	}
 
 	/**

@@ -30,8 +30,7 @@ public class CustomerContainer implements Serializable
 
     private CustomerContainer()
     {
-    	
-    	
+    	//Serialization.getInstance().deserializeClass("CustomerContainer");
     }
     
     public static CustomerContainer getInstance()
@@ -104,12 +103,20 @@ public class CustomerContainer implements Serializable
 				return false;
 			}
 		}
-		return customers.add(customer);
+		
+		customers.add(customer);
+		serializeClass();
+		return true;
 	}
 	
 	public ArrayList<Customer> getCustomers()
 	{
 		return customers;
+	}
+	
+	private void serializeClass()
+	{
+		Serialization.getInstance().serializeClass("modelLayer.CustomerContainer");
 	}
 	
 }
