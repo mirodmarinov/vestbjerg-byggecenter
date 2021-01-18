@@ -79,7 +79,6 @@ public class CreateOrderPanel extends JPanel {
 		
 		/********************************************** Customer Panel **********************************************/
 		JPanel customerPanel = new JPanel();
-		customerPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 		customerPanel.setBorder(BorderFactory.createLineBorder(new Color(243, 243, 243), 2, true));
 		customerPanel.setBackground(Color.WHITE);
 		GridBagConstraints gbc_customerPanel = new GridBagConstraints();
