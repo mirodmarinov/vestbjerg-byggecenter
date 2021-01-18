@@ -107,7 +107,7 @@ public class EditCustomerDialog extends JDialog {
 			contentPanel.add(header, gbc_panel_1);
 			{
 				
-				headerLabel = new JLabel("Edit Product");
+				headerLabel = new JLabel("Edit Customer");
 				//customerNameLabel.setHorizontalAlignment(JLabel.LEFT); TODO IT DOESN't WOOORK ;((((((
 				header.add(headerLabel);
 				headerLabel.setVisible(true);
