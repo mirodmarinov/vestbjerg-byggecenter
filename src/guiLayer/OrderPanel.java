@@ -196,7 +196,7 @@ public class OrderPanel extends JPanel {
 				loadPage(getPageIndex() + 1);
 			}
 		});
-		rightArrowLabel.setFont(new Font("Lato", Font.PLAIN, 15));
+		rightArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_rightArrowLabel = new GridBagConstraints();
 		gbc_rightArrowLabel.anchor = GridBagConstraints.WEST;
 		gbc_rightArrowLabel.insets = new Insets(0, 0, 5, 5);

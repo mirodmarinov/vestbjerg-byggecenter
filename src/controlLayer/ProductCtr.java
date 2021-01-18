@@ -13,7 +13,7 @@ import java.util.*;
 public class ProductCtr
 {
 
-	ArrayList<Product> products;
+	private ArrayList<Product> products;
 
 	public ProductCtr()
 	{

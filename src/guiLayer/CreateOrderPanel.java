@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -26,6 +27,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.JTextField;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -377,6 +379,7 @@ public class CreateOrderPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				AddProductsDialog dialog = new AddProductsDialog(orderTable);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 				dialog.setVisible(true);
 			}
 		});
@@ -545,6 +548,7 @@ public class CreateOrderPanel extends JPanel {
 		{
 			customerErrorLabel.setVisible(true);
 			clearCustomerLabels();
+			deleteButton.setVisible(false);
 			return;
 		}
 		deleteButton.setVisible(true);
@@ -563,7 +567,6 @@ public class CreateOrderPanel extends JPanel {
 		{
 			searchBar.setText("🔍 Phone number...");
 		}
-		//searchBar.setText((searchBar.isFocusOwner()) ? "" : "🔍 Phone number...");
 	}
 
 	

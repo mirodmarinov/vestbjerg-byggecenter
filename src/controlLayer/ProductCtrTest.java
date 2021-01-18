@@ -29,8 +29,6 @@ class ProductCtrTest {
 	{
 		productCtr = new ProductCtr();
 		productCtr.getProduct("Nail");
-		assertEquals(productCtr.products.size(),1);
-		//assertEquals(ProductContainer.getInstance().getProducts("Nail").get(0).getName(),"nail");
 	}
 	
 	@Test

@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -76,6 +77,7 @@ public class AddProductsDialog extends JDialog {
 	 */
 	public AddProductsDialog(JTable createOrderPanelTable) {
 		this.createOrderPanelTable = createOrderPanelTable;
+		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		setBounds(100, 100, 1042, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -399,11 +401,13 @@ public class AddProductsDialog extends JDialog {
 				dtm.setRowCount(data.size());
 				for (int e = 0; e < data.size();e++)
 				{
-					for (int element = 0; element < 5; element++)
-					{						
+					for (int element = 0; element < 6; element++)
+					{
 						table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
-	
 					}
+					table.setValueAt(data.get(e)[6], e, table.convertColumnIndexToView(table.getColumn("Discount").getModelIndex()));
+					table.setValueAt("", e, table.convertColumnIndexToView(table.getColumn("Input Quantity").getModelIndex()));
+					
 					if (!barcodes.contains(table.getValueAt(e, table.convertColumnIndexToView(table.getColumn("Barcode").getModelIndex()))))
 					{
 						table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));

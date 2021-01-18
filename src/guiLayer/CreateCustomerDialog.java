@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -64,6 +65,7 @@ public class CreateCustomerDialog extends JDialog {
 	 */
 	public CreateCustomerDialog() {
 		setBounds(100, 100, 1042, 600);
+		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setBackground(new Color(252, 252, 252));
@@ -219,7 +221,9 @@ public class CreateCustomerDialog extends JDialog {
 				panel.add(groupTextField, gbc_groupTextField);
 				groupTextField.setColumns(10);
 			}
+			fillFields();
 		}
+		
 		{
 			RoundedButton okButton = new RoundedButton("Finish", new Color(28, 150, 202), Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
 			formatButton(okButton);
@@ -244,6 +248,7 @@ public class CreateCustomerDialog extends JDialog {
 			gbc_cancelButton.gridy = 2;
 			contentPanel.add(cancelButton, gbc_cancelButton);
 		}
+	
 
 	
 	private void formatButton(RoundedButton button) {
@@ -352,5 +357,13 @@ public class CreateCustomerDialog extends JDialog {
 		dispose();
 	}
 
+	private void fillFields()
+	{
+		nameTextField.setText("Name...");
+		phoneTextField.setText("Phone...");
+		addressTextField.setText("Address...");
+		groupTextField.setText("Group...");
+		discountTextField.setText("Discount...");
+	}
 	
 }

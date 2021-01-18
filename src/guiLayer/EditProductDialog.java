@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -92,6 +93,7 @@ public class EditProductDialog extends JDialog {
 	public EditProductDialog(ProductsPanel productsPanel) {
 		//TODO redraw the productsPanel table after finish the editing (update the table)
 		setBounds(100, 100, 1042, 600);
+		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setBackground(new Color(252, 252, 252));
@@ -186,7 +188,6 @@ public class EditProductDialog extends JDialog {
 						{
 							//It should split the string by ':', add the name to it and connect with the rest of the string (add barcode)
 							//And of course set it as the name label
-							//TODO Do the same for the barcode
 
 							productName.setText(nameTextField.getText() + " " +productName.getText().substring(productName.getText().indexOf(":"),productName.getText().length()));
 						}
@@ -259,6 +260,21 @@ public class EditProductDialog extends JDialog {
 				barcodeTextField = new JTextField();
 				barcodeTextField.setName("Barcode");
 				textFieldFunctions(barcodeTextField);
+				barcodeTextField.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (!barcodeTextField.getText().equals(""))
+						{
+							//It should split the string by ':', add the name to it and connect with the rest of the string (add barcode)
+							//And of course set it as the name label
+							//TODO Do the same for the barcode
+							
+							productName.setText(productName.getText().substring(0,productName.getText().indexOf(":")) + ": " + barcodeTextField.getText());
+							//productName.setText(nameTextField.getText() + " " +productName.getText().substring(productName.getText().indexOf(":"),productName.getText().length()));
+						}
+							
+								
+					}
+				});
 				GridBagConstraints gbc_barcodeTextField = new GridBagConstraints();
 				gbc_barcodeTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_barcodeTextField.fill = GridBagConstraints.HORIZONTAL;
