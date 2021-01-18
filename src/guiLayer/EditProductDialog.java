@@ -99,9 +99,9 @@ public class EditProductDialog extends JDialog {
 		contentPanel.setBackground(new Color(252, 252, 252));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{60, 20, 0, 0, 0, 0, 0, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 20, 50, 0, 50, 50, 30};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, Double.MIN_VALUE};
+		gbl_contentPanel.columnWidths = new int[]{0, 0};
+		gbl_contentPanel.rowHeights = new int[]{0, 20, 50, 0, 0, 0, 50};
+		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.1, 0.1, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
@@ -111,7 +111,7 @@ public class EditProductDialog extends JDialog {
 			header.setBackground(babyBlue);
 			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 			gbc_panel_1.anchor = GridBagConstraints.NORTH;
-			gbc_panel_1.gridwidth = 8;
+			gbc_panel_1.gridwidth = 3;
 			gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 			gbc_panel_1.fill = GridBagConstraints.HORIZONTAL;
 			gbc_panel_1.gridx = 0;
@@ -131,7 +131,6 @@ public class EditProductDialog extends JDialog {
 			productName = new JLabel("<ProductNamePlaceHolder>");
 			productName.setFont(new Font("LATO", Font.BOLD, 18));
 			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-			gbc_lblNewLabel.gridwidth = 2;
 			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 			gbc_lblNewLabel.gridx = 0;
 			gbc_lblNewLabel.gridy = 1;
@@ -144,17 +143,17 @@ public class EditProductDialog extends JDialog {
 			panel.setBackground(Color.WHITE);
 			GridBagConstraints gbc_panel = new GridBagConstraints();
 			gbc_panel.gridheight = 2;
-			gbc_panel.gridwidth = 6;
-			gbc_panel.insets = new Insets(0, 0, 5, 5);
+			gbc_panel.gridwidth = 3;
+			gbc_panel.insets = new Insets(0, 50, 5, 50);
 			gbc_panel.fill = GridBagConstraints.BOTH;
-			gbc_panel.gridx = 1;
+			gbc_panel.gridx = 0;
 			gbc_panel.gridy = 3;
 			contentPanel.add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
-			gbl_panel.rowHeights = new int[]{0, 0, 50, 0, 0, 50, 0, 0, 50, 0, 0, 0};
+			gbl_panel.columnWidths = new int[]{50,0, 0, 0, 0, 0,50};
+			gbl_panel.rowHeights = new int[]{20, 0, 0, 50, 0, 0, 50, 0, 0, 50, 0, 0, 0};
 			gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			{
 				nameLabel = new JLabel("Name");
@@ -162,12 +161,13 @@ public class EditProductDialog extends JDialog {
 				gbc_nameLabel.anchor = GridBagConstraints.WEST;
 				gbc_nameLabel.insets = new Insets(0, 0, 5, 5);
 				gbc_nameLabel.gridx = 1;
-				gbc_nameLabel.gridy = 0;
+				gbc_nameLabel.gridy = 1;
 				panel.add(nameLabel, gbc_nameLabel);
 			}
 			{
 				groupLabel = new JLabel("Group");
 				GridBagConstraints gbc_groupLabel = new GridBagConstraints();
+				gbc_groupLabel.gridheight = 2;
 				gbc_groupLabel.anchor = GridBagConstraints.WEST;
 				gbc_groupLabel.insets = new Insets(0, 0, 5, 5);
 				gbc_groupLabel.gridx = 2;
@@ -177,8 +177,9 @@ public class EditProductDialog extends JDialog {
 			{
 				discountLabel = new JLabel("Discount");
 				GridBagConstraints gbc_discountLabel = new GridBagConstraints();
+				gbc_discountLabel.gridheight = 2;
 				gbc_discountLabel.anchor = GridBagConstraints.WEST;
-				gbc_discountLabel.insets = new Insets(0, 0, 5, 0);
+				gbc_discountLabel.insets = new Insets(0, 0, 5, 5);
 				gbc_discountLabel.gridx = 3;
 				gbc_discountLabel.gridy = 0;
 				panel.add(discountLabel, gbc_discountLabel);
@@ -204,7 +205,7 @@ public class EditProductDialog extends JDialog {
 				gbc_nameTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_nameTextField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_nameTextField.gridx = 1;
-				gbc_nameTextField.gridy = 1;
+				gbc_nameTextField.gridy = 2;
 				panel.add(nameTextField, gbc_nameTextField);
 				nameTextField.setColumns(10);
 			}
@@ -216,7 +217,7 @@ public class EditProductDialog extends JDialog {
 				gbc_groupTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_groupTextField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_groupTextField.gridx = 2;
-				gbc_groupTextField.gridy = 1;
+				gbc_groupTextField.gridy = 2;
 				panel.add(groupTextField, gbc_groupTextField);
 				groupTextField.setColumns(10);
 			}
@@ -225,10 +226,10 @@ public class EditProductDialog extends JDialog {
 				discountTextField.setName("Discount");
 				textFieldFunctions(discountTextField);
 				GridBagConstraints gbc_discountTextField = new GridBagConstraints();
-				gbc_discountTextField.insets = new Insets(0, 0, 5, 0);
+				gbc_discountTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_discountTextField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_discountTextField.gridx = 3;
-				gbc_discountTextField.gridy = 1;
+				gbc_discountTextField.gridy = 2;
 				panel.add(discountTextField, gbc_discountTextField);
 				discountTextField.setColumns(10);
 			}
@@ -238,7 +239,7 @@ public class EditProductDialog extends JDialog {
 				gbc_barcodeLabel.anchor = GridBagConstraints.WEST;
 				gbc_barcodeLabel.insets = new Insets(0, 0, 5, 5);
 				gbc_barcodeLabel.gridx = 1;
-				gbc_barcodeLabel.gridy = 3;
+				gbc_barcodeLabel.gridy = 4;
 				panel.add(barcodeLabel, gbc_barcodeLabel);
 			}
 			{
@@ -247,16 +248,16 @@ public class EditProductDialog extends JDialog {
 				gbc_locationLabel.anchor = GridBagConstraints.WEST;
 				gbc_locationLabel.insets = new Insets(0, 0, 5, 5);
 				gbc_locationLabel.gridx = 2;
-				gbc_locationLabel.gridy = 3;
+				gbc_locationLabel.gridy = 4;
 				panel.add(locationLabel, gbc_locationLabel);
 			}
 			{
 				descriptionLabel = new JLabel("Description");
 				GridBagConstraints gbc_descriptionLabel = new GridBagConstraints();
 				gbc_descriptionLabel.anchor = GridBagConstraints.WEST;
-				gbc_descriptionLabel.insets = new Insets(0, 0, 5, 0);
+				gbc_descriptionLabel.insets = new Insets(0, 0, 5, 5);
 				gbc_descriptionLabel.gridx = 3;
-				gbc_descriptionLabel.gridy = 3;
+				gbc_descriptionLabel.gridy = 4;
 				panel.add(descriptionLabel, gbc_descriptionLabel);
 			}
 			{
@@ -282,7 +283,7 @@ public class EditProductDialog extends JDialog {
 				gbc_barcodeTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_barcodeTextField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_barcodeTextField.gridx = 1;
-				gbc_barcodeTextField.gridy = 4;
+				gbc_barcodeTextField.gridy = 5;
 				panel.add(barcodeTextField, gbc_barcodeTextField);
 				barcodeTextField.setColumns(10);
 			}
@@ -294,7 +295,7 @@ public class EditProductDialog extends JDialog {
 				gbc_locationTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_locationTextField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_locationTextField.gridx = 2;
-				gbc_locationTextField.gridy = 4;
+				gbc_locationTextField.gridy = 5;
 				panel.add(locationTextField, gbc_locationTextField);
 				locationTextField.setColumns(10);
 			}
@@ -305,10 +306,10 @@ public class EditProductDialog extends JDialog {
 				descriptionTextField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, false));
 				GridBagConstraints gbc_descriptionTextField = new GridBagConstraints();
 				gbc_descriptionTextField.gridheight = 3;
-				gbc_descriptionTextField.insets = new Insets(0, 0, 5, 0);
+				gbc_descriptionTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_descriptionTextField.fill = GridBagConstraints.BOTH;
 				gbc_descriptionTextField.gridx = 3;
-				gbc_descriptionTextField.gridy = 4;
+				gbc_descriptionTextField.gridy = 5;
 				panel.add(descriptionTextField, gbc_descriptionTextField);
 			}
 			{
@@ -317,7 +318,7 @@ public class EditProductDialog extends JDialog {
 				gbc_thresholdLabel.anchor = GridBagConstraints.WEST;
 				gbc_thresholdLabel.insets = new Insets(0, 0, 5, 5);
 				gbc_thresholdLabel.gridx = 1;
-				gbc_thresholdLabel.gridy = 6;
+				gbc_thresholdLabel.gridy = 7;
 				panel.add(thresholdLabel, gbc_thresholdLabel);
 			}
 			{
@@ -326,7 +327,7 @@ public class EditProductDialog extends JDialog {
 				gbc_purchasePriceLabel.anchor = GridBagConstraints.WEST;
 				gbc_purchasePriceLabel.insets = new Insets(0, 0, 5, 5);
 				gbc_purchasePriceLabel.gridx = 2;
-				gbc_purchasePriceLabel.gridy = 6;
+				gbc_purchasePriceLabel.gridy = 7;
 				panel.add(purchasePriceLabel, gbc_purchasePriceLabel);
 			}
 			{
@@ -337,7 +338,7 @@ public class EditProductDialog extends JDialog {
 				gbc_thresholdTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_thresholdTextField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_thresholdTextField.gridx = 1;
-				gbc_thresholdTextField.gridy = 7;
+				gbc_thresholdTextField.gridy = 8;
 				panel.add(thresholdTextField, gbc_thresholdTextField);
 				thresholdTextField.setColumns(10);
 			}
@@ -349,7 +350,7 @@ public class EditProductDialog extends JDialog {
 				gbc_purchasePriceTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_purchasePriceTextField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_purchasePriceTextField.gridx = 2;
-				gbc_purchasePriceTextField.gridy = 7;
+				gbc_purchasePriceTextField.gridy = 8;
 				panel.add(purchasePriceTextField, gbc_purchasePriceTextField);
 				purchasePriceTextField.setColumns(10);
 			}
@@ -359,7 +360,7 @@ public class EditProductDialog extends JDialog {
 				gbc_quantityLabel.anchor = GridBagConstraints.WEST;
 				gbc_quantityLabel.insets = new Insets(0, 0, 5, 5);
 				gbc_quantityLabel.gridx = 1;
-				gbc_quantityLabel.gridy = 9;
+				gbc_quantityLabel.gridy = 10;
 				panel.add(quantityLabel, gbc_quantityLabel);
 			}
 			{
@@ -368,7 +369,7 @@ public class EditProductDialog extends JDialog {
 				gbc_salesPriceLabel.anchor = GridBagConstraints.WEST;
 				gbc_salesPriceLabel.insets = new Insets(0, 0, 5, 5);
 				gbc_salesPriceLabel.gridx = 2;
-				gbc_salesPriceLabel.gridy = 9;
+				gbc_salesPriceLabel.gridy = 10;
 				panel.add(salesPriceLabel, gbc_salesPriceLabel);
 			}
 			{
@@ -379,7 +380,7 @@ public class EditProductDialog extends JDialog {
 				gbc_quantityTextField.insets = new Insets(0, 0, 0, 5);
 				gbc_quantityTextField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_quantityTextField.gridx = 1;
-				gbc_quantityTextField.gridy = 10;
+				gbc_quantityTextField.gridy = 11;
 				panel.add(quantityTextField, gbc_quantityTextField);
 				quantityTextField.setColumns(10);
 			}
@@ -391,7 +392,7 @@ public class EditProductDialog extends JDialog {
 				gbc_salesPriceTextField.insets = new Insets(0, 0, 0, 5);
 				gbc_salesPriceTextField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_salesPriceTextField.gridx = 2;
-				gbc_salesPriceTextField.gridy = 10;
+				gbc_salesPriceTextField.gridy = 11;
 				panel.add(salesPriceTextField, gbc_salesPriceTextField);
 				salesPriceTextField.setColumns(10);
 			}
@@ -405,7 +406,7 @@ public class EditProductDialog extends JDialog {
 			gbc_okButton.gridheight = 4;
 			gbc_okButton.anchor = GridBagConstraints.SOUTHEAST;
 			gbc_okButton.insets = new Insets(0, 0, 0, 5);
-			gbc_okButton.gridx = 6;
+			gbc_okButton.gridx = 1;
 			gbc_okButton.gridy = 3;
 			contentPanel.add(okButton, gbc_okButton);
 		}
@@ -416,7 +417,7 @@ public class EditProductDialog extends JDialog {
 			GridBagConstraints gbc_cancelButton = new GridBagConstraints();
 			gbc_cancelButton.gridheight = 4;
 			gbc_cancelButton.anchor = GridBagConstraints.SOUTHEAST;
-			gbc_cancelButton.gridx = 7;
+			gbc_cancelButton.gridx = 2;
 			gbc_cancelButton.gridy = 3;
 			contentPanel.add(cancelButton, gbc_cancelButton);
 		}
