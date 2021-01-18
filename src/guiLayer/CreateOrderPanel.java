@@ -27,6 +27,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.JTextField;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;

@@ -15,6 +15,7 @@ import java.awt.Dimension;
 import java.awt.CardLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
@@ -30,7 +31,7 @@ import javax.swing.JLabel;
 
 public class OrderMenuGUI {
 
-	private JFrame frame;
+	private JFrame frmVestbjergByggecenterManagement;
 	private CardLayout cards = new CardLayout();
 	private JPanel mainFrame = new JPanel();
 	private Color babyBlue = new Color(28, 150, 202);
@@ -49,7 +50,7 @@ public class OrderMenuGUI {
 			public void run() {
 				try {
 					OrderMenuGUI window = new OrderMenuGUI();
-					window.frame.setVisible(true);
+					window.frmVestbjergByggecenterManagement.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -70,17 +71,19 @@ public class OrderMenuGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frmVestbjergByggecenterManagement = new JFrame();
+		frmVestbjergByggecenterManagement.setTitle("Vestbjerg Byggecenter Management System");
+		frmVestbjergByggecenterManagement.setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		//frame.setBounds(0, 0, 1680, 1050);
 		Rectangle height = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-		frame.setBounds(0, 0, (int)height.getWidth(), (int)height.getHeight());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmVestbjergByggecenterManagement.setBounds(0, 0, (int)height.getWidth(), (int)height.getHeight());
+		frmVestbjergByggecenterManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0};
 		gridBagLayout.rowWeights = new double[]{1.0};
-		frame.getContentPane().setLayout(gridBagLayout);
+		frmVestbjergByggecenterManagement.getContentPane().setLayout(gridBagLayout);
 		
 		/*
 		 * Here we format the side bar, and prepare it
@@ -96,7 +99,7 @@ public class OrderMenuGUI {
 		gbc_sideBar.insets = new Insets(0, 0, 0, 0);
 		gbc_sideBar.gridx = 0;
 		gbc_sideBar.gridy = 0;
-		frame.getContentPane().add(sideBar, gbc_sideBar);
+		frmVestbjergByggecenterManagement.getContentPane().add(sideBar, gbc_sideBar);
 		GridBagLayout gbl_sideBar = new GridBagLayout();
 		gbl_sideBar.columnWidths = new int[]{200};
 		gbl_sideBar.rowHeights = new int[]{75, 50, 50, 50, 50, 50, 0};
@@ -207,7 +210,7 @@ public class OrderMenuGUI {
 		gbc_mainFrame.fill = GridBagConstraints.BOTH;
 		gbc_mainFrame.gridx = 1;
 		gbc_mainFrame.gridy = 0;
-		frame.getContentPane().add(mainFrame, gbc_mainFrame);
+		frmVestbjergByggecenterManagement.getContentPane().add(mainFrame, gbc_mainFrame);
 		mainFrame.setLayout(new CardLayout(0, 0));
 	}
 	

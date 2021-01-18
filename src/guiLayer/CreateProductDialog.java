@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -77,6 +78,7 @@ public class CreateProductDialog extends JDialog {
 	 */
 	public CreateProductDialog() {
 		setBounds(100, 100, 1042, 600);
+		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setBackground(new Color(252, 252, 252));
