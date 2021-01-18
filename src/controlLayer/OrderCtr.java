@@ -60,7 +60,6 @@ public class OrderCtr
 			return null;
 		}
 		
-		
 		Customer customer = customerCtr.getCustomer(phone);
 		this.customer = customer;
 		if (customer == null)
@@ -92,10 +91,13 @@ public class OrderCtr
 
 		for (Product product : foundProducts)
 		{
-			String[] productInfo = new String[3];
+			String[] productInfo = new String[6];
 			productInfo[0] = product.getName();
 			productInfo[1] = product.getDescription();
 			productInfo[2] = String.valueOf(product.getQuantity());
+			productInfo[3] = product.getBarcode();
+			productInfo[4] = String.valueOf(product.getDiscount());
+			productInfo[5] = String.valueOf(product.getSalesPrice());
 			allProductsInfo.add(productInfo);
 		}
 
@@ -339,5 +341,35 @@ public class OrderCtr
 		return data;
 	}
 	
+	public ArrayList<String[]> fillTable(int index, String productName)
+	{
+		int productAmount = 0;
+		ArrayList<String[]> returnValue = new ArrayList<>();
+		ArrayList<String[]> products = getProducts(productName);	
+		if (products.size() == 0)
+		{
+			return returnValue;
+		}
+		if ((int)(Math.floor(products.size() / 50))+1 > index)
+		{
+			productAmount = 50;
+		}
+		else if ((int)(Math.floor(products.size() / 50))+1 == index)
+		{
+			productAmount = (int)(products.size()%50);
+		}
+		else
+		{
+			return returnValue;
+		}
+		
+		for (int e = (index-1)*50; e < (index-1)*50+productAmount; e++)
+		{
+			returnValue.add(products.get(e));
+			
+		}
+		return returnValue;
+		
+	}
 	
 }

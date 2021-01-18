@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
+import controlLayer.OrderCtr;
 import controlLayer.ProductCtr;
 import guiLayer.Renderers.JTableButtonMouseListener;
 import guiLayer.Renderers.JTableButtonRenderer;
@@ -48,6 +49,7 @@ public class AddProductsDialog extends JDialog {
 	private JTable table;
 	private RoundedButton cancelButton;
 	private ProductCtr productCtr;
+	private OrderCtr orderCtr;
 	private ArrayList<String> barcodes = new ArrayList<>();
 	private String[] tableElements = new String[] {"Barcode", "Name", "Discount", "Input Quantity", "Price", "Stock", ""};
 	private DocumentListener cl = new DocumentListener()
@@ -72,10 +74,13 @@ public class AddProductsDialog extends JDialog {
 		}
 	};
 
+	
+	
 	/**
 	 * Create the dialog.
 	 */
-	public AddProductsDialog(JTable createOrderPanelTable) {
+	public AddProductsDialog(JTable createOrderPanelTable, OrderCtr orderCtr) {
+		this.orderCtr = orderCtr;
 		this.createOrderPanelTable = createOrderPanelTable;
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		setBounds(100, 100, 1042, 600);
@@ -199,6 +204,8 @@ public class AddProductsDialog extends JDialog {
 			gbc_rightArrowLabel.gridy = 1;
 			contentPanel.add(rightArrowLabel, gbc_rightArrowLabel);
 		}
+		
+		/********************************************** Product Table **********************************************/
 		{
 			table = new JTable();
 			table.setName("AddProductsDialog");
@@ -340,9 +347,8 @@ public class AddProductsDialog extends JDialog {
 	}
 	
 	private void defaultFillTable(int index) {
-		productCtr = new ProductCtr();
 		//we get the product information from the productContainer
-		ArrayList<String[]> data = productCtr.defaultFill(index);
+		ArrayList<String[]> data = orderCtr.fillTable(index, "");
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		DefaultTableModel createOrderPanelTabledtm = (DefaultTableModel) createOrderPanelTable.getModel();
 		dtm.setRowCount(0);
@@ -355,13 +361,20 @@ public class AddProductsDialog extends JDialog {
 		for (int e = 0; e<data.size();e++)
 		{
 			
-			for (int element = 0; element < 6; element++)
+			/*for (int element = 0; element < 6; element++)
 			{
 				table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
-			}
+			}*/
 			
-			table.setValueAt(data.get(e)[6], e, table.convertColumnIndexToView(table.getColumn("Discount").getModelIndex()));
-			table.setValueAt("", e, table.convertColumnIndexToView(table.getColumn("Input Quantity").getModelIndex()));
+			table.setValueAt(data.get(e)[3], e, table.convertColumnIndexToView(table.getColumn(tableElements[0]).getModelIndex()));
+			table.setValueAt(data.get(e)[0], e, table.convertColumnIndexToView(table.getColumn(tableElements[1]).getModelIndex()));
+			table.setValueAt(data.get(e)[4], e, table.convertColumnIndexToView(table.getColumn(tableElements[2]).getModelIndex()));
+			table.setValueAt("", e, table.convertColumnIndexToView(table.getColumn(tableElements[3]).getModelIndex()));
+			table.setValueAt(data.get(e)[5], e, table.convertColumnIndexToView(table.getColumn(tableElements[4]).getModelIndex()));
+			table.setValueAt(data.get(e)[2], e, table.convertColumnIndexToView(table.getColumn(tableElements[5]).getModelIndex()));
+			//table.setValueAt(data.get(e)[6], e, table.convertColumnIndexToView(table.getColumn("Discount").getModelIndex()));
+			//table.setValueAt("", e, table.convertColumnIndexToView(table.getColumn("Input Quantity").getModelIndex()));
+			
 			//TODO Check if the barcode is already in the other table THIS IS A REALLY A REALL STUPID SYINTAX WHAT I JUST WROTE, JUST DELETE IT <3
 			for (int rows = 0; rows<createOrderPanelTabledtm.getRowCount();rows++)
 			{
@@ -383,16 +396,13 @@ public class AddProductsDialog extends JDialog {
 		}
 	}
 	
-	private void searchProduct(Boolean Notdynamic)
+	private void searchProduct(Boolean notDynamic)
 	{
 		
 		productErrorLabel.setVisible(false);
 		if ((!searchBar.getText().equals(""))&&(!searchBar.getText().equals("🔍 Product Name...")))
 		{
-			productCtr = new ProductCtr();
-			ArrayList<String[]> data = productCtr.searchField(searchBar.getText()); // TODO Check this
-			
-
+			ArrayList<String[]> data = orderCtr.fillTable(getPageIndex(), searchBar.getText());
 			
 			if (data.size() != 0)
 			{ 
@@ -401,12 +411,12 @@ public class AddProductsDialog extends JDialog {
 				dtm.setRowCount(data.size());
 				for (int e = 0; e < data.size();e++)
 				{
-					for (int element = 0; element < 6; element++)
-					{
-						table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
-					}
-					table.setValueAt(data.get(e)[6], e, table.convertColumnIndexToView(table.getColumn("Discount").getModelIndex()));
-					table.setValueAt("", e, table.convertColumnIndexToView(table.getColumn("Input Quantity").getModelIndex()));
+					table.setValueAt(data.get(e)[3], e, table.convertColumnIndexToView(table.getColumn(tableElements[0]).getModelIndex()));
+					table.setValueAt(data.get(e)[0], e, table.convertColumnIndexToView(table.getColumn(tableElements[1]).getModelIndex()));
+					table.setValueAt(data.get(e)[4], e, table.convertColumnIndexToView(table.getColumn(tableElements[2]).getModelIndex()));
+					table.setValueAt("", e, table.convertColumnIndexToView(table.getColumn(tableElements[3]).getModelIndex()));
+					table.setValueAt(data.get(e)[5], e, table.convertColumnIndexToView(table.getColumn(tableElements[4]).getModelIndex()));
+					table.setValueAt(data.get(e)[2], e, table.convertColumnIndexToView(table.getColumn(tableElements[5]).getModelIndex()));
 					
 					if (!barcodes.contains(table.getValueAt(e, table.convertColumnIndexToView(table.getColumn("Barcode").getModelIndex()))))
 					{
@@ -416,19 +426,15 @@ public class AddProductsDialog extends JDialog {
 					{
 						table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), table.getSelectedRow(), table.getColumn("").getModelIndex());
 					}
-					
-					
 				}
-				
 			}
 			else
 			{
-				if (Notdynamic)
+				if (notDynamic)
 				{
 					productErrorLabel.setVisible(true);
 				}
 			}
-			
 		}
 		else
 		{
@@ -482,10 +488,8 @@ public class AddProductsDialog extends JDialog {
 		if(index == 0) {
 			return;
 		}
-		
-		
-		productCtr = new ProductCtr();
-		if (productCtr.defaultFill(index).isEmpty())
+
+		if (orderCtr.fillTable(index, "").isEmpty())
 		{
 			return;
 		}

@@ -377,7 +377,7 @@ public class CreateOrderPanel extends JPanel {
 		addProductsButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				AddProductsDialog dialog = new AddProductsDialog(orderTable);
+				AddProductsDialog dialog = new AddProductsDialog(orderTable, orderCtr);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 				dialog.setVisible(true);
