@@ -71,12 +71,14 @@ public class CreateProductDialog extends JDialog {
 	private JTextPane descriptionTextField;
 	private JPanel header;
 	private ProductCtr productCtr;
+	private ProductsPanel productsPanel;
 
 	
 	/**
 	 * Create the dialog.
 	 */
-	public CreateProductDialog() {
+	public CreateProductDialog(ProductsPanel productsPanel) {
+		this.productsPanel = productsPanel;
 		setBounds(100, 100, 1042, 600);
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
@@ -505,6 +507,11 @@ public class CreateProductDialog extends JDialog {
 	private void finishCreation()
 	{
 		productCtr = new ProductCtr();
+		productCtr.createProduct(Integer.parseInt(thresholdTextField.getText()), Integer.parseInt(quantityTextField.getText()),
+				Integer.parseInt(discountTextField.getText()), Integer.parseInt(purchasePriceTextField.getText()), 
+				Integer.parseInt(salesPriceTextField.getText()), barcodeTextField.getText(), nameTextField.getText(), descriptionTextField.getText(),
+				groupTextField.getText(), locationTextField.getText());
+		productsPanel.defaultFillTable(Integer.parseInt(productsPanel.getTablePageLabel().getText()));
 		//TODO Check all fields's value and create the product then dispose the window
 		dispose();
 	}

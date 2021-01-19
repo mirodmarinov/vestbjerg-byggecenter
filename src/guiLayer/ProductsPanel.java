@@ -59,7 +59,7 @@ public class ProductsPanel extends JPanel {
 	public JLabel tablePageLabel;
 	private JLabel leftArrowLabel;
 	private JLabel rightArrowLabel;
-	private	ProductCtr productCtr;
+	private	ProductCtr productCtr = new ProductCtr();
 	
 	private DocumentListener cl = new DocumentListener()
 	
@@ -284,10 +284,11 @@ public class ProductsPanel extends JPanel {
 		
 		RoundedButton addProductButton = new RoundedButton("➕ Add Product", babyBlue,
 					Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14));
+		ProductsPanel passThisThingToTheCreateProductDialog = this;
 		addProductButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CreateProductDialog dialog = new CreateProductDialog();
+				CreateProductDialog dialog = new CreateProductDialog(passThisThingToTheCreateProductDialog);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 				dialog.setVisible(true);
@@ -303,7 +304,7 @@ public class ProductsPanel extends JPanel {
 		add(addProductButton, gbc_addCustomerButton);
 		
 		
-		EditProductDialog ecd = new EditProductDialog(this);
+		EditProductDialog ecd = new EditProductDialog(this,0,productCtr);
 		table.addMouseListener(new JTableButtonMouseListener(table,ecd));
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 	}
@@ -312,8 +313,7 @@ public class ProductsPanel extends JPanel {
 	 * This method fills the table with the first x elements from the orderContainer
 	 * 
 	 */
-	private void defaultFillTable(int index) {
-		productCtr = new ProductCtr();
+	protected void defaultFillTable(int index) {
 		//we get the order information from the orderContainer
 		ArrayList<String[]> data = productCtr.defaultFill(index);
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
@@ -347,7 +347,6 @@ public class ProductsPanel extends JPanel {
 		foundLabel.setVisible(false);
 		if ((!searchTextField.getText().equals(""))&&(!searchTextField.getText().equals("🔍 Search...")))
 		{
-			productCtr = new ProductCtr();
 			ArrayList<String[]> data = productCtr.searchField(searchTextField.getText()); // TODO Check this
 			
 			if (data.size() != 0)
@@ -390,7 +389,6 @@ public class ProductsPanel extends JPanel {
 		}
 		
 		
-		productCtr = new ProductCtr();
 		if (productCtr.defaultFill(index).isEmpty())
 		{
 			return;
@@ -443,5 +441,6 @@ public class ProductsPanel extends JPanel {
 			}
 		});
 	}
+	
 	
 }

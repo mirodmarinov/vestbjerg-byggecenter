@@ -25,6 +25,7 @@ import javax.swing.table.TableCellRenderer;
 import controlLayer.ProductCtr;
 import guiLayer.Renderers.JTableButtonMouseListener;
 import guiLayer.Renderers.JTableButtonRenderer;
+import guiLayer.Renderers.OrderTableRenderer;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -74,12 +75,17 @@ public class EditProductDialog extends JDialog {
 	private ProductCtr productCtr;
 	private JLabel productName;
 	private String barcode = "";
+	private int placeOnList;
+	private ProductsPanel productsPanel;
 
 
 	/**
 	 * Create the dialog.
 	 */
-	public EditProductDialog(ProductsPanel productsPanel) {
+	public EditProductDialog(ProductsPanel productsPanel, int placeOnList, ProductCtr productCtr) {
+		this.productsPanel = productsPanel;
+		this.placeOnList = placeOnList;
+		this.productCtr = productCtr;
 		//TODO redraw the productsPanel table after finish the editing (update the table)
 		setBounds(100, 100, 1237, 713);
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
@@ -445,6 +451,14 @@ public class EditProductDialog extends JDialog {
 				button.setBackground(babyBlue);
 				button.setForeground(Color.WHITE);
 			}
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				editProduct(placeOnList);
+				dispose();
+			}
 		});
 	}
 	
@@ -496,7 +510,7 @@ public class EditProductDialog extends JDialog {
 				int cofirmation = JOptionPane.showConfirmDialog(null, "Confirm deletion","Confirmation",JOptionPane.YES_NO_OPTION,JOptionPane.ERROR_MESSAGE);
 				if (cofirmation == JOptionPane.YES_OPTION)
 				{
-
+					deleteProduct(placeOnList);
 					dispose();
 				}
 			}
@@ -590,7 +604,6 @@ public class EditProductDialog extends JDialog {
 	 */
 	public void fillFields(String barcode)
 	{
-		productCtr = new ProductCtr();
 		String[] data = productCtr.getProductrByBarcode(barcode);
 		if (data != null)
 		{
@@ -614,11 +627,33 @@ public class EditProductDialog extends JDialog {
 		this.barcode = barcode;
 	}
 	
-	private void finishCreation()
+	private void editProduct(int placeOnList)
 	{
-		productCtr = new ProductCtr();
+		productCtr.updateParameter(placeOnList, 0, nameTextField.getText());
+		productCtr.updateParameter(placeOnList, 1, descriptionTextField.getText());
+		productCtr.updateParameter(placeOnList, 2, groupTextField.getText());
+		productCtr.updateParameter(placeOnList, 3, barcodeTextField.getText());
+		productCtr.updateParameter(placeOnList, 4, locationTextField.getText());
+		productCtr.updateParameter(placeOnList, 5, quantityTextField.getText());
+		productCtr.updateParameter(placeOnList, 6, thresholdTextField.getText());
+		productCtr.updateParameter(placeOnList, 7, salesPriceTextField.getText());
+		productCtr.updateParameter(placeOnList, 8, purchasePriceTextField.getText());
+		productCtr.updateParameter(placeOnList, 9, discountTextField.getText());
+		productsPanel.defaultFillTable(Integer.parseInt(productsPanel.getTablePageLabel().getText()));
+		dispose();
 		//TODO Check all fields's value and create the product then dispose the window
 
+	}
+	
+	private void deleteProduct(int placeOnList)
+	{
+		productCtr.deleteProduct(placeOnList);
+		productsPanel.defaultFillTable(Integer.parseInt(productsPanel.getTablePageLabel().getText()));
+	}
+	
+	public void setPlaceOnList(int placeOnList)
+	{
+		this.placeOnList = placeOnList;
 	}
 	
 }

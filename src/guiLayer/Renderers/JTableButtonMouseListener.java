@@ -71,6 +71,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 				{
 					
 					((EditProductDialog)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex()));
+					((EditProductDialog)popup).setPlaceOnList(table.getSelectedRow());
 					popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					popup.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 					popup.setVisible(true);
