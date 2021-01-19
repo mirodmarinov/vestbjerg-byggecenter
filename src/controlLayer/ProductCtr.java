@@ -5,6 +5,8 @@ import modelLayer.*;
 import java.awt.RenderingHints;
 import java.util.*;
 
+import com.sun.jdi.Value;
+
 /**
  * This class is a part of the System developed for Vestbjerg Byggecenter. It
  * acts a controller for all of the product objects.
@@ -194,6 +196,7 @@ public class ProductCtr
 		ArrayList<String[]> data = new ArrayList<>();
 		for (Product e : products)
 		{
+			this.products.add(e);
 			data.add(e.tableFill());
 		}
 		return data;
@@ -218,10 +221,14 @@ public class ProductCtr
 		}
 		if ((int)(Math.floor(products.size() / 50))+1 > index)
 		{
+			this.products = (ArrayList<Product>) products.subList((index-1)*50, (index-1)*50+50);
 			productAmount = 50;
 		}
 		else if ((int)(Math.floor(products.size() / 50))+1 == index)
 		{
+			
+			this.products = new ArrayList<Product>(products.subList((index-1)*50, (index-1)*50+(int)products.size()%50));
+			//this.products = (ArrayList<Product>) products.subList((index-1)*50, (index-1)*50+(int)products.size()%50);
 			productAmount = (int)(products.size()%50);
 		}
 		else
@@ -235,6 +242,7 @@ public class ProductCtr
 			returnValue.add(products.get(e).tableFill());
 			
 		}
+		
 		return returnValue;
 		
 	}
