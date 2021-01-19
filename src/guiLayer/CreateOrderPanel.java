@@ -360,8 +360,8 @@ public class CreateOrderPanel extends JPanel {
 		
 		DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
 		dtm.setRowCount(0);
-		orderTable.addMouseListener(new JTableButtonMouseListener(orderTable));
-		orderTable.addMouseMotionListener(new JTableButtonMouseListener(orderTable));
+		orderTable.addMouseListener(new JTableButtonMouseListener(orderTable, orderCtr));
+		orderTable.addMouseMotionListener(new JTableButtonMouseListener(orderTable, orderCtr));
 		
 		
 		//We remove the border of the table by making it empty
@@ -426,7 +426,7 @@ public class CreateOrderPanel extends JPanel {
 					//TODO DO ERROR MESSAGE, right returns on purpose
 					return;
 				}
-				//TODO Discuss the future of the createOffer & createOrder method. From TUI it works much differently
+				orderCtr.createOffer();
 			}
 			
 			
@@ -453,7 +453,7 @@ public class CreateOrderPanel extends JPanel {
 					//TODO DO ERROR MESSAGE, right returns on purpose
 					return;
 				}
-				//TODO Discuss the future of the createOffer & createOrder method. From TUI it works much differently
+				orderCtr.createOrder();
 			}
 			
 			

@@ -22,6 +22,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 	private Color babyBlue = new Color(28, 150, 202);
 	private String[] tableElements = new String[] {"Order Number", "Customer", "Purchase Date", "Status", "Expiration Date", "Total (DKK)", ""};
 	private JDialog popup;
+	private OrderCtr orderCtr;
 
 	public JTableButtonMouseListener(JTable table)
 	{
@@ -32,6 +33,11 @@ public class JTableButtonMouseListener extends MouseAdapter
 	{
 		this.table = table;
 		this.popup = popup;
+	}
+	
+	public JTableButtonMouseListener(JTable table, OrderCtr orderCtr) {
+		this.table = table;
+		this.orderCtr = orderCtr;
 	}
 
 	public void mouseClicked(MouseEvent e)
@@ -77,7 +83,12 @@ public class JTableButtonMouseListener extends MouseAdapter
 				else if(table.getName().equals("CreateOrderPanel"))
 				{
 					DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+					
+					String barcode = table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex()).toString();
+					orderCtr.removeProductFromList(barcode);
+					
 					dtm.removeRow(table.getSelectedRow());
+					
 				}
 			}
 		}

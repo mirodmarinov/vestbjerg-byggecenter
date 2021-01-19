@@ -2,6 +2,7 @@ package controlLayer;
 
 import modelLayer.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**
@@ -60,8 +61,7 @@ public class OrderCtr
 			return null;
 		}
 		
-		Customer customer = customerCtr.getCustomer(phone);
-		this.customer = customer;
+		customer = customerCtr.getCustomer(phone);
 		if (customer == null)
 		{
 			return new String[] {"", ""};
@@ -175,9 +175,10 @@ public class OrderCtr
 		 * Here we update the stock, by changing the quantity of the product in
 		 * stock based on the quantity of the orderline item.
 		 */
-		for (OrderLineItem p : orderProducts)
+		for(OrderLineItem p : orderProducts)
 		{
-			p.getProduct().updateQuantity(p.getQuantity() * (-1));
+			Product product = productCtr.getProduct(p.getProduct().getBarcode());
+			product.updateQuantity(p.getQuantity() * (-1));
 		}
 
 		return OrderContainer.getInstance().addOrder(order);
@@ -372,4 +373,21 @@ public class OrderCtr
 		
 	}
 	
+	/**
+	 * We remove a product from our arraylist of products
+	 * chosen for the order.
+	 * @param barcode
+	 */
+	public void removeProductFromList(String barcode) {
+		Iterator<OrderLineItem> it = orderProducts.iterator();
+		while(it.hasNext()) {
+			OrderLineItem orderLineItem = it.next();
+			Product productToRemove = orderLineItem.getProduct();
+			if(productToRemove.getBarcode().equals(barcode))
+			{
+				it.remove();
+				break;
+			}
+		}
+	}
 }

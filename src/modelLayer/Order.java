@@ -18,7 +18,6 @@ public class Order implements Serializable
 {
 	
 	private static final long serialVersionUID = 1L;
-	private static int orderNumberGenerator = 0;
 	private int orderNumber; // The unique identifier
 	private int discount;
 	private long totalPrice;
@@ -32,7 +31,6 @@ public class Order implements Serializable
 	
 	public Order(Customer customer, ArrayList<OrderLineItem> products) 
 	{
-		orderNumber = ++orderNumberGenerator;
 		this.customer = customer;
 		this.products = products;
 		expirationDate = null;

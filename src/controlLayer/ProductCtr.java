@@ -45,7 +45,7 @@ public class ProductCtr
 	 *            
 	 * @return An ArrayList of Strings arrays with their fields as values
 	 */
-	public ArrayList<String[]> getProduct(String name)
+	public ArrayList<String[]> getProductInfo(String name)
 	{
 		ArrayList<String[]> productInfo = new ArrayList<String[]>();
 		products = ProductContainer.getInstance().getProducts(name);
@@ -259,5 +259,24 @@ public class ProductCtr
 	
 		}
 		return string;
+	}
+	
+	/**
+	 * This method returns a Product Object form the Product Container
+	 * based on the products barcode.
+	 * @param barcode
+	 * @return
+	 */
+	public Product getProduct(String barcode)
+	{
+		ArrayList<Product> products = ProductContainer.getInstance().getProductsArray();
+		for (Product product : products)
+		{
+			if (product.getBarcode().equals(barcode))
+			{
+				return product;
+			}
+		}
+		return null;
 	}
 }

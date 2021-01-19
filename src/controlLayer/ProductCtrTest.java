@@ -28,14 +28,14 @@ class ProductCtrTest {
 	void createProduct() 
 	{
 		productCtr = new ProductCtr();
-		productCtr.getProduct("Nail");
+		productCtr.getProductInfo("Nail");
 	}
 	
 	@Test
 	void readProduct()
 	{
 		productCtr = new ProductCtr();
-		assertEquals(productCtr.getProduct("nail").size(),1);
+		assertEquals(productCtr.getProductInfo("nail").size(),1);
 	}
 
 	
@@ -43,7 +43,7 @@ class ProductCtrTest {
 	void updateProduct()
 	{
 		productCtr = new ProductCtr();
-		productCtr.getProduct("hemm");
+		productCtr.getProductInfo("hemm");
 		assertEquals(productCtr.updateParameter(0, 0, "Changed from Hemmors"),true);
 	}
 	
@@ -51,7 +51,7 @@ class ProductCtrTest {
 	void deleteProduct()
 	{
 		productCtr = new ProductCtr();
-		productCtr.getProduct("vic");
+		productCtr.getProductInfo("vic");
 		
 		assertEquals(productCtr.deleteProduct(0),true);
 	}

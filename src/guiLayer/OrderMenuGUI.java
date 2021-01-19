@@ -66,6 +66,7 @@ public class OrderMenuGUI {
 		frmVestbjergByggecenterManagement.setBounds(0, 0, (int)height.getWidth(), (int)height.getHeight());
 		frmVestbjergByggecenterManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmVestbjergByggecenterManagement.addWindowListener(new WindowAdapter() {
+		
 		public void windowClosing()
 		{
 			Serialization.getInstance().serializeClass("OrderContainer");

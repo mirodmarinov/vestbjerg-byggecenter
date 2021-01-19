@@ -19,6 +19,7 @@ public class OrderContainer implements Serializable
 	private static final long serialVersionUID = 1L;
 	private static OrderContainer uniqueInstance = new OrderContainer();
 	private ArrayList<Order> orders = new ArrayList<>();
+	public static int orderNumberGenerator = 0;
 	
 	private OrderContainer()
 	{
@@ -43,6 +44,7 @@ public class OrderContainer implements Serializable
 		if (orders.add(order))
 		{
 			Serialization.getInstance().serializeClass("modelLayer.OrderContainer");
+			order.setOrderNumber(++orderNumberGenerator);
 			return true;
 		}
 		return false;

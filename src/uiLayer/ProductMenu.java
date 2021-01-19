@@ -321,7 +321,7 @@ public class ProductMenu {
 			System.out.println("Please enter a name with has more than 2 characters!");
 			name = input.nextLine();
 		}
-		data = productCtr.getProduct(name);
+		data = productCtr.getProductInfo(name);
 		System.out.println("Please select an product from the list:");
 
 		
