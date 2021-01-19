@@ -427,6 +427,7 @@ public class CreateOrderPanel extends JPanel {
 					return;
 				}
 				orderCtr.createOffer();
+				reset();
 			}
 			
 			
@@ -454,6 +455,7 @@ public class CreateOrderPanel extends JPanel {
 					return;
 				}
 				orderCtr.createOrder();
+				reset();
 			}
 			
 			
@@ -574,8 +576,18 @@ public class CreateOrderPanel extends JPanel {
 	{
 		DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
 		dtm.setRowCount(0);
-		searchBar.setText("🔍 Phone number...");
+		searchBar.setFocusable(false);
+		searchBar.setFocusable(true);
+		if (searchBar.isFocusOwner())
+		{
+			searchBar.setText("");
+		}
+		else
+		{
+			searchBar.setText("🔍 Phone number...");
+		}
 		clearCustomerLabels();
+		
 		customerErrorLabel.setVisible(false);
 		deleteButton.setVisible(false);
 	}
