@@ -143,18 +143,6 @@ public class AddProductsDialog extends JDialog {
 			contentPanel.add(searchBar, gbc_searchBar);
 			searchBar.setColumns(10);
 		}
-		
-		
-		productErrorLabel = new JLabel("Product not found!");
-		productErrorLabel.setVisible(false);
-		productErrorLabel.setForeground(Color.RED);
-		productErrorLabel.setFont(new Font("Lato", Font.BOLD, 14));
-		GridBagConstraints gbc_productErrorLabel = new GridBagConstraints();
-		gbc_productErrorLabel.anchor = GridBagConstraints.WEST;
-		gbc_productErrorLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_productErrorLabel.gridx = 1;
-		gbc_productErrorLabel.gridy = 0;
-		contentPanel.add(productErrorLabel, gbc_productErrorLabel);
 		{
 			leftArrowLabel = new JLabel(" < ");
 			
@@ -167,6 +155,18 @@ public class AddProductsDialog extends JDialog {
 					loadPage(getPageIndex() - 1);
 				}
 			});
+			
+			
+			productErrorLabel = new JLabel("Product not found!");
+			productErrorLabel.setVisible(false);
+			productErrorLabel.setForeground(Color.RED);
+			productErrorLabel.setFont(new Font("Lato", Font.BOLD, 14));
+			GridBagConstraints gbc_productErrorLabel = new GridBagConstraints();
+			gbc_productErrorLabel.anchor = GridBagConstraints.WEST;
+			gbc_productErrorLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_productErrorLabel.gridx = 2;
+			gbc_productErrorLabel.gridy = 0;
+			contentPanel.add(productErrorLabel, gbc_productErrorLabel);
 			leftArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			GridBagConstraints gbc_leftArrowLabel = new GridBagConstraints();
 			gbc_leftArrowLabel.anchor = GridBagConstraints.EAST;
@@ -253,7 +253,7 @@ public class AddProductsDialog extends JDialog {
 			
 			GridBagConstraints gbc_table = new GridBagConstraints();
 			gbc_table.gridwidth = 5;
-			gbc_table.insets = new Insets(0, 0, 5, 5);
+			gbc_table.insets = new Insets(0, 0, 5, 0);
 			gbc_table.fill = GridBagConstraints.BOTH;
 			gbc_table.gridx = 0;
 			gbc_table.gridy = 2;
@@ -294,7 +294,6 @@ public class AddProductsDialog extends JDialog {
 			whiteButton(cancelButton);
 			GridBagConstraints gbc_cancelButton = new GridBagConstraints();
 			gbc_cancelButton.anchor = GridBagConstraints.SOUTHEAST;
-			gbc_cancelButton.insets = new Insets(0, 0, 0, 5);
 			gbc_cancelButton.gridx = 4;
 			gbc_cancelButton.gridy = 3;
 			contentPanel.add(cancelButton, gbc_cancelButton);
