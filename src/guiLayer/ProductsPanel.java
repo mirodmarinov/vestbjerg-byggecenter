@@ -284,11 +284,11 @@ public class ProductsPanel extends JPanel {
 		
 		RoundedButton addProductButton = new RoundedButton("➕ Add Product", babyBlue,
 					Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14));
-		ProductsPanel passThisThingToTheCreateProductDialog = this;
+		ProductsPanel thisObject = this;
 		addProductButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CreateProductDialog dialog = new CreateProductDialog(passThisThingToTheCreateProductDialog);
+				CreateProductDialog dialog = new CreateProductDialog(thisObject);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 				dialog.setVisible(true);

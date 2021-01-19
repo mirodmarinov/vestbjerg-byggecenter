@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -72,6 +73,7 @@ public class CreateProductDialog extends JDialog {
 	private JPanel header;
 	private ProductCtr productCtr;
 	private ProductsPanel productsPanel;
+	private ArrayList<Object[]> checkData;
 
 	
 	/**
@@ -507,13 +509,45 @@ public class CreateProductDialog extends JDialog {
 	private void finishCreation()
 	{
 		productCtr = new ProductCtr();
-		productCtr.createProduct(Integer.parseInt(thresholdTextField.getText()), Integer.parseInt(quantityTextField.getText()),
-				Integer.parseInt(discountTextField.getText()), Integer.parseInt(purchasePriceTextField.getText()), 
-				Integer.parseInt(salesPriceTextField.getText()), barcodeTextField.getText(), nameTextField.getText(), descriptionTextField.getText(),
-				groupTextField.getText(), locationTextField.getText());
-		productsPanel.defaultFillTable(Integer.parseInt(productsPanel.getTablePageLabel().getText()));
-		//TODO Check all fields's value and create the product then dispose the window
-		dispose();
+
+		checkData = new ArrayList<>();
+		checkData.add(new Object[] {quantityTextField.getText(),quantityLabel.getText(),quantityTextField});
+		checkData.add(new Object[] {thresholdTextField.getText(),thresholdLabel.getText(),thresholdTextField});
+		checkData.add(new Object[] {salesPriceTextField.getText(),salesPriceLabel.getText(),salesPriceTextField});
+		checkData.add(new Object[] {purchasePriceTextField.getText(),purchasePriceLabel.getText(),purchasePriceTextField});
+		checkData.add(new Object[] {discountTextField.getText(),discountLabel.getText(),discountTextField});
+		for (int e = 0;e < checkData.size();e++)
+		{
+			((JTextField) checkData.get(e)[2]).setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
+		}
+		ArrayList<Object[]> errorValues = productCtr.checkInputData(checkData);
+		if (errorValues.size() > 0)
+		{
+			String errors = ""; 
+			for (int element = 0;element < errorValues.size();element++)
+			{
+				((JTextField) errorValues.get(element)[2]).setBorder(new LineBorder(Color.RED,1,true));
+				if (element+1 == errorValues.size())
+				{
+					errors += errorValues.get(element)[1];
+				}
+				else
+				{
+					errors += errorValues.get(element)[1] + ", ";
+				}
+					
+			}
+			JOptionPane.showMessageDialog(null, "Invalid value for the fields: " + errors);
+		}
+		else
+		{
+			productCtr.createProduct(Integer.parseInt(thresholdTextField.getText()), Integer.parseInt(quantityTextField.getText()),
+					Integer.parseInt(discountTextField.getText()), Integer.parseInt(purchasePriceTextField.getText()), 
+					Integer.parseInt(salesPriceTextField.getText()), barcodeTextField.getText(), nameTextField.getText(), descriptionTextField.getText(),
+					groupTextField.getText(), locationTextField.getText());
+			productsPanel.defaultFillTable(Integer.parseInt(productsPanel.getTablePageLabel().getText()));
+			dispose();
+		}
 	}
 
 	private void fillFields()

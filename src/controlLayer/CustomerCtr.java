@@ -117,4 +117,22 @@ public class CustomerCtr
 		
 		return data;
 	}
+	
+	public ArrayList<Object[]> checkInputData(ArrayList<Object[]> data)
+	{
+		ArrayList<Object[]> errorValues = new ArrayList<>(); 
+		for (Object[] e : data)
+		{
+
+			try
+			{
+				Integer.parseInt((String)e[0]);
+			}
+			catch(Exception exception)
+			{
+				errorValues.add(e);
+			}
+		}
+		return errorValues;
+	}
 }
