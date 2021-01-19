@@ -45,6 +45,7 @@ import java.awt.event.FocusEvent;
 
 public class EditCustomerDialog extends JDialog {
 
+	private int phone;
 	private final JPanel contentPanel = new JPanel();
 	private Color babyBlue = new Color(28, 150, 202);
 	private JLabel headerLabel;
@@ -64,6 +65,7 @@ public class EditCustomerDialog extends JDialog {
 	private CustomerCtr customerCtr;
 	private JLabel customerName;
 	private JLabel lblNewLabel;
+	private CustomersPanel customersPanel;
 
 
 
@@ -71,6 +73,7 @@ public class EditCustomerDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public EditCustomerDialog(CustomersPanel customersPanel) {
+		this.customersPanel = customersPanel;
 		//TODO redraw the customersPanel table after finish the editing (update the table)
 		setBounds(100, 100, 567, 599);
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
@@ -328,9 +331,12 @@ public class EditCustomerDialog extends JDialog {
 				int confirmation = JOptionPane.showConfirmDialog(null, "Confirm deletion", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
 				if(confirmation == JOptionPane.YES_OPTION) 
 				{
-					//TODO Delete Customer
+					customerCtr.deleteCustomerByPhone(phone);
+					customersPanel.defaultFillTable(customersPanel.getPageIndex());
 					dispose();
 				}
+				button.setBackground(Color.RED);
+				button.setForeground(Color.WHITE);
 			}
 		});
 	}
@@ -424,6 +430,8 @@ public class EditCustomerDialog extends JDialog {
 			groupTextField.setText(data.get(0)[3]);
 			discountTextField.setText(data.get(0)[4]);
 			customerName.setText(data.get(0)[0]);
+			
+			this.phone = Integer.parseInt(data.get(0)[1]);
 		}
 		
 	}

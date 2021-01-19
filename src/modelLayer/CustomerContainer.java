@@ -109,6 +109,16 @@ public class CustomerContainer implements Serializable
 		return true;
 	}
 	
+	/**
+	 * Used to delete a customer from the container
+	 * @param customer
+	 * @return true if successful
+	 */
+	public boolean deleteCustomer(Customer customer)
+	{
+		return customers.remove(customer);
+	}
+	
 	public ArrayList<Customer> getCustomers()
 	{
 		return customers;

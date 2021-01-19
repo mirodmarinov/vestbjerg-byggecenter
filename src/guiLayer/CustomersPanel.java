@@ -313,7 +313,7 @@ public class CustomersPanel extends JPanel {
 	 * This method fills the table with the first x elements from the orderContainer
 	 * 
 	 */
-	private void defaultFillTable(int index) {
+	protected void defaultFillTable(int index) {
 		customerCtr = new CustomerCtr();
 		//we get the order information from the orderContainer
 		ArrayList<String[]> data = customerCtr.getCustomers(index);
@@ -427,6 +427,11 @@ public class CustomersPanel extends JPanel {
 	public JLabel getTablePageLabel()
 	{
 		return tablePageLabel;
+	}
+	
+	public JTable getTable()
+	{
+		return table;
 	}
 	
 	public void blueButton(RoundedButton button) {

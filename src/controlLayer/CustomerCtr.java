@@ -46,7 +46,16 @@ public class CustomerCtr
 	}
 	
 	
-	
+	public boolean deleteCustomerByPhone(int phone)
+	{
+		boolean result = false;
+		Customer customer = getCustomer(phone);
+		if (customer != null)
+		{
+			result = CustomerContainer.getInstance().deleteCustomer(customer);
+		}
+		return result;
+	}
 	
 	public ArrayList<String[]> getCustomers(int index)
 	{
