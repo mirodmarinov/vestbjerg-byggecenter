@@ -114,7 +114,6 @@ public class CreateProductDialog extends JDialog {
 		}
 		{
 			panel = new JPanel();
-			panel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 			panel.setBorder(BorderFactory.createLineBorder(new Color(243, 243, 243), 2, true));
 			panel.setBackground(Color.WHITE);
 			GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -127,7 +126,7 @@ public class CreateProductDialog extends JDialog {
 			contentPanel.add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
 			gbl_panel.columnWidths = new int[]{50,0, 0, 0, 0, 0,50};
-			gbl_panel.rowHeights = new int[]{20, 0, 0, 50, 0, 0, 50, 0, 0, 50, 0, 0, 0};
+			gbl_panel.rowHeights = new int[]{30, 0, 0, 50, 0, 0, 50, 0, 0, 50, 0, 0, 0};
 			gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
@@ -428,6 +427,7 @@ public class CreateProductDialog extends JDialog {
 	
 	private void textFieldFunctions(JTextField field)
 	{
+		field.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 		field.setFocusable(false);
 		field.addMouseListener(new MouseAdapter()
 		{
@@ -466,6 +466,7 @@ public class CreateProductDialog extends JDialog {
 	
 	private void textPaneFunctions(JTextPane pane)
 	{
+		pane.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 		pane.setFocusable(false);
 		pane.addMouseListener(new MouseAdapter()
 		{

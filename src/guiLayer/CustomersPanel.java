@@ -330,7 +330,7 @@ public class CustomersPanel extends JPanel {
 			{
 				table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 			}
-			table.setValueAt(new RoundedButton("Edit", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 5);
+			table.setValueAt(new RoundedButton("Manage", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 5);
 
 			
 		}
@@ -364,7 +364,7 @@ public class CustomersPanel extends JPanel {
 						table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 	
 					}
-					table.setValueAt(new RoundedButton("Edit", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 5);
+					table.setValueAt(new RoundedButton("Manage", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, 5);
 					
 				}
 				

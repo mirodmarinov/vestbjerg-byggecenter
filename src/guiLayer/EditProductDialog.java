@@ -127,7 +127,6 @@ public class EditProductDialog extends JDialog {
 		}
 		{
 			panel = new JPanel();
-			panel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 			panel.setBorder(BorderFactory.createLineBorder(new Color(243, 243, 243), 2, true));
 			panel.setBackground(Color.WHITE);
 			GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -506,6 +505,7 @@ public class EditProductDialog extends JDialog {
 	
 	private void textFieldFunctions(JTextField field)
 	{
+		field.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 		field.setText(field.getName()+"...");
 		field.setFocusable(false);
 		field.addMouseListener(new MouseAdapter()
@@ -545,6 +545,7 @@ public class EditProductDialog extends JDialog {
 	
 	private void textPaneFunctions(JTextPane pane)
 	{
+		pane.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 		pane.setText(pane.getName()+"...");
 		pane.setFocusable(false);
 		pane.addMouseListener(new MouseAdapter()

@@ -362,6 +362,7 @@ public class EditCustomerDialog extends JDialog {
 	
 	private void textFieldFunctions(JTextField field)
 	{
+		field.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 		field.setText(field.getName()+"...");
 		field.setFocusable(false);
 		field.addMouseListener(new MouseAdapter()
