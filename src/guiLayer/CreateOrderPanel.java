@@ -576,6 +576,7 @@ public class CreateOrderPanel extends JPanel {
 	{
 		DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
 		dtm.setRowCount(0);
+		orderCtr = new OrderCtr();
 		searchBar.setFocusable(false);
 		searchBar.setFocusable(true);
 		if (searchBar.isFocusOwner())
