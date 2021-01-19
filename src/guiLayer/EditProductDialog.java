@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -74,25 +75,13 @@ public class EditProductDialog extends JDialog {
 	private JLabel productName;
 	private String barcode = "";
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		try {
-			EditCustomerDialog dialog = new EditCustomerDialog(String productNameAndID);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
 
 	/**
 	 * Create the dialog.
 	 */
 	public EditProductDialog(ProductsPanel productsPanel) {
 		//TODO redraw the productsPanel table after finish the editing (update the table)
-		setBounds(100, 100, 1042, 600);
+		setBounds(100, 100, 1237, 713);
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -112,7 +101,7 @@ public class EditProductDialog extends JDialog {
 			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 			gbc_panel_1.anchor = GridBagConstraints.NORTH;
 			gbc_panel_1.gridwidth = 3;
-			gbc_panel_1.insets = new Insets(0, 0, 5, 0);
+			gbc_panel_1.insets = new Insets(0, 0, 5, 5);
 			gbc_panel_1.fill = GridBagConstraints.HORIZONTAL;
 			gbc_panel_1.gridx = 0;
 			gbc_panel_1.gridy = 0;
@@ -120,7 +109,6 @@ public class EditProductDialog extends JDialog {
 			{
 				
 				headerLabel = new JLabel("Edit Product");
-				//customerNameLabel.setHorizontalAlignment(JLabel.LEFT); TODO IT DOESN't WOOORK ;((((((
 				header.add(headerLabel);
 				headerLabel.setVisible(true);
 				headerLabel.setForeground(Color.WHITE);
@@ -131,6 +119,7 @@ public class EditProductDialog extends JDialog {
 			productName = new JLabel("<ProductNamePlaceHolder>");
 			productName.setFont(new Font("LATO", Font.BOLD, 18));
 			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+			gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
 			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 			gbc_lblNewLabel.gridx = 0;
 			gbc_lblNewLabel.gridy = 1;
@@ -150,7 +139,7 @@ public class EditProductDialog extends JDialog {
 			gbc_panel.gridy = 3;
 			contentPanel.add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{50,0, 0, 0, 0, 0,50};
+			gbl_panel.columnWidths = new int[]{0,50, 0, 0, 0, 0,50};
 			gbl_panel.rowHeights = new int[]{20, 0, 0, 50, 0, 0, 50, 0, 0, 50, 0, 0, 0};
 			gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -411,6 +400,19 @@ public class EditProductDialog extends JDialog {
 			contentPanel.add(okButton, gbc_okButton);
 		}
 		
+		{
+			RoundedButton deleteButton = new RoundedButton("Delete", Color.RED, Color.WHITE, Color.RED, new Font("Lato", Font.BOLD, 15));
+			formatButton(deleteButton);
+			redButton(deleteButton);
+			GridBagConstraints gbc_okButton = new GridBagConstraints();
+			gbc_okButton.gridheight = 4;
+			gbc_okButton.anchor = GridBagConstraints.SOUTHEAST;
+			gbc_okButton.insets = new Insets(0, 0, 0, 100);
+			gbc_okButton.gridx = 0;
+			gbc_okButton.gridy = 3;
+			contentPanel.add(deleteButton, gbc_okButton);
+		}
+		
 			cancelButton = new RoundedButton("Cancel", Color.WHITE, new Color(28, 150, 202), new Color(28, 150, 202), new Font("Lato", Font.BOLD, 15));
 			formatButton(cancelButton);
 			whiteButton(cancelButton);
@@ -468,6 +470,36 @@ public class EditProductDialog extends JDialog {
 			public void mouseClicked(MouseEvent e) 
 			{
 				dispose();
+			}
+		});
+	}
+	
+	private void redButton(RoundedButton button) {
+		button.addMouseListener(new MouseAdapter()
+		{	
+			@Override
+			public void mouseEntered(MouseEvent e) 
+			{
+				button.setBackground(Color.WHITE);
+				button.setForeground(Color.RED);
+			}
+					
+			@Override
+			public void mouseExited(MouseEvent e) 
+			{
+				button.setBackground(Color.RED);
+				button.setForeground(Color.WHITE);
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				int cofirmation = JOptionPane.showConfirmDialog(null, "Confirm deletion","Confirmation",JOptionPane.YES_NO_OPTION,JOptionPane.ERROR_MESSAGE);
+				if (cofirmation == JOptionPane.YES_OPTION)
+				{
+
+					dispose();
+				}
 			}
 		});
 	}
