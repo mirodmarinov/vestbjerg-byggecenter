@@ -57,6 +57,16 @@ public class CustomerCtr
 		return result;
 	}
 	
+	public void updateCustomer(int phone, int discount, String name, String address, String group)
+	{
+		Customer customer = getCustomer(phone);
+		customer.setPhone(phone);
+		customer.setDiscount(discount);
+		customer.setName(name);
+		customer.setAddress(address);
+		customer.setGroup(group);
+	}
+	
 	public ArrayList<String[]> getCustomers(int index)
 	{
 		int customerAmount = 0;

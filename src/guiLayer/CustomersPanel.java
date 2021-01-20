@@ -157,8 +157,7 @@ public class CustomersPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setPreferredWidth(70);
 		table.getColumnModel().getColumn(5).setMinWidth(70);
 		
-		EditCustomerDialog ecd = new EditCustomerDialog(this);
-		table.addMouseListener(new JTableButtonMouseListener(table,ecd));
+		table.addMouseListener(new JTableButtonMouseListener(table,new EditCustomerDialog(this)));
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 		
 		

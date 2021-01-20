@@ -443,7 +443,10 @@ public class EditCustomerDialog extends JDialog {
 		customerCtr = new CustomerCtr();
 		if (checkValues())
 		{
-			//TODO write the updateCustomer method in the lower layers
+			customerCtr.updateCustomer(Integer.parseInt(phoneTextField.getText()), Integer.parseInt(discountTextField.getText()),
+					nameTextField.getText(), addressTextField.getText(), groupTextField.getText());
+			customersPanel.defaultFillTable(customersPanel.getPageIndex());
+			dispose();
 		}
 
 	}

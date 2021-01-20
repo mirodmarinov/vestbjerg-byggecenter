@@ -63,7 +63,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 				else if(table.getName().equals("CustomersPanel"))
 				{
 					((EditCustomerDialog)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Phone number").getModelIndex()));
-					((EditProductDialog)popup).reDraw();
+					((EditCustomerDialog)popup).reDraw();
 					popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					popup.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 					popup.setVisible(true);
