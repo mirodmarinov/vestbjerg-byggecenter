@@ -48,7 +48,6 @@ public class AddProductsDialog extends JDialog {
 	private JTable createOrderPanelTable;
 	private JTable table;
 	private RoundedButton cancelButton;
-	private ProductCtr productCtr;
 	private OrderCtr orderCtr;
 	private ArrayList<Integer> productPlace = new ArrayList<>();
 	private String[] tableElements = new String[] {"Barcode", "Name", "Discount", "Input Quantity", "Price", "Stock", ""};
@@ -360,16 +359,18 @@ public class AddProductsDialog extends JDialog {
 		
 		//used for detecting if the table already contains the barcode.
 		//if yes, we created the "Added" button instead of "Add"
-		boolean tableContains = false;
 
 		for (int e = 0; e<data.size();e++)
 		{
+			//table.setValueAt("[1]", e, Integer.parseInt((String)table.getValueAt(e,table.getColumn("Input Quantity").getModelIndex())));
+			
 			table.setValueAt(data.get(e)[3], e, table.convertColumnIndexToView(table.getColumn(tableElements[0]).getModelIndex()));
 			table.setValueAt(data.get(e)[0], e, table.convertColumnIndexToView(table.getColumn(tableElements[1]).getModelIndex()));
 			table.setValueAt(data.get(e)[4], e, table.convertColumnIndexToView(table.getColumn(tableElements[2]).getModelIndex()));
-			table.setValueAt("", e, table.convertColumnIndexToView(table.getColumn(tableElements[3]).getModelIndex()));
+			table.setValueAt("", e, table.getColumn("Input Quantity").getModelIndex());
 			table.setValueAt(data.get(e)[5], e, table.convertColumnIndexToView(table.getColumn(tableElements[4]).getModelIndex()));
 			table.setValueAt(data.get(e)[2], e, table.convertColumnIndexToView(table.getColumn(tableElements[5]).getModelIndex()));
+			
 			
 			
 			
@@ -412,23 +413,36 @@ public class AddProductsDialog extends JDialog {
 			{ 
 				productErrorLabel.setVisible(false);
 				DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+				DefaultTableModel createOrderPanelTabledtm = (DefaultTableModel) createOrderPanelTable.getModel();
 				dtm.setRowCount(data.size());
 				for (int e = 0; e < data.size();e++)
 				{
 					table.setValueAt(data.get(e)[3], e, table.convertColumnIndexToView(table.getColumn(tableElements[0]).getModelIndex()));
 					table.setValueAt(data.get(e)[0], e, table.convertColumnIndexToView(table.getColumn(tableElements[1]).getModelIndex()));
 					table.setValueAt(data.get(e)[4], e, table.convertColumnIndexToView(table.getColumn(tableElements[2]).getModelIndex()));
-					table.setValueAt("", e, table.convertColumnIndexToView(table.getColumn(tableElements[3]).getModelIndex()));
+					table.setValueAt("", e, table.getColumn("Input Quantity").getModelIndex());
 					table.setValueAt(data.get(e)[5], e, table.convertColumnIndexToView(table.getColumn(tableElements[4]).getModelIndex()));
 					table.setValueAt(data.get(e)[2], e, table.convertColumnIndexToView(table.getColumn(tableElements[5]).getModelIndex()));
 					
-					if (!productPlace.contains(table.getValueAt(e, table.convertColumnIndexToView(table.getColumn("Barcode").getModelIndex()))))
+					for (int rows = 0; rows < createOrderPanelTabledtm.getRowCount(); rows++)
 					{
-						table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
-					}
-					else
-					{
-						table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), table.getSelectedRow(), table.getColumn("").getModelIndex());
+						
+						String a = createOrderPanelTable.getValueAt(rows, createOrderPanelTable.getColumn("Barcode").getModelIndex()).toString();
+						String b = data.get(e)[3].toString();
+						
+						/*
+						 * We check if the barcode is in the other table, or if the product has already been added
+						 * either through previously opening the dialog, or by pressing the add button.
+						 */
+						if (a.equals(b))
+						{
+							table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+							break;
+						}
+						else
+						{
+							table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+						}
 					}
 				}
 			}
@@ -456,19 +470,39 @@ public class AddProductsDialog extends JDialog {
 		{
 			return;
 		}
+		JLabel priceLabel = null;
+		JPanel tempPanel = (JPanel)createOrderPanelTable.getParent().getParent().getParent();
+		for(int i = 0; i < tempPanel.getComponentCount(); i++)
+		{
+			if (tempPanel.getComponent(i).getName() != null && tempPanel.getComponent(i).getName().equals("totalValueLabel"))
+			{
+				priceLabel = (JLabel) tempPanel.getComponent(i);
+			}
+			try 
+			{
+				JLabel label = (JLabel)tempPanel.getComponent(i);
+				if (label.getText().contains("select a product"))
+				{
+					label.setVisible(false);
+					break;
+				}	
+			}
+			catch (Exception e){}
+		}
 		DefaultTableModel dtm = (DefaultTableModel) createOrderPanelTable.getModel();
-		//dtm.setRowCount(0);
 		
 		int rowCount = dtm.getRowCount();
 		dtm.setRowCount(productPlace.size() + rowCount);
-		
+		int quantity = 1;
+		int totalPrice = 0;
 		for (int e = 0; e < productPlace.size(); e++)
 		{
 			String name = (String) table.getValueAt(productPlace.get(e), table.getColumn("Name").getModelIndex());
 			int barcode = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Barcode").getModelIndex()));
 			int discount = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Discount").getModelIndex()));
 			int price = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Price").getModelIndex()));
-			int quantity = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Input Quantity").getModelIndex()));
+				quantity = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Input Quantity").getModelIndex()));
+			
 			
 			orderCtr.selectProduct(productPlace.get(e), quantity);
 		
@@ -480,10 +514,12 @@ public class AddProductsDialog extends JDialog {
 			createOrderPanelTable.setValueAt(price, e + rowCount, createOrderPanelTable.getColumn("Price").getModelIndex());
 			createOrderPanelTable.setValueAt(quantity, e + rowCount, createOrderPanelTable.getColumn("Quantity").getModelIndex());
 			createOrderPanelTable.setValueAt((quantity * price), e + rowCount, createOrderPanelTable.getColumn("Total").getModelIndex());
-
+			totalPrice += (quantity * price);
 			
 			createOrderPanelTable.setValueAt(new RoundedButton("Remove", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e + rowCount, createOrderPanelTable.getColumn("").getModelIndex());
+			
 		}
+		priceLabel.setText(Integer.toString(totalPrice) + " DKK");
 		//TODO Check data and send it back to the CreateOrderPanel with the method setOrderPanelData(barcodes)
 		dispose();
 	}

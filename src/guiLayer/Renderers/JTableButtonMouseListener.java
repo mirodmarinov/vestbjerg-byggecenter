@@ -10,7 +10,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 import javax.swing.*;
+=======
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+>>>>>>> main
 import javax.swing.table.DefaultTableModel;
 
 import controlLayer.OrderCtr;
@@ -88,12 +95,32 @@ public class JTableButtonMouseListener extends MouseAdapter
 				else if(table.getName().equals("CreateOrderPanel"))
 				{
 					DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-					
 					String barcode = table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex()).toString();
 					orderCtr.removeProductFromList(barcode);
 					
+					//TODO Write comment here
+					
+					JLabel priceLabel = null;
+					JPanel tempPanel = (JPanel)table.getParent().getParent().getParent();
+					for (int a = 0;a < tempPanel.getComponentCount();a++)
+					{
+						if (tempPanel.getComponent(a).getName() != null && tempPanel.getComponent(a).getName().equals("totalValueLabel"))
+						{
+							priceLabel = (JLabel) tempPanel.getComponent(a);
+							String text = Integer.toString (Integer.parseInt(priceLabel.getText().substring(0, priceLabel.getText().length()-4))-Integer.parseInt(table.getValueAt(table.getSelectedRow(), table.getColumn("Total").getModelIndex()).toString()));
+							if (text.equals("0"))
+							{
+								priceLabel.setText("... DKK");
+							}
+							else
+							{
+								priceLabel.setText(text + " DKK");
+							}
+						}
+					}
 					dtm.removeRow(table.getSelectedRow());
 				}
+				
 			}
 			else if(table.getName().equals("OrderPanel"))
 			{
