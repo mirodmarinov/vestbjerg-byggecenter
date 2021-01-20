@@ -116,6 +116,7 @@ public class CreateOrderPanel extends JPanel {
 					searchBar.setFocusable(true);
 					if (searchBar.getText().equals(""))
 					{
+						searchBar.setForeground(new Color(149, 149, 149));
 						searchBar.setText("🔍 Phone number...");
 						
 					}
@@ -135,6 +136,7 @@ public class CreateOrderPanel extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				if (searchBar.getText().equals("🔍 Phone number..."))
 				{
+					searchBar.setForeground(Color.BLACK);
 					searchBar.setText("");
 				}
 			}
@@ -566,6 +568,7 @@ public class CreateOrderPanel extends JPanel {
 		phoneValueLabel.setText("...");
 		if (searchBar.getText().equals(""))
 		{
+			searchBar.setForeground(new Color(149, 149, 149));
 			searchBar.setText("🔍 Phone number...");
 		}
 	}
@@ -581,10 +584,12 @@ public class CreateOrderPanel extends JPanel {
 		searchBar.setFocusable(true);
 		if (searchBar.isFocusOwner())
 		{
+			searchBar.setForeground(Color.BLACK);
 			searchBar.setText("");
 		}
 		else
 		{
+			searchBar.setForeground(new Color(149, 149, 149));
 			searchBar.setText("🔍 Phone number...");
 		}
 		clearCustomerLabels();

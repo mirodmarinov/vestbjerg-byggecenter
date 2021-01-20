@@ -167,6 +167,7 @@ public class ProductsPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				searchTextField.getDocument().removeDocumentListener(cl);
+				searchTextField.setForeground(new Color(149, 149, 149));
 				searchTextField.setText("🔍 Search...");
 				searchTextField.getDocument().addDocumentListener(cl);
 				loadPage(getPageIndex() - 1);
@@ -195,6 +196,7 @@ public class ProductsPanel extends JPanel {
 				searchTextField.setFocusable(false);
 				searchTextField.setFocusable(true);
 				searchTextField.getDocument().removeDocumentListener(cl);
+				searchTextField.setForeground(new Color(149, 149, 149));
 				searchTextField.setText("🔍 Search...");
 				searchTextField.getDocument().addDocumentListener(cl);
 				loadPage(getPageIndex() + 1);
@@ -230,6 +232,7 @@ public class ProductsPanel extends JPanel {
 					{
 						loadPage(1);
 						searchTextField.getDocument().removeDocumentListener(cl);
+						searchTextField.setForeground(new Color(149, 149, 149));
 						searchTextField.setText("🔍 Search...");
 						searchTextField.getDocument().addDocumentListener(cl);
 					}
@@ -250,6 +253,7 @@ public class ProductsPanel extends JPanel {
 				if (searchTextField.getText().equals("🔍 Search..."))
 				{
 					searchTextField.getDocument().removeDocumentListener(cl);
+					searchTextField.setForeground(Color.BLACK);
 					searchTextField.setText("");
 					searchTextField.getDocument().addDocumentListener(cl);
 				}
@@ -262,6 +266,7 @@ public class ProductsPanel extends JPanel {
 		gbc_searchTextField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_searchTextField.gridx = 6;
 		gbc_searchTextField.gridy = 2;
+		searchTextField.setForeground(new Color(149, 149, 149));
 		searchTextField.setText("🔍 Search...");
 		searchTextField.getDocument().addDocumentListener(cl);
 		add(searchTextField, gbc_searchTextField);
