@@ -118,21 +118,30 @@ public class CustomerCtr
 		return data;
 	}
 	
-	public ArrayList<Object[]> checkInputData(ArrayList<Object[]> data)
+	public boolean checkValues(String name,String value,boolean string)
 	{
-		ArrayList<Object[]> errorValues = new ArrayList<>(); 
-		for (Object[] e : data)
+		if (string)
 		{
-
-			try
+			if ((name+"...").equals(value) || (value.equals("")))
 			{
-				Integer.parseInt((String)e[0]);
-			}
-			catch(Exception exception)
-			{
-				errorValues.add(e);
+				return false;
 			}
 		}
-		return errorValues;
+		else
+		{
+			try
+			{
+				Integer.parseInt(value);
+				return true;
+			}
+			catch(Exception e)
+			{
+				return false;
+			}
+		}
+		
+		
+		return true;
 	}
+	
 }

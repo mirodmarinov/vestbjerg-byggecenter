@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.text.JTextComponent;
 
 import controlLayer.CustomerCtr;
 import guiLayer.Renderers.JTableButtonMouseListener;
@@ -74,7 +75,6 @@ public class EditCustomerDialog extends JDialog {
 	 */
 	public EditCustomerDialog(CustomersPanel customersPanel) {
 		this.customersPanel = customersPanel;
-		//TODO redraw the customersPanel table after finish the editing (update the table)
 		setBounds(100, 100, 567, 599);
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
@@ -306,6 +306,12 @@ public class EditCustomerDialog extends JDialog {
 				button.setBackground(babyBlue);
 				button.setForeground(Color.WHITE);
 			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				finishCreation();
+			}
 		});
 	}
 	
@@ -404,12 +410,7 @@ public class EditCustomerDialog extends JDialog {
 		});
 
 	}
-	
-	
-	private void textPaneFunctions(JTextPane pane)
-	{
 
-	}
 	
 	/**
 	 * Gets the barcode of the product, fills up all the fields with the current data.
@@ -440,8 +441,66 @@ public class EditCustomerDialog extends JDialog {
 	private void finishCreation()
 	{
 		customerCtr = new CustomerCtr();
-		//TODO Check all fields's value and create the product then dispose the window
+		if (checkValues())
+		{
+			//TODO write the updateCustomer method in the lower layers
+		}
 
+	}
+	
+	private boolean checkValues()
+	{
+		JTextComponent[] strings = new JTextComponent[] {nameTextField,groupTextField,addressTextField}; 
+		JTextField[] integers = new JTextField[] {discountTextField,phoneTextField};
+		
+		String errorMessage = "";
+		
+		
+		//Checking string textfield values
+		
+		for (int string = 0;string<strings.length;string++)
+		{
+			strings[string].setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
+			if (!customerCtr.checkValues(strings[string].getName(), strings[string].getText(), true))
+			{
+				strings[string].setBorder(BorderFactory.createLineBorder(Color.RED, 1, true));
+				errorMessage += strings[string].getName() + ", ";	
+			}
+		}
+		
+		//Checking integer textfield values
+		
+		for (int integer = 0;integer<integers.length;integer++)
+		{
+			integers[integer].setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
+			if (!customerCtr.checkValues(integers[integer].getName(), integers[integer].getText(), false))
+			{
+				integers[integer].setBorder(BorderFactory.createLineBorder(Color.RED, 1, true));
+				errorMessage += integers[integer].getName() + ", ";	
+			}
+		}
+		
+		//Modifying the errorMessage and printing it
+		
+		if (errorMessage != "")
+		{
+			errorMessage = errorMessage.substring(0, errorMessage.length()-2);
+			errorMessage += "!";
+			JOptionPane.showMessageDialog(null, "Invalid value for the field(s): " + errorMessage);
+			return false;
+		}
+		
+		
+		return true;
+	}
+	
+	public void reDraw()
+	{
+		JTextComponent[] fields = new JTextComponent[] {nameTextField,groupTextField,addressTextField,discountTextField,phoneTextField};
+		for (JTextComponent field : fields)
+		{
+			field.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
+		}
 	}
 	
 }
