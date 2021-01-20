@@ -367,7 +367,7 @@ public class AddProductsDialog extends JDialog {
 			table.setValueAt(data.get(e)[3], e, table.convertColumnIndexToView(table.getColumn(tableElements[0]).getModelIndex()));
 			table.setValueAt(data.get(e)[0], e, table.convertColumnIndexToView(table.getColumn(tableElements[1]).getModelIndex()));
 			table.setValueAt(data.get(e)[4], e, table.convertColumnIndexToView(table.getColumn(tableElements[2]).getModelIndex()));
-			table.setValueAt("[1]", e, table.getColumn("Input Quantity").getModelIndex());
+			table.setValueAt("", e, table.getColumn("Input Quantity").getModelIndex());
 			table.setValueAt(data.get(e)[5], e, table.convertColumnIndexToView(table.getColumn(tableElements[4]).getModelIndex()));
 			table.setValueAt(data.get(e)[2], e, table.convertColumnIndexToView(table.getColumn(tableElements[5]).getModelIndex()));
 			
@@ -419,7 +419,7 @@ public class AddProductsDialog extends JDialog {
 					table.setValueAt(data.get(e)[3], e, table.convertColumnIndexToView(table.getColumn(tableElements[0]).getModelIndex()));
 					table.setValueAt(data.get(e)[0], e, table.convertColumnIndexToView(table.getColumn(tableElements[1]).getModelIndex()));
 					table.setValueAt(data.get(e)[4], e, table.convertColumnIndexToView(table.getColumn(tableElements[2]).getModelIndex()));
-					table.setValueAt("[1]", e, table.getColumn("Input Quantity").getModelIndex());
+					table.setValueAt("", e, table.getColumn("Input Quantity").getModelIndex());
 					table.setValueAt(data.get(e)[5], e, table.convertColumnIndexToView(table.getColumn(tableElements[4]).getModelIndex()));
 					table.setValueAt(data.get(e)[2], e, table.convertColumnIndexToView(table.getColumn(tableElements[5]).getModelIndex()));
 					
@@ -485,10 +485,7 @@ public class AddProductsDialog extends JDialog {
 			int barcode = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Barcode").getModelIndex()));
 			int discount = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Discount").getModelIndex()));
 			int price = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Price").getModelIndex()));
-			if (!table.getValueAt(e, table.getColumn("Input Quantity").getModelIndex()).equals("[1]"))
-			{
 				quantity = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Input Quantity").getModelIndex()));
-			}
 			
 			
 			orderCtr.selectProduct(productPlace.get(e), quantity);
