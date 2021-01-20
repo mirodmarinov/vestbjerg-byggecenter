@@ -67,7 +67,8 @@ public class OrderMenuGUI {
 		frmVestbjergByggecenterManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmVestbjergByggecenterManagement.addWindowListener(new WindowAdapter() {
 		
-		public void windowClosing()
+			@Override
+		public void windowClosing(WindowEvent e)
 		{
 			Serialization.getInstance().serializeClass("OrderContainer");
 			Serialization.getInstance().serializeClass("ProductContainer");

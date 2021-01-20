@@ -20,7 +20,6 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
 import controlLayer.OrderCtr;
-import controlLayer.ProductCtr;
 import guiLayer.Renderers.JTableButtonMouseListener;
 import guiLayer.Renderers.JTableButtonRenderer;
 
@@ -517,7 +516,6 @@ public class AddProductsDialog extends JDialog {
 			totalPrice += (quantity * price);
 			
 			createOrderPanelTable.setValueAt(new RoundedButton("Remove", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e + rowCount, createOrderPanelTable.getColumn("").getModelIndex());
-			
 		}
 		priceLabel.setText(Integer.toString(totalPrice) + " DKK");
 		//TODO Check data and send it back to the CreateOrderPanel with the method setOrderPanelData(barcodes)
