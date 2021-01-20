@@ -413,6 +413,7 @@ public class AddProductsDialog extends JDialog {
 			{ 
 				productErrorLabel.setVisible(false);
 				DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+				DefaultTableModel createOrderPanelTabledtm = (DefaultTableModel) createOrderPanelTable.getModel();
 				dtm.setRowCount(data.size());
 				for (int e = 0; e < data.size();e++)
 				{
@@ -423,13 +424,25 @@ public class AddProductsDialog extends JDialog {
 					table.setValueAt(data.get(e)[5], e, table.convertColumnIndexToView(table.getColumn(tableElements[4]).getModelIndex()));
 					table.setValueAt(data.get(e)[2], e, table.convertColumnIndexToView(table.getColumn(tableElements[5]).getModelIndex()));
 					
-					if (!productPlace.contains(table.getValueAt(e, table.convertColumnIndexToView(table.getColumn("Barcode").getModelIndex()))))
+					for (int rows = 0; rows < createOrderPanelTabledtm.getRowCount(); rows++)
 					{
-						table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
-					}
-					else
-					{
-						table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), table.getSelectedRow(), table.getColumn("").getModelIndex());
+						
+						String a = createOrderPanelTable.getValueAt(rows, createOrderPanelTable.getColumn("Barcode").getModelIndex()).toString();
+						String b = data.get(e)[3].toString();
+						
+						/*
+						 * We check if the barcode is in the other table, or if the product has already been added
+						 * either through previously opening the dialog, or by pressing the add button.
+						 */
+						if (a.equals(b))
+						{
+							table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+							break;
+						}
+						else
+						{
+							table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+						}
 					}
 				}
 			}
@@ -453,7 +466,6 @@ public class AddProductsDialog extends JDialog {
 	}
 	
 	private void finishCreation() {
-	
 		if (productPlace.size() == 0)
 		{
 			return;
@@ -474,7 +486,6 @@ public class AddProductsDialog extends JDialog {
 			}
 		}
 		DefaultTableModel dtm = (DefaultTableModel) createOrderPanelTable.getModel();
-		//dtm.setRowCount(0);
 		
 		int rowCount = dtm.getRowCount();
 		dtm.setRowCount(productPlace.size() + rowCount);
