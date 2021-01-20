@@ -38,11 +38,13 @@ import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
 
 public class CreateProductDialog extends JDialog {
 
@@ -70,7 +72,7 @@ public class CreateProductDialog extends JDialog {
 	private JLabel discountLabel;
 	private JTextField discountTextField;
 	private JLabel descriptionLabel;
-	private JTextPane descriptionTextField;
+	private JTextArea descriptionTextField;
 	private JPanel header;
 	private ProductCtr productCtr;
 	private ProductsPanel productsPanel;
@@ -127,9 +129,9 @@ public class CreateProductDialog extends JDialog {
 			gbc_panel.gridy = 3;
 			contentPanel.add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{50,0, 0, 0, 0, 0,50};
+			gbl_panel.columnWidths = new int[]{50,0, 0, 300,50};
 			gbl_panel.rowHeights = new int[]{30, 0, 0, 50, 0, 0, 50, 0, 0, 50, 0, 0, 0};
-			gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+			gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0};
 			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			{
@@ -249,12 +251,11 @@ public class CreateProductDialog extends JDialog {
 				locationTextField.setColumns(10);
 			}
 			{
-				descriptionTextField = new JTextPane();
+				descriptionTextField = new JTextArea();
 				descriptionTextField.setName("Description");
-				textPaneFunctions(descriptionTextField);
-				descriptionTextField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, false));
+				textAreaFunctions(descriptionTextField);
 				GridBagConstraints gbc_descriptionTextField = new GridBagConstraints();
-				gbc_descriptionTextField.gridheight = 3;
+				gbc_descriptionTextField.gridheight = 7;
 				gbc_descriptionTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_descriptionTextField.fill = GridBagConstraints.BOTH;
 				gbc_descriptionTextField.gridx = 3;
@@ -430,6 +431,7 @@ public class CreateProductDialog extends JDialog {
 	private void textFieldFunctions(JTextField field)
 	{
 		field.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
+		field.setForeground(new Color(149, 149, 149));
 		field.setFocusable(false);
 		field.addMouseListener(new MouseAdapter()
 		{
@@ -450,6 +452,7 @@ public class CreateProductDialog extends JDialog {
 				if (field.getText().equals(field.getName()+"..."))
 				{
 					field.setText("");
+					field.setForeground(Color.BLACK);
 				}
 			}
 			
@@ -459,6 +462,7 @@ public class CreateProductDialog extends JDialog {
 				if (field.getText().equals(""))
 				{
 					field.setText(field.getName()+"...");
+					field.setForeground(new Color(149, 149, 149));
 				}
 			}
 		});
@@ -466,38 +470,43 @@ public class CreateProductDialog extends JDialog {
 	}
 	
 	
-	private void textPaneFunctions(JTextPane pane)
+	private void textAreaFunctions(JTextArea textArea)
 	{
-		pane.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
-		pane.setFocusable(false);
-		pane.addMouseListener(new MouseAdapter()
+		textArea.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
+		textArea.setFocusable(false);
+		textArea.setForeground(new Color(149, 149, 149));
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		textArea.addMouseListener(new MouseAdapter()
 		{
 			
 			@Override
 			public void mouseEntered(MouseEvent e)
 			{
-				pane.setFocusable(true);
+				textArea.setFocusable(true);
 			}
 				
 		});
 		
-		pane.addFocusListener(new FocusAdapter()
+		textArea.addFocusListener(new FocusAdapter()
 		{
 			@Override
 			public void focusGained(FocusEvent e)
 			{
-				if (pane.getText().equals(pane.getName()+"..."))
+				if (textArea.getText().equals(textArea.getName()+"..."))
 				{
-					pane.setText("");
+					textArea.setText("");
+					textArea.setForeground(Color.BLACK);
 				}
 			}
 			
 			@Override
 			public void focusLost(FocusEvent e)
 			{
-				if (pane.getText().equals(""))
+				if (textArea.getText().equals(""))
 				{
-					pane.setText(pane.getName()+"...");
+					textArea.setText(textArea.getName()+"...");
+					textArea.setForeground(new Color(149, 149, 149));
 				}
 			}
 		});
