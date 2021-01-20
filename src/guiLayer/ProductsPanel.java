@@ -167,6 +167,7 @@ public class ProductsPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				searchTextField.getDocument().removeDocumentListener(cl);
+				searchTextField.setForeground(new Color(149, 149, 149));
 				searchTextField.setText("🔍 Search...");
 				searchTextField.getDocument().addDocumentListener(cl);
 				loadPage(getPageIndex() - 1);
@@ -195,6 +196,7 @@ public class ProductsPanel extends JPanel {
 				searchTextField.setFocusable(false);
 				searchTextField.setFocusable(true);
 				searchTextField.getDocument().removeDocumentListener(cl);
+				searchTextField.setForeground(new Color(149, 149, 149));
 				searchTextField.setText("🔍 Search...");
 				searchTextField.getDocument().addDocumentListener(cl);
 				loadPage(getPageIndex() + 1);
@@ -221,6 +223,7 @@ public class ProductsPanel extends JPanel {
 		add(foundLabel, gbc_foundLabel);
 		
 		searchTextField = new JTextField();
+		searchTextField.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 		searchTextField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					foundLabel.setVisible(false);
@@ -230,6 +233,7 @@ public class ProductsPanel extends JPanel {
 					{
 						loadPage(1);
 						searchTextField.getDocument().removeDocumentListener(cl);
+						searchTextField.setForeground(new Color(149, 149, 149));
 						searchTextField.setText("🔍 Search...");
 						searchTextField.getDocument().addDocumentListener(cl);
 					}
@@ -250,6 +254,7 @@ public class ProductsPanel extends JPanel {
 				if (searchTextField.getText().equals("🔍 Search..."))
 				{
 					searchTextField.getDocument().removeDocumentListener(cl);
+					searchTextField.setForeground(Color.BLACK);
 					searchTextField.setText("");
 					searchTextField.getDocument().addDocumentListener(cl);
 				}
@@ -262,6 +267,7 @@ public class ProductsPanel extends JPanel {
 		gbc_searchTextField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_searchTextField.gridx = 6;
 		gbc_searchTextField.gridy = 2;
+		searchTextField.setForeground(new Color(149, 149, 149));
 		searchTextField.setText("🔍 Search...");
 		searchTextField.getDocument().addDocumentListener(cl);
 		add(searchTextField, gbc_searchTextField);
@@ -304,8 +310,7 @@ public class ProductsPanel extends JPanel {
 		add(addProductButton, gbc_addCustomerButton);
 		
 		
-		EditProductDialog ecd = new EditProductDialog(this,0,productCtr);
-		table.addMouseListener(new JTableButtonMouseListener(table,ecd));
+		table.addMouseListener(new JTableButtonMouseListener(table,new EditProductDialog(this,0,productCtr)));
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 	}
 
@@ -441,6 +446,6 @@ public class ProductsPanel extends JPanel {
 			}
 		});
 	}
-	
+
 	
 }

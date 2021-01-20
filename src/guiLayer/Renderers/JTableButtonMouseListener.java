@@ -63,15 +63,16 @@ public class JTableButtonMouseListener extends MouseAdapter
 				else if(table.getName().equals("CustomersPanel"))
 				{
 					((EditCustomerDialog)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Phone number").getModelIndex()));
+					((EditCustomerDialog)popup).reDraw();
 					popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					popup.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 					popup.setVisible(true);
 				}
 				else if(table.getName().equals(("ProductsPanel")))
 				{
-					
 					((EditProductDialog)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex()));
 					((EditProductDialog)popup).setPlaceOnList(table.getSelectedRow());
+					((EditProductDialog)popup).reDraw();
 					popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					popup.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 					popup.setVisible(true);
@@ -89,8 +90,11 @@ public class JTableButtonMouseListener extends MouseAdapter
 					orderCtr.removeProductFromList(barcode);
 					
 					dtm.removeRow(table.getSelectedRow());
-					
 				}
+			}
+			else if(table.getName().equals("OrderPanel"))
+			{
+				System.out.println(e.getClickCount());
 			}
 		}
 	}

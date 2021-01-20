@@ -57,6 +57,16 @@ public class CustomerCtr
 		return result;
 	}
 	
+	public void updateCustomer(int phone, int discount, String name, String address, String group)
+	{
+		Customer customer = getCustomer(phone);
+		customer.setPhone(phone);
+		customer.setDiscount(discount);
+		customer.setName(name);
+		customer.setAddress(address);
+		customer.setGroup(group);
+	}
+	
 	public ArrayList<String[]> getCustomers(int index)
 	{
 		int customerAmount = 0;
@@ -118,21 +128,30 @@ public class CustomerCtr
 		return data;
 	}
 	
-	public ArrayList<Object[]> checkInputData(ArrayList<Object[]> data)
+	public boolean checkValues(String name,String value,boolean string)
 	{
-		ArrayList<Object[]> errorValues = new ArrayList<>(); 
-		for (Object[] e : data)
+		if (string)
 		{
-
-			try
+			if ((name+"...").equals(value) || (value.equals("")))
 			{
-				Integer.parseInt((String)e[0]);
-			}
-			catch(Exception exception)
-			{
-				errorValues.add(e);
+				return false;
 			}
 		}
-		return errorValues;
+		else
+		{
+			try
+			{
+				Integer.parseInt(value);
+				return true;
+			}
+			catch(Exception e)
+			{
+				return false;
+			}
+		}
+		
+		
+		return true;
 	}
+	
 }

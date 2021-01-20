@@ -43,8 +43,9 @@ public class OrderContainer implements Serializable
 	{
 		if (orders.add(order))
 		{
-			Serialization.getInstance().serializeClass("modelLayer.OrderContainer");
+			
 			order.setOrderNumber(++orderNumberGenerator);
+			Serialization.getInstance().serializeClass("modelLayer.OrderContainer");
 			return true;
 		}
 		return false;

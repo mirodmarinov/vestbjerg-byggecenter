@@ -157,8 +157,7 @@ public class CustomersPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setPreferredWidth(70);
 		table.getColumnModel().getColumn(5).setMinWidth(70);
 		
-		EditCustomerDialog ecd = new EditCustomerDialog(this);
-		table.addMouseListener(new JTableButtonMouseListener(table,ecd));
+		table.addMouseListener(new JTableButtonMouseListener(table,new EditCustomerDialog(this)));
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 		
 		
@@ -169,6 +168,7 @@ public class CustomersPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				searchTextField.getDocument().removeDocumentListener(cl);
+				searchTextField.setForeground(new Color(149, 149, 149));
 				searchTextField.setText("🔍 Search...");
 				searchTextField.getDocument().addDocumentListener(cl);
 				loadPage(getPageIndex() - 1);
@@ -197,6 +197,7 @@ public class CustomersPanel extends JPanel {
 				searchTextField.setFocusable(false);
 				searchTextField.setFocusable(true);
 				searchTextField.getDocument().removeDocumentListener(cl);
+				searchTextField.setForeground(new Color(149, 149, 149));
 				searchTextField.setText("🔍 Search...");
 				searchTextField.getDocument().addDocumentListener(cl);
 				loadPage(getPageIndex() + 1);
@@ -223,6 +224,7 @@ public class CustomersPanel extends JPanel {
 		add(foundLabel, gbc_foundLabel);
 		
 		searchTextField = new JTextField();
+		searchTextField.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 		searchTextField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					foundLabel.setVisible(false);
@@ -232,6 +234,7 @@ public class CustomersPanel extends JPanel {
 					{
 						loadPage(1);
 						searchTextField.getDocument().removeDocumentListener(cl);
+						searchTextField.setForeground(new Color(149, 149, 149));
 						searchTextField.setText("🔍 Search...");
 						searchTextField.getDocument().addDocumentListener(cl);
 					}
@@ -252,6 +255,7 @@ public class CustomersPanel extends JPanel {
 				if (searchTextField.getText().equals("🔍 Search..."))
 				{
 					searchTextField.getDocument().removeDocumentListener(cl);
+					searchTextField.setForeground(Color.BLACK);
 					searchTextField.setText("");
 					searchTextField.getDocument().addDocumentListener(cl);
 				}
@@ -264,6 +268,7 @@ public class CustomersPanel extends JPanel {
 		gbc_searchTextField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_searchTextField.gridx = 6;
 		gbc_searchTextField.gridy = 2;
+		searchTextField.setForeground(new Color(149, 149, 149));
 		searchTextField.setText("🔍 Search...");
 		searchTextField.getDocument().addDocumentListener(cl);
 		add(searchTextField, gbc_searchTextField);
@@ -286,11 +291,12 @@ public class CustomersPanel extends JPanel {
 		
 		RoundedButton addProductButton = new RoundedButton("➕ Add Customer", babyBlue,
 					Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14));
+		CustomersPanel thisClass = this;
 		addProductButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				CreateCustomerDialog dialog = new CreateCustomerDialog();
+				CreateCustomerDialog dialog = new CreateCustomerDialog(thisClass);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 				dialog.setVisible(true);
