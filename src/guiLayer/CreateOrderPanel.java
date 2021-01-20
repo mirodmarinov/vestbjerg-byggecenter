@@ -1,45 +1,12 @@
 package guiLayer;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.Color;
-import java.awt.Dialog;
-import java.awt.Dimension;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import javax.swing.SwingConstants;
-import javax.swing.border.EtchedBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.JTextField;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JSeparator;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-
+import javax.swing.*;
+import javax.swing.table.*;
+import java.awt.*;
+import java.awt.event.*;
 import controlLayer.*;
 import guiLayer.Renderers.JTableButtonMouseListener;
 import guiLayer.Renderers.JTableButtonRenderer;
-
-import javax.swing.JDialog;
 
 public class CreateOrderPanel extends JPanel {
 	private JTextField searchBar;
@@ -47,12 +14,12 @@ public class CreateOrderPanel extends JPanel {
 	private Color babyBlue = new Color(28, 150, 202);
 	private OrderCtr orderCtr = new OrderCtr();
 	private JLabel customerErrorLabel;
+	private JLabel orderErrorLabel;
 	private JLabel nameValueLabel;
 	private JLabel groupValueLabel;
 	private JLabel phoneValueLabel;
 	private JLabel deleteButton;
 	private String[] orderTableElements = {"Barcode", "Name", "Price", "Quantity", "Discount", "Total", ""};
-	private ProductCtr productCtr;
 
 	/**
 	 * Create the panel.
@@ -410,6 +377,18 @@ public class CreateOrderPanel extends JPanel {
 		gbc_totalValueLabel.gridy = 3;
 		productPanel.add(totalValueLabel, gbc_totalValueLabel);
 		
+		//Error Order JLabel********************************************************
+		orderErrorLabel = new JLabel("Please add a customer!");
+		orderErrorLabel.setVisible(false);
+		orderErrorLabel.setForeground(Color.RED);
+		orderErrorLabel.setFont(new Font("Lato", Font.BOLD, 14));
+		GridBagConstraints gbc_orderErrorLabel = new GridBagConstraints();
+		gbc_orderErrorLabel.anchor = GridBagConstraints.EAST;
+		gbc_orderErrorLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_orderErrorLabel.gridx = 2;
+		gbc_orderErrorLabel.gridy = 4;
+		productPanel.add(orderErrorLabel, gbc_orderErrorLabel);
+		
 		//Product Panel Create Offer Button********************************************************
 		RoundedButton createOfferButton = new RoundedButton("Create Offer", babyBlue,
 						Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
@@ -421,13 +400,20 @@ public class CreateOrderPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) 
 			{
 				DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
-				if (dtm.getRowCount() == 0 || phoneValueLabel.equals("..."))
+				if (phoneValueLabel.getText().equals("..."))
 				{
-					//TODO DO ERROR MESSAGE, right returns on purpose
-					return;
+					orderErrorLabel.setVisible(true);
 				}
-				orderCtr.createOffer();
-				reset();
+				else if (dtm.getRowCount() == 0)
+				{
+					orderErrorLabel.setText("Please select a product!");
+					orderErrorLabel.setVisible(true);
+				}
+				else
+				{
+					orderCtr.createOffer();
+					reset();
+				}
 			}
 			
 			
@@ -449,13 +435,20 @@ public class CreateOrderPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) 
 			{
 				DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
-				if (dtm.getRowCount() == 0 || phoneValueLabel.equals("..."))
+				if (phoneValueLabel.getText().equals("..."))
 				{
-					//TODO DO ERROR MESSAGE, right returns on purpose
-					return;
+					orderErrorLabel.setVisible(true);
 				}
-				orderCtr.createOrder();
-				reset();
+				else if (dtm.getRowCount() == 0)
+				{
+					orderErrorLabel.setText("Please select a product!");
+					orderErrorLabel.setVisible(true);
+				}
+				else
+				{
+					orderCtr.createOrder();
+					reset();
+				}
 			}
 			
 			
@@ -575,6 +568,7 @@ public class CreateOrderPanel extends JPanel {
 	public void reset()
 	{
 		DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
+		orderErrorLabel.setVisible(false);
 		dtm.setRowCount(0);
 		orderCtr = new OrderCtr();
 		searchBar.setFocusable(false);

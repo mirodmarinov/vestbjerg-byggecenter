@@ -452,9 +452,25 @@ public class AddProductsDialog extends JDialog {
 	}
 	
 	private void finishCreation() {
+		
 		if (productPlace.size() == 0)
 		{
 			return;
+		}
+		JPanel tempPanel = (JPanel)createOrderPanelTable.getParent().getParent().getParent();
+		for(int i = 0; i < tempPanel.getComponentCount(); i++)
+		{
+			try {
+			JLabel label = (JLabel)tempPanel.getComponent(i);
+			if (label.getText().contains("select a product"))
+			{
+				label.setVisible(false);
+				break;
+			}	
+			}
+			catch (Exception e)
+			{
+			}
 		}
 		DefaultTableModel dtm = (DefaultTableModel) createOrderPanelTable.getModel();
 		//dtm.setRowCount(0);
@@ -480,9 +496,10 @@ public class AddProductsDialog extends JDialog {
 			createOrderPanelTable.setValueAt(price, e + rowCount, createOrderPanelTable.getColumn("Price").getModelIndex());
 			createOrderPanelTable.setValueAt(quantity, e + rowCount, createOrderPanelTable.getColumn("Quantity").getModelIndex());
 			createOrderPanelTable.setValueAt((quantity * price), e + rowCount, createOrderPanelTable.getColumn("Total").getModelIndex());
-
+			
 			
 			createOrderPanelTable.setValueAt(new RoundedButton("Remove", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e + rowCount, createOrderPanelTable.getColumn("").getModelIndex());
+			
 		}
 		//TODO Check data and send it back to the CreateOrderPanel with the method setOrderPanelData(barcodes)
 		dispose();
