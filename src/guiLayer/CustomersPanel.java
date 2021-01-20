@@ -224,6 +224,7 @@ public class CustomersPanel extends JPanel {
 		add(foundLabel, gbc_foundLabel);
 		
 		searchTextField = new JTextField();
+		searchTextField.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 		searchTextField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					foundLabel.setVisible(false);

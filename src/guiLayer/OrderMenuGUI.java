@@ -113,6 +113,7 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Orders");
+				orderPanel.getSearchTextField().setForeground(new Color(149, 149, 149));
 				orderPanel.getSearchTextField().setText("🔍 Search...");
 				orderPanel.loadPage(1);
 				orderPanel.getTablePageLabel().setText("1");
@@ -158,6 +159,7 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Products");
+				productsPanel.getSearchTextField().setForeground(new Color(149, 149, 149));
 				productsPanel.getSearchTextField().setText("🔍 Search...");
 				productsPanel.loadPage(1);
 				productsPanel.getTablePageLabel().setText("1");
@@ -181,6 +183,7 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Customers");
+				customersPanel.getSearchTextField().setForeground(new Color(149, 149, 149));
 				customersPanel.getSearchTextField().setText("🔍 Search...");
 				customersPanel.loadPage(1);
 				customersPanel.getTablePageLabel().setText("1");
