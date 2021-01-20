@@ -9,9 +9,11 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.text.JTextComponent;
 
 import controlLayer.CustomerCtr;
 
@@ -46,6 +48,7 @@ public class CreateCustomerDialog extends JDialog {
 	private JTextField addressTextField;
 	private JPanel header;
 	private CustomerCtr customerCtr;
+	private CustomersPanel customersPanel;
 
 	/**
 	 * Launch the application.
@@ -63,7 +66,8 @@ public class CreateCustomerDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public CreateCustomerDialog() {
+	public CreateCustomerDialog(CustomersPanel customersPanel) {
+		this.customersPanel = customersPanel;
 		setBounds(100, 100, 567, 599);
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
@@ -343,16 +347,17 @@ public class CreateCustomerDialog extends JDialog {
 	}
 	
 	
-	private void textPaneFunctions(JTextPane pane)
-	{
-
-	}
-	
 	private void finishCreation()
 	{
 		customerCtr = new CustomerCtr();
-		//TODO Check all fields's value and create the product then dispose the window
-		dispose();
+		if (checkValues())
+		{
+			customerCtr.addCustomer(Integer.parseInt(phoneTextField.getText()), Integer.parseInt(discountTextField.getText()),
+					nameTextField.getText(), addressTextField.getText(), groupTextField.getText());
+			customersPanel.defaultFillTable(customersPanel.getPageIndex());
+			dispose();
+		}
+		
 	}
 
 	private void fillFields()
@@ -362,6 +367,53 @@ public class CreateCustomerDialog extends JDialog {
 		addressTextField.setText("Address...");
 		groupTextField.setText("Group...");
 		discountTextField.setText("Discount...");
+	}
+	
+	
+	private boolean checkValues()
+	{
+		JTextComponent[] strings = new JTextComponent[] {nameTextField,groupTextField,addressTextField}; 
+		JTextField[] integers = new JTextField[] {discountTextField,phoneTextField};
+		
+		String errorMessage = "";
+		
+		
+		//Checking string textfield values
+		
+		for (int string = 0;string<strings.length;string++)
+		{
+			strings[string].setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
+			if (!customerCtr.checkValues(strings[string].getName(), strings[string].getText(), true))
+			{
+				strings[string].setBorder(BorderFactory.createLineBorder(Color.RED, 1, true));
+				errorMessage += strings[string].getName() + ", ";	
+			}
+		}
+		
+		//Checking integer textfield values
+		
+		for (int integer = 0;integer<integers.length;integer++)
+		{
+			integers[integer].setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
+			if (!customerCtr.checkValues(integers[integer].getName(), integers[integer].getText(), false))
+			{
+				integers[integer].setBorder(BorderFactory.createLineBorder(Color.RED, 1, true));
+				errorMessage += integers[integer].getName() + ", ";	
+			}
+		}
+		
+		//Modifying the errorMessage and printing it
+		
+		if (errorMessage != "")
+		{
+			errorMessage = errorMessage.substring(0, errorMessage.length()-2);
+			errorMessage += "!";
+			JOptionPane.showMessageDialog(null, "Invalid value for the field(s): " + errorMessage);
+			return false;
+		}
+		
+		
+		return true;
 	}
 	
 }

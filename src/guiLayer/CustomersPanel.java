@@ -157,8 +157,7 @@ public class CustomersPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setPreferredWidth(70);
 		table.getColumnModel().getColumn(5).setMinWidth(70);
 		
-		EditCustomerDialog ecd = new EditCustomerDialog(this);
-		table.addMouseListener(new JTableButtonMouseListener(table,ecd));
+		table.addMouseListener(new JTableButtonMouseListener(table,new EditCustomerDialog(this)));
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 		
 		
@@ -291,11 +290,12 @@ public class CustomersPanel extends JPanel {
 		
 		RoundedButton addProductButton = new RoundedButton("➕ Add Customer", babyBlue,
 					Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14));
+		CustomersPanel thisClass = this;
 		addProductButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				CreateCustomerDialog dialog = new CreateCustomerDialog();
+				CreateCustomerDialog dialog = new CreateCustomerDialog(thisClass);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 				dialog.setVisible(true);
