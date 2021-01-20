@@ -1,14 +1,16 @@
 package guiLayer.Renderers;
 
-import java.awt.Color;
-import java.awt.Dialog;
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+/**
+ * This class adds different methods to the buttons
+ * we have inside the table, allowing us
+ * to give them different functions based on
+ * mouse actions applied by the user.
+ */
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 
-import javax.swing.JDialog;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import controlLayer.OrderCtr;
@@ -34,6 +36,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 		this.table = table;
 		this.popup = popup;
 	}
+	
 	
 	public JTableButtonMouseListener(JTable table, OrderCtr orderCtr) {
 		this.table = table;
@@ -94,10 +97,19 @@ public class JTableButtonMouseListener extends MouseAdapter
 			}
 			else if(table.getName().equals("OrderPanel"))
 			{
-				System.out.println(e.getClickCount());
+				if(e.getClickCount() > 1) {
+					try {
+						OrderInfoDialog dialog = new OrderInfoDialog();
+						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						dialog.setVisible(true);
+					} catch (Exception x) {
+						x.printStackTrace();
+					}
+				}
 			}
 		}
 	}
+	
 
 	public void mouseMoved(MouseEvent e)
 	{

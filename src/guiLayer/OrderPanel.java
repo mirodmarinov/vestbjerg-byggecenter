@@ -24,6 +24,7 @@ public class OrderPanel extends JPanel {
 	public JLabel tablePageLabel;
 	private JLabel leftArrowLabel;
 	private JLabel rightArrowLabel;
+	private JTableButtonMouseListener mouseListener;
 	private DocumentListener cl = new DocumentListener()
 	
 	{
@@ -69,6 +70,7 @@ public class OrderPanel extends JPanel {
 		add(ordersLabel, gbc_ordersLabel);
 
 		table = new JTable();
+		mouseListener = new JTableButtonMouseListener(table); // adds Mouse listener to table
 		//Changes the Color of the header
 		JTableHeader header = table.getTableHeader();
 		header.setBackground(babyBlue);
@@ -95,7 +97,9 @@ public class OrderPanel extends JPanel {
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
-			tableElements
+			new String[] {
+				"Order Number", "Customer", "Purchase Date", "Status", "Expiration Date", "Total (DKK)", ""
+			}
 		) {
 			Class[] columnTypes = new Class[] {
 				String.class, String.class, String.class, String.class, String.class, String.class, RoundedButton.class
@@ -103,8 +107,13 @@ public class OrderPanel extends JPanel {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false, true
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
 		});
-		
 		table.getColumnModel().getColumn(0).setPreferredWidth(85);
 		table.getColumnModel().getColumn(0).setMinWidth(85);
 		table.getColumnModel().getColumn(1).setPreferredWidth(70);
@@ -244,7 +253,7 @@ public class OrderPanel extends JPanel {
 		add(tablePane, gbc_table);
 		loadPage(1);
 		//table listeners moved to the bottom, in order for the page to be initialized
-		table.addMouseListener(new JTableButtonMouseListener(table));
+		table.addMouseListener(mouseListener);
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 		
 	}
