@@ -90,8 +90,11 @@ public class JTableButtonMouseListener extends MouseAdapter
 					orderCtr.removeProductFromList(barcode);
 					
 					dtm.removeRow(table.getSelectedRow());
-					
 				}
+			}
+			else if(table.getName().equals("OrderPanel"))
+			{
+				System.out.println(e.getClickCount());
 			}
 		}
 	}

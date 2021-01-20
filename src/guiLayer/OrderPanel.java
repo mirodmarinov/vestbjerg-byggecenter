@@ -1,50 +1,18 @@
 package guiLayer;
 import controlLayer.*;
-import uiLayer.MainMenu;
-
+import uiLayer.*;
+import modelLayer.*;
 
 import guiLayer.Renderers.JTableButtonMouseListener;
 import guiLayer.Renderers.JTableButtonRenderer;
-import modelLayer.OrderContainer;
-import modelLayer.ProductContainer;
-import modelLayer.Serialization;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JViewport;
-import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.table.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.xml.crypto.Data;
-
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class OrderPanel extends JPanel {
 	private JTable table;
@@ -79,7 +47,7 @@ public class OrderPanel extends JPanel {
 	};
 
 	/**
-	 * Create the panel.
+	 * Creates the panel.
 	 */
 	@SuppressWarnings("serial")
 	public OrderPanel() {
@@ -329,7 +297,6 @@ public class OrderPanel extends JPanel {
 		if ((!searchTextField.getText().equals(""))&&(!searchTextField.getText().equals("🔍 Search...")))
 		{
 			orderCtr = new OrderCtr();
-
 			
 			ArrayList<String[]> data = orderCtr.searchBar(searchTextField.getText()); // TODO Check this
 			
@@ -353,13 +320,8 @@ public class OrderPanel extends JPanel {
 					else
 					{
 						table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.WHITE, new Font("Lato", Font.PLAIN, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
-					}
-						
-					
+					}	
 				}
-				
-
-				
 			}
 
 			else
@@ -385,7 +347,6 @@ public class OrderPanel extends JPanel {
 			return;
 		}
 		
-		
 		orderCtr = new OrderCtr();
 		if (orderCtr.getOrders(index).isEmpty())
 		{
@@ -393,7 +354,6 @@ public class OrderPanel extends JPanel {
 		}
 		defaultFillTable(index);
 
-		
 		
 		tablePageLabel.setText("<html><u>" + index + "</u></html>");
 
