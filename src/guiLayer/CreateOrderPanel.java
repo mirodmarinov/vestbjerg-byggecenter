@@ -20,6 +20,7 @@ public class CreateOrderPanel extends JPanel {
 	private JLabel phoneValueLabel;
 	private JLabel deleteButton;
 	private String[] orderTableElements = {"Barcode", "Name", "Price", "Quantity", "Discount", "Total", ""};
+	private JLabel totalValueLabel;
 
 	/**
 	 * Create the panel.
@@ -371,7 +372,7 @@ public class CreateOrderPanel extends JPanel {
 		productPanel.add(totalLabel, gbc_totalLabel);
 		
 		//Product Panel Total Price Calculated********************************************************
-		JLabel totalValueLabel = new JLabel("... DKK");
+		totalValueLabel = new JLabel("... DKK");
 		totalValueLabel.setName("totalValueLabel");
 		totalValueLabel.setFont(new Font("Lato", Font.PLAIN, 20));
 		GridBagConstraints gbc_totalValueLabel = new GridBagConstraints();
@@ -577,6 +578,7 @@ public class CreateOrderPanel extends JPanel {
 		orderCtr = new OrderCtr();
 		searchBar.setFocusable(false);
 		searchBar.setFocusable(true);
+		totalValueLabel.setText("... DKK");
 		if (searchBar.isFocusOwner())
 		{
 			searchBar.setForeground(Color.BLACK);
