@@ -470,26 +470,31 @@ public class AddProductsDialog extends JDialog {
 		{
 			return;
 		}
+		JLabel priceLabel = null;
 		JPanel tempPanel = (JPanel)createOrderPanelTable.getParent().getParent().getParent();
 		for(int i = 0; i < tempPanel.getComponentCount(); i++)
 		{
-			try {
-			JLabel label = (JLabel)tempPanel.getComponent(i);
-			if (label.getText().contains("select a product"))
+			if (tempPanel.getComponent(i).getName() != null && tempPanel.getComponent(i).getName().equals("totalValueLabel"))
 			{
-				label.setVisible(false);
-				break;
-			}	
+				priceLabel = (JLabel) tempPanel.getComponent(i);
 			}
-			catch (Exception e)
+			try 
 			{
+				JLabel label = (JLabel)tempPanel.getComponent(i);
+				if (label.getText().contains("select a product"))
+				{
+					label.setVisible(false);
+					break;
+				}	
 			}
+			catch (Exception e){}
 		}
 		DefaultTableModel dtm = (DefaultTableModel) createOrderPanelTable.getModel();
 		
 		int rowCount = dtm.getRowCount();
 		dtm.setRowCount(productPlace.size() + rowCount);
 		int quantity = 1;
+		int totalPrice = 0;
 		for (int e = 0; e < productPlace.size(); e++)
 		{
 			String name = (String) table.getValueAt(productPlace.get(e), table.getColumn("Name").getModelIndex());
@@ -509,11 +514,12 @@ public class AddProductsDialog extends JDialog {
 			createOrderPanelTable.setValueAt(price, e + rowCount, createOrderPanelTable.getColumn("Price").getModelIndex());
 			createOrderPanelTable.setValueAt(quantity, e + rowCount, createOrderPanelTable.getColumn("Quantity").getModelIndex());
 			createOrderPanelTable.setValueAt((quantity * price), e + rowCount, createOrderPanelTable.getColumn("Total").getModelIndex());
-			
+			totalPrice += (quantity * price);
 			
 			createOrderPanelTable.setValueAt(new RoundedButton("Remove", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e + rowCount, createOrderPanelTable.getColumn("").getModelIndex());
 			
 		}
+		priceLabel.setText(Integer.toString(totalPrice) + " DKK");
 		//TODO Check data and send it back to the CreateOrderPanel with the method setOrderPanelData(barcodes)
 		dispose();
 	}

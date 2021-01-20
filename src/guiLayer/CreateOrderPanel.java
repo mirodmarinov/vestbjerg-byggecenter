@@ -372,6 +372,7 @@ public class CreateOrderPanel extends JPanel {
 		
 		//Product Panel Total Price Calculated********************************************************
 		JLabel totalValueLabel = new JLabel("... DKK");
+		totalValueLabel.setName("totalValueLabel");
 		totalValueLabel.setFont(new Font("Lato", Font.PLAIN, 20));
 		GridBagConstraints gbc_totalValueLabel = new GridBagConstraints();
 		gbc_totalValueLabel.insets = new Insets(0, 0, 5, 5);
