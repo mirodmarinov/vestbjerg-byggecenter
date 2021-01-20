@@ -10,14 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-<<<<<<< HEAD
 import javax.swing.*;
-=======
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
->>>>>>> main
 import javax.swing.table.DefaultTableModel;
 
 import controlLayer.OrderCtr;
