@@ -70,9 +70,10 @@ public class OrderMenuGUI {
 			@Override
 		public void windowClosing(WindowEvent e)
 		{
-			Serialization.getInstance().serializeClass("OrderContainer");
-			Serialization.getInstance().serializeClass("ProductContainer");
-			Serialization.getInstance().serializeClass("CustomerContainer");
+			
+			Serialization.getInstance().serializeClass("modelLayer.OrderContainer");
+			Serialization.getInstance().serializeClass("modelLayer.ProductContainer");
+			Serialization.getInstance().serializeClass("modelLayer.CustomerContainer");
 		}
 		});
 		GridBagLayout gridBagLayout = new GridBagLayout();
