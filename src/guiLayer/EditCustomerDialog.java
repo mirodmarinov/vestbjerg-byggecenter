@@ -99,7 +99,7 @@ public class EditCustomerDialog extends JDialog {
 			contentPanel.add(header, gbc_panel_1);
 			{
 				
-				headerLabel = new JLabel("Create Customer");
+				headerLabel = new JLabel("Manage Customer");
 				header.add(headerLabel);
 				headerLabel.setVisible(true);
 				headerLabel.setForeground(Color.WHITE);
