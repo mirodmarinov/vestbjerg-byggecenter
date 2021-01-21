@@ -12,8 +12,6 @@ import java.awt.event.*;
 
 import java.util.ArrayList;
 
-
-import controlLayer.*;
 import guiLayer.Renderers.JTableButtonMouseListener;
 import guiLayer.Renderers.JTableButtonRenderer;
 import java.beans.PropertyChangeListener;
