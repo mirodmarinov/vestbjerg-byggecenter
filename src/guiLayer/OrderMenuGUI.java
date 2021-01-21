@@ -140,7 +140,7 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Create Order");
-				createOrderPanel.reset();
+				//createOrderPanel.reset();
 				changeSelectedButton(createOrderButton);
 				
 			}

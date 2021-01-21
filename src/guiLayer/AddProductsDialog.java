@@ -1,39 +1,17 @@
 package guiLayer;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-
 import controlLayer.OrderCtr;
-import guiLayer.Renderers.JTableButtonMouseListener;
-import guiLayer.Renderers.JTableButtonRenderer;
+import guiLayer.Renderers.*;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.event.*;
+import javax.swing.table.*;
+
+import java.awt.*;
+import java.awt.event.*;
+
 import java.util.ArrayList;
-
-import javax.swing.JTextField;
-import javax.swing.JTable;
 
 public class AddProductsDialog extends JDialog {
 
@@ -122,6 +100,7 @@ public class AddProductsDialog extends JDialog {
 					searchBar.setFocusable(true);
 				}
 				
+				//Setting the text inside the searchbar to be nothing when clicked so the user can input words
 				@Override
 				public void mousePressed(MouseEvent e) {
 					if (searchBar.getText().equals("🔍 Product Name..."))
@@ -142,19 +121,9 @@ public class AddProductsDialog extends JDialog {
 			searchBar.setColumns(10);
 		}
 		{
-			leftArrowLabel = new JLabel(" < ");
 			
-			leftArrowLabel.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					searchBar.getDocument().removeDocumentListener(cl);
-					searchBar.setText("🔍 Product Name...");
-					searchBar.getDocument().addDocumentListener(cl);
-					loadPage(getPageIndex() - 1);
-				}
-			});
-			
-			
+			//Error product label**************************************************************
+			//A Label that shows when the searched product is not in the list of products
 			productErrorLabel = new JLabel("Product not found!");
 			productErrorLabel.setVisible(false);
 			productErrorLabel.setForeground(Color.RED);
@@ -173,6 +142,7 @@ public class AddProductsDialog extends JDialog {
 			gbc_leftArrowLabel.gridy = 1;
 			contentPanel.add(leftArrowLabel, gbc_leftArrowLabel);
 			
+			//Page number*********************************************************************
 			tablePageLabel = new JLabel("<html><u>1</u></html>");
 			tablePageLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			GridBagConstraints gbc_tablePageLabel = new GridBagConstraints();
@@ -181,6 +151,22 @@ public class AddProductsDialog extends JDialog {
 			gbc_tablePageLabel.gridy = 1;
 			contentPanel.add(tablePageLabel, gbc_tablePageLabel);
 			
+			//Left Arrow "<" ******************************************************************
+			//A Label that loads the previous page when clicked
+			leftArrowLabel = new JLabel(" < ");
+			
+			leftArrowLabel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					searchBar.getDocument().removeDocumentListener(cl);
+					searchBar.setText("🔍 Product Name...");
+					searchBar.getDocument().addDocumentListener(cl);
+					loadPage(getPageIndex() - 1);
+				}
+			});
+			
+			//Right Arrow ">" ******************************************************************
+			//A Label that loads the next page when clicked
 			rightArrowLabel = new JLabel(" > ");
 			rightArrowLabel.addMouseListener(new MouseAdapter() {
 				@Override
@@ -229,8 +215,7 @@ public class AddProductsDialog extends JDialog {
 			defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
 			table.getTableHeader().setDefaultRenderer(defaultHeaderRenderer);
 			
-			
-
+			//Setting the number of columns and their headers
 			table.setModel(new DefaultTableModel(
 				new Object[][] {
 				},
@@ -256,12 +241,15 @@ public class AddProductsDialog extends JDialog {
 			gbc_table.gridx = 0;
 			gbc_table.gridy = 2;
 			
+			//Table Scroll Pane********************************************************************
 			JScrollPane tablePane = new JScrollPane(table);
 			tablePane.setBorder(BorderFactory.createEmptyBorder());
 			contentPanel.add(tablePane, gbc_table);
 			loadPage(1);
 		}
 		{
+			//OK Button***************************************************************************
+			//Button used to confirm creating a new product to be added to a list of products
 			RoundedButton okButton = new RoundedButton("Finish", new Color(28, 150, 202), Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
 			okButton.addMouseListener(new MouseAdapter() {
 				@Override
@@ -279,7 +267,8 @@ public class AddProductsDialog extends JDialog {
 			gbc_okButton.gridy = 3;
 			contentPanel.add(okButton, gbc_okButton);
 		}
-		
+			
+			//Cancel Button*************************************************************************
 			cancelButton = new RoundedButton("Cancel", Color.WHITE, new Color(28, 150, 202), new Color(28, 150, 202), new Font("Lato", Font.BOLD, 15));
 			cancelButton.addMouseListener(new MouseAdapter() {
 				@Override
@@ -297,12 +286,17 @@ public class AddProductsDialog extends JDialog {
 			contentPanel.add(cancelButton, gbc_cancelButton);
 		}
 
-	
+	/* 
+	 * This method is used to set size and offset to the buttons
+	 */
 	private void formatButton(RoundedButton button) {
 		button.setPreferredSize(new Dimension(100, 30));
 		button.addOffset(-5, 2);
 	}
 	
+	/*
+	 * This method is used to add change color functions for blue buttons when mouse enters or exits
+	 */
 	private void blueButton(RoundedButton button) {
 		button.addMouseListener(new MouseAdapter()
 		{	
@@ -323,6 +317,9 @@ public class AddProductsDialog extends JDialog {
 		});
 	}
 	
+	/*
+	 * This method is used to add change color functions for white buttons when mouse enters or exits
+	 */
 	private void whiteButton(RoundedButton button) {
 		button.addMouseListener(new MouseAdapter()
 		{	
@@ -400,6 +397,10 @@ public class AddProductsDialog extends JDialog {
 		}
 	}
 	
+	/**
+	 * This method is used to search for specific products using the Search Bar through the product list
+	 * @param notDynamic - if true, enter was pressed, false means that the search is happening as letters are written
+	 */
 	private void searchProduct(Boolean notDynamic)
 	{
 		
@@ -459,11 +460,19 @@ public class AddProductsDialog extends JDialog {
 		}
 	}
 	
+	/**
+	 * TODO - finish description
+	 * @param placeInList - specific place in list
+	 */
 	public void addToList(int placeInList) 
 	{
 		productPlace.add(placeInList);
 	}
 	
+	/**
+	 * Happens when the Finish Button is pressed, it takes all the information from creation of the product
+	 * and puts it in the table
+	 */
 	private void finishCreation() {
 		if (productPlace.size() == 0)
 		{
@@ -522,11 +531,18 @@ public class AddProductsDialog extends JDialog {
 		dispose();
 	}
 	
+	/**
+	 * @return - the page number
+	 */
 	public int getPageIndex()  
 	{
 		return Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", ""));
 	}
 	
+	/**
+	 * This method loads a certain page of the product table
+	 * @param index - the page number
+	 */
 	public void loadPage(int index)
 	{
 		productErrorLabel.setVisible(false);
@@ -540,7 +556,8 @@ public class AddProductsDialog extends JDialog {
 		}
 		
 		defaultFillTable(index);
-
+		
+		//Sets the page number
 		tablePageLabel.setText("<html><u>" + index + "</u></html>");
 	}
 

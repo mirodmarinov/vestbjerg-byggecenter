@@ -201,7 +201,10 @@ public class OrderCtr
 			totalWithDiscount += product.getSalesPrice() * ((float)(100 - product.getDiscount(quantity))/100) * quantity;
 
 		}
-		totalWithDiscount *= ((float)(100 - customer.getDiscount())/100);
+		if (customer != null)
+		{
+			totalWithDiscount *= ((float)(100 - customer.getDiscount())/100);
+		}
 		return (float)totalWithDiscount / (float)totalWithoutDiscount < 0.8 ? (int)(0.8 * totalWithoutDiscount) : totalWithDiscount;
 	}
 	
