@@ -26,6 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JList;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.AbstractListModel;
 
 public class OrderInfoDialog extends JDialog {
 
@@ -37,6 +38,7 @@ public class OrderInfoDialog extends JDialog {
 	private JPanel orderPanel;
 	private JPanel customerPanel;
 	private JPanel productsList;
+	private JList<String> orderLineItemList;
 
 	/**
 	 * Creates the dialog.
@@ -384,7 +386,7 @@ public class OrderInfoDialog extends JDialog {
 				
 				//Products List********************************************************
 				{
-					JList orderLineItemList = new JList();
+					orderLineItemList = new JList<String>();
 					productsList.add(orderLineItemList);
 				}
 			}
@@ -545,7 +547,34 @@ public class OrderInfoDialog extends JDialog {
 		}
 		labels[0].setText(String.valueOf(orderDetails[4]));
 		labels[1].setText(String.valueOf(orderDetails[0]));
+	
+	
+		ArrayList<String> products = new ArrayList<String>();
+		
+		for(int i = 1; i < orderInfo.size()-2; i++)
+		{
+			String productInfo = "";
+			productInfo += orderInfo.get(i)[3];
+			productInfo += "x " + orderInfo.get(i)[1];
+			
+			int salesPrice = Integer.parseInt(orderInfo.get(i)[2]);
+			int quantity = Integer.parseInt(orderInfo.get(i)[3]);
+			int totalPrice = salesPrice * quantity;
+			
+			productInfo += " " + totalPrice;
+			
+			System.out.println(productInfo);
+		}
+		
+		orderLineItemList.setModel(new AbstractListModel<String>() {
+			ArrayList<String> values = products;
+			public int getSize() {
+				return values.size();
+			}
+			public String getElementAt(int index) {
+				return values.get(index);
+			}
+		});
+	
 	}
-	
-	
 }
