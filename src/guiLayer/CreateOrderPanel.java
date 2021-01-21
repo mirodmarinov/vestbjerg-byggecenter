@@ -1,14 +1,19 @@
 package guiLayer;
 
+
+import controlLayer.*;
+
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
+import javax.swing.event.*;
 import javax.swing.table.*;
+
 import java.awt.*;
 import java.awt.event.*;
-import controlLayer.*;
-import guiLayer.Renderers.JTableButtonMouseListener;
-import guiLayer.Renderers.JTableButtonRenderer;
+
+import java.util.ArrayList;
+
+import guiLayer.Renderers.*;
+
 
 public class CreateOrderPanel extends JPanel {
 	private JTextField searchBar;
@@ -37,6 +42,7 @@ public class CreateOrderPanel extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.8, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
+		//Create Offer/Order Label*****************************************************************************
 		JLabel createOrderLabel = new JLabel("Create Offer/Order");
 		createOrderLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		createOrderLabel.setFont(new Font("Lato", Font.BOLD, 35));
@@ -102,6 +108,7 @@ public class CreateOrderPanel extends JPanel {
 				searchBar.setFocusable(true);
 			}
 			
+			//sets the text to nothing when the search bar is clicked
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (searchBar.getText().equals("🔍 Phone number..."))
@@ -111,7 +118,16 @@ public class CreateOrderPanel extends JPanel {
 				}
 			}
 		});
+		GridBagConstraints gbc_searchBar = new GridBagConstraints();
+		gbc_searchBar.insets = new Insets(0, 0, 5, 5);
+		gbc_searchBar.fill = GridBagConstraints.BOTH;
+		gbc_searchBar.gridx = 5;
+		gbc_searchBar.gridy = 1;
+		customerPanel.add(searchBar, gbc_searchBar);
+		searchBar.setColumns(10);
 		
+		//Customer error Label*****************************************************************
+		//Appears when the phone number input doesn't match with the phone number of the customers in our customers list
 		customerErrorLabel = new JLabel("Customer not found!");
 		customerErrorLabel.setVisible(false);
 		customerErrorLabel.setForeground(Color.RED);
@@ -122,15 +138,6 @@ public class CreateOrderPanel extends JPanel {
 		gbc_customerErrorLabel.gridx = 3;
 		gbc_customerErrorLabel.gridy = 1;
 		customerPanel.add(customerErrorLabel, gbc_customerErrorLabel);
-		
-		GridBagConstraints gbc_searchBar = new GridBagConstraints();
-		gbc_searchBar.insets = new Insets(0, 0, 5, 5);
-		gbc_searchBar.fill = GridBagConstraints.BOTH;
-		gbc_searchBar.gridx = 5;
-		gbc_searchBar.gridy = 1;
-		customerPanel.add(searchBar, gbc_searchBar);
-		searchBar.setColumns(10);
-		
 
 		//Customer Panel Add Customer Button********************************************************
 		RoundedButton addCustomerButton = new RoundedButton("➕ Add Customer", babyBlue,
@@ -140,6 +147,8 @@ public class CreateOrderPanel extends JPanel {
 		
 		addCustomerButton.addMouseListener(new MouseAdapter()
 		{
+			//Searches for a customer based on the number in the text field and fills the labels in the customer
+			//panel with information about them
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				searchCustomer();
@@ -229,9 +238,11 @@ public class CreateOrderPanel extends JPanel {
 		gbc_phoneValueLabel.gridy = 4;
 		customerPanel.add(phoneValueLabel, gbc_phoneValueLabel);
 		
+		//A Clickable X Button********************************************************************
 		deleteButton = new JLabel("X");
 		deleteButton.setVisible(false);
 		deleteButton.addMouseListener(new MouseAdapter() {
+			//Clears out the value labels in the customer info panel
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				clearCustomerLabels();
@@ -266,6 +277,7 @@ public class CreateOrderPanel extends JPanel {
 		//Product Panel Header********************************************************
 		JLabel detailsLabel = new JLabel("Order Details");
 		detailsLabel.setFont(new Font("Lato", Font.PLAIN, 20));
+		
 		GridBagConstraints gbc_detailsLabel = new GridBagConstraints();
 		gbc_detailsLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_detailsLabel.anchor = GridBagConstraints.WEST;
@@ -297,7 +309,7 @@ public class CreateOrderPanel extends JPanel {
 		defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
 		orderTable.getTableHeader().setDefaultRenderer(defaultHeaderRenderer);
 		
-		
+		//Sets the number of columns and their header names
 		orderTable.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null, null},
@@ -311,6 +323,8 @@ public class CreateOrderPanel extends JPanel {
 				return columnTypes[columnIndex];
 			}
 		});
+		
+		//Formatting the columns sizes
 		orderTable.getColumnModel().getColumn(0).setPreferredWidth(50);
 		orderTable.getColumnModel().getColumn(0).setMinWidth(50);
 		orderTable.getColumnModel().getColumn(1).setPreferredWidth(50);
@@ -337,6 +351,7 @@ public class CreateOrderPanel extends JPanel {
 		orderTable.addMouseMotionListener(new JTableButtonMouseListener(orderTable, orderCtr));
 		orderTable.getModel().addTableModelListener(new TableModelListener() {
 
+			  //When the table changes, the Total Price label changes its amount accordingly
 			  public void tableChanged(TableModelEvent e) {
 				  totalValueLabel.setText(orderCtr.calculateTotal() + " DKK");
 			  }
@@ -353,9 +368,12 @@ public class CreateOrderPanel extends JPanel {
 		//Product Panel Add Product Button********************************************************
 		RoundedButton addProductsButton = new RoundedButton("➕ Add Products", babyBlue,
 						Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
-		addProductsButton.addMouseListener(new MouseAdapter() {
+		addProductsButton.addMouseListener(new MouseAdapter() 
+		{
+			//Creates the AddProductDialog and shows it to the user when the button is clicked
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) 
+			{
 				AddProductsDialog dialog = new AddProductsDialog(orderTable, orderCtr);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
@@ -364,6 +382,7 @@ public class CreateOrderPanel extends JPanel {
 		});
 		addProductsButton.addOffset(-17, 2);
 		blueButton(addProductsButton);
+		
 		GridBagConstraints gbc_addProductsButton = new GridBagConstraints();
 		gbc_addProductsButton.insets = new Insets(0, 0, 5, 5);
 		gbc_addProductsButton.fill = GridBagConstraints.BOTH;
@@ -375,6 +394,7 @@ public class CreateOrderPanel extends JPanel {
 		//Product Panel Total price Label********************************************************
 		JLabel totalLabel = new JLabel("Total Price");
 		totalLabel.setFont(new Font("Lato", Font.PLAIN, 20));
+		
 		GridBagConstraints gbc_totalLabel = new GridBagConstraints();
 		gbc_totalLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_totalLabel.gridx = 4;
@@ -385,6 +405,7 @@ public class CreateOrderPanel extends JPanel {
 		totalValueLabel = new JLabel("... DKK");
 		totalValueLabel.setName("totalValueLabel");
 		totalValueLabel.setFont(new Font("Lato", Font.PLAIN, 20));
+		
 		GridBagConstraints gbc_totalValueLabel = new GridBagConstraints();
 		gbc_totalValueLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_totalValueLabel.gridx = 5;
@@ -396,6 +417,7 @@ public class CreateOrderPanel extends JPanel {
 		orderErrorLabel.setVisible(false);
 		orderErrorLabel.setForeground(Color.RED);
 		orderErrorLabel.setFont(new Font("Lato", Font.BOLD, 14));
+		
 		GridBagConstraints gbc_orderErrorLabel = new GridBagConstraints();
 		gbc_orderErrorLabel.anchor = GridBagConstraints.EAST;
 		gbc_orderErrorLabel.insets = new Insets(0, 0, 5, 5);
@@ -410,6 +432,8 @@ public class CreateOrderPanel extends JPanel {
 		blueButton(createOfferButton);
 		createOfferButton.addMouseListener(new MouseAdapter()
 		{
+			//Creates offer when clicked and clears the customer and product details panel, shows error message
+			// if customer or product aren't chosen
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
@@ -429,9 +453,8 @@ public class CreateOrderPanel extends JPanel {
 					reset();
 				}
 			}
-			
-			
 		});
+		
 		GridBagConstraints gbc_createOfferButton = new GridBagConstraints();
 		gbc_createOfferButton.fill = GridBagConstraints.BOTH;
 		gbc_createOfferButton.insets = new Insets(0, 0, 5, 5);
@@ -445,6 +468,8 @@ public class CreateOrderPanel extends JPanel {
 		placeOrderButton.addOffset(-8, 2);
 		placeOrderButton.addMouseListener(new MouseAdapter()
 		{
+			//Creates order when clicked and clears the customer details and product details panel, shows error message
+			// if customer or product aren't chosen
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
@@ -460,14 +485,28 @@ public class CreateOrderPanel extends JPanel {
 				}
 				else
 				{
-					orderCtr.createOrder();
-					reset();
+					if (orderCtr.checkAmounts().size() == 0)
+					{
+						reset();
+						orderCtr.createOrder();
+					}
+					else
+					{
+						ArrayList<String> errors = orderCtr.checkAmounts();
+						String error = "Quantity less on stock then the quantity on the order for the product(s):";
+						for (int a = 0; a < errors.size();a++)
+						{
+							error += "\n"+errors.get(a);
+						}
+						JOptionPane.showMessageDialog(null, error, "Out of stock", 0);
+					}
 				}
 			}
 			
 			
 		});
 		blueButton(placeOrderButton);
+		
 		GridBagConstraints gbc_placeOrderButton = new GridBagConstraints();
 		gbc_placeOrderButton.fill = GridBagConstraints.BOTH;
 		gbc_placeOrderButton.insets = new Insets(0, 0, 5, 5);
@@ -482,11 +521,13 @@ public class CreateOrderPanel extends JPanel {
 		whiteButton(cancelButton);
 		cancelButton.addMouseListener(new MouseAdapter()
 		{
+			//clears the product and customer details panels
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				reset();
 			}
 		});
+		
 		GridBagConstraints gbc_cancelButton = new GridBagConstraints();
 		gbc_cancelButton.fill = GridBagConstraints.BOTH;
 		gbc_cancelButton.insets = new Insets(0, 0, 5, 5);
@@ -495,7 +536,10 @@ public class CreateOrderPanel extends JPanel {
 		productPanel.add(cancelButton, gbc_cancelButton);
 	}
 
-	
+	/**
+	 * This method adds events to the blue buttons that change the buttons colors when mouse enters or exits the button
+	 * @param button to be formatted
+	 */
 	public void blueButton(RoundedButton button) {
 		
 		button.addMouseListener(new MouseAdapter() {
@@ -515,6 +559,10 @@ public class CreateOrderPanel extends JPanel {
 		});
 	}
 	
+	/**
+	 * This method adds events to the white buttons that change the buttons colors when mouse enters or exits the button
+	 * @param button to be formatted
+	 */
 	public void whiteButton(RoundedButton button) {
 		button.addMouseListener(new MouseAdapter() {
 			
@@ -534,7 +582,10 @@ public class CreateOrderPanel extends JPanel {
 		});
 	}
 	
-	
+	/**
+	 * This method takes input from the search bar and looks for the customer based on it,
+	 * shows error message if there is no input or if there is wrong input 
+	 */
 	public void searchCustomer()
 	{
 		if(searchBar.getText().isEmpty() || searchBar.getText().equals("🔍 Phone number..."))
@@ -565,7 +616,9 @@ public class CreateOrderPanel extends JPanel {
 		phoneValueLabel.setText(phone);
 	}
 	
-	
+	/**
+	 * Clears the labels in the customer details panel and the search bar
+	 */
 	private void clearCustomerLabels()
 	{
 		nameValueLabel.setText("...");
@@ -579,7 +632,9 @@ public class CreateOrderPanel extends JPanel {
 	}
 
 	
-	
+	/**
+	 * Clears labels in the customer and product details and the search bar
+	 */
 	public void reset()
 	{
 		DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
