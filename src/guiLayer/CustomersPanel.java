@@ -123,7 +123,7 @@ public class CustomersPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setPreferredWidth(70);
 		table.getColumnModel().getColumn(5).setMinWidth(70);
 		
-		table.addMouseListener(new JTableButtonMouseListener(table,new EditCustomerDialog(this)));
+		table.addMouseListener(new JTableButtonMouseListener(table,new CustomerDialogs(this,true)));
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 		
 		
@@ -273,7 +273,7 @@ public class CustomersPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				CreateCustomerDialog dialog = new CreateCustomerDialog(thisClass);
+				CustomerDialogs dialog = new CustomerDialogs(thisClass,false);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 				dialog.setVisible(true);

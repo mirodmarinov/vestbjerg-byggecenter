@@ -294,7 +294,7 @@ public class ProductsPanel extends JPanel {
 		addProductButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CreateProductDialog dialog = new CreateProductDialog(thisObject);
+				ProductDialogs dialog = new ProductDialogs(thisObject,0,productCtr,false);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 				dialog.setVisible(true);
@@ -310,7 +310,7 @@ public class ProductsPanel extends JPanel {
 		add(addProductButton, gbc_addCustomerButton);
 		
 		
-		table.addMouseListener(new JTableButtonMouseListener(table,new EditProductDialog(this,0,productCtr)));
+		table.addMouseListener(new JTableButtonMouseListener(table,new ProductDialogs(this,0,productCtr,true)));
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 	}
 

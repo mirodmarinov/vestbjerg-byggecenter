@@ -65,17 +65,17 @@ public class JTableButtonMouseListener extends MouseAdapter
 				}
 				else if(table.getName().equals("CustomersPanel"))
 				{
-					((EditCustomerDialog)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Phone number").getModelIndex()));
-					((EditCustomerDialog)popup).reDraw();
+					((CustomerDialogs)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Phone number").getModelIndex()));
+					((CustomerDialogs)popup).reDraw();
 					popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					popup.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 					popup.setVisible(true);
 				}
 				else if(table.getName().equals(("ProductsPanel")))
 				{
-					((EditProductDialog)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex()));
-					((EditProductDialog)popup).setPlaceOnList(table.getSelectedRow());
-					((EditProductDialog)popup).reDraw();
+					((ProductDialogs)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex()));
+					((ProductDialogs)popup).setPlaceOnList(table.getSelectedRow());
+					((ProductDialogs)popup).reDraw();
 					popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					popup.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 					popup.setVisible(true);
