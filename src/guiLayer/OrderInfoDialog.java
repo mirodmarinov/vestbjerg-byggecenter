@@ -540,9 +540,9 @@ public class OrderInfoDialog extends JDialog {
 		//Order panel info****************************
 		for(Component c : orderPanel.getComponents())
 		{
-			if(c instanceof JLabel)
+			if(c.getName() != null)
 			{
-				if(((JLabel) c).getName().contains("InfoLabel")) 
+				if(c.getName().contains("InfoLabel")) 
 				{
 					labels[index] = ((JLabel) c);
 					index++;
@@ -563,9 +563,9 @@ public class OrderInfoDialog extends JDialog {
 		//Customer panel info****************************
 		for(Component c : customerPanel.getComponents())
 		{
-			if(c instanceof JLabel)
+			if(c.getName() != null)
 			{
-				if(((JLabel) c).getName().contains("InfoLabel"))
+				if(c.getName().contains("InfoLabel"))
 				{
 					labels[index] = ((JLabel) c);
 					index++;
@@ -586,9 +586,9 @@ public class OrderInfoDialog extends JDialog {
 		//Order total price and discount****************************
 		for(Component c : orderDetailsPanel.getComponents())
 		{
-			if(c instanceof JLabel)
+			if(c.getName() != null)
 			{
-				if(((JLabel) c).getText().equals("...")) 
+				if(c.getName().contains("InfoLabel")) 
 				{
 					labels[index] = ((JLabel) c);
 					index++;
