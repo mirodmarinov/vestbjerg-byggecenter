@@ -477,14 +477,10 @@ public class AddProductsDialog extends JDialog {
 		{
 			return;
 		}
-		JLabel priceLabel = null;
+		//JLabel priceLabel = null;
 		JPanel tempPanel = (JPanel)createOrderPanelTable.getParent().getParent().getParent();
 		for(int i = 0; i < tempPanel.getComponentCount(); i++)
 		{
-			if (tempPanel.getComponent(i).getName() != null && tempPanel.getComponent(i).getName().equals("totalValueLabel"))
-			{
-				priceLabel = (JLabel) tempPanel.getComponent(i);
-			}
 			try 
 			{
 				JLabel label = (JLabel)tempPanel.getComponent(i);
@@ -525,7 +521,6 @@ public class AddProductsDialog extends JDialog {
 			
 			createOrderPanelTable.setValueAt(new RoundedButton("Remove", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e + rowCount, createOrderPanelTable.getColumn("").getModelIndex());
 		}
-		priceLabel.setText(Integer.toString(totalPrice) + " DKK");
 		//TODO Check data and send it back to the CreateOrderPanel with the method setOrderPanelData(barcodes)
 		dispose();
 	}
