@@ -20,6 +20,7 @@ public class OrderInfoDialog extends JDialog {
 	private JPanel customerPanel;
 	private JPanel productsListPanel;
 	private JList<String> orderLineItemList;
+	private RoundedButton confirmOfferButton;
 
 	/**
 	 * Creates the dialog.
@@ -34,9 +35,9 @@ public class OrderInfoDialog extends JDialog {
 		contentPanel.setBackground(new Color(252, 252, 252));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{0};
-		gbl_contentPanel.rowHeights = new int[]{0,0,0};
-		gbl_contentPanel.columnWeights = new double[]{1.0};
+		gbl_contentPanel.columnWidths = new int[]{0, 0, 0};
+		gbl_contentPanel.rowHeights = new int[]{0, 0, 0};
+		gbl_contentPanel.columnWeights = new double[]{1.0, 0.0, 0.0};
 		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 0.0};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
@@ -46,6 +47,7 @@ public class OrderInfoDialog extends JDialog {
 		JPanel header = new JPanel();
 		header.setBackground(babyBlue);
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.gridwidth = 3;
 		gbc_panel_1.anchor = GridBagConstraints.NORTH;
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_1.fill = GridBagConstraints.HORIZONTAL;
@@ -67,6 +69,7 @@ public class OrderInfoDialog extends JDialog {
 			orderDetailsPanel.setBorder(BorderFactory.createLineBorder(new Color(243, 243, 243), 2, true));
 			orderDetailsPanel.setBackground(Color.WHITE);
 			GridBagConstraints gbc_orderDetailsPanel = new GridBagConstraints();
+			gbc_orderDetailsPanel.gridwidth = 3;
 			gbc_orderDetailsPanel.insets = new Insets(20, 50, 20, 50);
 			gbc_orderDetailsPanel.fill = GridBagConstraints.BOTH;
 			gbc_orderDetailsPanel.gridx = 0;
@@ -100,17 +103,18 @@ public class OrderInfoDialog extends JDialog {
 				
 				//Order number********************************************************
 				{
-					JLabel ordernumberLabel = new JLabel("Ordernumber:");
-					ordernumberLabel.setFont(new Font("Lato", Font.PLAIN, 13));
+					JLabel orderNumberLabel = new JLabel("Order number:");
+					orderNumberLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 					GridBagConstraints gbc_ordernumberLabel = new GridBagConstraints();
 					gbc_ordernumberLabel.anchor = GridBagConstraints.WEST;
 					gbc_ordernumberLabel.insets = new Insets(0, 0, 5, 5);
 					gbc_ordernumberLabel.gridx = 0;
 					gbc_ordernumberLabel.gridy = 0;
-					orderPanel.add(ordernumberLabel, gbc_ordernumberLabel);
+					orderPanel.add(orderNumberLabel, gbc_ordernumberLabel);
 				}
 				{
 					JLabel orderNumberValueLabel = new JLabel("...");
+					orderNumberValueLabel.setName("OrderNumberInfoLabel");
 					orderNumberValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 					orderNumberValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 					GridBagConstraints gbc_orderNumberValueLabel = new GridBagConstraints();
@@ -134,6 +138,7 @@ public class OrderInfoDialog extends JDialog {
 				}
 				{
 					JLabel statusValueLabel = new JLabel("...");
+					statusValueLabel.setName("StatusInfoLabel");
 					statusValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 					statusValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 					GridBagConstraints gbc_statusValueLabel = new GridBagConstraints();
@@ -156,6 +161,7 @@ public class OrderInfoDialog extends JDialog {
 				}
 				{
 					JLabel deliveryValueLabel = new JLabel("...");
+					deliveryValueLabel.setName("DeliveryInfoLabel");
 					deliveryValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 					deliveryValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 					GridBagConstraints gbc_deliveryValueLabel = new GridBagConstraints();
@@ -180,6 +186,7 @@ public class OrderInfoDialog extends JDialog {
 				}
 				{
 					JLabel expirationDateValueLabel = new JLabel("...");
+					expirationDateValueLabel.setName("ExperationDateInfoLabel");
 					expirationDateValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 					expirationDateValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 					GridBagConstraints gbc_expirationDateValueLabel = new GridBagConstraints();
@@ -203,6 +210,7 @@ public class OrderInfoDialog extends JDialog {
 				}
 				{
 					JLabel purchaseDateValueLabel = new JLabel("...");
+					purchaseDateValueLabel.setName("PurchaseDateInfoLabel");
 					purchaseDateValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 					purchaseDateValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 					GridBagConstraints gbc_purchaseDateValueLabel = new GridBagConstraints();
@@ -247,6 +255,7 @@ public class OrderInfoDialog extends JDialog {
 				}
 				{
 					JLabel customerValueLabel = new JLabel("...");
+					customerValueLabel.setName("CustomerInfoLabel");
 					customerValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 					customerValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 					GridBagConstraints gbc_customerValueLabel = new GridBagConstraints();
@@ -270,6 +279,7 @@ public class OrderInfoDialog extends JDialog {
 				}
 				{
 					JLabel phoneValueLabel = new JLabel("...");
+					phoneValueLabel.setName("PhoneInfoLabel");
 					phoneValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 					phoneValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 					GridBagConstraints gbc_phoneValueLabel = new GridBagConstraints();
@@ -293,6 +303,7 @@ public class OrderInfoDialog extends JDialog {
 				}
 				{
 					JLabel groupValueLabel = new JLabel("...");
+					groupValueLabel.setName("GroupInfoLabel");
 					groupValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 					groupValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 					GridBagConstraints gbc_groupValueLabel = new GridBagConstraints();
@@ -316,6 +327,7 @@ public class OrderInfoDialog extends JDialog {
 				}
 				{
 					JLabel addressValueLabel = new JLabel("...");
+					addressValueLabel.setName("AddressInfoLabel");
 					addressValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 					addressValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 					GridBagConstraints gbc_addressValueLabel = new GridBagConstraints();
@@ -339,6 +351,7 @@ public class OrderInfoDialog extends JDialog {
 				}
 				{
 					JLabel discountValueLabel = new JLabel("...");
+					discountValueLabel.setName("CustomerDiscountInfoLabel");
 					discountValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 					discountValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 					GridBagConstraints gbc_discountValueLabel = new GridBagConstraints();
@@ -367,8 +380,8 @@ public class OrderInfoDialog extends JDialog {
 				GridBagLayout gbl_productsListPanel = new GridBagLayout();
 				gbl_productsListPanel.columnWidths = new int[]{0};
 				gbl_productsListPanel.rowHeights = new int[]{0};
-				gbl_productsListPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-				gbl_productsListPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+				gbl_productsListPanel.columnWeights = new double[]{1.0};
+				gbl_productsListPanel.rowWeights = new double[]{1.0};
 				productsListPanel.setLayout(gbl_productsListPanel);
 				
 				//Products List********************************************************
@@ -396,6 +409,7 @@ public class OrderInfoDialog extends JDialog {
 			}
 			{
 				JLabel discountValueLabel = new JLabel("...");
+				discountValueLabel.setName("OrderDiscountInfoLabel");
 				discountValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 				discountValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 				GridBagConstraints gbc_discountValueLabel = new GridBagConstraints();
@@ -419,6 +433,7 @@ public class OrderInfoDialog extends JDialog {
 			}
 			{
 				JLabel totalPriceValueLabel = new JLabel("...");
+				totalPriceValueLabel.setName("TotalInfoLabel");
 				totalPriceValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 				totalPriceValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 				GridBagConstraints gbc_totalPriceValueLabel = new GridBagConstraints();
@@ -429,35 +444,74 @@ public class OrderInfoDialog extends JDialog {
 			}
 		}
 		
-		/********************************************** OK button **********************************************/
+		/********************************************** Buttons **********************************************/
+		//Confirm Offer Button********************************************************
 		{
-			RoundedButton okButton = new RoundedButton("OK", new Color(28, 150, 202), Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
-			okButton.setPreferredSize(new Dimension(100, 30));
-			okButton.addOffset(-5, 2);
+			confirmOfferButton = new RoundedButton("Confirm Offer", babyBlue, Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
+			confirmOfferButton.setPreferredSize(new Dimension(150, 30));
+			confirmOfferButton.addOffset(-13, 2);
 			
-			//Formats button to have hover function
-			okButton.addMouseListener(new MouseAdapter()
-			{	
+			confirmOfferButton.addMouseListener(new MouseAdapter() {
 				@Override
-				public void mouseEntered(MouseEvent e) 
-				{
-					okButton.setBackground(Color.WHITE);
-					okButton.setForeground(babyBlue);
-				}
-						
-				@Override
-				public void mouseExited(MouseEvent e) 
-				{
-					okButton.setBackground(babyBlue);
-					okButton.setForeground(Color.WHITE);
+				public void mouseClicked(MouseEvent e) {
+					orderCtr.confirmOffer(orderNumber);
+					//confirmOfferButton.setVisible(false);
+					retrieveInfo();
 				}
 			});
 			
+			blueButton(confirmOfferButton);
+			
+			GridBagConstraints gbc_confirmOfferButton = new GridBagConstraints();
+			gbc_confirmOfferButton.anchor = GridBagConstraints.EAST;
+			gbc_confirmOfferButton.insets = new Insets(0, 0, 0, 5);
+			gbc_confirmOfferButton.gridx = 0;
+			gbc_confirmOfferButton.gridy = 2;
+			contentPanel.add(confirmOfferButton, gbc_confirmOfferButton);
+		}
+		
+		//Generate Invoice Button********************************************************
+		{	
+			RoundedButton invoiceButton = new RoundedButton("Generate Invoice", babyBlue, Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
+			invoiceButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+						
+				}
+			});
+			invoiceButton.setPreferredSize(new Dimension(150, 30));
+			invoiceButton.addOffset(-13, 2);
+					
+			blueButton(invoiceButton);
+					
+			GridBagConstraints gbc_invoiceButton = new GridBagConstraints();
+			gbc_invoiceButton.anchor = GridBagConstraints.EAST;
+			gbc_invoiceButton.insets = new Insets(0, 0, 0, 5);
+			gbc_invoiceButton.gridx = 1;
+			gbc_invoiceButton.gridy = 2;
+			contentPanel.add(invoiceButton, gbc_invoiceButton);
+		}
+		
+		//Close Button******************************************************************
+		{
+			RoundedButton okButton = new RoundedButton("Close", Color.WHITE, babyBlue, babyBlue, new Font("Lato", Font.BOLD, 15));
+			okButton.setPreferredSize(new Dimension(100, 30));
+			okButton.addOffset(-5, 2);
+			
+			okButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					
+				}
+			});
+			
+			//Formats button to have hover function
+			whiteButton(okButton);
+			
 			GridBagConstraints gbc_okButton = new GridBagConstraints();
-			gbc_okButton.anchor = GridBagConstraints.SOUTHEAST;
-			gbc_okButton.gridx = 0;
+			gbc_okButton.anchor = GridBagConstraints.SOUTH;
+			gbc_okButton.gridx = 2;
 			gbc_okButton.gridy = 2;
-			gbc_okButton.insets = new Insets(0, 0, 0, 50);
 			contentPanel.add(okButton, gbc_okButton);
 		}
 		
@@ -478,12 +532,17 @@ public class OrderInfoDialog extends JDialog {
 		String[] customerDetails = orderInfo.get(0);
 		int index = 0;
 		
+		//Confirm Offer Button****************************
+		if(!orderDetails[2].equalsIgnoreCase("pending")) {
+			confirmOfferButton.setVisible(false);
+		}
+		
 		//Order panel info****************************
 		for(Component c : orderPanel.getComponents())
 		{
-			if(c instanceof JLabel)
+			if(c.getName() != null)
 			{
-				if(((JLabel) c).getText().equals("...")) 
+				if(c.getName().contains("InfoLabel")) 
 				{
 					labels[index] = ((JLabel) c);
 					index++;
@@ -504,9 +563,9 @@ public class OrderInfoDialog extends JDialog {
 		//Customer panel info****************************
 		for(Component c : customerPanel.getComponents())
 		{
-			if(c instanceof JLabel)
+			if(c.getName() != null)
 			{
-				if(((JLabel) c).getText().equals("...")) 
+				if(c.getName().contains("InfoLabel"))
 				{
 					labels[index] = ((JLabel) c);
 					index++;
@@ -527,9 +586,9 @@ public class OrderInfoDialog extends JDialog {
 		//Order total price and discount****************************
 		for(Component c : orderDetailsPanel.getComponents())
 		{
-			if(c instanceof JLabel)
+			if(c.getName() != null)
 			{
-				if(((JLabel) c).getText().equals("...")) 
+				if(c.getName().contains("InfoLabel")) 
 				{
 					labels[index] = ((JLabel) c);
 					index++;
@@ -544,15 +603,15 @@ public class OrderInfoDialog extends JDialog {
 		
 		for(int i = 1; i < orderInfo.size()-1; i++)
 		{
-			String productInfo = "";
-			productInfo += orderInfo.get(i)[3];
-			productInfo += "x " + orderInfo.get(i)[1];
+			String productInfo = orderInfo.get(i)[3];
+			productInfo += " x " + orderInfo.get(i)[1];
 			
 			int salesPrice = Integer.parseInt(orderInfo.get(i)[2]);
 			int quantity = Integer.parseInt(orderInfo.get(i)[3]);
 			int totalPrice = salesPrice * quantity;
 			
-			productInfo += " " + totalPrice;
+			productInfo += "  .   .   .   .   .   .   " + totalPrice + "DKK";
+			products.add(productInfo);
 		}
 		
 		orderLineItemList.setModel(new AbstractListModel<String>() {
@@ -566,5 +625,45 @@ public class OrderInfoDialog extends JDialog {
 		});
 	
 		orderLineItemList.setCellRenderer(new ProductJListCellRenderer());
+	}
+	
+	public void blueButton(RoundedButton button) {
+		
+		button.addMouseListener(new MouseAdapter()
+		{	
+			@Override
+			public void mouseEntered(MouseEvent e) 
+			{
+				button.setBackground(Color.WHITE);
+				button.setForeground(babyBlue);
+			}
+					
+			@Override
+			public void mouseExited(MouseEvent e) 
+			{
+				button.setBackground(babyBlue);
+				button.setForeground(Color.WHITE);
+			}
+			
+		});
+	}
+	
+	public void whiteButton(RoundedButton button) {
+		button.addMouseListener(new MouseAdapter()
+		{	
+			@Override
+			public void mouseEntered(MouseEvent e) 
+			{
+				button.setBackground(babyBlue);
+				button.setForeground(Color.WHITE);
+			}
+					
+			@Override
+			public void mouseExited(MouseEvent e) 
+			{
+				button.setBackground(Color.WHITE);
+				button.setForeground(babyBlue);
+			}
+		});
 	}
 }

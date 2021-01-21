@@ -58,9 +58,16 @@ public class JTableButtonMouseListener extends MouseAdapter
 				{
 					if (((RoundedButton)value).getName().equals("Confirm"))
 					{
-						// perform a click event
-						confirmOffer();
-						table.repaint();
+						int index = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("Order Number").getModelIndex())));
+						
+						try {
+							OrderInfoDialog dialog = new OrderInfoDialog(index);
+							dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							dialog.setVisible(true);
+							
+						} catch (Exception x) {
+							x.printStackTrace();
+						}
 					}
 				}
 				else if(table.getName().equals("CustomersPanel"))
