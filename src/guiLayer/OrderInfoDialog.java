@@ -494,25 +494,25 @@ public class OrderInfoDialog extends JDialog {
 		
 		//Close Button******************************************************************
 		{
-			RoundedButton okButton = new RoundedButton("Close", Color.WHITE, babyBlue, babyBlue, new Font("Lato", Font.BOLD, 15));
-			okButton.setPreferredSize(new Dimension(100, 30));
-			okButton.addOffset(-5, 2);
+			RoundedButton closeButton = new RoundedButton("Close", Color.WHITE, babyBlue, babyBlue, new Font("Lato", Font.BOLD, 15));
+			closeButton.setPreferredSize(new Dimension(100, 30));
+			closeButton.addOffset(-5, 2);
 			
-			okButton.addMouseListener(new MouseAdapter() {
+			closeButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					
+					dispose();	
 				}
 			});
 			
 			//Formats button to have hover function
-			whiteButton(okButton);
+			whiteButton(closeButton);
 			
 			GridBagConstraints gbc_okButton = new GridBagConstraints();
 			gbc_okButton.anchor = GridBagConstraints.SOUTH;
 			gbc_okButton.gridx = 2;
 			gbc_okButton.gridy = 2;
-			contentPanel.add(okButton, gbc_okButton);
+			contentPanel.add(closeButton, gbc_okButton);
 		}
 		
 		retrieveInfo();
