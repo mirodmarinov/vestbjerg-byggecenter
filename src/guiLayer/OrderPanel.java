@@ -251,7 +251,7 @@ public class OrderPanel extends JPanel {
 		JScrollPane tablePane = new JScrollPane(table);
 		tablePane.setBorder(BorderFactory.createEmptyBorder());
 		add(tablePane, gbc_table);
-		loadPage(1);
+		loadPage(getPageIndex());
 		//table listeners moved to the bottom, in order for the page to be initialized
 		table.addMouseListener(mouseListener);
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));
@@ -387,6 +387,11 @@ public class OrderPanel extends JPanel {
 	public JLabel getTablePageLabel()
 	{
 		return tablePageLabel;
+	}
+	
+	public void reset()
+	{
+		loadPage(getPageIndex()); 
 	}
 	
 }

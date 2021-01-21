@@ -49,6 +49,7 @@ public class AddProductsDialog extends JDialog {
 			searchProduct(false);
 		}
 	};
+	private JPanel header;
 	
 	/**
 	 * Create the dialog.
@@ -57,20 +58,41 @@ public class AddProductsDialog extends JDialog {
 		this.orderCtr = orderCtr;
 		this.createOrderPanelTable = createOrderPanelTable;
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
-		setBounds(100, 100, 1042, 600);
+		setBounds(100, 100, 1042, 650);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setBackground(new Color(252, 252, 252));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.5, 0.0, 0.5, 0.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.2, Double.MIN_VALUE};
+		gbl_contentPanel.rowHeights = new int[]{0, 20, 0, 0, 0, 0, 0};
+		gbl_contentPanel.columnWeights = new double[]{1.0, 0.0, 1.0, 0.2, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.5, 1.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
-		
-		//Product SearchBar********************************************************
 		{
+			
+			//Product SearchBar********************************************************
+			{
+				
+				header = new JPanel();
+				GridBagConstraints gbc_header = new GridBagConstraints();
+				header.setBackground(babyBlue);
+				gbc_header.gridwidth = 5;
+				gbc_header.insets = new Insets(0, 0, 5, 0);
+				gbc_header.fill = GridBagConstraints.BOTH;
+				gbc_header.gridx = 0;
+				gbc_header.gridy = 0;
+				contentPanel.add(header, gbc_header);
+				{
+					JLabel headerLabel = new JLabel("Add Product");
+					
+					header.add(headerLabel);
+					headerLabel.setVisible(true);
+					headerLabel.setForeground(Color.WHITE);
+					headerLabel.setFont(new Font("LATO", Font.BOLD, 20));
+					
+				}
+			}
 			searchBar = new JTextField();
 			searchBar.setFocusable(false);
 			searchBar.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
@@ -116,11 +138,9 @@ public class AddProductsDialog extends JDialog {
 			gbc_searchBar.insets = new Insets(0, 0, 5, 5);
 			gbc_searchBar.fill = GridBagConstraints.HORIZONTAL;
 			gbc_searchBar.gridx = 0;
-			gbc_searchBar.gridy = 0;
+			gbc_searchBar.gridy = 2;
 			contentPanel.add(searchBar, gbc_searchBar);
 			searchBar.setColumns(10);
-		}
-		{
 			
 			//Error product label**************************************************************
 			//A Label that shows when the searched product is not in the list of products
@@ -132,7 +152,7 @@ public class AddProductsDialog extends JDialog {
 			gbc_productErrorLabel.anchor = GridBagConstraints.WEST;
 			gbc_productErrorLabel.insets = new Insets(0, 0, 5, 5);
 			gbc_productErrorLabel.gridx = 2;
-			gbc_productErrorLabel.gridy = 0;
+			gbc_productErrorLabel.gridy = 2;
 			contentPanel.add(productErrorLabel, gbc_productErrorLabel);
 			
 			//Page number*********************************************************************
@@ -141,7 +161,7 @@ public class AddProductsDialog extends JDialog {
 			GridBagConstraints gbc_tablePageLabel = new GridBagConstraints();
 			gbc_tablePageLabel.insets = new Insets(0, 0, 5, 5);
 			gbc_tablePageLabel.gridx = 1;
-			gbc_tablePageLabel.gridy = 1;
+			gbc_tablePageLabel.gridy = 3;
 			contentPanel.add(tablePageLabel, gbc_tablePageLabel);
 			
 			//Left Arrow "<" ******************************************************************
@@ -161,7 +181,7 @@ public class AddProductsDialog extends JDialog {
 			gbc_leftArrowLabel.anchor = GridBagConstraints.EAST;
 			gbc_leftArrowLabel.insets = new Insets(0, 0, 5, 5);
 			gbc_leftArrowLabel.gridx = 0;
-			gbc_leftArrowLabel.gridy = 1;
+			gbc_leftArrowLabel.gridy = 3;
 			contentPanel.add(leftArrowLabel, gbc_leftArrowLabel);
 			
 			//Right Arrow ">" ******************************************************************
@@ -184,7 +204,7 @@ public class AddProductsDialog extends JDialog {
 			gbc_rightArrowLabel.anchor = GridBagConstraints.WEST;
 			gbc_rightArrowLabel.insets = new Insets(0, 0, 5, 5);
 			gbc_rightArrowLabel.gridx = 2;
-			gbc_rightArrowLabel.gridy = 1;
+			gbc_rightArrowLabel.gridy = 3;
 			contentPanel.add(rightArrowLabel, gbc_rightArrowLabel);
 		}
 		
@@ -238,7 +258,7 @@ public class AddProductsDialog extends JDialog {
 			gbc_table.insets = new Insets(0, 0, 5, 0);
 			gbc_table.fill = GridBagConstraints.BOTH;
 			gbc_table.gridx = 0;
-			gbc_table.gridy = 2;
+			gbc_table.gridy = 4;
 			
 			//Table Scroll Pane********************************************************************
 			JScrollPane tablePane = new JScrollPane(table);
@@ -263,7 +283,7 @@ public class AddProductsDialog extends JDialog {
 			gbc_okButton.anchor = GridBagConstraints.SOUTHEAST;
 			gbc_okButton.insets = new Insets(0, 0, 0, 5);
 			gbc_okButton.gridx = 3;
-			gbc_okButton.gridy = 3;
+			gbc_okButton.gridy = 5;
 			contentPanel.add(okButton, gbc_okButton);
 		}
 			
@@ -281,7 +301,7 @@ public class AddProductsDialog extends JDialog {
 			GridBagConstraints gbc_cancelButton = new GridBagConstraints();
 			gbc_cancelButton.anchor = GridBagConstraints.SOUTHEAST;
 			gbc_cancelButton.gridx = 4;
-			gbc_cancelButton.gridy = 3;
+			gbc_cancelButton.gridy = 5;
 			contentPanel.add(cancelButton, gbc_cancelButton);
 		}
 

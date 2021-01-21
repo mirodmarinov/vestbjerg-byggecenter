@@ -26,21 +26,24 @@ public class GenerateInvoiceDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public GenerateInvoiceDialog(int orderNumber) {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 500, 400);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(Color.WHITE);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			JTextArea txtrInvoice = new JTextArea();
+			JTextArea textArea = new JTextArea();
 			OrderCtr orderCtr = new OrderCtr();
 			String text = orderCtr.generateInvoice(orderNumber);
-			txtrInvoice.setEditable(false);
-			txtrInvoice.setText(text);
-			contentPanel.add(txtrInvoice);
+			textArea.setPreferredSize(new Dimension(300,300));
+			textArea.setEditable(false);
+			textArea.setText(text);
+			contentPanel.add(textArea);
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(Color.DARK_GRAY.brighter());
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

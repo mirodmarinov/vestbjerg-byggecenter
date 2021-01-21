@@ -61,7 +61,8 @@ public class JTableButtonMouseListener extends MouseAdapter
 						int index = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("Order Number").getModelIndex())));
 						
 						try {
-							OrderInfoDialog dialog = new OrderInfoDialog(index);
+							OrderPanel opd = (OrderPanel) table.getParent().getParent().getParent();
+							OrderInfoDialog dialog = new OrderInfoDialog(index,opd);
 							dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 							dialog.setVisible(true);
 							
@@ -97,27 +98,6 @@ public class JTableButtonMouseListener extends MouseAdapter
 					DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 					String barcode = table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex()).toString();
 					orderCtr.removeProductFromList(barcode);
-					
-					//TODO Write comment here
-					
-					JLabel priceLabel = null;
-//					JPanel tempPanel = (JPanel)table.getParent().getParent().getParent();
-//					for (int a = 0;a < tempPanel.getComponentCount();a++)
-//					{
-//						if (tempPanel.getComponent(a).getName() != null && tempPanel.getComponent(a).getName().equals("totalValueLabel"))
-//						{
-//							priceLabel = (JLabel) tempPanel.getComponent(a);
-//							String text = Integer.toString (Integer.parseInt(priceLabel.getText().substring(0, priceLabel.getText().length()-4))-Integer.parseInt(table.getValueAt(table.getSelectedRow(), table.getColumn("Total").getModelIndex()).toString()));
-//							if (text.equals("0"))
-//							{
-//								priceLabel.setText("... DKK");
-//							}
-//							else
-//							{
-//								priceLabel.setText(text + " DKK");
-//							}
-//						}
-//					}
 					dtm.removeRow(table.getSelectedRow());
 				}
 				
@@ -128,7 +108,8 @@ public class JTableButtonMouseListener extends MouseAdapter
 					int index = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("Order Number").getModelIndex())));
 					
 					try {
-						OrderInfoDialog dialog = new OrderInfoDialog(index);
+						OrderPanel opd = (OrderPanel) table.getParent().getParent().getParent();
+						OrderInfoDialog dialog = new OrderInfoDialog(index,opd);
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 						dialog.setVisible(true);
 						

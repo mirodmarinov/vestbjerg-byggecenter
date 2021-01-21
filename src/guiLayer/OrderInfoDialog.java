@@ -21,13 +21,14 @@ public class OrderInfoDialog extends JDialog {
 	private JPanel productsListPanel;
 	private JList<String> orderLineItemList;
 	private RoundedButton confirmOfferButton;
+	private OrderPanel originalOrderPanel;
 
 	/**
 	 * Creates the dialog.
 	 */
-	public OrderInfoDialog(int orderNumber) {
+	public OrderInfoDialog(int orderNumber,OrderPanel originalOrderPanel) {
 		this.orderNumber = orderNumber; 
-		
+		this.originalOrderPanel = originalOrderPanel;
 		setBounds(100, 100, 794, 545);
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
@@ -455,6 +456,7 @@ public class OrderInfoDialog extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					orderCtr.confirmOffer(orderNumber);
+					originalOrderPanel.reset();
 					//confirmOfferButton.setVisible(false);
 					retrieveInfo();
 				}
@@ -476,7 +478,10 @@ public class OrderInfoDialog extends JDialog {
 			invoiceButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-						
+						GenerateInvoiceDialog invoice = new GenerateInvoiceDialog(orderNumber);
+						invoice.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						invoice.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+						invoice.setVisible(true);
 				}
 			});
 			invoiceButton.setPreferredSize(new Dimension(150, 30));
@@ -501,6 +506,7 @@ public class OrderInfoDialog extends JDialog {
 			closeButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					originalOrderPanel.reset();
 					dispose();	
 				}
 			});
