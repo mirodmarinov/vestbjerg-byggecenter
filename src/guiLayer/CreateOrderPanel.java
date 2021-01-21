@@ -10,6 +10,8 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import java.util.ArrayList;
+
 import guiLayer.Renderers.*;
 
 
@@ -483,8 +485,21 @@ public class CreateOrderPanel extends JPanel {
 				}
 				else
 				{
-					orderCtr.createOrder();
-					reset();
+					if (orderCtr.checkAmounts().size() == 0)
+					{
+						reset();
+						orderCtr.createOrder();
+					}
+					else
+					{
+						ArrayList<String> errors = orderCtr.checkAmounts();
+						String error = "Quantity less on stock then the quantity on the order for the product(s):";
+						for (int a = 0; a < errors.size();a++)
+						{
+							error += "\n"+errors.get(a);
+						}
+						JOptionPane.showMessageDialog(null, error, "Out of stock", 0);
+					}
 				}
 			}
 			

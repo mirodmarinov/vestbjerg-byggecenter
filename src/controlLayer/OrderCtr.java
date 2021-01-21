@@ -393,4 +393,17 @@ public class OrderCtr
 			}
 		}
 	}
+	
+	public ArrayList<String> checkAmounts()
+	{
+		ArrayList<String> errors = new ArrayList<>();
+		for (OrderLineItem order : orderProducts)
+		{
+			if (order.getProduct().getQuantity() < order.getQuantity())
+			{
+				errors.add(order.getProduct().getName());
+			}
+		}
+		return errors;
+	}
 }
