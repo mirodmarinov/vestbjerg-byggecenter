@@ -205,7 +205,6 @@ public class OrderCtr
 		{
 			totalWithDiscount *= ((float)(100 - customer.getDiscount())/100);
 		}
-		System.out.println((float)totalWithDiscount / (float)totalWithoutDiscount < 0.8 ? (int)(0.8 * totalWithoutDiscount) : totalWithDiscount);
 		return (float)totalWithDiscount / (float)totalWithoutDiscount < 0.8 ? (int)(0.8 * totalWithoutDiscount) : totalWithDiscount;
 	}
 	
