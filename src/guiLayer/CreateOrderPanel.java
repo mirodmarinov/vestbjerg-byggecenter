@@ -511,8 +511,8 @@ public class CreateOrderPanel extends JPanel {
 					orderErrorLabel.setVisible(false);
 					if (orderCtr.checkAmounts().size() == 0)
 					{
-						reset();
 						orderCtr.createOrder();
+						reset();
 					}
 					else
 					{
