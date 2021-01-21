@@ -193,13 +193,14 @@ public class Order implements Serializable
 			allInfo.add(productInfo);
 		}
 		
-		String[] orderInfo = new String[5];
+		String[] orderInfo = new String[6];
 		
 		orderInfo[0] = String.valueOf(getTotalPrice());
 		orderInfo[1] = String.valueOf(getPurchaseDate());
 		orderInfo[2] = getStatus();
 		orderInfo[3] = String.valueOf(getExpirationDate());
 		orderInfo[4] = String.valueOf(getDiscount());
+		orderInfo[5] = getDelivery();
 		//Information about the order
 		allInfo.add(orderInfo);
 		

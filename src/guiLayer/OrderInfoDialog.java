@@ -3,6 +3,7 @@ package guiLayer;
 import controlLayer.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -32,6 +33,10 @@ public class OrderInfoDialog extends JDialog {
 	private Color babyBlue = new Color(28, 150, 202);
 	private int orderNumber;
 	private OrderCtr orderCtr = new OrderCtr();
+	private JPanel orderDetailsPanel;
+	private JPanel orderPanel;
+	private JPanel customerPanel;
+	private JPanel productsList;
 
 	/**
 	 * Creates the dialog.
@@ -75,7 +80,7 @@ public class OrderInfoDialog extends JDialog {
 		
 		//Order Details Panel********************************************************
 		{
-			JPanel orderDetailsPanel = new JPanel();
+			orderDetailsPanel = new JPanel();
 			orderDetailsPanel.setBorder(BorderFactory.createLineBorder(new Color(243, 243, 243), 2, true));
 			orderDetailsPanel.setBackground(Color.WHITE);
 			GridBagConstraints gbc_orderDetailsPanel = new GridBagConstraints();
@@ -93,7 +98,7 @@ public class OrderInfoDialog extends JDialog {
 			
 			/********************************************** Order info panel**********************************************/
 			{
-				JPanel orderPanel = new JPanel();
+				orderPanel = new JPanel();
 				orderPanel.setBorder(new TitledBorder(new LineBorder(babyBlue), "Order", TitledBorder.LEADING, TitledBorder.TOP, null, babyBlue));
 				((TitledBorder)orderPanel.getBorder()).setTitleFont(new Font("Lato", Font.BOLD, 14));
 				orderPanel.setBackground(Color.WHITE);
@@ -229,7 +234,7 @@ public class OrderInfoDialog extends JDialog {
 			/********************************************** Customer Info Panel**********************************************/
 			{
 				//Customer Info********************************************************
-				JPanel customerPanel = new JPanel();
+				customerPanel = new JPanel();
 				customerPanel.setBorder(new TitledBorder(new LineBorder(babyBlue), "Customer", TitledBorder.LEADING, TitledBorder.TOP, null, babyBlue));
 				((TitledBorder)customerPanel.getBorder()).setTitleFont(new Font("Lato", Font.BOLD, 14));
 				customerPanel.setBackground(Color.WHITE);
@@ -365,7 +370,7 @@ public class OrderInfoDialog extends JDialog {
 			
 			/********************************************** Products List  Panel**********************************************/
 			{
-				JPanel productsList = new JPanel();
+				productsList = new JPanel();
 				productsList.setBorder(new TitledBorder(new LineBorder(babyBlue), "Products", TitledBorder.LEADING, TitledBorder.TOP, null, babyBlue));
 				((TitledBorder)productsList.getBorder()).setTitleFont(new Font("Lato", Font.BOLD, 14));
 				productsList.setBackground(Color.WHITE);
@@ -462,11 +467,63 @@ public class OrderInfoDialog extends JDialog {
 			gbc_okButton.insets = new Insets(0, 0, 0, 50);
 			contentPanel.add(okButton, gbc_okButton);
 		}
+		
+		retrieveInfo();
 	}
 	
-	public void fillInfo(JLabel label)
+	/**
+	 * Retrieves info about the order, based on what
+	 * order is double clicked to open the window.
+	 * The info of the order is then filled into the
+	 * created labels using this method.
+	 */
+	public void retrieveInfo()
 	{
 		ArrayList<String[]> orderInfo = orderCtr.findOrder(orderNumber);
+		JLabel[] labels = new JLabel[5];
+		String[] orderDetails = orderInfo.get(orderInfo.size()-1);
+		String[] customerDetails = orderInfo.get(0);
+		int index = 0;
+		
+		for(Component c : orderPanel.getComponents())
+		{
+			if(c instanceof JLabel)
+			{
+				if(((JLabel) c).getText().equals("...")) 
+				{
+					labels[index] = ((JLabel) c);
+					index++;
+				}
+			}
+		}
+		
+		labels[0].setText(String.valueOf(orderNumber));
+		labels[1].setText(orderDetails[2]);
+		labels[2].setText(orderDetails[5]);
+		labels[3].setText(orderDetails[3]);
+		labels[4].setText(orderDetails[1]);
+		
+		for(Component c : customerPanel.getComponents())
+		{
+			if(c instanceof JLabel)
+			{
+				if(((JLabel) c).getText().equals("...")) 
+				{
+					
+				}
+			}
+		}
+		
+		for(Component c : orderDetailsPanel.getComponents())
+		{
+			if(c instanceof JLabel)
+			{
+				if(((JLabel) c).getText().equals("...")) 
+				{
+					
+				}
+			}
+		}
 		
 	}
 }
