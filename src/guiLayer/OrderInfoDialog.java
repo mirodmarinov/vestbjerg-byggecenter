@@ -503,16 +503,27 @@ public class OrderInfoDialog extends JDialog {
 		labels[3].setText(orderDetails[3]);
 		labels[4].setText(orderDetails[1]);
 		
+		labels = new JLabel[5];
+		index = 0;
+		
 		for(Component c : customerPanel.getComponents())
 		{
 			if(c instanceof JLabel)
 			{
 				if(((JLabel) c).getText().equals("...")) 
 				{
-					
+					labels[index] = ((JLabel) c);
+					index++;
 				}
 			}
 		}
+		
+		labels[0].setText(customerDetails[0]);
+		labels[1].setText(customerDetails[2]);
+		labels[2].setText(customerDetails[1]);
+		labels[3].setText(customerDetails[3]);
+		labels[4].setText(customerDetails[4]);
+		
 		
 		for(Component c : orderDetailsPanel.getComponents())
 		{
