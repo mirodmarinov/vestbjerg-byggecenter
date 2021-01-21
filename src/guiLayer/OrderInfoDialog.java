@@ -1,5 +1,6 @@
 package guiLayer;
 
+import controlLayer.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,6 +19,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.SwingConstants;
 import javax.swing.JList;
 import javax.swing.border.TitledBorder;
@@ -27,24 +30,15 @@ public class OrderInfoDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private Color babyBlue = new Color(28, 150, 202);
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			OrderInfoDialog dialog = new OrderInfoDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private int orderNumber;
+	private OrderCtr orderCtr = new OrderCtr();
 
 	/**
 	 * Creates the dialog.
 	 */
-	public OrderInfoDialog() {
+	public OrderInfoDialog(int orderNumber) {
+		this.orderNumber = orderNumber; 
+		
 		setBounds(100, 100, 794, 545);
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
@@ -92,12 +86,12 @@ public class OrderInfoDialog extends JDialog {
 			contentPanel.add(orderDetailsPanel, gbc_orderDetailsPanel);
 			GridBagLayout gbl_orderDetailsPanel = new GridBagLayout();
 			gbl_orderDetailsPanel.columnWidths = new int[]{0, 0, 0};
-			gbl_orderDetailsPanel.rowHeights = new int[]{0, 0, 0, 0, 0};
+			gbl_orderDetailsPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
 			gbl_orderDetailsPanel.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
-			gbl_orderDetailsPanel.rowWeights = new double[]{1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_orderDetailsPanel.rowWeights = new double[]{1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			orderDetailsPanel.setLayout(gbl_orderDetailsPanel);
 			
-			/********************************************** Order info**********************************************/
+			/********************************************** Order info panel**********************************************/
 			{
 				JPanel orderPanel = new JPanel();
 				orderPanel.setBorder(new TitledBorder(new LineBorder(babyBlue), "Order", TitledBorder.LEADING, TitledBorder.TOP, null, babyBlue));
@@ -232,7 +226,7 @@ public class OrderInfoDialog extends JDialog {
 				}
 			}
 			
-			/********************************************** Customer Info **********************************************/
+			/********************************************** Customer Info Panel**********************************************/
 			{
 				//Customer Info********************************************************
 				JPanel customerPanel = new JPanel();
@@ -397,24 +391,45 @@ public class OrderInfoDialog extends JDialog {
 				discountLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 				GridBagConstraints gbc_discountLabel = new GridBagConstraints();
 				gbc_discountLabel.anchor = GridBagConstraints.WEST;
-				gbc_discountLabel.insets = new Insets(0, 0, 5, 5);
-				gbc_discountLabel.gridx = 0;
+				gbc_discountLabel.insets = new Insets(0, 0, 5, 0);
+				gbc_discountLabel.gridx = 1;
 				gbc_discountLabel.gridy = 2;
 				orderDetailsPanel.add(discountLabel, gbc_discountLabel);
 			}
 			{
 				JLabel discountValueLabel = new JLabel("...");
-				discountValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 				discountValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
+				discountValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
 				GridBagConstraints gbc_discountValueLabel = new GridBagConstraints();
-				gbc_discountValueLabel.insets = new Insets(0, 0, 0, 5);
 				gbc_discountValueLabel.anchor = GridBagConstraints.WEST;
-				gbc_discountValueLabel.gridx = 0;
+				gbc_discountValueLabel.insets = new Insets(0, 0, 5, 0);
+				gbc_discountValueLabel.gridx = 1;
 				gbc_discountValueLabel.gridy = 3;
 				orderDetailsPanel.add(discountValueLabel, gbc_discountValueLabel);
 			}
+			
+			//Total Price Label********************************************************
+			{
+				JLabel totalPriceLabel = new JLabel("Total:");
+				totalPriceLabel.setFont(new Font("Lato", Font.PLAIN, 13));
+				GridBagConstraints gbc_totalPriceLabel = new GridBagConstraints();
+				gbc_totalPriceLabel.anchor = GridBagConstraints.WEST;
+				gbc_totalPriceLabel.insets = new Insets(0, 0, 5, 0);
+				gbc_totalPriceLabel.gridx = 1;
+				gbc_totalPriceLabel.gridy = 4;
+				orderDetailsPanel.add(totalPriceLabel, gbc_totalPriceLabel);
+			}
+			{
+				JLabel totalPriceValueLabel = new JLabel("...");
+				totalPriceValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
+				totalPriceValueLabel.setFont(new Font("Lato", Font.PLAIN, 13));
+				GridBagConstraints gbc_totalPriceValueLabel = new GridBagConstraints();
+				gbc_totalPriceValueLabel.anchor = GridBagConstraints.WEST;
+				gbc_totalPriceValueLabel.gridx = 1;
+				gbc_totalPriceValueLabel.gridy = 5;
+				orderDetailsPanel.add(totalPriceValueLabel, gbc_totalPriceValueLabel);
+			}
 		}
-		
 		
 		/********************************************** OK button **********************************************/
 		{
@@ -448,5 +463,10 @@ public class OrderInfoDialog extends JDialog {
 			contentPanel.add(okButton, gbc_okButton);
 		}
 	}
-
+	
+	public void fillInfo(JLabel label)
+	{
+		ArrayList<String[]> orderInfo = orderCtr.findOrder(orderNumber);
+		
+	}
 }

@@ -171,17 +171,18 @@ public class Order implements Serializable
 	{
 		ArrayList<String[]> allInfo = new ArrayList<String[]>();
 		
-		String[] customerInfo = new String[4];
+		String[] customerInfo = new String[5];
 		customerInfo[0] = customer.getName();
 		customerInfo[1] = customer.getGroup();
 		customerInfo[2] = String.valueOf(customer.getPhone());
 		customerInfo[3] = customer.getAddress();
+		customerInfo[4] = String.valueOf(customer.getDiscount());
 		//Information about the customer
 		allInfo.add(customerInfo);
 		
 		for(OrderLineItem o: products)
 		{
-			//we need 6 slots but the last one is calculated later in the gui
+			//we need 6 slots but the last one is calculated later in the GUI
 			String[] productInfo = new String[5];
 			productInfo[0] = o.getProduct().getBarcode();
 			productInfo[1] = o.getProduct().getName();
@@ -192,13 +193,14 @@ public class Order implements Serializable
 			allInfo.add(productInfo);
 		}
 		
-		String[] orderInfo = new String[1];
+		String[] orderInfo = new String[5];
 		
 		orderInfo[0] = String.valueOf(getTotalPrice());
 		orderInfo[1] = String.valueOf(getPurchaseDate());
 		orderInfo[2] = getStatus();
 		orderInfo[3] = String.valueOf(getExpirationDate());
-		//Total price
+		orderInfo[4] = String.valueOf(getDiscount());
+		//Information about the order
 		allInfo.add(orderInfo);
 		
 		return allInfo;

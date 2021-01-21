@@ -118,10 +118,13 @@ public class JTableButtonMouseListener extends MouseAdapter
 			else if(table.getName().equals("OrderPanel"))
 			{
 				if(e.getClickCount() > 1) {
+					int index = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("Order Number").getModelIndex())));
+					
 					try {
-						OrderInfoDialog dialog = new OrderInfoDialog();
+						OrderInfoDialog dialog = new OrderInfoDialog(index);
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 						dialog.setVisible(true);
+						
 					} catch (Exception x) {
 						x.printStackTrace();
 					}
