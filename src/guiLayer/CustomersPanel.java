@@ -1,54 +1,16 @@
 package guiLayer;
+
 import controlLayer.*;
-import uiLayer.MainMenu;
+import guiLayer.Renderers.*;
 
-
-import guiLayer.Renderers.JTableButtonMouseListener;
-import guiLayer.Renderers.JTableButtonRenderer;
-import modelLayer.OrderContainer;
-import modelLayer.ProductContainer;
-
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.Dialog;
-import java.awt.Dimension;
-
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JViewport;
-import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import java.awt.Insets;
-import java.awt.Panel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.xml.crypto.Data;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.table.*;
 
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 
 public class CustomersPanel extends JPanel {
 	private JTable table;
@@ -98,22 +60,24 @@ public class CustomersPanel extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 2.0, 0.0, 1.0, 0.2};
 		setLayout(gridBagLayout);
 		
-		JLabel ordersLabel = new JLabel("Customers");
-		ordersLabel.setFont(new Font("Lato", Font.BOLD, 35));
-		GridBagConstraints gbc_ordersLabel = new GridBagConstraints();
-		gbc_ordersLabel.anchor = GridBagConstraints.WEST;
-		gbc_ordersLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_ordersLabel.gridx = 1;
-		gbc_ordersLabel.gridy = 1;
-		add(ordersLabel, gbc_ordersLabel);
+		//Customers Label*************************************************************
+		JLabel customersLabel = new JLabel("Customers");
+		customersLabel.setFont(new Font("Lato", Font.BOLD, 35));
+		
+		GridBagConstraints gbc_customersLabel = new GridBagConstraints();
+		gbc_customersLabel.anchor = GridBagConstraints.WEST;
+		gbc_customersLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_customersLabel.gridx = 1;
+		gbc_customersLabel.gridy = 1;
+		add(customersLabel, gbc_customersLabel);
 
+		//Customers Table*****************************************************************
 		table = new JTable();
 		table.setName("CustomersPanel");
 		//Changes the Color of the header
 		JTableHeader header = table.getTableHeader();
 		header.setBackground(babyBlue);
 		header.setForeground(Color.WHITE);
-
 
 		table.setRowSelectionAllowed(false);
 		table.setFocusable(false);
@@ -132,6 +96,7 @@ public class CustomersPanel extends JPanel {
 		table.getTableHeader().setFont(new Font("Lato", Font.BOLD, 14));
 		table.getTableHeader().setDefaultRenderer(defaultHeaderRenderer);
 
+		//Setting the number of columns, the data types
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -144,6 +109,7 @@ public class CustomersPanel extends JPanel {
 				return columnTypes[columnIndex];
 			}
 		});
+		//Setting the sizes of the columns
 		table.getColumnModel().getColumn(0).setPreferredWidth(85);
 		table.getColumnModel().getColumn(0).setMinWidth(85);
 		table.getColumnModel().getColumn(1).setPreferredWidth(70);
@@ -161,9 +127,9 @@ public class CustomersPanel extends JPanel {
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 		
 		
-		
+		//Left Arrow Label "<"**********************************************************
 		leftArrowLabel = new JLabel(" < ");
-		
+		//Loads the previous page
 		leftArrowLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -175,6 +141,7 @@ public class CustomersPanel extends JPanel {
 			}
 		});
 		leftArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
 		GridBagConstraints gbc_leftArrowLabel = new GridBagConstraints();
 		gbc_leftArrowLabel.anchor = GridBagConstraints.EAST;
 		gbc_leftArrowLabel.insets = new Insets(0, 0, 5, 5);
@@ -182,16 +149,20 @@ public class CustomersPanel extends JPanel {
 		gbc_leftArrowLabel.gridy = 1;
 		add(leftArrowLabel, gbc_leftArrowLabel);
 		
+		//Page Number Label*********************************************************************
 		tablePageLabel = new JLabel("<html><u>1</u></html>");
 		tablePageLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
 		GridBagConstraints gbc_tablePageLabel = new GridBagConstraints();
 		gbc_tablePageLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_tablePageLabel.gridx = 3;
 		gbc_tablePageLabel.gridy = 1;
 		add(tablePageLabel, gbc_tablePageLabel);
 		
+		//Right Arrow Label ">"*****************************************************************
 		rightArrowLabel = new JLabel(" > ");
 		rightArrowLabel.addMouseListener(new MouseAdapter() {
+			//Loads the next page
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				searchTextField.setFocusable(false);
@@ -204,6 +175,7 @@ public class CustomersPanel extends JPanel {
 			}
 		});
 		rightArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
 		GridBagConstraints gbc_rightArrowLabel = new GridBagConstraints();
 		gbc_rightArrowLabel.anchor = GridBagConstraints.WEST;
 		gbc_rightArrowLabel.insets = new Insets(0, 0, 5, 5);
@@ -211,11 +183,12 @@ public class CustomersPanel extends JPanel {
 		gbc_rightArrowLabel.gridy = 1;
 		add(rightArrowLabel, gbc_rightArrowLabel);
 		
-		
+		//Customer not found Label***************************************************************
 		foundLabel = new JLabel("Customer not found!");
 		foundLabel.setVisible(false);
 		foundLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		foundLabel.setForeground(Color.RED);
+		
 		GridBagConstraints gbc_foundLabel = new GridBagConstraints();
 		gbc_foundLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_foundLabel.anchor = GridBagConstraints.EAST;
@@ -223,6 +196,7 @@ public class CustomersPanel extends JPanel {
 		gbc_foundLabel.gridy = 2;
 		add(foundLabel, gbc_foundLabel);
 		
+		//Search Bar*****************************************************************************
 		searchTextField = new JTextField();
 		searchTextField.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 		searchTextField.addActionListener(new ActionListener() {
@@ -273,6 +247,7 @@ public class CustomersPanel extends JPanel {
 		searchTextField.getDocument().addDocumentListener(cl);
 		add(searchTextField, gbc_searchTextField);
 		searchTextField.setColumns(10);
+		
 		GridBagConstraints gbc_table = new GridBagConstraints();
 		gbc_table.gridheight = 3;
 		gbc_table.gridwidth = 6;
@@ -281,18 +256,20 @@ public class CustomersPanel extends JPanel {
 		gbc_table.gridx = 1;
 		gbc_table.gridy = 3;
 		
+		//Scroll Pane********************************************************************
 		JScrollPane tablePane = new JScrollPane(table);
 		tablePane.setBorder(BorderFactory.createEmptyBorder());
 		add(tablePane, gbc_table);
 		loadPage(1);
 		
 		
-		//***** Add Products button ****\\
+		//Add Products button ***********************************************************
 		
 		RoundedButton addProductButton = new RoundedButton("➕ Add Customer", babyBlue,
 					Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14));
 		CustomersPanel thisClass = this;
 		addProductButton.addMouseListener(new MouseAdapter() {
+			//Calls the addProductsDialog
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
@@ -304,15 +281,13 @@ public class CustomersPanel extends JPanel {
 		});
 		addProductButton.addOffset(-13, 2);
 		blueButton(addProductButton);
+		
 		GridBagConstraints gbc_addCustomerButton = new GridBagConstraints();
 		gbc_addCustomerButton.fill = GridBagConstraints.BOTH;
 		gbc_addCustomerButton.insets = new Insets(0, 0, 5, 5);
 		gbc_addCustomerButton.gridx = 1;
 		gbc_addCustomerButton.gridy = 2;
 		add(addProductButton, gbc_addCustomerButton);
-		
-		
-		
 	}
 
 	/**
@@ -392,13 +367,16 @@ public class CustomersPanel extends JPanel {
 		
 	}
 	
+	/**
+	 * Loads the page depending on the index in the parameter and sets the page number
+	 * @param index - page number
+	 */
 	public void loadPage(int index)
 	{
 		foundLabel.setVisible(false);
 		if(index == 0) {
 			return;
 		}
-		
 		
 		customerCtr = new CustomerCtr();
 		if (customerCtr.getCustomers(index).isEmpty())
@@ -408,17 +386,10 @@ public class CustomersPanel extends JPanel {
 		
 		defaultFillTable(index);
 
-		
-		
 		tablePageLabel.setText("<html><u>" + index + "</u></html>");
-
-		
 	}
 	
-	/**
-	 * Returns the current page index
-	 * @return an integer based on the current page index.
-	 */
+	//Getters**********************************************************************
 	public int getPageIndex()  
 	{
 		return Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", ""));
@@ -440,6 +411,10 @@ public class CustomersPanel extends JPanel {
 		return table;
 	}
 	
+	/**
+	 * This method adds events to the blue buttons - changing their color when a mouse enters or exits the button
+	 * @param button to be formatted
+	 */
 	public void blueButton(RoundedButton button) {
 		
 		button.addMouseListener(new MouseAdapter() {
@@ -458,5 +433,4 @@ public class CustomersPanel extends JPanel {
 			}
 		});
 	}
-	
 }
