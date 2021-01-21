@@ -1,6 +1,8 @@
 package guiLayer;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -141,6 +143,7 @@ public class CreateOrderPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				searchCustomer();
+				orderCtr.calculateTotal();
 			}
 		});
 		
@@ -332,6 +335,13 @@ public class CreateOrderPanel extends JPanel {
 		dtm.setRowCount(0);
 		orderTable.addMouseListener(new JTableButtonMouseListener(orderTable, orderCtr));
 		orderTable.addMouseMotionListener(new JTableButtonMouseListener(orderTable, orderCtr));
+		orderTable.getModel().addTableModelListener(new TableModelListener() {
+
+			  public void tableChanged(TableModelEvent e) {
+				  totalValueLabel.setText(orderCtr.calculateTotal() + " DKK");
+			  }
+			});
+		
 		
 		
 		//We remove the border of the table by making it empty
