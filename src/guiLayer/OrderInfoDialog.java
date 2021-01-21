@@ -506,12 +506,9 @@ public class OrderInfoDialog extends JDialog {
 			okButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-<<<<<<< Updated upstream
 					originalOrderPanel.reset();
 					dispose();	
-=======
-					
->>>>>>> Stashed changes
+
 				}
 			});
 			
@@ -616,11 +613,11 @@ public class OrderInfoDialog extends JDialog {
 			String productInfo = orderInfo.get(i)[3];
 			productInfo += " x " + orderInfo.get(i)[1];
 			
-			int salesPrice = Integer.parseInt(orderInfo.get(i)[2]);
-			int quantity = Integer.parseInt(orderInfo.get(i)[3]);
-			int totalPrice = salesPrice * quantity;
+			float salesPrice = Float.parseFloat(orderInfo.get(i)[2]);
+			float quantity = Float.parseFloat(orderInfo.get(i)[3]);
+			float totalPrice = salesPrice * quantity;
 			
-			productInfo += "  .   .   .   .   .   .   " + totalPrice + "DKK";
+			productInfo += "  .   .   .   .   .   .   " + String.format("%.2f", totalPrice) + " DKK";
 			products.add(productInfo);
 		}
 		

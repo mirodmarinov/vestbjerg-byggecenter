@@ -517,7 +517,6 @@ public class AddProductsDialog extends JDialog {
 		int rowCount = dtm.getRowCount();
 		dtm.setRowCount(productPlace.size() + rowCount);
 		int quantity = 1;
-		float totalPrice = 0;
 		for (int e = 0; e < productPlace.size(); e++)
 		{
 			String name = (String) table.getValueAt(productPlace.get(e), table.getColumn("Name").getModelIndex());
@@ -525,7 +524,7 @@ public class AddProductsDialog extends JDialog {
 			int discount = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Discount").getModelIndex()));
 			float price = Float.valueOf(((String)table.getValueAt(productPlace.get(e), table.getColumn("Price").getModelIndex())));
 				quantity = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Input Quantity").getModelIndex()));
-			
+			String totalPrice = String.format("%.2f", (quantity * price));
 			
 			orderCtr.selectProduct(productPlace.get(e), quantity);
 		
@@ -536,8 +535,7 @@ public class AddProductsDialog extends JDialog {
 			createOrderPanelTable.setValueAt(discount, e + rowCount, createOrderPanelTable.getColumn("Discount").getModelIndex());
 			createOrderPanelTable.setValueAt(price, e + rowCount, createOrderPanelTable.getColumn("Price").getModelIndex());
 			createOrderPanelTable.setValueAt(quantity, e + rowCount, createOrderPanelTable.getColumn("Quantity").getModelIndex());
-			createOrderPanelTable.setValueAt((quantity * price), e + rowCount, createOrderPanelTable.getColumn("Total").getModelIndex());
-			totalPrice += (quantity * price);
+			createOrderPanelTable.setValueAt(totalPrice, e + rowCount, createOrderPanelTable.getColumn("Total").getModelIndex());
 			
 			createOrderPanelTable.setValueAt(new RoundedButton("Remove", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e + rowCount, createOrderPanelTable.getColumn("").getModelIndex());
 		}

@@ -97,7 +97,7 @@ public class OrderCtr
 			productInfo[2] = String.valueOf(product.getQuantity());
 			productInfo[3] = product.getBarcode();
 			productInfo[4] = String.valueOf(product.getDiscount());
-			productInfo[5] = String.valueOf(product.getSalesPrice());
+			productInfo[5] = String.format("%.2f", product.getSalesPrice());
 			allProductsInfo.add(productInfo);
 		}
 		
