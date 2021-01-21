@@ -1,48 +1,14 @@
 package guiLayer;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.text.JTextComponent;
-
 import controlLayer.CustomerCtr;
-import guiLayer.Renderers.JTableButtonMouseListener;
-import guiLayer.Renderers.JTableButtonRenderer;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.swing.JTextField;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import javax.swing.JTextPane;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+import javax.swing.text.JTextComponent;
 
 public class EditCustomerDialog extends JDialog {
 
@@ -54,7 +20,6 @@ public class EditCustomerDialog extends JDialog {
 	private JPanel panel;
 	private JLabel nameLabel;
 	private JTextField nameTextField;
-	private JLabel discountLabel;
 	private JTextField discountTextField;
 	private JLabel phoneLabel;
 	private JTextField phoneTextField;
@@ -65,7 +30,6 @@ public class EditCustomerDialog extends JDialog {
 	private JPanel header;
 	private CustomerCtr customerCtr;
 	private JLabel customerName;
-	private JLabel lblNewLabel;
 	private CustomersPanel customersPanel;
 
 
@@ -78,9 +42,9 @@ public class EditCustomerDialog extends JDialog {
 		setBounds(100, 100, 567, 599);
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
-		//contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setBackground(new Color(252, 252, 252));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{0, 0, 0};
 		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0};
@@ -88,8 +52,10 @@ public class EditCustomerDialog extends JDialog {
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
+			//Blue Header Panel*****************************************************************
 			header = new JPanel();
 			header.setBackground(babyBlue);
+			
 			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 			gbc_panel_1.gridwidth = 3;
 			gbc_panel_1.insets = new Insets(0, 0, 5, 0);
@@ -98,7 +64,7 @@ public class EditCustomerDialog extends JDialog {
 			gbc_panel_1.gridy = 0;
 			contentPanel.add(header, gbc_panel_1);
 			{
-				
+				//Manage Customer Label************************************************************
 				headerLabel = new JLabel("Manage Customer");
 				header.add(headerLabel);
 				headerLabel.setVisible(true);
@@ -107,9 +73,11 @@ public class EditCustomerDialog extends JDialog {
 			}
 		}
 		{
+			//Customer name Label*******************************************************************
 			customerName = new JLabel("<CustomerNamePlaceHolder>");
 			customerName.setHorizontalAlignment(SwingConstants.LEFT);
 			customerName.setFont(new Font("LATO", Font.BOLD, 18));
+			
 			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 			gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
 			gbc_lblNewLabel.insets = new Insets(5, 5, 5, 5);
@@ -121,6 +89,7 @@ public class EditCustomerDialog extends JDialog {
 			panel = new JPanel();
 			panel.setBorder(BorderFactory.createLineBorder(new Color(243, 243, 243), 2, true));
 			panel.setBackground(Color.WHITE);
+			
 			GridBagConstraints gbc_panel = new GridBagConstraints();
 			gbc_panel.gridwidth = 3;
 			gbc_panel.insets = new Insets(20, 50, 20, 50);
@@ -128,14 +97,18 @@ public class EditCustomerDialog extends JDialog {
 			gbc_panel.gridx = 0;
 			gbc_panel.gridy = 2;
 			contentPanel.add(panel, gbc_panel);
+			
 			GridBagLayout gbl_panel = new GridBagLayout();
 			gbl_panel.columnWidths = new int[]{0};
 			gbl_panel.rowHeights = new int[]{30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 			gbl_panel.columnWeights = new double[]{1.0};
 			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
+			
+			//Name Label and Text Field*******************************************************************
 			{
 				nameLabel = new JLabel("Name");
+				
 				GridBagConstraints gbc_nameLabel = new GridBagConstraints();
 				gbc_nameLabel.anchor = GridBagConstraints.WEST;
 				gbc_nameLabel.insets = new Insets(0, 10, 10, 0);
@@ -144,7 +117,32 @@ public class EditCustomerDialog extends JDialog {
 				panel.add(nameLabel, gbc_nameLabel);
 			}
 			{
+				nameTextField = new JTextField();
+				
+				nameTextField.setName("Name");
+				textFieldFunctions(nameTextField);
+				
+				GridBagConstraints gbc_nameTextField = new GridBagConstraints();
+				gbc_nameTextField.insets = new Insets(0, 10, 25, 10);
+				gbc_nameTextField.fill = GridBagConstraints.HORIZONTAL;
+				gbc_nameTextField.gridx = 0;
+				gbc_nameTextField.gridy = 2;
+				panel.add(nameTextField, gbc_nameTextField);
+				nameTextField.setColumns(10);
+				nameTextField.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (!nameTextField.getText().equals(""))
+						{
+							customerName.setText(nameTextField.getText());
+						}
+					}
+				});
+			}
+			
+			//Phone Label and Text Field**********************************************************
+			{
 				phoneLabel = new JLabel("Phone");
+				
 				GridBagConstraints gbc_phoneLabel = new GridBagConstraints();
 				gbc_phoneLabel.anchor = GridBagConstraints.WEST;
 				gbc_phoneLabel.insets = new Insets(0, 10, 10, 0);
@@ -153,40 +151,10 @@ public class EditCustomerDialog extends JDialog {
 				panel.add(phoneLabel, gbc_phoneLabel);
 			}
 			{
-				addressLabel = new JLabel("Address");
-				GridBagConstraints gbc_addressLabel = new GridBagConstraints();
-				gbc_addressLabel.anchor = GridBagConstraints.WEST;
-				gbc_addressLabel.insets = new Insets(0, 10, 10, 0);
-				gbc_addressLabel.gridx = 0;
-				gbc_addressLabel.gridy = 5;
-				panel.add(addressLabel, gbc_addressLabel);
-			}
-			{
-				nameTextField = new JTextField();
-				nameTextField.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if (!nameTextField.getText().equals(""))
-						{
-							customerName.setText(nameTextField.getText());
-						}
-							
-								
-					}
-				});
-				nameTextField.setName("Name");
-				textFieldFunctions(nameTextField);
-				GridBagConstraints gbc_nameTextField = new GridBagConstraints();
-				gbc_nameTextField.insets = new Insets(0, 10, 25, 10);
-				gbc_nameTextField.fill = GridBagConstraints.HORIZONTAL;
-				gbc_nameTextField.gridx = 0;
-				gbc_nameTextField.gridy = 2;
-				panel.add(nameTextField, gbc_nameTextField);
-				nameTextField.setColumns(10);
-			}
-			{
 				phoneTextField = new JTextField();
 				phoneTextField.setName("Phone");
 				textFieldFunctions(phoneTextField);
+				
 				GridBagConstraints gbc_phoneTextField = new GridBagConstraints();
 				gbc_phoneTextField.insets = new Insets(0, 10, 25, 10);
 				gbc_phoneTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -195,10 +163,23 @@ public class EditCustomerDialog extends JDialog {
 				panel.add(phoneTextField, gbc_phoneTextField);
 				phoneTextField.setColumns(10);
 			}
+			
+			//Address Label and Text Field***************************************************
+			{
+				addressLabel = new JLabel("Address");
+				
+				GridBagConstraints gbc_addressLabel = new GridBagConstraints();
+				gbc_addressLabel.anchor = GridBagConstraints.WEST;
+				gbc_addressLabel.insets = new Insets(0, 10, 10, 0);
+				gbc_addressLabel.gridx = 0;
+				gbc_addressLabel.gridy = 5;
+				panel.add(addressLabel, gbc_addressLabel);
+			}
 			{
 				addressTextField = new JTextField();
 				addressTextField.setName("Address");
 				textFieldFunctions(addressTextField);
+				
 				GridBagConstraints gbc_addressTextField = new GridBagConstraints();
 				gbc_addressTextField.insets = new Insets(0, 10, 25, 10);
 				gbc_addressTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -207,8 +188,11 @@ public class EditCustomerDialog extends JDialog {
 				panel.add(addressTextField, gbc_addressTextField);
 				addressTextField.setColumns(10);
 			}
+			
+			//Discount Label and Text Fields***************************************************************
 			{
 				JLabel discountLabel = new JLabel("Discount");
+				
 				GridBagConstraints gbc_discountLabel = new GridBagConstraints();
 				gbc_discountLabel.anchor = GridBagConstraints.WEST;
 				gbc_discountLabel.insets = new Insets(0, 10, 10, 0);
@@ -217,18 +201,10 @@ public class EditCustomerDialog extends JDialog {
 				panel.add(discountLabel, gbc_discountLabel);
 			}
 			{
-				groupLabel = new JLabel("Group");
-				GridBagConstraints gbc_groupLabel = new GridBagConstraints();
-				gbc_groupLabel.anchor = GridBagConstraints.WEST;
-				gbc_groupLabel.insets = new Insets(0, 10, 10, 0);
-				gbc_groupLabel.gridx = 0;
-				gbc_groupLabel.gridy = 11;
-				panel.add(groupLabel, gbc_groupLabel);
-			}
-			{
 				discountTextField = new JTextField();
 				discountTextField.setName("Discount");
 				textFieldFunctions(discountTextField);
+				
 				GridBagConstraints gbc_discountTextField = new GridBagConstraints();
 				gbc_discountTextField.insets = new Insets(0, 10, 25, 10);
 				gbc_discountTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -237,10 +213,23 @@ public class EditCustomerDialog extends JDialog {
 				panel.add(discountTextField, gbc_discountTextField);
 				discountTextField.setColumns(10);
 			}
+			
+			//Group Label and Text Field************************************************************
+			{
+				groupLabel = new JLabel("Group");
+				
+				GridBagConstraints gbc_groupLabel = new GridBagConstraints();
+				gbc_groupLabel.anchor = GridBagConstraints.WEST;
+				gbc_groupLabel.insets = new Insets(0, 10, 10, 0);
+				gbc_groupLabel.gridx = 0;
+				gbc_groupLabel.gridy = 11;
+				panel.add(groupLabel, gbc_groupLabel);
+			}
 			{
 				groupTextField = new JTextField();
 				groupTextField.setName("Group");
 				textFieldFunctions(groupTextField);
+				
 				GridBagConstraints gbc_groupTextField = new GridBagConstraints();
 				gbc_groupTextField.insets = new Insets(0, 10, 25, 10);
 				gbc_groupTextField.fill = GridBagConstraints.HORIZONTAL;
@@ -251,9 +240,11 @@ public class EditCustomerDialog extends JDialog {
 			}
 		}
 		{
+			//Delete Button***************************************************************************
 			RoundedButton deleteButton = new RoundedButton("Delete", Color.RED, Color.WHITE, Color.RED, new Font("Lato", Font.BOLD, 15));
 			formatButton(deleteButton);
 			redButton(deleteButton);
+			
 			GridBagConstraints gbc_deleteButton = new GridBagConstraints();
 			gbc_deleteButton.anchor = GridBagConstraints.WEST;
 			gbc_deleteButton.insets = new Insets(10, 5, 5, 0);
@@ -261,21 +252,25 @@ public class EditCustomerDialog extends JDialog {
 			gbc_deleteButton.gridy = 3;
 			contentPanel.add(deleteButton, gbc_deleteButton);
 		}
-		{
-			RoundedButton okButton = new RoundedButton("Finish", new Color(28, 150, 202), Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
-			formatButton(okButton);
-			blueButton(okButton);
-			GridBagConstraints gbc_okButton = new GridBagConstraints();
-			gbc_okButton.anchor = GridBagConstraints.SOUTHEAST;
-			gbc_okButton.insets = new Insets(0, 0, 5, 5);
-			gbc_okButton.gridx = 1;
-			gbc_okButton.gridy = 3;
-			contentPanel.add(okButton, gbc_okButton);
-		}
 		
+		{
+			//Finish Button***************************************************************************
+			RoundedButton finishButton = new RoundedButton("Finish", new Color(28, 150, 202), Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
+			formatButton(finishButton);
+			blueButton(finishButton);
+			
+			GridBagConstraints gbc_finishButton = new GridBagConstraints();
+			gbc_finishButton.anchor = GridBagConstraints.SOUTHEAST;
+			gbc_finishButton.insets = new Insets(0, 0, 5, 5);
+			gbc_finishButton.gridx = 1;
+			gbc_finishButton.gridy = 3;
+			contentPanel.add(finishButton, gbc_finishButton);
+		}
+			//Cancel Button************************************************************************
 			cancelButton = new RoundedButton("Cancel", Color.WHITE, new Color(28, 150, 202), new Color(28, 150, 202), new Font("Lato", Font.BOLD, 15));
 			formatButton(cancelButton);
 			whiteButton(cancelButton);
+			
 			GridBagConstraints gbc_cancelButton = new GridBagConstraints();
 			gbc_cancelButton.anchor = GridBagConstraints.SOUTHEAST;
 			gbc_cancelButton.insets = new Insets(0, 0, 5, 5);
@@ -284,13 +279,22 @@ public class EditCustomerDialog extends JDialog {
 			contentPanel.add(cancelButton, gbc_cancelButton);
 		}
 
-	
-	private void formatButton(RoundedButton button) {
+	/**
+	 * Sets size and offsets to the button
+	 * @param button to be formatted
+	 */
+	private void formatButton(RoundedButton button) 
+	{
 		button.setPreferredSize(new Dimension(100, 30));
 		button.addOffset(-5, 2);
 	}
 	
-	private void blueButton(RoundedButton button) {
+	/**
+	 * Adds events to the blue buttons - changing color when mouse enters and exits the button and a click function
+	 * @param button to be formatted
+	 */
+	private void blueButton(RoundedButton button) 
+	{
 		button.addMouseListener(new MouseAdapter()
 		{	
 			@Override
@@ -315,6 +319,11 @@ public class EditCustomerDialog extends JDialog {
 		});
 	}
 	
+	/**
+	 * Adds events to the buttons - changing color when mouse enters and exits the button and a click function
+	 * that shows a pop up for a confirmation of deletion
+	 * @param button to be formatted
+	 */
 	private void redButton(RoundedButton button) {
 		button.addMouseListener(new MouseAdapter()
 		{	
@@ -347,6 +356,10 @@ public class EditCustomerDialog extends JDialog {
 		});
 	}
 	
+	/**
+	 * Adds events to the white buttons - changing color when mouse enters and exits the button and a click function
+	 * @param button to be formatted
+	 */
 	private void whiteButton(RoundedButton button) {
 		button.addMouseListener(new MouseAdapter()
 		{	
@@ -372,6 +385,12 @@ public class EditCustomerDialog extends JDialog {
 		});
 	}
 	
+	/**
+	 * This method adds functions to the text field - changing border color when focused and clearing the text field when clicked,
+	 * setting the text to ... when nothing was entered
+	 * 
+	 * @param field that gets the functions
+	 */
 	private void textFieldFunctions(JTextField field)
 	{
 		field.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
@@ -437,7 +456,10 @@ public class EditCustomerDialog extends JDialog {
 		
 	}
 	
-	
+	/**
+	 * When the finish button is clicked, all the information input is taken from the text fields and areas
+	 * and put to the customers table, then the dialog is closed
+	 */
 	private void finishCreation()
 	{
 		customerCtr = new CustomerCtr();
@@ -451,6 +473,11 @@ public class EditCustomerDialog extends JDialog {
 
 	}
 	
+	/**
+	 * Checks if the input is correct in the text fields, if not right, an error message is shown telling the user
+	 * what to do
+	 * @return true if the input is correct, false if not
+	 */
 	private boolean checkValues()
 	{
 		JTextComponent[] strings = new JTextComponent[] {nameTextField,groupTextField,addressTextField}; 
@@ -497,6 +524,9 @@ public class EditCustomerDialog extends JDialog {
 		return true;
 	}
 	
+	/**
+	 * Refreshes the table
+	 */
 	public void reDraw()
 	{
 		JTextComponent[] fields = new JTextComponent[] {nameTextField,groupTextField,addressTextField,discountTextField,phoneTextField};
@@ -505,5 +535,4 @@ public class EditCustomerDialog extends JDialog {
 			field.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 		}
 	}
-	
 }
