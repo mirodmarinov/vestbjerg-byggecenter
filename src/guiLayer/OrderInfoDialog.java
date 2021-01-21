@@ -1,32 +1,13 @@
 package guiLayer;
 
 import controlLayer.*;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
+import guiLayer.Renderers.ProductJListCellRenderer;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
 import java.util.ArrayList;
-
-import javax.swing.SwingConstants;
-import javax.swing.JList;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.AbstractListModel;
 
 public class OrderInfoDialog extends JDialog {
 
@@ -37,7 +18,7 @@ public class OrderInfoDialog extends JDialog {
 	private JPanel orderDetailsPanel;
 	private JPanel orderPanel;
 	private JPanel customerPanel;
-	private JPanel productsList;
+	private JPanel productsListPanel;
 	private JList<String> orderLineItemList;
 
 	/**
@@ -372,22 +353,32 @@ public class OrderInfoDialog extends JDialog {
 			
 			/********************************************** Products List  Panel**********************************************/
 			{
-				productsList = new JPanel();
-				productsList.setBorder(new TitledBorder(new LineBorder(babyBlue), "Products", TitledBorder.LEADING, TitledBorder.TOP, null, babyBlue));
-				((TitledBorder)productsList.getBorder()).setTitleFont(new Font("Lato", Font.BOLD, 14));
-				productsList.setBackground(Color.WHITE);
-				GridBagConstraints gbc_productsList = new GridBagConstraints();
-				gbc_productsList.gridwidth = 2;
-				gbc_productsList.insets = new Insets(0, 0, 5, 0);
-				gbc_productsList.fill = GridBagConstraints.BOTH;
-				gbc_productsList.gridx = 0;
-				gbc_productsList.gridy = 1;
-				orderDetailsPanel.add(productsList, gbc_productsList);
+				productsListPanel = new JPanel();
+				productsListPanel.setBorder(new TitledBorder(new LineBorder(babyBlue), "Products", TitledBorder.LEADING, TitledBorder.TOP, null, babyBlue));
+				((TitledBorder)productsListPanel.getBorder()).setTitleFont(new Font("Lato", Font.BOLD, 14));
+				productsListPanel.setBackground(Color.WHITE);
+				GridBagConstraints gbc_productsListPanel = new GridBagConstraints();
+				gbc_productsListPanel.gridwidth = 2;
+				gbc_productsListPanel.insets = new Insets(0, 0, 5, 0);
+				gbc_productsListPanel.fill = GridBagConstraints.BOTH;
+				gbc_productsListPanel.gridx = 0;
+				gbc_productsListPanel.gridy = 1;
+				orderDetailsPanel.add(productsListPanel, gbc_productsListPanel);
+				GridBagLayout gbl_productsListPanel = new GridBagLayout();
+				gbl_productsListPanel.columnWidths = new int[]{0};
+				gbl_productsListPanel.rowHeights = new int[]{0};
+				gbl_productsListPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+				gbl_productsListPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+				productsListPanel.setLayout(gbl_productsListPanel);
 				
 				//Products List********************************************************
 				{
 					orderLineItemList = new JList<String>();
-					productsList.add(orderLineItemList);
+					GridBagConstraints gbc_orderLineItemList = new GridBagConstraints();
+					gbc_orderLineItemList.fill = GridBagConstraints.BOTH;
+					gbc_orderLineItemList.gridx = 0;
+					gbc_orderLineItemList.gridy = 0;
+					productsListPanel.add(orderLineItemList, gbc_orderLineItemList);
 				}
 			}
 			
@@ -551,7 +542,7 @@ public class OrderInfoDialog extends JDialog {
 	
 		ArrayList<String> products = new ArrayList<String>();
 		
-		for(int i = 1; i < orderInfo.size()-2; i++)
+		for(int i = 1; i < orderInfo.size()-1; i++)
 		{
 			String productInfo = "";
 			productInfo += orderInfo.get(i)[3];
@@ -562,8 +553,6 @@ public class OrderInfoDialog extends JDialog {
 			int totalPrice = salesPrice * quantity;
 			
 			productInfo += " " + totalPrice;
-			
-			System.out.println(productInfo);
 		}
 		
 		orderLineItemList.setModel(new AbstractListModel<String>() {
@@ -576,5 +565,6 @@ public class OrderInfoDialog extends JDialog {
 			}
 		});
 	
+		orderLineItemList.setCellRenderer(new ProductJListCellRenderer());
 	}
 }
