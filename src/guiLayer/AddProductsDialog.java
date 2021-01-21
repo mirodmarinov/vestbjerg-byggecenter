@@ -134,13 +134,6 @@ public class AddProductsDialog extends JDialog {
 			gbc_productErrorLabel.gridx = 2;
 			gbc_productErrorLabel.gridy = 0;
 			contentPanel.add(productErrorLabel, gbc_productErrorLabel);
-			leftArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			GridBagConstraints gbc_leftArrowLabel = new GridBagConstraints();
-			gbc_leftArrowLabel.anchor = GridBagConstraints.EAST;
-			gbc_leftArrowLabel.insets = new Insets(0, 0, 5, 5);
-			gbc_leftArrowLabel.gridx = 0;
-			gbc_leftArrowLabel.gridy = 1;
-			contentPanel.add(leftArrowLabel, gbc_leftArrowLabel);
 			
 			//Page number*********************************************************************
 			tablePageLabel = new JLabel("<html><u>1</u></html>");
@@ -154,7 +147,7 @@ public class AddProductsDialog extends JDialog {
 			//Left Arrow "<" ******************************************************************
 			//A Label that loads the previous page when clicked
 			leftArrowLabel = new JLabel(" < ");
-			
+			leftArrowLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			leftArrowLabel.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -164,6 +157,12 @@ public class AddProductsDialog extends JDialog {
 					loadPage(getPageIndex() - 1);
 				}
 			});
+			GridBagConstraints gbc_leftArrowLabel = new GridBagConstraints();
+			gbc_leftArrowLabel.anchor = GridBagConstraints.EAST;
+			gbc_leftArrowLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_leftArrowLabel.gridx = 0;
+			gbc_leftArrowLabel.gridy = 1;
+			contentPanel.add(leftArrowLabel, gbc_leftArrowLabel);
 			
 			//Right Arrow ">" ******************************************************************
 			//A Label that loads the next page when clicked
