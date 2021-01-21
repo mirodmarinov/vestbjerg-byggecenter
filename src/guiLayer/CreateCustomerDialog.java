@@ -1,34 +1,12 @@
 package guiLayer;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.text.JTextComponent;
-
 import controlLayer.CustomerCtr;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.*;
+import javax.swing.text.*;
 
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.*;
+import java.awt.event.*;
 
 public class CreateCustomerDialog extends JDialog {
 
@@ -81,6 +59,7 @@ public class CreateCustomerDialog extends JDialog {
 		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
+			//Blue Header Panel*******************************************************************
 			header = new JPanel();
 			header.setBackground(babyBlue);
 			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
@@ -91,7 +70,7 @@ public class CreateCustomerDialog extends JDialog {
 			gbc_panel_1.gridy = 0;
 			contentPanel.add(header, gbc_panel_1);
 			{
-				
+				//Header Label Create Customer*****************************************************
 				headerLabel = new JLabel("Create Customer");
 				header.add(headerLabel);
 				headerLabel.setVisible(true);
@@ -100,6 +79,7 @@ public class CreateCustomerDialog extends JDialog {
 			}
 		}
 		{
+			//Customer Details Panel***************************************************************
 			panel = new JPanel();
 			panel.setBorder(BorderFactory.createLineBorder(new Color(243, 243, 243), 2, true));
 			panel.setBackground(Color.WHITE);
@@ -117,6 +97,7 @@ public class CreateCustomerDialog extends JDialog {
 			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			{
+				//Name Label and Text Field******************************************************************
 				nameLabel = new JLabel("Name");
 				GridBagConstraints gbc_nameLabel = new GridBagConstraints();
 				gbc_nameLabel.anchor = GridBagConstraints.WEST;
@@ -137,7 +118,9 @@ public class CreateCustomerDialog extends JDialog {
 				panel.add(nameTextField, gbc_nameTextField);
 				nameTextField.setColumns(10);
 			}
+			
 			{
+				//Phone Label and Text Field**************************************************************
 				phoneLabel = new JLabel("Phone");
 				GridBagConstraints gbc_phoneLabel = new GridBagConstraints();
 				gbc_phoneLabel.anchor = GridBagConstraints.WEST;
@@ -158,7 +141,9 @@ public class CreateCustomerDialog extends JDialog {
 				panel.add(phoneTextField, gbc_phoneTextField);
 				phoneTextField.setColumns(10);
 			}
+			
 			{
+				//Address Label and Text Field**************************************************************
 				addressLabel = new JLabel("Address");
 				GridBagConstraints gbc_addressLabel = new GridBagConstraints();
 				gbc_addressLabel.anchor = GridBagConstraints.WEST;
@@ -179,7 +164,9 @@ public class CreateCustomerDialog extends JDialog {
 				panel.add(addressTextField, gbc_addressTextField);
 				addressTextField.setColumns(10);
 			}
+			
 			{
+				//Discount Label and Text Field*****************************************************************
 				JLabel discountLabel = new JLabel("Discount");
 				GridBagConstraints gbc_discountLabel = new GridBagConstraints();
 				gbc_discountLabel.anchor = GridBagConstraints.WEST;
@@ -200,7 +187,9 @@ public class CreateCustomerDialog extends JDialog {
 				panel.add(discountTextField, gbc_discountTextField);
 				discountTextField.setColumns(10);
 			}
+			
 			{
+				//Group Label and Text Field*****************************************************************
 				groupLabel = new JLabel("Group");
 				GridBagConstraints gbc_groupLabel = new GridBagConstraints();
 				gbc_groupLabel.anchor = GridBagConstraints.WEST;
@@ -225,17 +214,19 @@ public class CreateCustomerDialog extends JDialog {
 		}
 		
 		{
-			RoundedButton okButton = new RoundedButton("Finish", new Color(28, 150, 202), Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
-			formatButton(okButton);
-			blueButton(okButton);
-			GridBagConstraints gbc_okButton = new GridBagConstraints();
-			gbc_okButton.anchor = GridBagConstraints.SOUTHEAST;
-			gbc_okButton.insets = new Insets(0, 0, 5, 5);
-			gbc_okButton.gridx = 0;
-			gbc_okButton.gridy = 2;
-			contentPanel.add(okButton, gbc_okButton);
+			//Finish Button*************************************************************************************
+			//Takes all of the information input and puts it in the customers list
+			RoundedButton finishButton = new RoundedButton("Finish", new Color(28, 150, 202), Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
+			formatButton(finishButton);
+			blueButton(finishButton);
+			GridBagConstraints gbc_finishButton = new GridBagConstraints();
+			gbc_finishButton.anchor = GridBagConstraints.SOUTHEAST;
+			gbc_finishButton.insets = new Insets(0, 0, 5, 5);
+			gbc_finishButton.gridx = 0;
+			gbc_finishButton.gridy = 2;
+			contentPanel.add(finishButton, gbc_finishButton);
 		}
-		
+			//Cancel Button*************************************************************************************
 			cancelButton = new RoundedButton("Cancel", Color.WHITE, new Color(28, 150, 202), new Color(28, 150, 202), new Font("Lato", Font.BOLD, 15));
 			formatButton(cancelButton);
 			whiteButton(cancelButton);
@@ -248,12 +239,19 @@ public class CreateCustomerDialog extends JDialog {
 		}
 	
 
-	
+	/**
+	 * This method sets the buttons size and offset
+	 * @param button to be formatted
+	 */
 	private void formatButton(RoundedButton button) {
 		button.setPreferredSize(new Dimension(100, 30));
 		button.addOffset(-5, 2);
 	}
 	
+	/**
+	 * This method sets the events for blue buttons - changing colors when mouse enters and exits, being clicked
+	 * @param button to be formatted
+	 */
 	private void blueButton(RoundedButton button) {
 		button.addMouseListener(new MouseAdapter()
 		{	
@@ -280,6 +278,10 @@ public class CreateCustomerDialog extends JDialog {
 		});
 	}
 	
+	/**
+	 * This method sets the events for white buttons - changing colors when mouse enters and exits, being clicked
+	 * @param button to be formatted
+	 */
 	private void whiteButton(RoundedButton button) {
 		button.addMouseListener(new MouseAdapter()
 		{	
@@ -305,6 +307,10 @@ public class CreateCustomerDialog extends JDialog {
 		});
 	}
 	
+	/**
+	 * This method formats the textfield, sets its borders, colors and adds events for when it is focused or not
+	 * @param field to be formatted
+	 */
 	private void textFieldFunctions(JTextField field)
 	{
 		field.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
@@ -346,7 +352,9 @@ public class CreateCustomerDialog extends JDialog {
 
 	}
 	
-	
+	/**
+	 * Takes all the information from the textfields in createCustomerDialog and puts in in the table of customers
+	 */
 	private void finishCreation()
 	{
 		customerCtr = new CustomerCtr();
@@ -360,6 +368,10 @@ public class CreateCustomerDialog extends JDialog {
 		
 	}
 
+	/**
+	 * For the purposes of good looks and user friendliness sets texts in the text fields accordingly before being 
+	 * clicked or edited
+	 */
 	private void fillFields()
 	{
 		nameTextField.setText("Name...");
@@ -369,7 +381,11 @@ public class CreateCustomerDialog extends JDialog {
 		discountTextField.setText("Discount...");
 	}
 	
-	
+	/**
+	 * Checks if the input is correct in the text fields, if not right, an error message is shown telling the user
+	 * what to do
+	 * @return true if the input is correct, false if not
+	 */
 	private boolean checkValues()
 	{
 		JTextComponent[] strings = new JTextComponent[] {nameTextField,groupTextField,addressTextField}; 
