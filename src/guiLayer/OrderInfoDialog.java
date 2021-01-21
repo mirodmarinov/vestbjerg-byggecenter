@@ -485,6 +485,7 @@ public class OrderInfoDialog extends JDialog {
 		String[] customerDetails = orderInfo.get(0);
 		int index = 0;
 		
+		//Order panel info****************************
 		for(Component c : orderPanel.getComponents())
 		{
 			if(c instanceof JLabel)
@@ -503,27 +504,48 @@ public class OrderInfoDialog extends JDialog {
 		labels[3].setText(orderDetails[3]);
 		labels[4].setText(orderDetails[1]);
 		
+		//resets index and JLabel
+		labels = new JLabel[5];
+		index = 0;
+		
+		//Customer panel info****************************
 		for(Component c : customerPanel.getComponents())
 		{
 			if(c instanceof JLabel)
 			{
 				if(((JLabel) c).getText().equals("...")) 
 				{
-					
+					labels[index] = ((JLabel) c);
+					index++;
 				}
 			}
 		}
 		
+		labels[0].setText(customerDetails[0]);
+		labels[1].setText(customerDetails[2]);
+		labels[2].setText(customerDetails[1]);
+		labels[3].setText(customerDetails[3]);
+		labels[4].setText(customerDetails[4]);
+		
+		//resets index and JLabel
+		labels = new JLabel[2];
+		index = 0;
+		
+		//Order total price and discount****************************
 		for(Component c : orderDetailsPanel.getComponents())
 		{
 			if(c instanceof JLabel)
 			{
 				if(((JLabel) c).getText().equals("...")) 
 				{
-					
+					labels[index] = ((JLabel) c);
+					index++;
 				}
 			}
 		}
-		
+		labels[0].setText(String.valueOf(orderDetails[4]));
+		labels[1].setText(String.valueOf(orderDetails[0]));
 	}
+	
+	
 }

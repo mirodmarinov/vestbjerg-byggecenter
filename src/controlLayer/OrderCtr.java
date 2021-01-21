@@ -398,4 +398,28 @@ public class OrderCtr
 	{
 		customer = null;
 	}
+	
+	public ArrayList<String> checkAmounts()
+	{
+		ArrayList<String> errors = new ArrayList<>();
+		for (OrderLineItem order : orderProducts)
+		{
+			if (order.getProduct().getQuantity() < order.getQuantity())
+			{
+				errors.add(order.getProduct().getName());
+			}
+		}
+		return errors;
+	}
+	
+	public void changeOrderQuantity(String barcode, String quantity)
+	{
+		for (OrderLineItem order : orderProducts)
+		{
+			if (order.getProduct().getBarcode().equals(barcode))
+			{
+				order.setQuantity(Integer.parseInt(quantity));
+			}
+		}
+	}
 }

@@ -250,12 +250,20 @@ public class JTableButtonMouseListener extends MouseAdapter
 	
 	
 	private void addToList()
-	{
-		if (table.getValueAt(table.getSelectedRow(), table.getColumn("Input Quantity").getModelIndex()).toString().isEmpty())
+	{	
+		RoundedButton button = (RoundedButton)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("").getModelIndex()));
+		if (button.getName().equals("Add"))
 		{
-			table.setValueAt("1", table.getSelectedRow(), table.getColumn("Input Quantity").getModelIndex());
+			if (table.getValueAt(table.getSelectedRow(), table.getColumn("Input Quantity").getModelIndex()).toString().isEmpty())
+			{
+				table.setValueAt("1", table.getSelectedRow(), table.getColumn("Input Quantity").getModelIndex());
+			}
+			if  (true)
+			{
+				
+			}
+			table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), table.getSelectedRow(), table.getColumn("").getModelIndex());
+			((AddProductsDialog)popup).addToList(table.getSelectedRow());
 		}
-		table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), table.getSelectedRow(), table.getColumn("").getModelIndex());
-		((AddProductsDialog)popup).addToList(table.getSelectedRow());
 	}
 }
