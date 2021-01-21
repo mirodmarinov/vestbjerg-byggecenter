@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import controlLayer.*;
 import guiLayer.Renderers.JTableButtonMouseListener;
 import guiLayer.Renderers.JTableButtonRenderer;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class CreateOrderPanel extends JPanel {
 	private JTextField searchBar;
@@ -343,7 +345,22 @@ public class CreateOrderPanel extends JPanel {
 				  totalValueLabel.setText(orderCtr.calculateTotal() + " DKK");
 			  }
 			});
-		
+
+		orderTable.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				if (orderTable.getRowCount() > 0)
+				{
+					  String barcode,value;
+					  for (int element = 0 ; element < orderTable.getRowCount(); element++)
+					  {
+						  barcode = orderTable.getValueAt(element, orderTable.getColumn("Barcode").getModelIndex()).toString();
+						  value = orderTable.getValueAt(element, orderTable.getColumn("Quantity").getModelIndex()).toString();
+						  orderCtr.changeOrderQuantity(barcode, value);
+					  }
+					  totalValueLabel.setText(orderCtr.calculateTotal() + " DKK");
+				}
+			}
+		});
 		
 		
 		//We remove the border of the table by making it empty
@@ -462,6 +479,7 @@ public class CreateOrderPanel extends JPanel {
 				}
 				else
 				{
+					orderErrorLabel.setVisible(false);
 					if (orderCtr.checkAmounts().size() == 0)
 					{
 						reset();

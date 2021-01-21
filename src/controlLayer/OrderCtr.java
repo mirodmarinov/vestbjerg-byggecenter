@@ -406,4 +406,15 @@ public class OrderCtr
 		}
 		return errors;
 	}
+	
+	public void changeOrderQuantity(String barcode, String quantity)
+	{
+		for (OrderLineItem order : orderProducts)
+		{
+			if (order.getProduct().getBarcode().equals(barcode))
+			{
+				order.setQuantity(Integer.parseInt(quantity));
+			}
+		}
+	}
 }
