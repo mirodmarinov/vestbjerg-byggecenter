@@ -7,30 +7,12 @@ import java.awt.Font;
 import javax.swing.*;
 
 public class ProductJListCellRenderer extends JLabel implements ListCellRenderer<String> {
+	public ProductJListCellRenderer() {
+	}
      // This is the only method defined by ListCellRenderer.
      // We just reconfigure the JLabel each time we're called.
 
 	private Color babyBlue = new Color(28, 150, 202);
-	
-	/*@Override
-	public Component getListCellRendererComponent(
-       JList<? extends String> list,           // the list
-       Object value,            // value to display
-       int index,               // cell index
-       boolean isSelected,      // is the cell selected
-       boolean cellHasFocus)    // does the cell have focus
-     {
-         if (isSelected) { <<<
-             
-         } else {
-             
-         }
-
-         setEnabled(list.isEnabled());
-         setFont(list.getFont());
-         setOpaque(true);
-         return this;
-     }*/
 
 	@Override
 	public Component getListCellRendererComponent(JList<? extends String> list, String value, int index, boolean isSelected,
@@ -38,8 +20,7 @@ public class ProductJListCellRenderer extends JLabel implements ListCellRenderer
 		
 		setText(value);
 		setFont(new Font("Lato", Font.PLAIN, 13));
-		setForeground(babyBlue);
-		
+		setForeground(Color.BLACK);
 		
 		return this;
 	}
