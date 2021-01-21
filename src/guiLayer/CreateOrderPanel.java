@@ -156,6 +156,7 @@ public class CreateOrderPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				searchCustomer();
 				orderCtr.calculateTotal();
+				updateTotalLabel();
 			}
 		});
 		
@@ -251,8 +252,10 @@ public class CreateOrderPanel extends JPanel {
 				if (!phoneValueLabel.getText().equals("..."))
 				{
 					orderCtr.clearCustomer();
+					updateTotalLabel();
+					
+					clearCustomerLabels();
 				}
-				clearCustomerLabels();
 				deleteButton.setVisible(false);
 			}
 		});
@@ -369,7 +372,7 @@ public class CreateOrderPanel extends JPanel {
 			public void propertyChange(PropertyChangeEvent evt) {
 				if (orderTable.getRowCount() > 0)
 				{
-					  String barcode,value;
+					  String barcode, value;
 					  for (int element = 0 ; element < orderTable.getRowCount(); element++)
 					  {
 						  barcode = orderTable.getValueAt(element, orderTable.getColumn("Barcode").getModelIndex()).toString();
@@ -682,6 +685,11 @@ public class CreateOrderPanel extends JPanel {
 		
 		customerErrorLabel.setVisible(false);
 		deleteButton.setVisible(false);
+	}
+	
+	public void updateTotalLabel()
+	{
+		totalValueLabel.setText(orderCtr.calculateTotal() + " DKK");
 	}
 	
 	
