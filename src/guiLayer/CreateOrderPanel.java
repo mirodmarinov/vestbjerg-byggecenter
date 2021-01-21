@@ -234,6 +234,10 @@ public class CreateOrderPanel extends JPanel {
 		deleteButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (!phoneValueLabel.getText().equals("..."))
+				{
+					orderCtr.clearCustomer();
+				}
 				clearCustomerLabels();
 				deleteButton.setVisible(false);
 			}
@@ -340,6 +344,7 @@ public class CreateOrderPanel extends JPanel {
 			  public void tableChanged(TableModelEvent e) {
 				  totalValueLabel.setText(orderCtr.calculateTotal() + " DKK");
 			  }
+			  
 			});
 		
 		

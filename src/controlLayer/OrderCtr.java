@@ -393,4 +393,9 @@ public class OrderCtr
 			}
 		}
 	}
+	
+	public void clearCustomer()
+	{
+		customer = null;
+	}
 }
