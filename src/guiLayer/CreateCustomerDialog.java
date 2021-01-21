@@ -28,19 +28,7 @@ public class CreateCustomerDialog extends JDialog {
 	private CustomerCtr customerCtr;
 	private CustomersPanel customersPanel;
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		try {
-			CreateCustomerDialog dialog = new CreateCustomerDialog(String productNameAndID);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
-
+	
 	/**
 	 * Create the dialog.
 	 */
@@ -49,7 +37,6 @@ public class CreateCustomerDialog extends JDialog {
 		setBounds(100, 100, 567, 599);
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
-		//contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setBackground(new Color(252, 252, 252));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
