@@ -120,7 +120,7 @@ public class Serialization {
 			Order order = new Order(customer1, oliarray);
 			order.calculateExpirationDate();
 			order.setStatus("pending");
-			order.setTotalPrice(10000);
+			order.setTotalPrice((float) 1000.00);
 			order.setDiscount(5);
 			
 			OrderContainer.getInstance().addOrder(order);

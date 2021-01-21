@@ -297,9 +297,9 @@ public class OrderMenu
 		{
 			Product product = o.getProduct();
 			String name = product.getName();
-			long price = product.getSalesPrice();
+			float price = product.getSalesPrice();
 			int quantity = o.getQuantity();
-			long totalPrice = quantity * price; // Total price of the product based on quantity
+			float totalPrice = quantity * price; // Total price of the product based on quantity
 			priceWithoutDiscount += totalPrice;
 			
 			temp = String.valueOf(price);

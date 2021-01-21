@@ -20,7 +20,7 @@ public class Order implements Serializable
 	private static final long serialVersionUID = 1L;
 	private int orderNumber; // The unique identifier
 	private int discount;
-	private long totalPrice;
+	private float totalPrice;
 	private Calendar expirationDate; //and Order object is offer if expirationDate is null, if it isnt, it is and offer
 	private Calendar purchaseDate;
 	private String status; // The status of the sales process, is it still just an offer or how far along has it come
@@ -74,12 +74,12 @@ public class Order implements Serializable
 		this.delivery = delivery;
 	}
 
-	public long getTotalPrice() 
+	public float getTotalPrice() 
 	{
 		return totalPrice;
 	}
 
-	public void setTotalPrice(int totalPrice) 
+	public void setTotalPrice(float totalPrice) 
 	{
 		this.totalPrice = totalPrice;
 	}
@@ -221,7 +221,7 @@ public class Order implements Serializable
 		data[2] = getPurchaseDate();
 		data[3] = getStatus();
 		data[4] = getExpirationDate();
-		data[5] = Long.toString(getTotalPrice());
+		data[5] = String.format("%.2f", getTotalPrice());
 		return data;
 	}
 }

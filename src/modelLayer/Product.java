@@ -19,15 +19,15 @@ public class Product implements Serializable
 	private int threshold; // the minimum of products, once crossed, restock is initiated             
 	private int quantity;
 	private int discount;
-	private long purchasePrice;
-	private long salesPrice;
+	private float purchasePrice;
+	private float salesPrice;
 	private String barcode; // unique number for each type of product
 	private String name;
 	private String description;
 	private String group;
 	private String location;
 
-	public Product(int threshold, int quantity,  int discount, long purchasePrice, long salesPrice, String barcode, String name, String description,
+	public Product(int threshold, int quantity,  int discount, float purchasePrice, float salesPrice, String barcode, String name, String description,
 	                String group, String location)
 	{
 		this.threshold = threshold;
@@ -121,22 +121,22 @@ public class Product implements Serializable
 		this.discount = discount;
 	}
 	
-	public long getPurchasePrice()
+	public float getPurchasePrice()
 	{
 		return purchasePrice;
 	}
 
-	public void setPurchasePrice(long purchasePrice)
+	public void setPurchasePrice(float purchasePrice)
 	{
 		this.purchasePrice = purchasePrice;
 	}
 
-	public long getSalesPrice()
+	public float getSalesPrice()
 	{
 		return salesPrice;
 	}
 
-	public void setSalesPrice(long salesPrice)
+	public void setSalesPrice(float salesPrice)
 	{
 		this.salesPrice = salesPrice;
 	}
@@ -178,7 +178,7 @@ public class Product implements Serializable
 	public String[] toStrings()
 	{
 		return new String[] { name, description, group, barcode,
-                location, Integer.toString(quantity), Integer.toString(threshold), Long.toString(salesPrice), Long.toString(purchasePrice), Integer.toString(discount)};
+                location, Integer.toString(quantity), Integer.toString(threshold), String.format("%.2f", salesPrice), String.format("%.2f", purchasePrice), Integer.toString(discount)};
 	}
 	
 	
@@ -194,7 +194,7 @@ public class Product implements Serializable
 		data[1] = name;
 		data[2] = group;
 		data[3] = location;
-		data[4] = Long.toString(purchasePrice);
+		data[4] = String.format("%.2f", purchasePrice);
 		data[5] = Integer.toString(quantity);
 		data[6] = Integer.toString(discount);
 		return data;

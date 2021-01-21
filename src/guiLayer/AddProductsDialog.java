@@ -517,13 +517,13 @@ public class AddProductsDialog extends JDialog {
 		int rowCount = dtm.getRowCount();
 		dtm.setRowCount(productPlace.size() + rowCount);
 		int quantity = 1;
-		int totalPrice = 0;
+		float totalPrice = 0;
 		for (int e = 0; e < productPlace.size(); e++)
 		{
 			String name = (String) table.getValueAt(productPlace.get(e), table.getColumn("Name").getModelIndex());
 			int barcode = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Barcode").getModelIndex()));
 			int discount = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Discount").getModelIndex()));
-			int price = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Price").getModelIndex()));
+			float price = Float.valueOf(((String)table.getValueAt(productPlace.get(e), table.getColumn("Price").getModelIndex())));
 				quantity = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Input Quantity").getModelIndex()));
 			
 			

@@ -278,7 +278,6 @@ public class OrderPanel extends JPanel {
 			
 			for (int element = 0; element < 6; element++)
 			{
-				
 				table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 			}
 

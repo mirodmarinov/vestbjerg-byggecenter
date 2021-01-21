@@ -142,7 +142,7 @@ public class OrderCtr
 		Order offer = new Order(customer, orderProducts);
 		offer.calculateExpirationDate();
 		offer.setStatus("pending");
-		offer.setTotalPrice((int)calculateTotal());
+		offer.setTotalPrice((float)calculateTotal());
 		offer.setDiscount(customer.getDiscount());
 
 		/*
@@ -168,7 +168,7 @@ public class OrderCtr
 	{
 		Order order = new Order(customer, orderProducts);
 		order.setStatus("confirmed");
-		order.setTotalPrice((int)calculateTotal());
+		order.setTotalPrice((float)calculateTotal());
 		order.setDiscount(customer.getDiscount());
 		order.generatePurchaseDate();
 		/*
@@ -189,7 +189,7 @@ public class OrderCtr
 	 * 
 	 * @return total cost of order/offer
 	 */
-	public int calculateTotal()
+	public float calculateTotal()
 	{
 		int totalWithoutDiscount = 0;
 		int totalWithDiscount = 0;
@@ -205,7 +205,7 @@ public class OrderCtr
 		{
 			totalWithDiscount *= ((float)(100 - customer.getDiscount())/100);
 		}
-		return (float)totalWithDiscount / (float)totalWithoutDiscount < 0.8 ? (int)(0.8 * totalWithoutDiscount) : totalWithDiscount;
+		return (float)totalWithDiscount / (float)totalWithoutDiscount < 0.8 ? (float)(0.8 * totalWithoutDiscount) : totalWithDiscount;
 	}
 	
 	/**
@@ -233,7 +233,7 @@ public class OrderCtr
 		invoice = "\t  Vestbjerg Byggecenter" + "\n\t    Imaginepark 1536"  + "\n\t*************************" +
 				"\n\t   Phone: 52 96 52 63" + "\n\t*************************" +
 				"\n\nName: "+order.getCustomer().getName() + "\nDate: " + order.getPurchaseDate() +
-				"\nProducts: "+productInfo + "\n\nPrice before discount: " + (int)(order.getTotalPrice() / ((float)(100-order.getDiscount())/100)) + 
+				"\nProducts: "+productInfo + "\n\nPrice before discount: " + (float)(order.getTotalPrice() / ((float)(100-order.getDiscount())/100)) + 
 				"\nDiscount: "+ order.getDiscount() + " %" +
 				"\n\nTotal: " + order.getTotalPrice(); 
 		
