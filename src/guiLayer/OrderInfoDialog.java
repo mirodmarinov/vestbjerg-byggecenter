@@ -394,7 +394,9 @@ public class OrderInfoDialog extends JDialog {
 					gbc_orderLineItemList.fill = GridBagConstraints.BOTH;
 					gbc_orderLineItemList.gridx = 0;
 					gbc_orderLineItemList.gridy = 0;
-					productsListPanel.add(orderLineItemList, gbc_orderLineItemList);
+					JScrollPane listScrollPane = new JScrollPane(orderLineItemList);
+					listScrollPane.setBorder(BorderFactory.createEmptyBorder());
+					productsListPanel.add(listScrollPane, gbc_orderLineItemList);
 				}
 			}
 			
