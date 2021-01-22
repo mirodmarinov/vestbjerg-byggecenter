@@ -618,7 +618,7 @@ public class OrderInfoDialog extends JDialog {
 			float quantity = Float.parseFloat(orderInfo.get(i)[3]);
 			float totalPrice = salesPrice * quantity;
 			
-			productInfo += "  .   .   .   .   .   .   " + String.format(Locale.CANADA, "%.2f", totalPrice) + " DKK";
+			productInfo += "  .   .   .   .   .   .   " + String.format("%.2f", totalPrice) + " DKK";
 			products.add(productInfo);
 		}
 		

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.LineBorder;
 import java.awt.event.*;
+import java.util.Locale;
 
 import modelLayer.Serialization;
 
@@ -28,6 +29,7 @@ public class OrderMenuGUI {
 			public void run() {
 				try {
 					OrderMenuGUI window = new OrderMenuGUI();
+					Locale.setDefault(new Locale("en", "US"));
 					window.frmVestbjergByggecenterManagement.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

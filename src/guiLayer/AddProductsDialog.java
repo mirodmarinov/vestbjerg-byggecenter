@@ -526,7 +526,7 @@ public class AddProductsDialog extends JDialog {
 			int discount = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Discount").getModelIndex()));
 			float price = Float.valueOf(((String)table.getValueAt(productPlace.get(e), table.getColumn("Price").getModelIndex())));
 				quantity = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Input Quantity").getModelIndex()));
-			String totalPrice = String.format(Locale.CANADA, "%.2f", (quantity * price));
+			String totalPrice = String.format("%.2f", (quantity * price));
 			
 			orderCtr.selectProduct(productPlace.get(e), quantity);
 		
