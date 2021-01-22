@@ -265,7 +265,7 @@ public class CustomersPanel extends JPanel {
 		
 		//Add Products button ***********************************************************
 		
-		RoundedButton addProductButton = new RoundedButton("➕ Add Customer", babyBlue,
+		RoundedButton addProductButton = new RoundedButton("\u002B Add Customer", babyBlue,
 					Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14));
 		CustomersPanel thisClass = this;
 		addProductButton.addMouseListener(new MouseAdapter() {

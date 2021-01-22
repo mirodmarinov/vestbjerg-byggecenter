@@ -132,7 +132,7 @@ public class ProductDialogs extends JDialog {
 			contentPanel.add(panel, gbc_panel);
 			
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{0,50, 0, 0, 0, 0,50};
+			gbl_panel.columnWidths = new int[]{50, 0, 0, 0,50};
 			gbl_panel.rowHeights = new int[]{20, 0, 0, 50, 0, 0, 50, 0, 0, 50, 0, 0, 40, 0, 0, 0, 0};
 			gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -496,13 +496,12 @@ public class ProductDialogs extends JDialog {
 				formatButton(deleteButton);
 				redButton(deleteButton);
 				
-				GridBagConstraints gbc_okButton = new GridBagConstraints();
-				gbc_okButton.gridheight = 4;
-				gbc_okButton.anchor = GridBagConstraints.SOUTHEAST;
-				gbc_okButton.insets = new Insets(0, 0, 0, 100);
-				gbc_okButton.gridx = 0;
-				gbc_okButton.gridy = 3;
-				contentPanel.add(deleteButton, gbc_okButton);
+				GridBagConstraints gbc_deleteButton = new GridBagConstraints();
+				gbc_deleteButton.anchor = GridBagConstraints.SOUTHWEST;
+				gbc_deleteButton.insets = new Insets(0, 0, 0, 100);
+				gbc_deleteButton.gridx = 0;
+				gbc_deleteButton.gridy = 6;
+				contentPanel.add(deleteButton, gbc_deleteButton);
 			}
 		}
 		

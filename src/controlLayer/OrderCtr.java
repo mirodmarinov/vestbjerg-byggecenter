@@ -2,7 +2,6 @@ package controlLayer;
 
 import modelLayer.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
 /**
@@ -142,7 +141,6 @@ public class OrderCtr
 		Order offer = new Order(customer, orderProducts);
 		offer.calculateExpirationDate();
 		offer.setStatus("pending");
-		offer.setTotalPrice((float)calculateTotal());
 		offer.setDiscount(customer.getDiscount());
 
 		/*
@@ -168,7 +166,7 @@ public class OrderCtr
 	{
 		Order order = new Order(customer, orderProducts);
 		order.setStatus("confirmed");
-		order.setTotalPrice((float)calculateTotal());
+		//order.setTotalPrice((float)calculateTotal());
 		order.setDiscount(customer.getDiscount());
 		order.generatePurchaseDate();
 		/*
@@ -302,14 +300,11 @@ public class OrderCtr
 		{
 			return returnValue;
 		}
-		for(int e = (index-1) * 50 + orderAmount - 1; e >= (index - 1) * 50; e--)
-		//for (int e = (index-1)*50; e < (index-1)*50+orderAmount; e++)
+
+		for (int e = (orders.size()-(index-1)*50)-1 ; e > (orders.size()-((index-1)*50+orderAmount))-1 ; e--)
 		{
 			returnValue.add(orders.get(e).searchBar());
 		}
-		
-		Collections.reverse(orders);
-		Collections.reverse(returnValue);
 		
 		return returnValue;
 	}
@@ -331,11 +326,11 @@ public class OrderCtr
 			return data;
 		}
 		
-		for (Order order : orders)
+		for (int e = orders.size()-1; e > -1 ; e--)
 		{
-			if(Integer.toString(order.getOrderNumber()).contains(id))
+			if(Integer.toString(orders.get(e).getOrderNumber()).contains(id))
 			{
-				data.add(order.searchBar());
+				data.add(orders.get(e).searchBar());
 			}
 		}
 		return data;
