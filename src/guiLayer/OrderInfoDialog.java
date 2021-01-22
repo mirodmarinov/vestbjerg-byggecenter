@@ -23,6 +23,7 @@ public class OrderInfoDialog extends JDialog {
 	private JList<String> orderLineItemList;
 	private RoundedButton confirmOfferButton;
 	private OrderPanel originalOrderPanel;
+	private RoundedButton invoiceButton;
 
 	/**
 	 * Creates the dialog.
@@ -458,7 +459,8 @@ public class OrderInfoDialog extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 					orderCtr.confirmOffer(orderNumber);
 					originalOrderPanel.reset();
-					//confirmOfferButton.setVisible(false);
+					invoiceButton.setFocusable(true);
+					invoiceButton.setBackground(babyBlue);
 					retrieveInfo();
 				}
 			});
@@ -475,20 +477,24 @@ public class OrderInfoDialog extends JDialog {
 		
 		//Generate Invoice Button********************************************************
 		{	
-			RoundedButton invoiceButton = new RoundedButton("Generate Invoice", babyBlue, Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
+			invoiceButton = new RoundedButton("Generate Invoice", babyBlue, Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 15));
+			invoiceButton.setName("Enabled");
 			invoiceButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+						if (invoiceButton.getName().equals("Enabled"))
+						{
 						GenerateInvoiceDialog invoice = new GenerateInvoiceDialog(orderNumber);
 						invoice.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 						invoice.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 						invoice.setVisible(true);
+						}
 				}
 			});
 			invoiceButton.setPreferredSize(new Dimension(150, 30));
 			invoiceButton.addOffset(-13, 2);
 					
-			blueButton(invoiceButton);
+			
 					
 			GridBagConstraints gbc_invoiceButton = new GridBagConstraints();
 			gbc_invoiceButton.anchor = GridBagConstraints.EAST;
@@ -543,6 +549,15 @@ public class OrderInfoDialog extends JDialog {
 		//Confirm Offer Button****************************
 		if(!orderDetails[2].equalsIgnoreCase("pending")) {
 			confirmOfferButton.setVisible(false);
+			blueButton(invoiceButton);
+		}
+		else
+		{
+			invoiceButton.setBackground(Color.DARK_GRAY);
+			invoiceButton.setFocusable(false);
+			invoiceButton.setBorderColor(Color.DARK_GRAY);
+			invoiceButton.setForeground(Color.LIGHT_GRAY);
+			invoiceButton.setName("Disabled");
 		}
 		
 		//Order panel info****************************
@@ -637,6 +652,7 @@ public class OrderInfoDialog extends JDialog {
 	
 	public void blueButton(RoundedButton button) {
 		
+		button.setForeground(Color.WHITE);
 		button.addMouseListener(new MouseAdapter()
 		{	
 			@Override
