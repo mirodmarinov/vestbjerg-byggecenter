@@ -191,7 +191,7 @@ public class Product implements Serializable
 	@Override
 	public String toString()
 	{
-		return String.format(" (1) Name: %s\n (2) Description: %s\n (3) Group: %s\n (4) Barcode: %s\n (5) Location: %s\n (6) Quantity: %d\n (7) Threshold: %d\n (8) Sales Price: %d\n (9) Purchase Price: %d\n (10) Discount: %d\n",name, description, group, barcode, location, quantity, threshold, salesPrice, purchasePrice, discount);
+		return String.format(" (1) Name: %s\n (2) Description: %s\n (3) Group: %s\n (4) Barcode: %s\n (5) Location: %s\n (6) Quantity: %d\n (7) Threshold: %d\n (8) Sales Price: %f\n (9) Purchase Price: %f\n (10) Discount: %d\n",name, description, group, barcode, location, quantity, threshold, salesPrice, purchasePrice, discount);
 		//return String.format(" Name: %s\n Description: %s\n Group: %s\n Barcode: %s\n Location: %s\n Quantity: %d\n Threshold: %d\n Sales Price: %d\n Purchase Price: %d\n Discount: %d\n",name, description, group, barcode, location, quantity, threshold, salesPrice, purchasePrice, discount);
 	}
 	
