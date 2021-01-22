@@ -1,12 +1,16 @@
 package guiLayer;
 
+/**
+ * This class is a part of the Warehouse system
+ * for Vestbjerg Byggecenter. It contains the
+ * definition used to make rounded buttons, instead of
+ * using the conventional Jbuttons. This has
+ * been implemented to support a more flat design
+ * for the system.
+ */
+
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 
 
 public class RoundedButton extends Component {
@@ -21,7 +25,7 @@ public class RoundedButton extends Component {
     private Font font;
 
     /**
-     * Constructs a RoundedButton with the specified label.
+     * Constructs a RoundedButton with the specified parameters.
      *
      * @param label the label of the button
      */
@@ -33,6 +37,14 @@ public class RoundedButton extends Component {
         this.setName(label);
     }
     
+    /**
+     * Constructs a RoundedButton with the specified parameters.
+     * 
+     * @param label
+     * @param bg = background color
+     * @param borderColor
+     * @param font
+     */
     public RoundedButton(String label, Color bg, Color borderColor, Font font) {
         this.label = label;
         this.bg = bg;
@@ -42,6 +54,15 @@ public class RoundedButton extends Component {
         this.font = font;
     }
     
+/**
+ * Constructs a RoundedButton with the specified parameters.
+ * 
+ * @param label
+ * @param bgColor
+ * @param fgColor
+ * @param borderColor
+ * @param font
+ */
     public RoundedButton(String label, Color bgColor, Color fgColor, Color borderColor, Font font) {
         this.label = label;
         this.bg = bgColor;
@@ -56,6 +77,7 @@ public class RoundedButton extends Component {
     public void paint(Graphics g) {
 
     	Graphics2D g2 = (Graphics2D) g;
+    	//2D graphics is used to avoid pixelation on the button
     	
         RenderingHints rh = new RenderingHints(RenderingHints.KEY_TEXT_ANTIALIASING,
         RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -81,7 +103,14 @@ public class RoundedButton extends Component {
     }
     
     
-    
+    /**
+     * Moved the label inside the button, since the labels
+     * are not always centered. This allows
+     * manual adjustment of the labels position.
+     * 
+     * @param xAxis
+     * @param yAxis
+     */
     public void addOffset(int xAxis, int yAxis)
     {
     	this.xAxis = xAxis;
@@ -117,6 +146,4 @@ public class RoundedButton extends Component {
     public void setFont(Font font) {
     	this.font = font;
     }
-    
-    
 }
