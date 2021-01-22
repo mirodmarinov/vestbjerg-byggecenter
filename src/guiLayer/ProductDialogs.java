@@ -760,9 +760,9 @@ public class ProductDialogs extends JDialog {
 	{				
 		if(checkValues())
 		{
-			String row = (rowTextField.getText().equals("Row...") || rowTextField.getText().equals("")) ? "#" : rowTextField.getText().replaceAll("[.]", "-");
-			String column = (columnTextField.getText().equals("Column...") || columnTextField.getText().equals("")) ? "#" : columnTextField.getText().replaceAll("[.]", "-");
-			String place = (placeTextField.getText().equals("Place...") || placeTextField.getText().equals("")) ? "#" : placeTextField.getText().replaceAll("[.]", "-");
+			String row = (rowTextField.getText().equals("Row...") || rowTextField.getText().replaceAll("[.]", "").equals("")) ? "#" : rowTextField.getText().replaceAll("[.]", "");
+			String column = (columnTextField.getText().equals("Column...") || columnTextField.getText().replaceAll("[.]", "").equals("")) ? "#" : columnTextField.getText().replaceAll("[.]", "");
+			String place = (placeTextField.getText().equals("Place...") || placeTextField.getText().replaceAll("[.]", "").equals("")) ? "#" : placeTextField.getText().replaceAll("[.]", "");
 			if (isEditProduct)
 			{
 				productCtr.updateParameter(placeOnList, 0, nameTextField.getText());
