@@ -765,9 +765,12 @@ public class ProductDialogs extends JDialog {
 			productName.setText(data[0] + " : " + data[3]);
 
 			//TODO Edit if the stock format changed
-			rowTextField.setText(data[10].substring(0, 1));
-			columnTextField.setText(data[10].substring(1, 2));
-			placeTextField.setText(data[10].substring(2, 3));
+			if (!data[10].equals("") && data[10] != null)
+			{
+				rowTextField.setText(data[10].substring(0, 1));
+				columnTextField.setText(data[10].substring(1, 2));
+				placeTextField.setText(data[10].substring(2, 3));
+			}
 		}
 		
 	}
