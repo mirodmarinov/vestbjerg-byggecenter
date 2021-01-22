@@ -1,9 +1,3 @@
-/bin/*
-/.metadata/
-/bin/
-bin/
-/.git/
-/.settings/
-bin
-
 *.class
+bin/
+.settings/
