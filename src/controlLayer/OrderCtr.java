@@ -3,6 +3,7 @@ package controlLayer;
 import modelLayer.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Locale;
 
 
 /**
@@ -97,7 +98,7 @@ public class OrderCtr
 			productInfo[2] = String.valueOf(product.getQuantity());
 			productInfo[3] = product.getBarcode();
 			productInfo[4] = String.valueOf(product.getDiscount());
-			productInfo[5] = String.format("%.2f", product.getSalesPrice());
+			productInfo[5] = String.format(Locale.CANADA, "%.2f", product.getSalesPrice());
 			allProductsInfo.add(productInfo);
 		}
 		

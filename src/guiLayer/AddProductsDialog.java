@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class AddProductsDialog extends JDialog {
 
@@ -136,7 +137,7 @@ public class AddProductsDialog extends JDialog {
 			
 			GridBagConstraints gbc_searchBar = new GridBagConstraints();
 			gbc_searchBar.insets = new Insets(0, 0, 5, 5);
-			gbc_searchBar.fill = GridBagConstraints.HORIZONTAL;
+			gbc_searchBar.fill = GridBagConstraints.BOTH;
 			gbc_searchBar.gridx = 0;
 			gbc_searchBar.gridy = 2;
 			contentPanel.add(searchBar, gbc_searchBar);
@@ -149,6 +150,7 @@ public class AddProductsDialog extends JDialog {
 			productErrorLabel.setForeground(Color.RED);
 			productErrorLabel.setFont(new Font("Lato", Font.BOLD, 14));
 			GridBagConstraints gbc_productErrorLabel = new GridBagConstraints();
+			gbc_productErrorLabel.gridwidth = 2;
 			gbc_productErrorLabel.anchor = GridBagConstraints.WEST;
 			gbc_productErrorLabel.insets = new Insets(0, 0, 5, 5);
 			gbc_productErrorLabel.gridx = 2;
@@ -524,7 +526,7 @@ public class AddProductsDialog extends JDialog {
 			int discount = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Discount").getModelIndex()));
 			float price = Float.valueOf(((String)table.getValueAt(productPlace.get(e), table.getColumn("Price").getModelIndex())));
 				quantity = Integer.parseInt((String)table.getValueAt(productPlace.get(e), table.getColumn("Input Quantity").getModelIndex()));
-			String totalPrice = String.format("%.2f", (quantity * price));
+			String totalPrice = String.format(Locale.CANADA, "%.2f", (quantity * price));
 			
 			orderCtr.selectProduct(productPlace.get(e), quantity);
 		

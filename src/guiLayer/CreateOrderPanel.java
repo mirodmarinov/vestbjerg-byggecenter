@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import guiLayer.Renderers.JTableButtonMouseListener;
 import guiLayer.Renderers.JTableButtonRenderer;
@@ -363,7 +364,7 @@ public class CreateOrderPanel extends JPanel {
 
 			  //When the table changes, the Total Price label changes its amount accordingly
 			  public void tableChanged(TableModelEvent e) {
-				  totalValueLabel.setText(String.format("%.2f", orderCtr.calculateTotal()) + " DKK");
+				  totalValueLabel.setText(String.format(Locale.CANADA, "%.2f", orderCtr.calculateTotal()) + " DKK");
 			  }
 			  
 			});
@@ -379,7 +380,7 @@ public class CreateOrderPanel extends JPanel {
 						  value = orderTable.getValueAt(element, orderTable.getColumn("Quantity").getModelIndex()).toString();
 						  orderCtr.changeOrderQuantity(barcode, value);
 					  }
-					  totalValueLabel.setText(String.format("%.2f", orderCtr.calculateTotal()) + " DKK");
+					  totalValueLabel.setText(String.format(Locale.CANADA, "%.2f", orderCtr.calculateTotal()) + " DKK");
 				}
 			}
 		});
@@ -689,7 +690,7 @@ public class CreateOrderPanel extends JPanel {
 	
 	public void updateTotalLabel()
 	{
-		totalValueLabel.setText(String.format("%.2f", orderCtr.calculateTotal()) + " DKK");
+		totalValueLabel.setText(String.format(Locale.CANADA, "%.2f", orderCtr.calculateTotal()) + " DKK");
 	}
 	
 	
