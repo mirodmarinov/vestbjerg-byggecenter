@@ -2,6 +2,7 @@ package controlLayer;
 
 import modelLayer.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
 
@@ -286,7 +287,9 @@ public class OrderCtr
 	{
 		int orderAmount = 0;
 		ArrayList<String[]> returnValue = new ArrayList<>();
-		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();	
+		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();
+		Collections.reverse(returnValue);
+		
 		if (orders.size() == 0)
 		{
 			return returnValue;

@@ -10,6 +10,7 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class OrderPanel extends JPanel {
@@ -287,7 +288,7 @@ public class OrderPanel extends JPanel {
 		//we fill the table with the order data quantity, otherwise we fill
 		//the whole table with information
 		
-		for (int e = 0; e<data.size();e++)
+		for (int e = 0; e < data.size();e++)
 		{
 			
 			for (int element = 0; element < 6; element++)
@@ -304,7 +305,6 @@ public class OrderPanel extends JPanel {
 			{
 				table.setValueAt(new RoundedButton("Confirmed",Color.WHITE, Color.WHITE, new Font("Lato", Font.PLAIN, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
 			}
-			
 		}
 	}
 	
@@ -354,7 +354,6 @@ public class OrderPanel extends JPanel {
 					foundLabel.setVisible(true);
 				}
 			}
-			
 		}
 		else
 		{
@@ -380,10 +379,7 @@ public class OrderPanel extends JPanel {
 		}
 		defaultFillTable(index);
 
-		
 		tablePageLabel.setText("<html><u>" + index + "</u></html>");
-
-		
 	}
 	
 	/**
@@ -412,6 +408,5 @@ public class OrderPanel extends JPanel {
 	public void reset()
 	{
 		loadPage(getPageIndex()); 
-	}
-	
+	}	
 }
