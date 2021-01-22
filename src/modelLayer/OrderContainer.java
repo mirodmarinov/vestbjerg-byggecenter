@@ -30,6 +30,11 @@ public class OrderContainer implements Serializable
 		return uniqueInstance;
 	}
 	
+	public static void setInstance(OrderContainer orderC)
+	{
+		uniqueInstance = orderC;
+	}
+	
 	/**
 	 * The method adds an already existing order to
 	 * the ArrayList<> orders. If the

@@ -45,9 +45,10 @@ public class OrderMenuGUI {
 	public OrderMenuGUI() {
 
 		//load saved data if available
-		Serialization.getInstance().deserializeClass("modelLayer.OrderContainer");
+
 		Serialization.getInstance().deserializeClass("modelLayer.ProductContainer");
 		Serialization.getInstance().deserializeClass("modelLayer.CustomerContainer");
+		Serialization.getInstance().deserializeClass("modelLayer.OrderContainer");
 		//populate with test data
 		//Serialization.populateClasses();
 		//Deserialization/class population must happen before initialization of orderPanel to ensure that the main table is not empty before refreshing.
