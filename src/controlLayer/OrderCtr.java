@@ -142,7 +142,7 @@ public class OrderCtr
 		Order offer = new Order(customer, orderProducts);
 		offer.calculateExpirationDate();
 		offer.setStatus("pending");
-		offer.setTotalPrice((float)calculateTotal());
+		//offer.setTotalPrice((float)calculateTotal());
 		offer.setDiscount(customer.getDiscount());
 
 		/*
@@ -168,7 +168,7 @@ public class OrderCtr
 	{
 		Order order = new Order(customer, orderProducts);
 		order.setStatus("confirmed");
-		order.setTotalPrice((float)calculateTotal());
+		//order.setTotalPrice((float)calculateTotal());
 		order.setDiscount(customer.getDiscount());
 		order.generatePurchaseDate();
 		/*
@@ -303,7 +303,6 @@ public class OrderCtr
 			return returnValue;
 		}
 		for(int e = (index-1) * 50 + orderAmount - 1; e >= (index - 1) * 50; e--)
-		//for (int e = (index-1)*50; e < (index-1)*50+orderAmount; e++)
 		{
 			returnValue.add(orders.get(e).searchBar());
 		}

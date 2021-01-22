@@ -101,29 +101,25 @@ public class Serialization {
 		Product p3 = new Product(10, 10, 0, 2500, 2000, "123456787", "hammer", "A construction hammer", "Tools",
 		                "3.12.52");
 		
-		
-		/**OrderLineItem oli2 = new OrderLineItem(p1, 8);
-		ArrayList<OrderLineItem> oliarray2 = new ArrayList<>();
-		oliarray2.add(oli2);
-		Order order2 = new Order(customer2, oliarray2);
-		order2.calculateExpirationDate();
-		order2.setStatus("confirmed");
-		order2.setTotalPrice(8000);
-		order2.setDiscount(0);
-		order2.generatePurchaseDate();
-		OrderContainer.getInstance().addOrder(order2);*/
-		
 		OrderLineItem oli = new OrderLineItem(p3, 5);
+		OrderLineItem oli2 = new OrderLineItem(p1, 2);
+		OrderLineItem oli3 = new OrderLineItem(p2, 4);
 		ArrayList<OrderLineItem> oliarray = new ArrayList<>();
 		oliarray.add(oli);
+		oliarray.add(oli2);
+		oliarray.add(oli3);
 		for(int i = 0; i < 69; i++) {
 			Order order = new Order(customer1, oliarray);
 			order.calculateExpirationDate();
 			order.setStatus("pending");
-			order.setTotalPrice((float) 1000.00);
 			order.setDiscount(5);
-			
 			OrderContainer.getInstance().addOrder(order);
+			
+			/*Order order2 = new Order(customer2, oliarray);
+			order2.generatePurchaseDate();
+			order2.setStatus("confirmed");
+			OrderContainer.getInstance().addOrder(order2);*/
+			
 		}
 		
 		ProductContainer.getInstance().addProduct(p1);

@@ -35,7 +35,7 @@ public class Order implements Serializable
 		this.customer = customer;
 		this.products = products;
 		expirationDate = null;
-	
+		totalPrice = calculateTotal();
 		//TODO automatically add purchaseDate, status, delivery, totalPrice, automatically generate expirationDate
 	}
 	
@@ -224,5 +224,22 @@ public class Order implements Serializable
 		data[4] = getExpirationDate();
 		data[5] = String.format("%.2f", getTotalPrice());
 		return data;
+	}
+	
+	public float calculateTotal() {
+		int totalWithoutDiscount = 0;
+		int totalWithDiscount = 0;
+		for (OrderLineItem p : products)
+		{
+			Product product = p.getProduct();
+			int quantity = p.getQuantity();
+			totalWithoutDiscount += product.getSalesPrice() * quantity;
+			totalWithDiscount += product.getSalesPrice() * ((float)(100 - product.getDiscount(quantity))/100) * quantity;
+		}
+		if (customer != null)
+		{
+			totalWithDiscount *= ((float)(100 - customer.getDiscount())/100);
+		}
+		return (float)totalWithDiscount / (float)totalWithoutDiscount < 0.8 ? (float)(0.8 * totalWithoutDiscount) : totalWithDiscount;
 	}
 }
