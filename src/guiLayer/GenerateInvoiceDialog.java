@@ -1,22 +1,18 @@
 package guiLayer;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+/**
+ * This class is a part of the warehouse management system
+ * for Vestbjerg Byggecenter. It creates an Invoice dialog, containing
+ * a preview of the invoice that should be sent to customers.
+ * 
+ */
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
 
 import controlLayer.OrderCtr;
-
-import javax.swing.JTextArea;
 
 public class GenerateInvoiceDialog extends JDialog {
 
@@ -32,6 +28,8 @@ public class GenerateInvoiceDialog extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setBackground(Color.WHITE);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		
+		//Invoice text area******************************************************************
 		{
 			JTextArea textArea = new JTextArea();
 			OrderCtr orderCtr = new OrderCtr();
@@ -41,14 +39,18 @@ public class GenerateInvoiceDialog extends JDialog {
 			textArea.setText(text);
 			contentPanel.add(textArea);
 		}
+		
+		/********************************************** Button Panel **********************************************/
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(Color.DARK_GRAY.brighter());
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			
+			//Close Button******************************************************************
 			{
-				RoundedButton cancelButton = new RoundedButton("OK", new Color(28, 150, 202), Color.WHITE, new Color(28, 150, 202), new Font("Lato", Font.BOLD, 15));
-				cancelButton.addMouseListener(new MouseAdapter() {
+				RoundedButton closeButton = new RoundedButton("Close", new Color(28, 150, 202), Color.WHITE, new Color(28, 150, 202), new Font("Lato", Font.BOLD, 15));
+				closeButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) 
 					{
@@ -56,37 +58,34 @@ public class GenerateInvoiceDialog extends JDialog {
 					}
 				});
 
-				cancelButton.setPreferredSize(new Dimension(100, 30));
-				cancelButton.addOffset(-5, 2);
-				cancelButton.setBackground(Color.WHITE);
-				cancelButton.setForeground(new Color(28, 150, 202));
-				GridBagConstraints gbc_cancelButton = new GridBagConstraints();
-				cancelButton.addMouseListener(new MouseAdapter()
+				closeButton.setPreferredSize(new Dimension(100, 30));
+				closeButton.addOffset(-5, 2);
+				closeButton.setBackground(Color.WHITE);
+				closeButton.setForeground(new Color(28, 150, 202));
+				GridBagConstraints gbc_closeButton = new GridBagConstraints();
+				
+				//Hover functions are added to the button*****************
+				closeButton.addMouseListener(new MouseAdapter()
 				{	
 					@Override
 					public void mouseEntered(MouseEvent e) 
 					{
-						cancelButton.setBackground(new Color(28, 150, 202));
-						cancelButton.setForeground(Color.WHITE);
+						closeButton.setBackground(new Color(28, 150, 202));
+						closeButton.setForeground(Color.WHITE);
 					}
 							
 					@Override
 					public void mouseExited(MouseEvent e) 
 					{
-						cancelButton.setBackground(Color.WHITE);
-						cancelButton.setForeground(new Color(28, 150, 202));
+						closeButton.setBackground(Color.WHITE);
+						closeButton.setForeground(new Color(28, 150, 202));
 					}
 					
 				});
-				gbc_cancelButton.anchor = GridBagConstraints.SOUTHEAST;
-				gbc_cancelButton.gridx = 4;
-				gbc_cancelButton.gridy = 3;
-				buttonPane.add(cancelButton, gbc_cancelButton);
-				
-				/*JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);*/
+				gbc_closeButton.anchor = GridBagConstraints.SOUTHEAST;
+				gbc_closeButton.gridx = 4;
+				gbc_closeButton.gridy = 3;
+				buttonPane.add(closeButton, gbc_closeButton);
 			}
 		}
 	}
