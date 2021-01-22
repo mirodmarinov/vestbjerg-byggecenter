@@ -6,6 +6,12 @@ import java.awt.Font;
 
 import javax.swing.*;
 
+/**
+ * 	Custom implementation of ListCellRenderer,
+ *  so all components act as JLabel
+ * @author group1
+ *
+ */
 public class ProductJListCellRenderer extends JLabel implements ListCellRenderer<String> {
 	public ProductJListCellRenderer() {
 	}
@@ -14,6 +20,10 @@ public class ProductJListCellRenderer extends JLabel implements ListCellRenderer
 
 	private Color babyBlue = new Color(28, 150, 202);
 
+	/**
+	 * a custom overridden method for retrieving
+	 * a cell in a form of a JLabel Component
+	 */
 	@Override
 	public Component getListCellRendererComponent(JList<? extends String> list, String value, int index, boolean isSelected,
 			boolean cellHasFocus) {
