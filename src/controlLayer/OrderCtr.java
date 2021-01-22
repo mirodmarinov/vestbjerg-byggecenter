@@ -394,11 +394,20 @@ public class OrderCtr
 		}
 	}
 	
+	/**
+	 * Deletes the customer
+	 * 
+	 */
 	public void clearCustomer()
 	{
 		customer = null;
 	}
 	
+	/**
+	 * This method checks the quantity on the stock. Returns the elements with less amount of than the desired input 
+	 * 
+	 * @return
+	 */
 	public ArrayList<String> checkAmounts()
 	{
 		ArrayList<String> errors = new ArrayList<>();
@@ -412,6 +421,14 @@ public class OrderCtr
 		return errors;
 	}
 	
+	/**
+	 * This method searchis the order by barcode and update it's quantity within the orderLineItem.
+	 * Used for updating the quantity throught the createOrderPanel
+	 * 
+	 * @param barcode
+	 * @param quantity
+	 */
+	
 	public void changeOrderQuantity(String barcode, String quantity)
 	{
 		for (OrderLineItem order : orderProducts)
@@ -422,4 +439,5 @@ public class OrderCtr
 			}
 		}
 	}
+	
 }

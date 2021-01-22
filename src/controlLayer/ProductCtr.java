@@ -289,7 +289,6 @@ public class ProductCtr
 	}
 	
 	
-	
 	public boolean checkValues(String name,String value,boolean string)
 	{
 		if (string)
@@ -303,7 +302,7 @@ public class ProductCtr
 		{
 			try
 			{
-				Integer.parseInt(value);
+				Float.parseFloat(value);
 				return true;
 			}
 			catch(Exception e)
@@ -314,6 +313,20 @@ public class ProductCtr
 		
 		
 		return true;
+	}
+	
+	/**
+	 * Updates the amount of the items on the stock by the barcode
+	 * Used for both editing and creating products
+	 * 
+	 * @param barcode
+	 * @param stock
+	 */
+	
+	public void updateStock(String barcode, String stock)
+	{
+		Product p = getProduct(barcode);
+		p.setStock(stock);
 	}
 	
 }

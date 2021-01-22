@@ -43,6 +43,12 @@ public class ProductDialogs extends JDialog {
 	private int placeOnList;
 	private ProductsPanel productsPanel;
 	private boolean isEditProduct;
+	private JLabel stockLabel;
+	private JTextField rowTextField;
+	private JTextField columnTextField;
+	private JTextField placeTextField;
+	private JLabel rowLabel;
+	private JLabel placeLabel;
 
 
 	/**
@@ -129,9 +135,9 @@ public class ProductDialogs extends JDialog {
 			
 			GridBagLayout gbl_panel = new GridBagLayout();
 			gbl_panel.columnWidths = new int[]{0,50, 0, 0, 0, 0,50};
-			gbl_panel.rowHeights = new int[]{20, 0, 0, 50, 0, 0, 50, 0, 0, 50, 0, 0, 0};
+			gbl_panel.rowHeights = new int[]{20, 0, 0, 50, 0, 0, 50, 0, 0, 50, 0, 0, 40, 0, 0, 0, 0};
 			gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			
 			//Name Label and Text Field**************************************************************
@@ -256,7 +262,6 @@ public class ProductDialogs extends JDialog {
 							{
 								//It should split the string by ':', add the name to it and connect with the rest of the string (add barcode)
 								//And of course set it as the name label
-								//TODO Do the same for the barcode
 								
 								productName.setText(productName.getText().substring(0,productName.getText().indexOf(":")) + ": " + barcodeTextField.getText());
 								//productName.setText(nameTextField.getText() + " " +productName.getText().substring(productName.getText().indexOf(":"),productName.getText().length()));
@@ -384,7 +389,7 @@ public class ProductDialogs extends JDialog {
 				textFieldFunctions(quantityTextField);
 				
 				GridBagConstraints gbc_quantityTextField = new GridBagConstraints();
-				gbc_quantityTextField.insets = new Insets(0, 0, 0, 5);
+				gbc_quantityTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_quantityTextField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_quantityTextField.gridx = 1;
 				gbc_quantityTextField.gridy = 11;
@@ -409,12 +414,85 @@ public class ProductDialogs extends JDialog {
 				textFieldFunctions(salesPriceTextField);
 				
 				GridBagConstraints gbc_salesPriceTextField = new GridBagConstraints();
-				gbc_salesPriceTextField.insets = new Insets(0, 0, 0, 5);
+				gbc_salesPriceTextField.insets = new Insets(0, 0, 5, 5);
 				gbc_salesPriceTextField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_salesPriceTextField.gridx = 2;
 				gbc_salesPriceTextField.gridy = 11;
 				panel.add(salesPriceTextField, gbc_salesPriceTextField);
 				salesPriceTextField.setColumns(10);
+			}
+			{
+				stockLabel = new JLabel("Stock");
+				stockLabel.setFont(new Font("Lato", Font.BOLD, 19));
+				GridBagConstraints gbc_stockLabel = new GridBagConstraints();
+				gbc_stockLabel.anchor = GridBagConstraints.WEST;
+				gbc_stockLabel.insets = new Insets(0, 0, 5, 5);
+				gbc_stockLabel.gridx = 1;
+				gbc_stockLabel.gridy = 13;
+				panel.add(stockLabel, gbc_stockLabel);
+			}
+			{
+				rowLabel = new JLabel("Row");
+				GridBagConstraints gbc_rowLabel = new GridBagConstraints();
+				gbc_rowLabel.anchor = GridBagConstraints.WEST;
+				gbc_rowLabel.insets = new Insets(0, 0, 5, 5);
+				gbc_rowLabel.gridx = 1;
+				gbc_rowLabel.gridy = 14;
+				panel.add(rowLabel, gbc_rowLabel);
+			}
+			{
+				JLabel columnLabel = new JLabel("Column");
+				GridBagConstraints gbc_columnLabel = new GridBagConstraints();
+				gbc_columnLabel.anchor = GridBagConstraints.WEST;
+				gbc_columnLabel.insets = new Insets(0, 0, 5, 5);
+				gbc_columnLabel.gridx = 2;
+				gbc_columnLabel.gridy = 14;
+				panel.add(columnLabel, gbc_columnLabel);
+			}
+			{
+				placeLabel = new JLabel("Place");
+				GridBagConstraints gbc_placeLabel = new GridBagConstraints();
+				gbc_placeLabel.anchor = GridBagConstraints.WEST;
+				gbc_placeLabel.insets = new Insets(0, 0, 5, 5);
+				gbc_placeLabel.gridx = 3;
+				gbc_placeLabel.gridy = 14;
+				panel.add(placeLabel, gbc_placeLabel);
+			}
+			{
+				rowTextField = new JTextField();
+				rowTextField.setName("Row");
+				textFieldFunctions(rowTextField);
+				GridBagConstraints gbc_rowTextField = new GridBagConstraints();
+				gbc_rowTextField.insets = new Insets(0, 0, 0, 5);
+				gbc_rowTextField.fill = GridBagConstraints.HORIZONTAL;
+				gbc_rowTextField.gridx = 1;
+				gbc_rowTextField.gridy = 15;
+				panel.add(rowTextField, gbc_rowTextField);
+				rowTextField.setColumns(10);
+			}
+			{
+				columnTextField = new JTextField();
+				columnTextField.setName("Column");
+				textFieldFunctions(columnTextField);
+				GridBagConstraints gbc_columnTextField = new GridBagConstraints();
+				gbc_columnTextField.insets = new Insets(0, 0, 0, 5);
+				gbc_columnTextField.fill = GridBagConstraints.HORIZONTAL;
+				gbc_columnTextField.gridx = 2;
+				gbc_columnTextField.gridy = 15;
+				panel.add(columnTextField, gbc_columnTextField);
+				columnTextField.setColumns(10);
+			}
+			{
+				placeTextField = new JTextField();
+				placeTextField.setName("Place");
+				textFieldFunctions(placeTextField);
+				GridBagConstraints gbc_placeTextField = new GridBagConstraints();
+				gbc_placeTextField.insets = new Insets(0, 0, 0, 5);
+				gbc_placeTextField.fill = GridBagConstraints.HORIZONTAL;
+				gbc_placeTextField.gridx = 3;
+				gbc_placeTextField.gridy = 15;
+				panel.add(placeTextField, gbc_placeTextField);
+				placeTextField.setColumns(10);
 			}
 			if (isEditProduct)
 			{
@@ -685,6 +763,11 @@ public class ProductDialogs extends JDialog {
 			purchasePriceTextField.setText(data[8]);
 			discountTextField.setText(data[9]);
 			productName.setText(data[0] + " : " + data[3]);
+
+			//TODO Edit if the stock format changed
+			rowTextField.setText(data[10].substring(0, 1));
+			columnTextField.setText(data[10].substring(1, 2));
+			placeTextField.setText(data[10].substring(2, 3));
 		}
 		
 	}
@@ -705,6 +788,7 @@ public class ProductDialogs extends JDialog {
 		{
 			if (isEditProduct)
 			{
+			
 			productCtr.updateParameter(placeOnList, 0, nameTextField.getText());
 			productCtr.updateParameter(placeOnList, 1, descriptionTextField.getText());
 			productCtr.updateParameter(placeOnList, 2, groupTextField.getText());
@@ -715,17 +799,26 @@ public class ProductDialogs extends JDialog {
 			productCtr.updateParameter(placeOnList, 7, salesPriceTextField.getText());
 			productCtr.updateParameter(placeOnList, 8, purchasePriceTextField.getText());
 			productCtr.updateParameter(placeOnList, 9, discountTextField.getText());
+			//TODO Edit if the stock format has changed
+			//TODO Maybe errorhandling? IDK
+			if (!rowTextField.getText().equals("Row...") && columnTextField.getText().equals("Column...") && !placeTextField.getText().equals("Place..."))
+			{
+			productCtr.updateStock(barcodeTextField.getText(),rowTextField.getText()+columnTextField.getText()+placeTextField.getText());
+			}
 			productsPanel.defaultFillTable(productsPanel.getPageIndex());
 			dispose();
 			}
 			else
 			{
+				
 				productCtr.createProduct(Integer.parseInt(thresholdTextField.getText()), Integer.parseInt(quantityTextField.getText()),
 						Integer.parseInt(discountTextField.getText()), Integer.parseInt(purchasePriceTextField.getText()), 
 						Integer.parseInt(salesPriceTextField.getText()), barcodeTextField.getText(), nameTextField.getText(), descriptionTextField.getText(),
 						groupTextField.getText(), locationTextField.getText());
 				productsPanel.defaultFillTable(Integer.parseInt(productsPanel.getTablePageLabel().getText()));
 				productsPanel.defaultFillTable(productsPanel.getPageIndex());
+				//TODO Edit if the stock format has changed
+				productCtr.updateStock(barcodeTextField.getText(),rowTextField.getText()+columnTextField.getText()+placeTextField.getText());
 				dispose();
 			}
 		}

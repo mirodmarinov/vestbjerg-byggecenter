@@ -51,7 +51,7 @@ public class ProductContainer implements Serializable
 				specifiedProducts.add(a);
 			}
 		}
-
+		Serialization.getInstance().serializeClass("modelLayer.ProductContainer");
 		return specifiedProducts;
 	}
 
