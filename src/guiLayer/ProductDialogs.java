@@ -804,10 +804,10 @@ public class ProductDialogs extends JDialog {
 			productCtr.updateParameter(placeOnList, 9, discountTextField.getText());
 			//TODO Edit if the stock format has changed
 			//TODO Maybe errorhandling? IDK
-			if (!rowTextField.getText().equals("Row...") && columnTextField.getText().equals("Column...") && !placeTextField.getText().equals("Place..."))
-			{
-			productCtr.updateStock(barcodeTextField.getText(),rowTextField.getText()+columnTextField.getText()+placeTextField.getText());
-			}
+			String row = rowTextField.getText().equals("Row...") || rowTextField.getText().equals("") ? "#" : rowTextField.getText();
+			String column = columnTextField.getText().equals("Column...") || columnTextField.getText().equals("") ? "#" : columnTextField.getText();
+			String place = placeTextField.getText().equals("Place...") || placeTextField.getText().equals("") ? "#" : placeTextField.getText();
+			productCtr.updateStock(barcodeTextField.getText(),row+column+place);
 			productsPanel.defaultFillTable(productsPanel.getPageIndex());
 			dispose();
 			}
