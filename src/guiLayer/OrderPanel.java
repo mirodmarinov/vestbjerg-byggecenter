@@ -10,8 +10,6 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Collections;
-
 
 public class OrderPanel extends JPanel {
 	private JTable table;
@@ -49,6 +47,7 @@ public class OrderPanel extends JPanel {
 	/**
 	 * Creates the panel.
 	 */
+	/********************************************** Order Panel**********************************************/
 	@SuppressWarnings("serial")
 	public OrderPanel() {
 		setBackground(new Color(252, 252, 252));
@@ -141,6 +140,7 @@ public class OrderPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setMinWidth(70);
 		table.getColumnModel().getColumn(6).setMinWidth(75);
 		
+		
 		//Error Label Not Found*************************************************************
 		foundLabel = new JLabel("Order not found!");
 		foundLabel.setVisible(false);
@@ -153,6 +153,7 @@ public class OrderPanel extends JPanel {
 		gbc_foundLabel.gridx = 5;
 		gbc_foundLabel.gridy = 1;
 		add(foundLabel, gbc_foundLabel);
+		
 		
 		//Left Arrow Label "<"**************************************************************
 		leftArrowLabel = new JLabel(" < ");
@@ -175,6 +176,7 @@ public class OrderPanel extends JPanel {
 			}
 		});
 		
+		
 		//Page Number Label**********************************************************
 		tablePageLabel = new JLabel("<html><u>1</u></html>");
 		tablePageLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -184,6 +186,7 @@ public class OrderPanel extends JPanel {
 		gbc_tablePageLabel.gridx = 3;
 		gbc_tablePageLabel.gridy = 1;
 		add(tablePageLabel, gbc_tablePageLabel);
+		
 		
 		//Right Arrow Label ">"******************************************************
 		rightArrowLabel = new JLabel(" > ");
@@ -270,7 +273,6 @@ public class OrderPanel extends JPanel {
 		//table listeners moved to the bottom, in order for the page to be initialized
 		table.addMouseListener(mouseListener);
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));
-		
 	}
 
 	/**

@@ -4,8 +4,6 @@ import modelLayer.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.Locale;
-
 
 /**
  * This class is a part of the System developed for Vestbjerg Byggecenter. 
@@ -239,7 +237,6 @@ public class OrderCtr
 				"\nDiscount: "+ order.getDiscount() + " %" +
 				"\n\nTotal: " + order.getTotalPrice(); 
 		
-			
 		return invoice;
 	}
 	
@@ -288,7 +285,6 @@ public class OrderCtr
 		int orderAmount = 0;
 		ArrayList<String[]> returnValue = new ArrayList<>();
 		ArrayList<Order> orders = OrderContainer.getInstance().getOrders();
-		Collections.reverse(returnValue);
 		
 		if (orders.size() == 0)
 		{
@@ -306,21 +302,21 @@ public class OrderCtr
 		{
 			return returnValue;
 		}
-		
-
-		for (int e = (index-1)*50; e < (index-1)*50+orderAmount; e++)
+		for(int e = (index-1) * 50 + orderAmount - 1; e >= (index - 1) * 50; e--)
+		//for (int e = (index-1)*50; e < (index-1)*50+orderAmount; e++)
 		{
 			returnValue.add(orders.get(e).searchBar());
-			
 		}
-		return returnValue;
 		
+		Collections.reverse(orders);
+		Collections.reverse(returnValue);
+		
+		return returnValue;
 	}
 	
 	/**
 	 * This method is used only for the searchField in the GUI. We had to implement a new
 	 * method because the findOffer method doesn't return every necessary information.
-	 * 
 	 * 
 	 * @param id
 	 * @return If order is found returns the data from it, otherwise returns null
@@ -335,8 +331,6 @@ public class OrderCtr
 			return data;
 		}
 		
-		
-		
 		for (Order order : orders)
 		{
 			if(Integer.toString(order.getOrderNumber()).contains(id))
@@ -344,8 +338,6 @@ public class OrderCtr
 				data.add(order.searchBar());
 			}
 		}
-		
-		
 		return data;
 	}
 	
@@ -373,11 +365,10 @@ public class OrderCtr
 		
 		for (int e = (index-1)*50; e < (index-1)*50+productAmount; e++)
 		{
-			returnValue.add(products.get(e));
-			
+			returnValue.add(products.get(e));	
 		}
-		return returnValue;
 		
+		return returnValue;
 	}
 	
 	/**
@@ -426,7 +417,7 @@ public class OrderCtr
 	}
 	
 	/**
-	 * This method searchis the order by barcode and update it's quantity within the orderLineItem.
+	 * This method search is the order by barcode and update it's quantity within the orderLineItem.
 	 * Used for updating the quantity throught the createOrderPanel
 	 * 
 	 * @param barcode
@@ -443,5 +434,4 @@ public class OrderCtr
 			}
 		}
 	}
-	
 }
