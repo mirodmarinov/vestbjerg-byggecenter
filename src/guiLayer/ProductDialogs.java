@@ -760,27 +760,23 @@ public class ProductDialogs extends JDialog {
 	{				
 		if(checkValues())
 		{
-
-			String row = rowTextField.getText().equals("Row...") || rowTextField.getText().equals("") ? "#" : rowTextField.getText();
-			String column = columnTextField.getText().equals("Column...") || columnTextField.getText().equals("") ? "#" : columnTextField.getText();
-			String place = placeTextField.getText().equals("Place...") || placeTextField.getText().equals("") ? "#" : placeTextField.getText();
+			String row = (rowTextField.getText().equals("Row...") || rowTextField.getText().replaceAll("[.]", "").equals("")) ? "#" : rowTextField.getText().replaceAll("[.]", "");
+			String column = (columnTextField.getText().equals("Column...") || columnTextField.getText().replaceAll("[.]", "").equals("")) ? "#" : columnTextField.getText().replaceAll("[.]", "");
+			String place = (placeTextField.getText().equals("Place...") || placeTextField.getText().replaceAll("[.]", "").equals("")) ? "#" : placeTextField.getText().replaceAll("[.]", "");
 			if (isEditProduct)
 			{
-			
-			productCtr.updateParameter(placeOnList, 0, nameTextField.getText());
-			productCtr.updateParameter(placeOnList, 1, descriptionTextField.getText());
-			productCtr.updateParameter(placeOnList, 2, groupTextField.getText());
-			productCtr.updateParameter(placeOnList, 3, barcodeTextField.getText());
-			productCtr.updateParameter(placeOnList, 5, quantityTextField.getText());
-			productCtr.updateParameter(placeOnList, 6, thresholdTextField.getText());
-			productCtr.updateParameter(placeOnList, 7, salesPriceTextField.getText());
-			productCtr.updateParameter(placeOnList, 8, purchasePriceTextField.getText());
-			productCtr.updateParameter(placeOnList, 9, discountTextField.getText());
-			//TODO Edit if the stock format has changed
-			//TODO Maybe errorhandling? IDK
-			productCtr.updateLocation(barcodeTextField.getText(),row+column+place);
-			productsPanel.defaultFillTable(productsPanel.getPageIndex());
-			dispose();
+				productCtr.updateParameter(placeOnList, 0, nameTextField.getText());
+				productCtr.updateParameter(placeOnList, 1, descriptionTextField.getText());
+				productCtr.updateParameter(placeOnList, 2, groupTextField.getText());
+				productCtr.updateParameter(placeOnList, 3, barcodeTextField.getText());
+				productCtr.updateParameter(placeOnList, 5, quantityTextField.getText());
+				productCtr.updateParameter(placeOnList, 6, thresholdTextField.getText());
+				productCtr.updateParameter(placeOnList, 7, salesPriceTextField.getText());
+				productCtr.updateParameter(placeOnList, 8, purchasePriceTextField.getText());
+				productCtr.updateParameter(placeOnList, 9, discountTextField.getText());
+				productCtr.updateLocation(barcodeTextField.getText(), (row + "." + column + "." + place));
+				productsPanel.defaultFillTable(productsPanel.getPageIndex());
+				dispose();
 			}
 			else
 			{
@@ -791,8 +787,7 @@ public class ProductDialogs extends JDialog {
 						groupTextField.getText(),"");
 				productsPanel.defaultFillTable(Integer.parseInt(productsPanel.getTablePageLabel().getText()));
 				productsPanel.defaultFillTable(productsPanel.getPageIndex());
-				//TODO Edit if the stock format has changed
-				productCtr.updateLocation(barcodeTextField.getText(),row+column+place);
+				productCtr.updateLocation(barcodeTextField.getText(),(row + "." + column + "." + place));
 				dispose();
 			}
 		}
