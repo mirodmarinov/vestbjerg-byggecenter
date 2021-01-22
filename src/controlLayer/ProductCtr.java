@@ -323,10 +323,10 @@ public class ProductCtr
 	 * @param stock
 	 */
 	
-	public void updateStock(String barcode, String stock)
+	public void updateLocation(String barcode, String stock)
 	{
 		Product p = getProduct(barcode);
-		p.setStock(stock);
+		p.setLocation(stock);
 	}
 	
 }

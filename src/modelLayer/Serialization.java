@@ -95,11 +95,11 @@ public class Serialization {
 		CustomerContainer.getInstance().addCustomer(customer1);
 		CustomerContainer.getInstance().addCustomer(customer2);
 		Product p1 = new Product(10, 50, 0, 5000, 1000, "123456789", "nails", "Huge nails , fix houses",
-		                "the nail shelf", "3.12.50","168");
+		                "the nail shelf", "3.12.50");
 		Product p2 = new Product(10, 50, 15, 6000, 1100, "123456788", "different nails",
-		                "Bigger nails , used for fixing different houses", "the nail shelf", "3.12.51","465");
+		                "Bigger nails , used for fixing different houses", "the nail shelf", "3.12.51");
 		Product p3 = new Product(10, 10, 0, 2500, 2000, "123456787", "hammer", "A construction hammer", "Tools",
-		                "3.12.52","335");
+		                "3.12.52");
 		
 		
 		/**OrderLineItem oli2 = new OrderLineItem(p1, 8);

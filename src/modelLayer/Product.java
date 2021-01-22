@@ -26,7 +26,6 @@ public class Product implements Serializable
 	private String description;
 	private String group;
 	private String location;
-	private String stock;
 
 	public Product(int threshold, int quantity,  int discount, float purchasePrice, float salesPrice, String barcode, String name, String description,
 	                String group, String location)
@@ -42,22 +41,6 @@ public class Product implements Serializable
 		this.group = group;
 		this.location = location;
 	}
-	
-	public Product(int threshold, int quantity,  int discount, float purchasePrice, float salesPrice, String barcode, String name, String description,
-            String group, String location, String stock)
-	{
-	this.threshold = threshold;
-	this.quantity = quantity;
-	this.discount = discount;
-	this.purchasePrice = purchasePrice;
-	this.salesPrice = salesPrice;
-	this.barcode = barcode;
-	this.name = name.toLowerCase();
-	this.description = description;
-	this.group = group;
-	this.location = location;
-	this.stock = stock;
-}
 
 	/**
 	 * These are all the getters and setters for the all the fields
@@ -177,17 +160,7 @@ public class Product implements Serializable
 	{
 		this.quantity += quantity;
 	}
-	
-	public void setStock(String stock)
-	{
-		this.stock = stock;
-	}
-	
-	public String getStock()
-	{
-		return stock;
-	}
-	
+
 	@Override
 	public String toString()
 	{
@@ -205,7 +178,7 @@ public class Product implements Serializable
 	public String[] toStrings()
 	{
 		return new String[] { name, description, group, barcode,
-                location, Integer.toString(quantity), Integer.toString(threshold), String.format("%.2f", salesPrice), String.format("%.2f", purchasePrice), Integer.toString(discount), stock};
+                location, Integer.toString(quantity), Integer.toString(threshold), String.format("%.2f", salesPrice), String.format("%.2f", purchasePrice), Integer.toString(discount)};
 	}
 	
 	
