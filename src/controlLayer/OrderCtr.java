@@ -141,7 +141,6 @@ public class OrderCtr
 		Order offer = new Order(customer, orderProducts);
 		offer.calculateExpirationDate();
 		offer.setStatus("pending");
-		//offer.setTotalPrice((float)calculateTotal());
 		offer.setDiscount(customer.getDiscount());
 
 		/*

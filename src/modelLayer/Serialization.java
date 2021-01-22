@@ -108,17 +108,17 @@ public class Serialization {
 		oliarray.add(oli);
 		oliarray.add(oli2);
 		oliarray.add(oli3);
-		for(int i = 0; i < 69; i++) {
+		for(int i = 0; i < 30; i++) {
 			Order order = new Order(customer1, oliarray);
 			order.calculateExpirationDate();
 			order.setStatus("pending");
 			order.setDiscount(5);
 			OrderContainer.getInstance().addOrder(order);
 			
-			/*Order order2 = new Order(customer2, oliarray);
+			Order order2 = new Order(customer2, oliarray);
 			order2.generatePurchaseDate();
 			order2.setStatus("confirmed");
-			OrderContainer.getInstance().addOrder(order2);*/
+			OrderContainer.getInstance().addOrder(order2);
 			
 		}
 		
