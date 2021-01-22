@@ -61,7 +61,6 @@ public class ProductMenu {
 	
 	private void createProduct()
 	{
-		//TODO check if user communication has a good form
 		int threshold,quantity,purchasePrice,salesPrice,discount;
 		String barcode,name,description,group,location;
 		//********************** Get name **********************\\

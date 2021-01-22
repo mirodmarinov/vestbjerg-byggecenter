@@ -38,7 +38,6 @@ public class OrderCtr
 	 */
 	public String findCustomer(int phone) throws CustomerNotFoundException
 	{
-		// TODO - check if correct
 		Customer customer = customerCtr.getCustomer(phone);
 		this.customer = customer;
 		if (customer == null)

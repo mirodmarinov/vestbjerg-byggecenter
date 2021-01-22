@@ -270,7 +270,6 @@ public class OrderMenuGUI {
 	
 	/**
 	 * Changed the current selected button to the other selected one
-	 * TODO Edit this comment so it won't be that brief
 	 * 
 	 * @param button
 	 */
