@@ -38,7 +38,6 @@ public class OrderCtr
 	 */
 	public String findCustomer(int phone) throws CustomerNotFoundException
 	{
-		// TODO - check if correct
 		Customer customer = customerCtr.getCustomer(phone);
 		this.customer = customer;
 		if (customer == null)
@@ -159,8 +158,6 @@ public class OrderCtr
 	 * This method creates an Order, by passing the customer and the list of
 	 * products and setting the status of the order to confirmed so indicate
 	 * that it is an order.
-	 * 
-	 * 
 	 */
 	public boolean createOrder()
 	{
@@ -215,7 +212,7 @@ public class OrderCtr
 	 */
 	public String generateInvoice(int orderNumber)
 	{
-		Order order = OrderContainer.getInstance().generateInvoice(orderNumber);
+		Order order = OrderContainer.getInstance().findOrder(orderNumber);
 		String invoice, productInfo = "";
 		ArrayList<OrderLineItem> products = order.getProducts();
 		// Adding all the products into the productInfo String so it's easier to combine with the whole invoice.
@@ -386,7 +383,6 @@ public class OrderCtr
 	
 	/**
 	 * Deletes the customer
-	 * 
 	 */
 	public void clearCustomer()
 	{
@@ -413,7 +409,7 @@ public class OrderCtr
 	
 	/**
 	 * This method search is the order by barcode and update it's quantity within the orderLineItem.
-	 * Used for updating the quantity throught the createOrderPanel
+	 * Used for updating the quantity through the createOrderPanel
 	 * 
 	 * @param barcode
 	 * @param quantity

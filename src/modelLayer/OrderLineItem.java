@@ -43,17 +43,4 @@ public class OrderLineItem implements Serializable
 	{
 		this.quantity = quantity;
 	}
-	
-	/**
-	 * This method calculates the discount of the product
-	 * based on the quantity it is ordered in,
-	 * to allow bulk buy.
-	 * 
-	 * @return the discount triggered by quantity
-	 */
-	public int calculateDiscount() 
-	{
-		//TODO write method
-		return 0;	
-	}
 }

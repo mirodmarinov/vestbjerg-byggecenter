@@ -17,7 +17,6 @@ import java.util.ArrayList;
  */
 public class Order implements Serializable
 {
-	
 	private static final long serialVersionUID = 1L;
 	private int orderNumber; // The unique identifier
 	private int discount;
@@ -36,10 +35,8 @@ public class Order implements Serializable
 		this.products = products;
 		expirationDate = null;
 		totalPrice = calculateTotal();
-		//TODO automatically add purchaseDate, status, delivery, totalPrice, automatically generate expirationDate
 	}
 	
-
 	/**
  	* The following methods are the getters 
  	* and setters for all the fields.
@@ -116,7 +113,8 @@ public class Order implements Serializable
 	}
 
 	/**
-	 * @return purchase date as String
+	 * Converts the purchase date to string
+	 * and returns it.
 	 */
 	public String getPurchaseDate() 
 	{
@@ -134,7 +132,8 @@ public class Order implements Serializable
 	}
 	
 	/**
-	 * @return expiration date as String
+	 * Converts the expiration date to string
+	 * and returns it.
 	 */
 	public String getExpirationDate() 
 	{
@@ -150,7 +149,7 @@ public class Order implements Serializable
 	{
 		this.expirationDate = expirationDate;
 	}
-
+	
 	public Calendar calculateExpirationDate() 
 	{
 		Calendar generateExpirationDate = Calendar.getInstance();
@@ -165,8 +164,9 @@ public class Order implements Serializable
 	}
 	
 	/** This method creates an array list of string arrays
-	 * 
-	 * @return
+	 * containing information about the order,
+	 * it's customer, and all of the
+	 * orderlineItems in it.
 	 */
 	public ArrayList<String[]> toStrings()
 	{

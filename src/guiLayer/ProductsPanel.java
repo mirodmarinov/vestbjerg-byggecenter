@@ -321,7 +321,7 @@ public class ProductsPanel extends JPanel {
 		foundLabel.setVisible(false);
 		if ((!searchTextField.getText().equals(""))&&(!searchTextField.getText().equals("🔍 Search...")))
 		{
-			ArrayList<String[]> data = productCtr.searchField(searchTextField.getText()); // TODO Check this
+			ArrayList<String[]> data = productCtr.searchField(searchTextField.getText());
 			
 			if (data.size() != 0)
 			{ 

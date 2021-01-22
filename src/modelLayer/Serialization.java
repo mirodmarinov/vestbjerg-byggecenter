@@ -25,7 +25,6 @@ public class Serialization {
 		// makes it hidden for basic operating systems.
 		CONFIG_HOME = new File(home, ".VestbjergWMS").getAbsoluteFile();
 		CONFIG_HOME.mkdirs();
-
 	}
 	
     
@@ -41,7 +40,6 @@ public class Serialization {
 	 */
 	public boolean serializeClass(String className)
 	{
-
 		/*
 		 * we use try with resources here, so we make sure that the
 		 * ObjectOutputStream object is closed automatically once the try is
@@ -62,7 +60,6 @@ public class Serialization {
 		{
 			return false;
 		}
-
 	}
 
 	/**
@@ -171,14 +168,10 @@ public class Serialization {
 			order2.generatePurchaseDate();
 			order2.setStatus("confirmed");
 			OrderContainer.getInstance().addOrder(order2);
-			
 		}
 		
 		ProductContainer.getInstance().addProduct(p1);
 		ProductContainer.getInstance().addProduct(p2);
 		ProductContainer.getInstance().addProduct(p3);
-
 	}
-	
-
 }

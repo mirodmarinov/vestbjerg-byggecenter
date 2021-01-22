@@ -45,7 +45,12 @@ public class CustomerCtr
 		CustomerContainer.getInstance().addCustomer(customer);
 	}
 	
-	
+	/**
+	 * Finds and deletes customer based on phoneNumber.
+	 * 
+	 * @param phone
+	 * @return true if successful
+	 */
 	public boolean deleteCustomerByPhone(int phone)
 	{
 		boolean result = false;
@@ -57,6 +62,16 @@ public class CustomerCtr
 		return result;
 	}
 	
+	/**
+	 * Finds customer based on phone
+	 * and updates the information inside it.
+	 * 
+	 * @param phone
+	 * @param discount
+	 * @param name
+	 * @param address
+	 * @param group
+	 */
 	public void updateCustomer(int phone, int discount, String name, String address, String group)
 	{
 		Customer customer = getCustomer(phone);
@@ -67,6 +82,14 @@ public class CustomerCtr
 		customer.setGroup(group);
 	}
 	
+	/**
+	 * This method return a list of Arrays
+	 * containing string containing customer
+	 * information.
+	 * 
+	 * @param index
+	 * @return
+	 */
 	public ArrayList<String[]> getCustomers(int index)
 	{
 		int customerAmount = 0;
@@ -88,15 +111,12 @@ public class CustomerCtr
 		{
 			return returnValue;
 		}
-		
-
 		for (int e = (index-1)*50; e < (index-1)*50+customerAmount; e++)
 		{
 			returnValue.add(customers.get(e).tableFill());
 			
 		}
 		return returnValue;
-		
 	}
 	
 	/**
@@ -123,12 +143,10 @@ public class CustomerCtr
 				data.add(customer.tableFill());
 			}
 		}
-		
-		
 		return data;
 	}
 	
-	public boolean checkValues(String name,String value,boolean string)
+	public boolean checkValues(String name, String value, boolean string)
 	{
 		if (string)
 		{
@@ -149,9 +167,6 @@ public class CustomerCtr
 				return false;
 			}
 		}
-		
-		
 		return true;
 	}
-	
 }

@@ -61,7 +61,6 @@ public class ProductMenu {
 	
 	private void createProduct()
 	{
-		//TODO check if user communication has a good form
 		int threshold,quantity,purchasePrice,salesPrice,discount;
 		String barcode,name,description,group,location;
 		//********************** Get name **********************\\
@@ -168,9 +167,7 @@ public class ProductMenu {
 		{
 			System.out.println("Product creation error!");
 		}
-		
 	}
-	
 	
 	private void readProduct()
 	{
@@ -196,12 +193,10 @@ public class ProductMenu {
 		{
 		System.out.println(productCtr.getParameters(choice-1));
 		
-		
 		boolean running = true;
 		int element;
 		while (running)
 		{
-			
 			System.out.println("Please choose an element you want to edit");
 			element = intInput();
 			while (element <= 0 || element > 10)
@@ -257,7 +252,6 @@ public class ProductMenu {
 			}
 		}
 		}
-		
 		
 	}
 	

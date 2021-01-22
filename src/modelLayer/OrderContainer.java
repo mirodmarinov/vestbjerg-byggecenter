@@ -87,20 +87,9 @@ public class OrderContainer implements Serializable
 		return orders;
 	}
 	
-	public Order generateInvoice(int orderNumber)
-	{
-		Order order = null;
-		for (Order e : orders)
-		{
-			if (e.getOrderNumber() == orderNumber)
-			{
-				order = e;
-				break;
-			}
-		}
-		return order;
-	}
-	
+	/**
+	 * Returns an order based on its orderNumber
+	 */
 	public Order findOrder(int orderNumber)
 	{
 		Order order = null;
@@ -121,6 +110,10 @@ public class OrderContainer implements Serializable
 		return order;
 	}
 	
+	/**
+	 * Finds an offer based on its
+	 * order number and confirms the offer.
+	 */
 	public boolean confirmOffer(int orderNumber)
 	{
 		Order order = findOrder(orderNumber);
@@ -132,7 +125,5 @@ public class OrderContainer implements Serializable
 			return true;
 		}
 		return false;
-		
 	}
-
 }

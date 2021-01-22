@@ -331,7 +331,7 @@ public class CustomersPanel extends JPanel {
 		{
 			customerCtr = new CustomerCtr();
 			
-			ArrayList<String[]> data = customerCtr.searchField(searchTextField.getText()); // TODO CHECK IF ITS STRING FOR REAL
+			ArrayList<String[]> data = customerCtr.searchField(searchTextField.getText());
 			
 			if (data.size() != 0)
 			{ 
