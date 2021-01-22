@@ -482,7 +482,8 @@ public class AddProductsDialog extends JDialog {
 	}
 	
 	/**
-	 * TODO - finish description
+	 * Based on a products place in the list, we add it to our
+	 * product list.
 	 * @param placeInList - specific place in list
 	 */
 	public void addToList(int placeInList) 
@@ -529,8 +530,6 @@ public class AddProductsDialog extends JDialog {
 			String totalPrice = String.format("%.2f", (quantity * price));
 			
 			orderCtr.selectProduct(productPlace.get(e), quantity);
-		
-			//TODO ERRORHANDLING TO FOR THE QUANTITY
 			
 			createOrderPanelTable.setValueAt(name, e + rowCount, createOrderPanelTable.getColumn("Name").getModelIndex());
 			createOrderPanelTable.setValueAt(barcode, e + rowCount, createOrderPanelTable.getColumn("Barcode").getModelIndex());
@@ -541,7 +540,6 @@ public class AddProductsDialog extends JDialog {
 			
 			createOrderPanelTable.setValueAt(new RoundedButton("Remove", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e + rowCount, createOrderPanelTable.getColumn("").getModelIndex());
 		}
-		//TODO Check data and send it back to the CreateOrderPanel with the method setOrderPanelData(barcodes)
 		dispose();
 	}
 	

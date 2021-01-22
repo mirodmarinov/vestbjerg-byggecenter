@@ -322,7 +322,7 @@ public class OrderPanel extends JPanel {
 		{
 			orderCtr = new OrderCtr();
 			
-			ArrayList<String[]> data = orderCtr.searchBar(searchTextField.getText()); // TODO Check this
+			ArrayList<String[]> data = orderCtr.searchBar(searchTextField.getText());
 			
 			if (data.size() != 0)
 			{ 

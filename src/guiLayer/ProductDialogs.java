@@ -57,7 +57,6 @@ public class ProductDialogs extends JDialog {
 		this.placeOnList = placeOnList;
 		this.productCtr = productCtr;
 		this.isEditProduct = isEditProduct;
-		//TODO redraw the productsPanel table after finish the editing (update the table)
 		setBounds(100, 100, 1237, 713);
 		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		getContentPane().setLayout(new BorderLayout());
