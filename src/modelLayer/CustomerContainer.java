@@ -1,17 +1,6 @@
 package modelLayer;
 
 import java.util.ArrayList;
-
-/**
- * This class defines orders in the System for
- * Vestbjerg Byggecenter. It acts as a collection
- * of all customers in the system. This allows us to
- * create methods that needs to be done on the entire 
- * collection, rather than the individual customer.
- *
- */
-
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -61,19 +50,15 @@ public class CustomerContainer implements Serializable
 				found = true;
 			}
 		}
-		
-		
 		return customer;
 	}
 	
-		/**
-	 *
+	/**
 	 *A method that overrides the instance with the object retrieved from deserialization
 	 * @param ois
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-
 	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException
 	{
 		ois.defaultReadObject();
@@ -128,5 +113,4 @@ public class CustomerContainer implements Serializable
 	{
 		Serialization.getInstance().serializeClass("modelLayer.CustomerContainer");
 	}
-	
 }

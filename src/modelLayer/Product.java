@@ -6,15 +6,12 @@ import java.io.Serializable;
  * The class Product is a part of the System developed for Vestbjerg
  * Byggecenter. It defines all the traits and knowledge we need to store on each
  * individual product.
- * It implement Serializable in order ot be able to save it to a file.
+ * It implement Serializable in order to be able to save it to a file.
  * 
  */
 
 public class Product implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int threshold; // the minimum of products, once crossed, restock is initiated             
 	private int quantity;
@@ -165,15 +162,8 @@ public class Product implements Serializable
 	public String toString()
 	{
 		return String.format(" (1) Name: %s\n (2) Description: %s\n (3) Group: %s\n (4) Barcode: %s\n (5) Location: %s\n (6) Quantity: %d\n (7) Threshold: %d\n (8) Sales Price: %f\n (9) Purchase Price: %f\n (10) Discount: %d\n",name, description, group, barcode, location, quantity, threshold, salesPrice, purchasePrice, discount);
-		//return String.format(" Name: %s\n Description: %s\n Group: %s\n Barcode: %s\n Location: %s\n Quantity: %d\n Threshold: %d\n Sales Price: %d\n Purchase Price: %d\n Discount: %d\n",name, description, group, barcode, location, quantity, threshold, salesPrice, purchasePrice, discount);
+		
 	}
-	
-	
-	/*
-	public String getParameterList()
-	{
-		return String.format(" (1) Name: %s\n (2) Description: %s\n (3) Group: %s\n (4) Barcode: %s\n (5) Location: %s\n (6) Quantity: %d\n (7) Threshold: %d\n (8) Sales Price: %d\n (9) Purchase Price: %d\n (10) Discount: %d\n",name, description, group, barcode, location, quantity, threshold, salesPrice, purchasePrice, discount);
-	}*/
 	
 	public String[] toStrings()
 	{
@@ -181,11 +171,8 @@ public class Product implements Serializable
                 location, Integer.toString(quantity), Integer.toString(threshold), String.format("%.2f", salesPrice), String.format("%.2f", purchasePrice), Integer.toString(discount)};
 	}
 	
-	
 	/**
 	 * Return only the necessary information to the product panel with the right order
-	 * 
-	 * @return
 	 */
 	public String[] tableFill()
 	{
@@ -199,6 +186,4 @@ public class Product implements Serializable
 		data[6] = Integer.toString(discount);
 		return data;
 	}
-
-
 }

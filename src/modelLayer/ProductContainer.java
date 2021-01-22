@@ -18,7 +18,6 @@ import java.io.Serializable;
 
 public class ProductContainer implements Serializable
 {
-
 	private static final long serialVersionUID = 1L;
 	private static ProductContainer uniqueInstance = new ProductContainer();
 	private ArrayList<Product> products = new ArrayList<>();
@@ -111,7 +110,7 @@ public class ProductContainer implements Serializable
 	}
 
 	/**
-	 * used for serialization to return the instance of the singleton class
+	 * Used for serialization to return the instance of the singleton class
 	 * 
 	 * @return returns a productCOntainer instance that can be serialized
 	 */
@@ -123,6 +122,5 @@ public class ProductContainer implements Serializable
 	public ArrayList<Product> getProductsArray()
 	{
 		return products;
-	}
-	
+	}	
 }

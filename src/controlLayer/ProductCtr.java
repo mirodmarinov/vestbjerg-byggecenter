@@ -2,10 +2,8 @@ package controlLayer;
 
 import modelLayer.*;
 
-import java.awt.RenderingHints;
 import java.util.*;
 
-import com.sun.jdi.Value;
 
 /**
  * This class is a part of the System developed for Vestbjerg Byggecenter. It
@@ -21,7 +19,7 @@ public class ProductCtr
 	{
 	}
 
-	/*
+	/**
 	 * The method returns an ArrayList of products by calling the matching
 	 * method in the Container and passing the String parameter name.
 	 */
@@ -30,7 +28,10 @@ public class ProductCtr
 		return ProductContainer.getInstance().getProducts(name);
 	}
 
-	
+	/**
+	 * This method creates a product, and passes
+	 * all necessary information into it.
+	 */
 	public boolean createProduct(int threshold, int quantity, int discount, long purchasePrice, long salesPrice, String barcode, String name, String description,
 	                String group, String location)
 	{
@@ -59,12 +60,10 @@ public class ProductCtr
 		return productInfo;
 	}
 	
-	
 	/**
 	 * Finds a product by its place on the generated ArrayList
 	 * 
-	 * @param placeOnList index in the products ArrayList
-	 *            
+	 * @param placeOnList index in the products ArrayList         
 	 * @return returns an array of all its field values
 	 */
 	public String[] selectProduct(int placeOnList)
@@ -92,7 +91,6 @@ public class ProductCtr
 			}
 		}
 		switch (index)
-
 		{
 			case 0:
 				p.setName(value);
@@ -130,9 +128,9 @@ public class ProductCtr
 	}
 	
 	/**
+	 * Deletes a product based on it's place in a list.
 	 * 
 	 * @param placeInList
-	 * @return
 	 */
 	public boolean deleteProduct(int placeInList)
 	{
@@ -142,9 +140,14 @@ public class ProductCtr
 	}
 
 	/**
+	 * Retrieves info about a product
+	 * based on it's place in a list.
+	 * And returns it as a String
+	 * without brackets,
+	 * so it does not look like
+	 * they are choices.
 	 * 
 	 * @param placeInList
-	 * @return
 	 */
 	public String getInfo(int placeInList)
 	{
@@ -152,9 +155,11 @@ public class ProductCtr
 	}
 
 	/**
+	 * Retrieves info about a product
+	 * based on it's place in a list.
+	 * And returns it as a String
 	 * 
 	 * @param placeInList
-	 * @return
 	 */
 	public String getParameters(int placeInList)
 	{
@@ -180,7 +185,6 @@ public class ProductCtr
 		{
 			return false;
 		}
-		
 	}
 	
 	/**
@@ -189,7 +193,6 @@ public class ProductCtr
 	 * @param name of the product
 	 * @return
 	 */
-	
 	public ArrayList<String[]> searchField(String name)
 	{
 		ArrayList<Product> products = ProductContainer.getInstance().getProducts(name);
@@ -209,7 +212,6 @@ public class ProductCtr
 	 * @param index of the page
 	 * @return the data of the products
 	 */
-	
 	public ArrayList<String[]> defaultFill(int index)
 	{
 		int productAmount = 0;
@@ -235,16 +237,12 @@ public class ProductCtr
 		{
 			return returnValue;
 		}
-		
-		
 		for (int e = (index-1)*50; e < (index-1)*50+productAmount; e++)
 		{
-			returnValue.add(products.get(e).tableFill());
-			
+			returnValue.add(products.get(e).tableFill());	
 		}
 		
 		return returnValue;
-		
 	}
 	
 	/**
@@ -264,7 +262,6 @@ public class ProductCtr
 				string = product.toStrings();
 				break;
 			}
-	
 		}
 		return string;
 	}
@@ -288,7 +285,6 @@ public class ProductCtr
 		return null;
 	}
 	
-	
 	public boolean checkValues(String name,String value,boolean string)
 	{
 		if (string)
@@ -310,8 +306,6 @@ public class ProductCtr
 				return false;
 			}
 		}
-		
-		
 		return true;
 	}
 	

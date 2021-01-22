@@ -84,6 +84,13 @@ public class Customer implements Serializable
 		this.group = group;
 	}
 	
+	/**
+	 * This method returns an Array of Strings
+	 * containing the different information
+	 * of the fields of a Customer Object.
+	 * 
+	 * @return String[] of info
+	 */
 	public String[] tableFill()
 	{
 		String[] data = new String[5];
