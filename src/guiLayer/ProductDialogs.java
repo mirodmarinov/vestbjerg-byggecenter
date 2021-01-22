@@ -523,13 +523,12 @@ public class ProductDialogs extends JDialog {
 				formatButton(deleteButton);
 				redButton(deleteButton);
 				
-				GridBagConstraints gbc_okButton = new GridBagConstraints();
-				gbc_okButton.gridheight = 4;
-				gbc_okButton.anchor = GridBagConstraints.SOUTHEAST;
-				gbc_okButton.insets = new Insets(0, 0, 0, 100);
-				gbc_okButton.gridx = 0;
-				gbc_okButton.gridy = 3;
-				contentPanel.add(deleteButton, gbc_okButton);
+				GridBagConstraints gbc_deleteButton = new GridBagConstraints();
+				gbc_deleteButton.anchor = GridBagConstraints.SOUTHWEST;
+				gbc_deleteButton.insets = new Insets(0, 0, 0, 100);
+				gbc_deleteButton.gridx = 0;
+				gbc_deleteButton.gridy = 6;
+				contentPanel.add(deleteButton, gbc_deleteButton);
 			}
 		}
 		
