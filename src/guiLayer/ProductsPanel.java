@@ -1,54 +1,24 @@
 package guiLayer;
-import controlLayer.*;
-import uiLayer.MainMenu;
 
+/**
+ * This class is a part of the Warehouse System
+ * for Vestbjerg Byggecenter. It contains the
+ * formatting and functions of the products panel
+ * which is used to show and manage products
+ * in the system.
+ */
+
+import controlLayer.*;
 
 import guiLayer.Renderers.JTableButtonMouseListener;
 import guiLayer.Renderers.JTableButtonRenderer;
-import modelLayer.OrderContainer;
-import modelLayer.ProductContainer;
-
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.Dialog;
-import java.awt.Dimension;
-
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JViewport;
-import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import java.awt.Insets;
-import java.awt.Panel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import javax.swing.table.*;
+import javax.swing.event.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.xml.crypto.Data;
-
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class ProductsPanel extends JPanel {
 	private JTable table;
@@ -88,6 +58,7 @@ public class ProductsPanel extends JPanel {
 	 * Create the panel.
 	 */
 	@SuppressWarnings("serial")
+	/********************************************** Products Panel **********************************************/
 	public ProductsPanel() {
 		System.setProperty("file.encoding", "UTF-8");
 		setBackground(new Color(252, 252, 252));
@@ -98,15 +69,17 @@ public class ProductsPanel extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 2.0, 0.0, 1.0, 0.2};
 		setLayout(gridBagLayout);
 		
-		JLabel ordersLabel = new JLabel("Products");
-		ordersLabel.setFont(new Font("Lato", Font.BOLD, 35));
-		GridBagConstraints gbc_ordersLabel = new GridBagConstraints();
-		gbc_ordersLabel.anchor = GridBagConstraints.WEST;
-		gbc_ordersLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_ordersLabel.gridx = 1;
-		gbc_ordersLabel.gridy = 1;
-		add(ordersLabel, gbc_ordersLabel);
+		//Products header*****************************************************************************
+		JLabel productsHeaderLabel = new JLabel("Products");
+		productsHeaderLabel.setFont(new Font("Lato", Font.BOLD, 35));
+		GridBagConstraints gbc_productsHeaderLabel = new GridBagConstraints();
+		gbc_productsHeaderLabel.anchor = GridBagConstraints.WEST;
+		gbc_productsHeaderLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_productsHeaderLabel.gridx = 1;
+		gbc_productsHeaderLabel.gridy = 1;
+		add(productsHeaderLabel, gbc_productsHeaderLabel);
 
+		//Products Table*****************************************************************************
 		table = new JTable();
 		table.setName("ProductsPanel");
 		//Changes the Color of the header
@@ -158,11 +131,8 @@ public class ProductsPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setMinWidth(70);
 		table.getColumnModel().getColumn(6).setMinWidth(75);
 	
-		
-		
-		
+		//"<"Left arrow label*****************************************************************************
 		leftArrowLabel = new JLabel(" < ");
-		
 		leftArrowLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -181,6 +151,7 @@ public class ProductsPanel extends JPanel {
 		gbc_leftArrowLabel.gridy = 1;
 		add(leftArrowLabel, gbc_leftArrowLabel);
 		
+		//Table page indicator label*****************************************************************************
 		tablePageLabel = new JLabel("<html><u>1</u></html>");
 		tablePageLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_tablePageLabel = new GridBagConstraints();
@@ -189,6 +160,7 @@ public class ProductsPanel extends JPanel {
 		gbc_tablePageLabel.gridy = 1;
 		add(tablePageLabel, gbc_tablePageLabel);
 		
+		//">"Right arrow label*****************************************************************************
 		rightArrowLabel = new JLabel(" > ");
 		rightArrowLabel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -210,7 +182,7 @@ public class ProductsPanel extends JPanel {
 		gbc_rightArrowLabel.gridy = 1;
 		add(rightArrowLabel, gbc_rightArrowLabel);
 		
-		
+		//Product not found error label*****************************************************************************
 		foundLabel = new JLabel("Product not found!");
 		foundLabel.setVisible(false);
 		foundLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -222,6 +194,7 @@ public class ProductsPanel extends JPanel {
 		gbc_foundLabel.gridy = 2;
 		add(foundLabel, gbc_foundLabel);
 		
+		//Search Text field*****************************************************************************
 		searchTextField = new JTextField();
 		searchTextField.setBorder(BorderFactory.createLineBorder(new Color(143, 143, 143), 1, true));
 		searchTextField.addActionListener(new ActionListener() {
@@ -286,9 +259,8 @@ public class ProductsPanel extends JPanel {
 		loadPage(1);
 
 		
-		//***** Add Products button ****\\
-		
-		RoundedButton addProductButton = new RoundedButton("➕ Add Product", babyBlue,
+		//Add  products button*****************************************************************************
+		RoundedButton addProductButton = new RoundedButton("\u002B Add Product", babyBlue,
 					Color.WHITE, babyBlue, new Font("Lato", Font.BOLD, 14));
 		ProductsPanel thisObject = this;
 		addProductButton.addMouseListener(new MouseAdapter() {
@@ -316,7 +288,6 @@ public class ProductsPanel extends JPanel {
 
 	/**
 	 * This method fills the table with the first x elements from the orderContainer
-	 * 
 	 */
 	protected void defaultFillTable(int index) {
 		//we get the order information from the orderContainer
@@ -336,8 +307,6 @@ public class ProductsPanel extends JPanel {
 				table.setValueAt(data.get(e)[element], e, table.convertColumnIndexToView(table.getColumn(tableElements[element]).getModelIndex()));
 			}
 			table.setValueAt(new RoundedButton("Manage", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
-
-			
 		}
 	}
 	
@@ -367,18 +336,15 @@ public class ProductsPanel extends JPanel {
 	
 					}
 					table.setValueAt(new RoundedButton("Manage", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
-					
+					}
 				}
-				
-			}
 			else
 			{
 				if (Notdynamic)
 				{
 				foundLabel.setVisible(true);
 				}
-			}
-			
+			}	
 		}
 		else
 		{
@@ -386,6 +352,13 @@ public class ProductsPanel extends JPanel {
 		}
 	}
 	
+	/**
+	 * This method is used to refresh the table
+	 * after a product has been deleted,
+	 * added and edited.
+	 * 
+	 * @param index
+	 */
 	public void loadPage(int index)
 	{
 		foundLabel.setVisible(false);
@@ -393,19 +366,15 @@ public class ProductsPanel extends JPanel {
 			return;
 		}
 		
-		
 		if (productCtr.defaultFill(index).isEmpty())
 		{
 			return;
 		}
 		
 		defaultFillTable(index);
-
-		
 		
 		tablePageLabel.setText("<html><u>" + index + "</u></html>");
 
-		
 	}
 	
 	/**
@@ -416,18 +385,21 @@ public class ProductsPanel extends JPanel {
 	{
 		return Integer.parseInt(tablePageLabel.getText().replaceAll("\\<.*?\\>", ""));
 	}
-	
 	public JTextField getSearchTextField()
 	{
 		
 		return searchTextField;
 	}
-	
 	public JLabel getTablePageLabel()
 	{
 		return tablePageLabel;
 	}
 	
+	/**
+	 * Formats a Roundedbutton
+	 * 
+	 * @param button
+	 */
 	public void blueButton(RoundedButton button) {
 		
 		button.addMouseListener(new MouseAdapter() {
@@ -446,6 +418,4 @@ public class ProductsPanel extends JPanel {
 			}
 		});
 	}
-
-	
 }
