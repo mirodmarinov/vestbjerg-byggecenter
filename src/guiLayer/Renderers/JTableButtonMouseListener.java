@@ -1,11 +1,5 @@
 package guiLayer.Renderers;
 
-/**
- * This class adds different methods to the buttons
- * we have inside the table, allowing us
- * to give them different functions based on
- * mouse actions applied by the user.
- */
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -16,6 +10,12 @@ import javax.swing.table.DefaultTableModel;
 import controlLayer.OrderCtr;
 import guiLayer.*;
 
+/**
+ * This class adds different methods to all tables
+ * and buttons inside of them, allowing us
+ * to give them different functions based on
+ * mouse actions applied by the user.
+ */
 public class JTableButtonMouseListener extends MouseAdapter
 {
 	private final JTable table;
@@ -43,6 +43,13 @@ public class JTableButtonMouseListener extends MouseAdapter
 		this.orderCtr = orderCtr;
 	}
 
+	/**
+	 * On Mouse click in any of the tables in the GUI,
+	 * this eventlistener method is triggered and a
+	 * position is derived from the mouse click. it is
+	 * used to trigger a button, table update or a
+	 * relevant action.
+	 */
 	public void mouseClicked(MouseEvent e)
 	{
 		int column = table.getColumnModel().getColumnIndexAtX(e.getX()); // get the column of the button
@@ -56,6 +63,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 			{
 				if (table.getName().equals("OrderPanel"))
 				{
+					//if Confirm button is pressed in the Order Panel, open Order Details Dialog.
 					if (((RoundedButton)value).getName().equals("Confirm"))
 					{
 						int index = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("Order Number").getModelIndex())));
@@ -104,16 +112,18 @@ public class JTableButtonMouseListener extends MouseAdapter
 			}
 			else if(table.getName().equals("OrderPanel"))
 			{
-				if(e.getClickCount() > 1) {
+				if(e.getClickCount() > 1)
+				{
 					int index = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("Order Number").getModelIndex())));
-					
-					try {
+					try
+					{
 						OrderPanel opd = (OrderPanel) table.getParent().getParent().getParent();
 						OrderInfoDialog dialog = new OrderInfoDialog(index,opd);
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 						dialog.setVisible(true);
-						
-					} catch (Exception x) {
+					}
+					catch (Exception x)
+					{
 						x.printStackTrace();
 					}
 				}
@@ -121,7 +131,14 @@ public class JTableButtonMouseListener extends MouseAdapter
 		}
 	}
 	
-
+	/**
+	 * It is a mouse moved listener that is a custom
+	 * implementation of mouse hover for the RandonButton class.
+	 * The method is called when the mouse is moved
+	 * inside any of the tables. Used for updating the
+	 * color of buttons according to their focus/mouse hover.
+	 * 
+	 */
 	public void mouseMoved(MouseEvent e)
 	{
 		int column = table.getColumnModel().getColumnIndexAtX(e.getX()); // get the column of the button
@@ -130,7 +147,6 @@ public class JTableButtonMouseListener extends MouseAdapter
 		// Checking the row or column is valid or not
 		if (column != y || row != x)
 		{
-
 			// Leave the button
 			if (recolor == 1)
 			{
@@ -172,6 +188,10 @@ public class JTableButtonMouseListener extends MouseAdapter
 		}
 	}
 
+	/**
+	 * Triggered on table mouse exit.
+	 * It resets the colors of all buttons
+	 */
 	public void mouseExited(MouseEvent e)
 	{
 		if (y<table.getRowCount() && x<table.getColumnCount())
@@ -183,52 +203,15 @@ public class JTableButtonMouseListener extends MouseAdapter
 				{
 					mouseExited((RoundedButton)prevValue);
 				}
-
 				table.repaint();
 			}
 		}
 
 	}
-
-	public void confirmOffer()
-	{
-		OrderCtr orderCtr = new OrderCtr();
-
-		// confirm offer
-		int index = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("Order Number").getModelIndex())));
-		//int index = 1;
-
-		orderCtr.confirmOffer(index);
-		// get new data
-		ArrayList<String[]> data = orderCtr.searchBar(Integer.toString(index));
-		String[] ourData = new String[6];
-		for (String[] e : data)
-		{
-			if (Integer.parseInt(e[0]) == index)
-			{
-				ourData = e;
-				break;
-			}
-		}
-		
-		// change the button to Confirmed and inactive
-		RoundedButton button = (RoundedButton)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("").getModelIndex()));
-		button.setText("Confirmed");
-		button.setBackground(Color.WHITE);
-		button.setBorderColor(Color.WHITE);
-		button.setForeground(Color.BLACK);
-		button.setFont(new Font("Lato", Font.PLAIN, 14));
-
-		// update the table model row with the new content
-
-		for (int e = 0;e<6;e++)
-		{
-			table.setValueAt(ourData[e], table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn(tableElements[e]).getModelIndex()));
-		}
-
-
-	}
-
+	
+	/**
+	 * Custom method for resetting button colors.
+	 */
 	public void mouseExited(RoundedButton button)
 	{
 		button.setBackground(babyBlue);
@@ -236,21 +219,25 @@ public class JTableButtonMouseListener extends MouseAdapter
 		button.setBorderColor(Color.WHITE);
 	}
 	
-	
+	/**
+	 * Checks if the product is added to the list and if not,
+	 * it adds the product and its quantity to a list of
+	 * products to be added to the order. If quantity is empty,
+	 * it adds an amount of 1.
+	 */
 	private void addToList()
 	{	
 		RoundedButton button = (RoundedButton)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("").getModelIndex()));
 		if (button.getName().equals("Add"))
 		{
+			//if no quantity entered, change quantity to 1.
 			if (table.getValueAt(table.getSelectedRow(), table.getColumn("Input Quantity").getModelIndex()).toString().isEmpty())
 			{
 				table.setValueAt("1", table.getSelectedRow(), table.getColumn("Input Quantity").getModelIndex());
 			}
-			if  (true)
-			{
-				
-			}
+			//change value to "Added"
 			table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), table.getSelectedRow(), table.getColumn("").getModelIndex());
+			//stores the product line for further manipulation
 			((AddProductsDialog)popup).addToList(table.getSelectedRow());
 		}
 	}
