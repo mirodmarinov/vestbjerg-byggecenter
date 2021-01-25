@@ -463,6 +463,7 @@ public class OrderInfoDialog extends JDialog {
 					originalOrderPanel.reset();
 					invoiceButton.setFocusable(true);
 					invoiceButton.setBackground(babyBlue);
+					invoiceButton.setName("Enabled");
 					retrieveInfo();
 				}
 			});
