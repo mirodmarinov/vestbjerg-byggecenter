@@ -292,7 +292,7 @@ public class ProductsPanel extends JPanel {
 	 */
 	protected void defaultFillTable(int index) {
 		//we get the order information from the orderContainer
-		ArrayList<String[]> data = productCtr.defaultFill(index);
+		ArrayList<String[]> data = productCtr.getProductsInfo(index);
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(0);
 		dtm.setRowCount(data.size());
@@ -367,7 +367,7 @@ public class ProductsPanel extends JPanel {
 			return;
 		}
 		
-		if (productCtr.defaultFill(index).isEmpty())
+		if (productCtr.getProductsInfo(index).isEmpty())
 		{
 			return;
 		}

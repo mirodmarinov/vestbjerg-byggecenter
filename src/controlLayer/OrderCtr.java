@@ -204,7 +204,6 @@ public class OrderCtr
 			int quantity = p.getQuantity();
 			totalWithoutDiscount += product.getSalesPrice() * quantity;
 			totalWithDiscount += product.getSalesPrice() * ((float)(100 - product.getDiscount(quantity))/100) * quantity;
-
 		}
 		if (customer != null)
 		{
@@ -223,7 +222,8 @@ public class OrderCtr
 	public String generateInvoice(int orderNumber)
 	{
 		Order order = OrderContainer.getInstance().findOrder(orderNumber);
-		String invoice, productInfo = "";
+		String invoice = "";
+		String productInfo = "";
 		ArrayList<OrderLineItem> products = order.getProducts();
 		// Adding all the products into the productInfo String so it's easier to combine with the whole invoice.
 		for (OrderLineItem e : products) 
@@ -251,7 +251,7 @@ public class OrderCtr
 	 * @param orderNumber
 	 * @return returns strings for gui purposes
 	 */
-	public ArrayList<String[]> findOrder(int orderNumber)
+	public ArrayList<String[]> getOrderInfo(int orderNumber)
 	{
 		Order order = OrderContainer.getInstance().findOrder(orderNumber);
 		if (order == null)
@@ -297,7 +297,6 @@ public class OrderCtr
 		return OrderContainer.getInstance().confirmOffer(orderNumber);
 	}
 	
-	
 	/**
 	 * This method is for the fillTable method in the OrderPanel. Returns x amount of order's data
 	 * so we can write it to the table in the UI layer.
@@ -307,8 +306,7 @@ public class OrderCtr
 	 * @return
 	 */
 	
-
-	public ArrayList<String[]> getOrders(int index)
+	public ArrayList<String[]> getOrdersInfo(int index)
 	{
 		int orderAmount = 0;
 		ArrayList<String[]> returnValue = new ArrayList<>();
@@ -318,10 +316,12 @@ public class OrderCtr
 		{
 			return returnValue;
 		}
+		//If we have more than 50 elements we set the orderAmount to 50
 		if ((int)(Math.floor(orders.size() / 50))+1 > index)
 		{
 			orderAmount = 50;
 		}
+		//If a page contains less then 50 elements, the orderAmount is set to the leftover amount.
 		else if ((int)(Math.floor(orders.size() / 50))+1 == index)
 		{
 			orderAmount = (int)(orders.size()%50);
@@ -330,7 +330,7 @@ public class OrderCtr
 		{
 			return returnValue;
 		}
-
+		//All of the orders are added to returnValue based on the orderAmount
 		for (int e = (orders.size()-(index-1)*50)-1 ; e > (orders.size()-((index-1)*50+orderAmount))-1 ; e--)
 		{
 			returnValue.add(orders.get(e).searchBar());
@@ -340,8 +340,10 @@ public class OrderCtr
 	}
 	
 	/**
-	 * This method is used only for the searchField in the GUI. We had to implement a new
-	 * method because the findOffer method doesn't return every necessary information.
+	 * This method is used only for the searchField in the GUI.
+	 * The method retrieves all orders, with ordernumbers match
+	 * the sequence of numbers in the search bar. And live-updating
+	 * the table, so the user has suggestions for orders based on the ordernumber.
 	 * 
 	 * @param id
 	 * @return If order is found returns the data from it, otherwise returns null
@@ -403,19 +405,20 @@ public class OrderCtr
 	 */
 	public void removeProductFromList(String barcode) {
 		Iterator<OrderLineItem> it = orderProducts.iterator();
-		while(it.hasNext()) {
+		boolean productFound = false;
+		while(it.hasNext() && !productFound) {
 			OrderLineItem orderLineItem = it.next();
 			Product productToRemove = orderLineItem.getProduct();
 			if(productToRemove.getBarcode().equals(barcode))
 			{
 				it.remove();
-				break;
+				productFound = true;
 			}
 		}
 	}
 	
 	/**
-	 * Deletes the customer
+	 * Resets the customer field.
 	 */
 	public void clearCustomer()
 	{
@@ -423,7 +426,8 @@ public class OrderCtr
 	}
 	
 	/**
-	 * This method checks the quantity on the stock. Returns the elements with less amount of than the desired input 
+	 * This method checks the quantity of the product in stock. 
+	 * Returns the elements with less amount of than the desired input 
 	 * 
 	 * @return
 	 */
@@ -441,13 +445,13 @@ public class OrderCtr
 	}
 	
 	/**
-	 * This method search is the order by barcode and update it's quantity within the orderLineItem.
-	 * Used for updating the quantity through the createOrderPanel
+	 * This method updates the quantity of OrderLineItems inside
+	 * the order, by locating them using barcode, and then updating
+	 * the quantity parameter.
 	 * 
 	 * @param barcode
 	 * @param quantity
 	 */
-	
 	public void changeOrderQuantity(String barcode, String quantity)
 	{
 		for (OrderLineItem order : orderProducts)

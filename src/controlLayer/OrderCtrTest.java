@@ -142,10 +142,10 @@ class OrderCtrTest
 	{
 		orderCtr = new OrderCtr();
 		
-		assertNotNull(orderCtr.findOrder(1));
-		assertNull(orderCtr.findOrder(2));
+		assertNotNull(orderCtr.getOrderInfo(1));
+		assertNull(orderCtr.getOrderInfo(2));
 		assertEquals(orderCtr.confirmOffer(1), true);
-		assertNull(orderCtr.findOrder(1));
+		assertNull(orderCtr.getOrderInfo(1));
 		
 	}
 

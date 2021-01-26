@@ -283,7 +283,7 @@ public class OrderPanel extends JPanel {
 	private void defaultFillTable(int index) {
 		orderCtr = new OrderCtr();
 		//we get the order information from the orderContainer
-		ArrayList<String[]> data = orderCtr.getOrders(index);
+		ArrayList<String[]> data = orderCtr.getOrdersInfo(index);
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(0);
 		dtm.setRowCount(data.size());
@@ -376,7 +376,7 @@ public class OrderPanel extends JPanel {
 		}
 		
 		orderCtr = new OrderCtr();
-		if (orderCtr.getOrders(index).isEmpty())
+		if (orderCtr.getOrdersInfo(index).isEmpty())
 		{
 			return;
 		}

@@ -90,7 +90,7 @@ public class CustomerCtr
 	 * @param index
 	 * @return
 	 */
-	public ArrayList<String[]> getCustomers(int index)
+	public ArrayList<String[]> getCustomersInfo(int index)
 	{
 		int customerAmount = 0;
 		ArrayList<String[]> returnValue = new ArrayList<>();
