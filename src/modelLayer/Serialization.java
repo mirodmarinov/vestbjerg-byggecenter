@@ -4,6 +4,17 @@ import java.io.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+/**
+ * This class is a part of the warehouse system
+ * for Vestbjerg Byggecenter. It is used to save
+ * the data every time the program is closed, to 
+ * ensure that the users don't loose the data
+ * that has been put into the system.
+ * It also allows the system to open the files and
+ * read data from previous use.
+ * 
+ */
+
 public class Serialization {
 	
 	private File CONFIG_HOME; // storing the app data folder link
@@ -68,7 +79,6 @@ public class Serialization {
 	 */
 	public boolean deserializeClass(String className)
 	{
-		
 		boolean returnValue = false;
 		File tmpFile = new File(CONFIG_HOME.getPath() + File.separator + className + ".ser");
 		if (tmpFile.exists() && tmpFile.isFile())
@@ -105,32 +115,12 @@ public class Serialization {
 						newOrderC.addOrder(o);
 					}
 					OrderContainer.setInstance(newOrderC);
-//					OrderContainer c = OrderContainer.getInstance();
-//					ProductContainer productC = ProductContainer.getInstance();
-//					CustomerContainer customerC = CustomerContainer.getInstance();
-//					ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//				    ObjectOutputStream oos = new ObjectOutputStream(baos);
-//
-//
-//				    oos.writeObject(newOrderC);
-//
-//				    oos.flush();
-//				    oos.close();
-//
-//				    InputStream is = new ByteArrayInputStream(baos.toByteArray());
-//					ObjectInputStream ois2 = new ObjectInputStream(is);
-//					ois2.readObject();
-//					ois2.close();
-//					OrderContainer orderC = OrderContainer.getInstance();
-					System.out.println();
 				}
-				
 			}
 			catch (Exception e)
 			{
 			}
 		}
-		
 		return returnValue;
 	}
 	
