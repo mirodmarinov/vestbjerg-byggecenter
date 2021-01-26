@@ -20,7 +20,6 @@ public class Serialization {
 	private File CONFIG_HOME; // storing the app data folder link
     private static Serialization uniqueInstance = new Serialization();
     OrderContainer oldOrderC;
-	OrderContainer newOrderC;
 	
 	private Serialization()
 	{
@@ -93,28 +92,14 @@ public class Serialization {
 				}
 				else
 				{
-					newOrderC = OrderContainer.getInstance();
 					oldOrderC = (OrderContainer) ois.readObject();
 					ArrayList<Order> orders = oldOrderC.getOrders();
 					for (Order order: orders)
 					{
-						Customer customer = CustomerContainer.getInstance().getCustomer(order.getCustomer().getPhone());
-						Order o = new Order(customer, order.getProducts());
-						if (order.getStatus().equals("confirmed"))
-						{
-							o.setStatus("confirmed");
-							o.setDiscount(customer.getDiscount());
-							o.generatePurchaseDate();
-						}
-						else
-						{
-							o.calculateExpirationDate();
-							o.setStatus("pending");
-							o.setDiscount(customer.getDiscount());
-						}
-						newOrderC.addOrder(o);
+						Customer newCustomer = CustomerContainer.getInstance().getCustomer(order.getCustomer().getPhone());
+						order.setCustomer(newCustomer);
 					}
-					OrderContainer.setInstance(newOrderC);
+					OrderContainer.setInstance(oldOrderC);
 				}
 			}
 			catch (Exception e)
