@@ -156,6 +156,7 @@ public class CustomerCtr
 	 */
 	public boolean checkValues(String name, String value, boolean string)
 	{
+		
 		if (string)
 		{
 			if ((name+"...").equals(value) || (value.equals("")))
@@ -165,6 +166,13 @@ public class CustomerCtr
 		}
 		else
 		{
+			if (name.equals("Phone"))
+			{
+				if (value.length() != 8 || value.charAt(0) == '0')
+				{
+					return false;
+				}
+			}
 			try
 			{
 				Integer.parseInt(value);

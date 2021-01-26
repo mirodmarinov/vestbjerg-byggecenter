@@ -458,12 +458,18 @@ public class OrderInfoDialog extends JDialog {
 			confirmOfferButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					orderCtr.confirmOffer(orderNumber);
-					originalOrderPanel.reset();
-					invoiceButton.setFocusable(true);
-					invoiceButton.setBackground(babyBlue);
-					invoiceButton.setName("Enabled");
-					retrieveInfo();
+					if (orderCtr.confirmOffer(orderNumber))
+					{
+						originalOrderPanel.reset();
+						invoiceButton.setFocusable(true);
+						invoiceButton.setBackground(babyBlue);
+						invoiceButton.setName("Enabled");
+						retrieveInfo();
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Item out of stock!", "Out of stock!", 0);
+					}
 				}
 			});
 			

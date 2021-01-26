@@ -4,6 +4,8 @@ import modelLayer.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.junit.jupiter.api.MethodOrdererContext;
+
 /**
  * This class is a part of the System developed for Vestbjerg Byggecenter. 
  * It acts as a controller for all of the order objects.
@@ -28,6 +30,7 @@ public class OrderCtr
 	{
 		return orderProducts;
 	}
+	
 
 	/**
 	 * This method returns the customers name and also stores the customer
@@ -268,6 +271,29 @@ public class OrderCtr
 	 */
 	public boolean confirmOffer(int orderNumber)
 	{
+		for (Order order : OrderContainer.getInstance().getOrders())
+		{
+			if (order.getOrderNumber() == orderNumber)
+			{
+				ArrayList<OrderLineItem> products = order.getProducts();
+				for (OrderLineItem product : products)
+				{
+					if (productCtr.getProduct(product.getProduct().getBarcode()).getQuantity() - product.getQuantity() < 0)
+					{
+						return false;
+					}
+				}
+				
+				for (OrderLineItem product : products)
+				{
+					productCtr.getProduct(product.getProduct().getBarcode()).setQuantity((productCtr.getProduct(product.getProduct().getBarcode()).getQuantity() - product.getQuantity()));
+				}
+				break;
+			}
+			
+			
+		}
+		
 		return OrderContainer.getInstance().confirmOffer(orderNumber);
 	}
 	
@@ -432,4 +458,6 @@ public class OrderCtr
 			}
 		}
 	}
+	
+	
 }
