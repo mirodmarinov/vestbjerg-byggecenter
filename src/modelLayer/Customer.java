@@ -8,17 +8,18 @@ import java.io.Serializable;
  * knowledge needed about the customers, as well
  * as the methods needed to access and mutate
  * this information.
- * It implement Serializable in order ot be able to save it to a file.
+ * It implement Serializable in order to be able to save it to a file.
  */
 
 public class Customer implements Serializable
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;//is used to identify the state of the Object
 	private int phone; //phone number without country code
     private int discount; //based on the group
     private String name;
     private String address;
-    private String group; 
+    private String group;
+    //private String email;
 
 
     public Customer(int phone, int discount, String name, String address, String group)

@@ -18,7 +18,7 @@ import java.io.Serializable;
 
 public class ProductContainer implements Serializable
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; //is used to identify the state of the Object
 	private static ProductContainer uniqueInstance = new ProductContainer();
 	private ArrayList<Product> products = new ArrayList<>();
 
@@ -44,7 +44,6 @@ public class ProductContainer implements Serializable
 		name = name.toLowerCase();
 		for (Product a : products)
 		{
-
 			if (a.getName().contains(name))
 			{
 				specifiedProducts.add(a);
@@ -96,9 +95,9 @@ public class ProductContainer implements Serializable
 	}
 
 	/**
-	 *
 	 * A method that overrides the instance with the object retrieved from
 	 * deserialization.
+	 * 
 	 * @param ois	new ProductCOntainer object ot be used
 	 * @throws IOException	based if the input object is reabable
 	 * @throws ClassNotFoundException if it cannot find the singleton class
@@ -119,8 +118,13 @@ public class ProductContainer implements Serializable
 		return uniqueInstance;
 	}
 	
+	/**
+	 * Is used in the controlLayer to retrieve
+	 * the entire ArrayList of products saved
+	 * in the container.
+	 */
 	public ArrayList<Product> getProductsArray()
 	{
 		return products;
-	}	
+	}
 }

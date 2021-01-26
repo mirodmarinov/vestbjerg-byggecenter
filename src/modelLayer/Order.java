@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Order implements Serializable
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; //is used to identify the state of the Object
 	private int orderNumber; // The unique identifier
 	private int discount;
 	private float totalPrice;
@@ -150,7 +150,7 @@ public class Order implements Serializable
 	public Calendar calculateExpirationDate() 
 	{
 		Calendar generateExpirationDate = Calendar.getInstance();
-		generateExpirationDate.roll(Calendar.MONTH, true);
+		generateExpirationDate.add((Calendar.MONTH), 1);
 		expirationDate = generateExpirationDate; // saves it to the field
 		return generateExpirationDate;
 	}

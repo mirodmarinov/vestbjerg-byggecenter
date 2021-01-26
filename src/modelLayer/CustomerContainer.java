@@ -7,19 +7,16 @@ import java.io.Serializable;
 /**
  *  Customer Container implements Serializable in order to be able to save it in a local file.
  *  It is a singleton class that contains all customers of the system.
- * @author Miroslav
  *
  */
 public class CustomerContainer implements Serializable
 {
-	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; //is used to identify the state of the Object
     private static CustomerContainer uniqueInstance = new CustomerContainer();
 	private ArrayList<Customer> customers = new ArrayList<>();
 
     private CustomerContainer()
     {
-    	//Serialization.getInstance().deserializeClass("CustomerContainer");
     }
     
     public static CustomerContainer getInstance()
@@ -54,27 +51,6 @@ public class CustomerContainer implements Serializable
 	}
 	
 	/**
-	 *A method that overrides the instance with the object retrieved from deserialization
-	 * @param ois
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 */
-	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException
-	{
-		ois.defaultReadObject();
-		uniqueInstance = this;
-	}
-
-	/**
-	 * used for serialization to return the instance of the singleton class
-	 * @return returns a productCOntainer instance that can be serialized
-	 */
-	private Object readResolve()
-	{
-		return uniqueInstance;
-	}
-	
-	/**
 	 * Made as a test method for the CustomerContainerTest test class, the create offer
 	 * and the create order use cases.
 	 * @param customer
@@ -88,7 +64,6 @@ public class CustomerContainer implements Serializable
 				return false;
 			}
 		}
-		
 		customers.add(customer);
 		serializeClass();
 		return true;
@@ -104,6 +79,11 @@ public class CustomerContainer implements Serializable
 		return customers.remove(customer);
 	}
 	
+	/**
+	 * Is used in the controlLayer to retrieve
+	 * the entire ArrayList of products saved
+	 * in the container.
+	 */
 	public ArrayList<Customer> getCustomers()
 	{
 		return customers;
@@ -112,5 +92,26 @@ public class CustomerContainer implements Serializable
 	private void serializeClass()
 	{
 		Serialization.getInstance().serializeClass("modelLayer.CustomerContainer");
+	}
+	
+	/**
+	 *A method that overrides the instance with the object retrieved from deserialization
+	 * @param ois
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException
+	{
+		ois.defaultReadObject();
+		uniqueInstance = this;
+	}
+
+	/**
+	 * Used for serialization to return the instance of the singleton class
+	 * @return returns a productCOntainer instance that can be serialized
+	 */
+	private Object readResolve()
+	{
+		return uniqueInstance;
 	}
 }

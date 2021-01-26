@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 public class Product implements Serializable
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;//is used to identify the state of the Object
 	private int threshold; // the minimum of products, once crossed, restock is initiated             
 	private int quantity;
 	private int discount;
@@ -158,6 +158,13 @@ public class Product implements Serializable
 		this.quantity += quantity;
 	}
 
+	/**
+	 * Is used to format the way we would display
+	 * the product as a String when used in 
+	 * the TUI. It shows all fields of the
+	 * Product in a comprehensible way.
+	 * 
+	 */
 	@Override
 	public String toString()
 	{
@@ -165,6 +172,15 @@ public class Product implements Serializable
 		
 	}
 	
+	/**
+	 * Is used to gather all the fields
+	 * in an Array of Strings, where all the
+	 * fields are formatted to fit how we want
+	 * to showcase everything, such as the 
+	 * prices, that are floats. Then the 
+	 * Array of Strings is returned.
+	 * 
+	 */
 	public String[] toStrings()
 	{
 		return new String[] { name, description, group, barcode,
@@ -172,7 +188,13 @@ public class Product implements Serializable
 	}
 	
 	/**
-	 * Return only the necessary information to the product panel with the right order
+	 * Returns specific information
+	 * used in the UI formatted and in an
+	 * ordered String Array.
+	 * This could have been combined with
+	 * either of the toString() methods above,
+	 * if the methods had been better planned.
+	 * 
 	 */
 	public String[] tableFill()
 	{
