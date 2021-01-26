@@ -39,10 +39,10 @@ public class CustomerCtr
 	 * @param address
 	 * @param group
 	 */
-	public void addCustomer(int phone, int discount, String name, String address, String group)
+	public boolean addCustomer(int phone, int discount, String name, String address, String group)
 	{
 		Customer customer = new Customer(phone,discount,name,address,group);
-		CustomerContainer.getInstance().addCustomer(customer);
+		return CustomerContainer.getInstance().addCustomer(customer);
 	}
 	
 	/**
