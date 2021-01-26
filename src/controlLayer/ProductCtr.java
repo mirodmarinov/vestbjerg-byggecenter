@@ -88,7 +88,6 @@ public class ProductCtr
 				return false;
 			}
 		}
-		
 		switch (index)
 		{
 			case 0:
@@ -174,7 +173,7 @@ public class ProductCtr
 	{
 		try
 		{
-			Long.parseLong(value);
+			Float.parseFloat(value);
 			return true;
 		}
 		catch(Exception e)
