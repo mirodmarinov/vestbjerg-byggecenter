@@ -378,8 +378,6 @@ public class AddProductsDialog extends JDialog {
 
 		for (int e = 0; e<data.size();e++)
 		{
-			//table.setValueAt("[1]", e, Integer.parseInt((String)table.getValueAt(e,table.getColumn("Input Quantity").getModelIndex())));
-			
 			table.setValueAt(data.get(e)[3], e, table.convertColumnIndexToView(table.getColumn(tableElements[0]).getModelIndex()));
 			table.setValueAt(data.get(e)[0], e, table.convertColumnIndexToView(table.getColumn(tableElements[1]).getModelIndex()));
 			table.setValueAt(data.get(e)[4], e, table.convertColumnIndexToView(table.getColumn(tableElements[2]).getModelIndex()));
@@ -499,7 +497,6 @@ public class AddProductsDialog extends JDialog {
 		{
 			return;
 		}
-		//JLabel priceLabel = null;
 		JPanel tempPanel = (JPanel)createOrderPanelTable.getParent().getParent().getParent();
 		for(int i = 0; i < tempPanel.getComponentCount(); i++)
 		{

@@ -261,7 +261,6 @@ public class ProductDialogs extends JDialog {
 								//And of course set it as the name label
 								
 								productName.setText(productName.getText().substring(0,productName.getText().indexOf(":")) + ": " + barcodeTextField.getText());
-								//productName.setText(nameTextField.getText() + " " +productName.getText().substring(productName.getText().indexOf(":"),productName.getText().length()));
 							}		
 						}
 					});

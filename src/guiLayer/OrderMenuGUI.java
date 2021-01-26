@@ -63,7 +63,6 @@ public class OrderMenuGUI {
 		frmVestbjergByggecenterManagement = new JFrame();
 		frmVestbjergByggecenterManagement.setTitle("Vestbjerg Byggecenter Management System");
 		frmVestbjergByggecenterManagement.setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
-		//frame.setBounds(0, 0, 1680, 1050);
 		Rectangle height = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		frmVestbjergByggecenterManagement.setBounds(0, 0, (int)height.getWidth(), (int)height.getHeight());
 		frmVestbjergByggecenterManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -142,7 +141,6 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Create Order");
-				//createOrderPanel.reset();
 				changeSelectedButton(createOrderButton);
 				
 			}
