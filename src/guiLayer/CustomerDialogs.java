@@ -32,6 +32,7 @@ public class CustomerDialogs extends JDialog {
 	private JLabel customerName;
 	private CustomersPanel customersPanel;
 	private boolean isEditCustomer;
+	private int originalPhoneNumber;
 
 
 
@@ -469,7 +470,7 @@ public class CustomerDialogs extends JDialog {
 				groupTextField.setText(data.get(0)[3]);
 				discountTextField.setText(data.get(0)[4]);
 				customerName.setText(data.get(0)[0]);
-				
+				originalPhoneNumber = Integer.parseInt(data.get(0)[1]);
 				this.phone = Integer.parseInt(data.get(0)[1]);
 			}
 		}
@@ -488,7 +489,7 @@ public class CustomerDialogs extends JDialog {
 			if (isEditCustomer)
 			{
 				customerCtr.updateCustomer(Integer.parseInt(phoneTextField.getText()), Integer.parseInt(discountTextField.getText()),
-						nameTextField.getText(), addressTextField.getText(), groupTextField.getText());
+						nameTextField.getText(), addressTextField.getText(), groupTextField.getText(),originalPhoneNumber);
 				customersPanel.defaultFillTable(customersPanel.getPageIndex());
 				dispose();
 			}

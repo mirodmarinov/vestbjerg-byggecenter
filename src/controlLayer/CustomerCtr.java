@@ -72,9 +72,9 @@ public class CustomerCtr
 	 * @param address
 	 * @param group
 	 */
-	public void updateCustomer(int phone, int discount, String name, String address, String group)
+	public void updateCustomer(int phone, int discount, String name, String address, String group, int originalNumber)
 	{
-		Customer customer = getCustomer(phone);
+		Customer customer = getCustomer(originalNumber);
 		customer.setPhone(phone);
 		customer.setDiscount(discount);
 		customer.setName(name);
