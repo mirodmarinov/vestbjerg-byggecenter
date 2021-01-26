@@ -14,13 +14,14 @@ public class OrderCtr
 	private CustomerCtr customerCtr = new CustomerCtr();
 	private ProductCtr productCtr = new ProductCtr();
 	private Customer customer;
-	private ArrayList<OrderLineItem> orderProducts;
 	private ArrayList<Product> foundProducts;
+	private ArrayList<OrderLineItem> orderProducts;
+	
 
 	public OrderCtr()
 	{
-		orderProducts = new ArrayList<OrderLineItem>();
 		foundProducts = new ArrayList<Product>();
+		orderProducts = new ArrayList<OrderLineItem>();	
 	}
 
 	public ArrayList<OrderLineItem> getOrderProducts()
@@ -47,7 +48,11 @@ public class OrderCtr
 		return customer.getName();
 	}
 	
-	public String[] getCustomerInfo(String stringPhone)// throws CustomerNotFoundException
+	/**
+	 * @param stringPhone
+	 * @return customer information as a String Array
+	 */
+	public String[] getCustomerInfo(String stringPhone)
 	{
 		int phone = 0;
 		try
@@ -63,7 +68,6 @@ public class OrderCtr
 		if (customer == null)
 		{
 			return new String[] {"", ""};
-			//throw new CustomerNotFoundException("No customer exists with this phone number: " + phone + "\n Make sure to write the phone number without the country code.");
 		}
 		
 		String[] info = new String[2];
@@ -76,13 +80,13 @@ public class OrderCtr
 	/**
 	 * This method calls the getProducts() in the product controller and creates
 	 * a list of products that are stored in the foundProducts field. Then an
-	 * Array of Strings containing info such as the name an description of the
+	 * Array of Strings containing info such as the name and description of the
 	 * product is created. This can then be used in the UI layer.
 	 * 
 	 * @param name
 	 * @return ArrayList of String Arrays containing product information
 	 */
-	public ArrayList<String[]> getProducts(String name)
+	public ArrayList<String[]> getProductsInfo(String name)
 	{
 		foundProducts = productCtr.getProducts(name);
 		ArrayList<String[]> allProductsInfo = new ArrayList<String[]>();
@@ -148,7 +152,9 @@ public class OrderCtr
 		 */
 		for (OrderLineItem p : orderProducts)
 		{
-			p.getProduct().updateThreshold(p.getQuantity());
+			String barcode = p.getProduct().getBarcode();
+			Product product = productCtr.getProduct(barcode);
+			product.updateThreshold(p.getQuantity());
 		}
 
 		return OrderContainer.getInstance().addOrder(offer);
@@ -163,19 +169,20 @@ public class OrderCtr
 	{
 		Order order = new Order(customer, orderProducts);
 		order.setStatus("confirmed");
-		//order.setTotalPrice((float)calculateTotal());
 		order.setDiscount(customer.getDiscount());
 		order.generatePurchaseDate();
+		
 		/*
 		 * Here we update the stock, by changing the quantity of the product in
 		 * stock based on the quantity of the orderline item.
 		 */
 		for(OrderLineItem p : orderProducts)
 		{
-			Product product = productCtr.getProduct(p.getProduct().getBarcode());
+			String barcode = p.getProduct().getBarcode();
+			Product product = productCtr.getProduct(barcode);
 			product.updateQuantity(p.getQuantity() * (-1));
 		}
-
+		
 		return OrderContainer.getInstance().addOrder(order);
 	}
 
@@ -337,7 +344,7 @@ public class OrderCtr
 	{
 		int productAmount = 0;
 		ArrayList<String[]> returnValue = new ArrayList<>();
-		ArrayList<String[]> products = getProducts(productName);	
+		ArrayList<String[]> products = getProductsInfo(productName);	
 		if (products.size() == 0)
 		{
 			return returnValue;

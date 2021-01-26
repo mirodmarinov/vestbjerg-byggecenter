@@ -149,7 +149,11 @@ public class CustomerCtr
 		return data;
 	}
 	
-	
+	/**
+	 * This method is used to do error handling in the GUI
+	 * we check if the inputs are correct, for the given
+	 * type.
+	 */
 	public boolean checkValues(String name, String value, boolean string)
 	{
 		if (string)

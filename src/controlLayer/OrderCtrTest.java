@@ -59,8 +59,8 @@ class OrderCtrTest
 	@Test
 	void getProducts()
 	{	
-		assertEquals(orderCtr.getProducts("Ham").get(0)[0],"hammer");
-		assertEquals(orderCtr.getProducts("Ham").get(0)[1],"A construction hammer");
+		assertEquals(orderCtr.getProductsInfo("Ham").get(0)[0],"hammer");
+		assertEquals(orderCtr.getProductsInfo("Ham").get(0)[1],"A construction hammer");
 		
 	}
 	
@@ -81,7 +81,7 @@ class OrderCtrTest
 	@Test
 	void getProductsNegativeTest()
 	{	
-		assertNotEquals(orderCtr.getProducts("Ham").size(), 0);
+		assertNotEquals(orderCtr.getProductsInfo("Ham").size(), 0);
 	}
 	
 	@Test
@@ -91,9 +91,9 @@ class OrderCtrTest
 		
 		try{orderCtr.findCustomer(12658989);}
 		catch(Exception e) {}
-		orderCtr.getProducts("Ham");
+		orderCtr.getProductsInfo("Ham");
 		orderCtr.selectProduct(0, 2);
-		orderCtr.getProducts("nai");
+		orderCtr.getProductsInfo("nai");
 		orderCtr.selectProduct(0, 2);
 		int currentthreshold = orderCtr.getOrderProducts().get(0).getProduct().getThreshold();
 		int currentquantity = 2;
@@ -114,7 +114,7 @@ class OrderCtrTest
 		
 		try{orderCtr.findCustomer(12658989);}
 		catch(Exception e) {}
-		orderCtr.getProducts("Ham");
+		orderCtr.getProductsInfo("Ham");
 		orderCtr.selectProduct(0, 2);
 		int currentquantity = orderCtr.getOrderProducts().get(0).getProduct().getQuantity();
 		

@@ -208,7 +208,7 @@ public class OrderMenu
 				System.out.println("Please input product name:");
 				productName = stringInput();
 				
-				products = orderCtr.getProducts(productName);
+				products = orderCtr.getProductsInfo(productName);
 			
 				if(products.size() == 0)
 				{
