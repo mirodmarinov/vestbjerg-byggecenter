@@ -208,7 +208,7 @@ public class ProductCtr
 	 * @param index of the page
 	 * @return the data of the products
 	 */
-	public ArrayList<String[]> defaultFill(int index)
+	public ArrayList<String[]> getProductsInfo(int index)
 	{
 		int productAmount = 0;
 		ArrayList<String[]> returnValue = new ArrayList<>();

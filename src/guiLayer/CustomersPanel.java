@@ -298,7 +298,7 @@ public class CustomersPanel extends JPanel {
 	protected void defaultFillTable(int index) {
 		customerCtr = new CustomerCtr();
 		//we get the order information from the orderContainer
-		ArrayList<String[]> data = customerCtr.getCustomers(index);
+		ArrayList<String[]> data = customerCtr.getCustomersInfo(index);
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.setRowCount(0);
 		dtm.setRowCount(data.size());
@@ -380,7 +380,7 @@ public class CustomersPanel extends JPanel {
 		}
 		
 		customerCtr = new CustomerCtr();
-		if (customerCtr.getCustomers(index).isEmpty())
+		if (customerCtr.getCustomersInfo(index).isEmpty())
 		{
 			return;
 		}

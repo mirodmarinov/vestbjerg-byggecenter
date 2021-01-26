@@ -542,7 +542,7 @@ public class OrderInfoDialog extends JDialog {
 	 */
 	public void retrieveInfo()
 	{
-		ArrayList<String[]> orderInfo = orderCtr.findOrder(orderNumber);
+		ArrayList<String[]> orderInfo = orderCtr.getOrderInfo(orderNumber);
 		JLabel[] labels = new JLabel[5];
 		String[] orderDetails = orderInfo.get(orderInfo.size()-1);
 		String[] customerDetails = orderInfo.get(0);
