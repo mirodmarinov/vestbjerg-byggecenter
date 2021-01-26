@@ -70,6 +70,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 						try {
 							OrderPanel opd = (OrderPanel) table.getParent().getParent().getParent();
 							OrderInfoDialog dialog = new OrderInfoDialog(index,opd);
+							dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 							dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 							dialog.setVisible(true);
 							
@@ -118,6 +119,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 					{
 						OrderPanel opd = (OrderPanel) table.getParent().getParent().getParent();
 						OrderInfoDialog dialog = new OrderInfoDialog(index,opd);
+						dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 						dialog.setVisible(true);
 					}
