@@ -6,7 +6,7 @@ package modelLayer;
  * of all orders in the system. This allows us to
  * create methods that needs to be done on the entire 
  * collection, rather than the individual order.
- * It implement Serializable in order ot be able to save it to a file.
+ * It implement Serializable in order to be able to save it to a file.
  */
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.io.Serializable;
 
 public class OrderContainer implements Serializable
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; //is used to identify the state of the Object
 	private static OrderContainer uniqueInstance = new OrderContainer();
 	private ArrayList<Order> orders = new ArrayList<>();
 	public int orderNumberGenerator = 0;
@@ -55,14 +55,13 @@ public class OrderContainer implements Serializable
 		return false;
 	}
 	
-		/**
+	/**
 	 *
 	 *A method that overrides the instance with the object retrieved from deserialization
 	 * @param ois
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-
 	private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException
 	{
 		ois.defaultReadObject();

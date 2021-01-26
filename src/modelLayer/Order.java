@@ -206,7 +206,7 @@ public class Order implements Serializable
 	}
 	
 	/**
-	 * Returns the 5 information what the GUI need to display.
+	 * Returns the 5 information that the GUI need to display.
 	 * 
 	 * @return
 	 */
@@ -223,6 +223,13 @@ public class Order implements Serializable
 		return data;
 	}
 	
+	/**
+	 * Calculates the total price of the entire order
+	 * based on all the discounts
+	 * that are based on products, quantity
+	 * and customer.
+	 * 
+	 */
 	public float calculateTotal() {
 		int totalWithoutDiscount = 0;
 		int totalWithDiscount = 0;

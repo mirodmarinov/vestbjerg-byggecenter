@@ -19,7 +19,6 @@ class ProductContainerTest
 	@Test
 	void notNullTest()
 	{
-
 		ProductContainer.getInstance().addProduct(product1);
 		ProductContainer.getInstance().addProduct(product2);
 		assertNotNull(ProductContainer.getInstance());
@@ -38,6 +37,4 @@ class ProductContainerTest
 	{
 		assertEquals(ProductContainer.getInstance().getProducts("1").size(), 0);
 	}
-
-
 }

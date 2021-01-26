@@ -12,7 +12,6 @@ import java.util.*;
 
 public class ProductCtr
 {
-
 	private ArrayList<Product> products;
 
 	public ProductCtr()
@@ -37,7 +36,6 @@ public class ProductCtr
 	{
 		Product product = new Product(threshold, quantity, discount, purchasePrice, salesPrice, barcode, name, description, group, location);
 		return ProductContainer.getInstance().addProduct(product);
-
 	}
 
 	/**
@@ -83,13 +81,14 @@ public class ProductCtr
 	public boolean updateParameter(int placeOnList, int index, String value)
 	{
 		Product p = products.get(placeOnList);
-		if (index == 5 || index == 6 || index == 7 || index == 8 || index == 9)
+		if (index >= 5)
 		{
 			if (!tryCatch(value))
 			{
 				return false;
 			}
 		}
+		
 		switch (index)
 		{
 			case 0:
@@ -114,17 +113,16 @@ public class ProductCtr
 				p.setThreshold(Integer.valueOf(value));
 				break;
 			case 7:
-				p.setSalesPrice(Long.valueOf(value));
+				p.setSalesPrice(Float.valueOf(value));
 				break;
 			case 8:
-				p.setPurchasePrice(Long.valueOf(value));
+				p.setPurchasePrice(Float.valueOf(value));
 				break;
 			case 9:
 				p.setDiscount(Integer.valueOf(value));
 				break;
 		}
 		return true;
-
 	}
 	
 	/**
