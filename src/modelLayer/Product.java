@@ -203,7 +203,7 @@ public class Product implements Serializable
 		data[1] = name;
 		data[2] = group;
 		data[3] = location;
-		data[4] = String.format("%.2f", purchasePrice);
+		data[4] = String.format("%.2f", salesPrice);
 		data[5] = Integer.toString(quantity);
 		data[6] = Integer.toString(discount);
 		return data;
