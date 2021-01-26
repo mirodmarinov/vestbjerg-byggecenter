@@ -314,7 +314,6 @@ public class ProductCtr
 	 * the product based on barcode
 	 * and then inputing the new location.
 	 */
-	
 	public void updateLocation(String barcode, String location)
 	{
 		Product p = getProduct(barcode);

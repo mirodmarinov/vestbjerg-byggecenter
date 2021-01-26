@@ -99,10 +99,12 @@ public class CustomerCtr
 		{
 			return returnValue;
 		}
+		//If we have more than 50 elements we set the customerAmount to 50
 		if ((int)(Math.floor(customers.size() / 50))+1 > index)
 		{
 			customerAmount = 50;
 		}
+		//If a page contains less then 50 elements, the customerAmount is set to the leftover amount.
 		else if ((int)(Math.floor(customers.size() / 50))+1 == index)
 		{
 			customerAmount = (int)(customers.size()%50);
@@ -111,18 +113,20 @@ public class CustomerCtr
 		{
 			return returnValue;
 		}
+		//All of the customers are added to returnValue based on the customerAmount
 		for (int e = (index-1)*50; e < (index-1)*50+customerAmount; e++)
 		{
 			returnValue.add(customers.get(e).tableFill());
-			
 		}
 		return returnValue;
 	}
 	
 	/**
-	 * This method is used only for the searchField in the GUI. We had to implement a new
-	 * method because the findOffer method doesn't return every necessary information.
-	 * 
+	 * This method is used only for the searchField in the GUI.
+	 * The method retrieves all customers, whose phone number matches
+	 * the sequence of numbers in the search bar. And live-updating
+	 * the table, so the user has suggestions for customers based on the phone
+	 * number.
 	 * 
 	 * @param id
 	 * @return If order is found returns the data from it, otherwise returns null
@@ -135,7 +139,6 @@ public class CustomerCtr
 		{
 			return data;
 		}
-		
 		for (Customer customer : customers)
 		{
 			if (Integer.toString(customer.getPhone()).contains(phone))
@@ -145,6 +148,7 @@ public class CustomerCtr
 		}
 		return data;
 	}
+	
 	
 	public boolean checkValues(String name, String value, boolean string)
 	{
