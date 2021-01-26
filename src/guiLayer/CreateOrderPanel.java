@@ -103,6 +103,7 @@ public class CreateOrderPanel extends JPanel {
 					else
 					{
 						searchCustomer();
+						updateTotalLabel();
 					}
 			}
 		});
@@ -156,7 +157,6 @@ public class CreateOrderPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				searchCustomer();
-				orderCtr.calculateTotal();
 				updateTotalLabel();
 			}
 		});
