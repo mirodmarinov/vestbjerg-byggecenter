@@ -315,6 +315,8 @@ public class CreateOrderPanel extends JPanel {
 		
 		DefaultTableCellRenderer defaultHeaderRenderer = (DefaultTableCellRenderer) orderTable.getTableHeader().getDefaultRenderer();
 		defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
+		orderTable.getTableHeader().setFont(new Font("Lato", Font.BOLD, 14));
+		orderTable.getTableHeader().setReorderingAllowed(false);
 		orderTable.getTableHeader().setDefaultRenderer(defaultHeaderRenderer);
 		
 		//Sets the number of columns and their header names

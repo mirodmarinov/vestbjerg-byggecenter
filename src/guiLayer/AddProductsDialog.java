@@ -223,7 +223,6 @@ public class AddProductsDialog extends JDialog {
 			table.setFocusable(false);
 			table.setFillsViewportHeight(true);
 			table.setFont(new Font("Lato", Font.PLAIN, 14));
-			table.getTableHeader().setFont(new Font("Lato", Font.BOLD, 14));
 			table.setShowVerticalLines(false);
 			table.setRowHeight(50);
 			
@@ -233,6 +232,8 @@ public class AddProductsDialog extends JDialog {
 			// Could be moved to a custom header renderer
 			DefaultTableCellRenderer defaultHeaderRenderer = (DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer();
 			defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
+			table.getTableHeader().setFont(new Font("Lato", Font.BOLD, 14));
+			table.getTableHeader().setReorderingAllowed(false);
 			table.getTableHeader().setDefaultRenderer(defaultHeaderRenderer);
 			
 			//Setting the number of columns and their headers

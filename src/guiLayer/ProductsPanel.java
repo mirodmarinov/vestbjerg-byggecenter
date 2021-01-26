@@ -102,6 +102,7 @@ public class ProductsPanel extends JPanel {
 		DefaultTableCellRenderer defaultHeaderRenderer = (DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer();
 		defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
 		table.getTableHeader().setFont(new Font("Lato", Font.BOLD, 14));
+		table.getTableHeader().setReorderingAllowed(false);
 		table.getTableHeader().setDefaultRenderer(defaultHeaderRenderer);
 
 		table.setModel(new DefaultTableModel(
