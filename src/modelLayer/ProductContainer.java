@@ -123,7 +123,7 @@ public class ProductContainer implements Serializable
 	 * the entire ArrayList of products saved
 	 * in the container.
 	 */
-	public ArrayList<Product> getProductsArray()
+	public ArrayList<Product> getProductsArrayList()
 	{
 		return products;
 	}

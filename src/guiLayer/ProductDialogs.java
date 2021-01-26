@@ -719,7 +719,7 @@ public class ProductDialogs extends JDialog {
 	 */
 	public void fillFields(String barcode)
 	{
-		String[] data = productCtr.getProductrByBarcode(barcode);
+		String[] data = productCtr.getProductInfoByBarcode(barcode);
 		if (data != null)
 		{
 			nameTextField.setText(data[0]);

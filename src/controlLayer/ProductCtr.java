@@ -132,9 +132,7 @@ public class ProductCtr
 	 */
 	public boolean deleteProduct(int placeInList)
 	{
-		ProductContainer.getInstance().deleteProduct(products.get(placeInList));
-
-		return true;
+		return ProductContainer.getInstance().deleteProduct(products.get(placeInList));
 	}
 
 	/**
@@ -204,7 +202,7 @@ public class ProductCtr
 	}
 	
 	/**
-	 * Returns the first up to 50 elements from the Products container.
+	 * Returns the newest up to 50 elements from the Products container.
 	 * Those datas fill up the products table in the UI.
 	 * 
 	 * @param index of the page
@@ -214,7 +212,7 @@ public class ProductCtr
 	{
 		int productAmount = 0;
 		ArrayList<String[]> returnValue = new ArrayList<>();
-		ArrayList<Product> products = ProductContainer.getInstance().getProductsArray();	
+		ArrayList<Product> products = ProductContainer.getInstance().getProductsArrayList();	
 		if (products.size() == 0)
 		{
 			return returnValue;
@@ -226,9 +224,7 @@ public class ProductCtr
 		}
 		else if ((int)(Math.floor(products.size() / 50))+1 == index)
 		{
-			
 			this.products = new ArrayList<Product>(products.subList((index-1)*50, (index-1)*50+(int)products.size()%50));
-			//this.products = (ArrayList<Product>) products.subList((index-1)*50, (index-1)*50+(int)products.size()%50);
 			productAmount = (int)(products.size()%50);
 		}
 		else
@@ -244,24 +240,25 @@ public class ProductCtr
 	}
 	
 	/**
-	 * gets only product by the barcode. Used in EditCustomerDialog UI. Return all the information about the product.
+	 * Gets only product by the barcode. Used in EditCustomerDialog UI. 
+	 * Return all the information about the product.
 	 * 
 	 * @param barcode
 	 * @return
 	 */
-	public String[] getProductrByBarcode(String barcode)
+	public String[] getProductInfoByBarcode(String barcode)
 	{
-		ArrayList<Product> products = ProductContainer.getInstance().getProductsArray();
-		String[] string = null;
+		ArrayList<Product> products = ProductContainer.getInstance().getProductsArrayList();
+		String[] productInfo = null;
 		for (Product product : products)
 		{
 			if (product.getBarcode().equals(barcode))
 			{
-				string = product.toStrings();
+				productInfo = product.toStrings();
 				break;
 			}
 		}
-		return string;
+		return productInfo;
 	}
 	
 	/**
@@ -272,7 +269,7 @@ public class ProductCtr
 	 */
 	public Product getProduct(String barcode)
 	{
-		ArrayList<Product> products = ProductContainer.getInstance().getProductsArray();
+		ArrayList<Product> products = ProductContainer.getInstance().getProductsArrayList();
 		for (Product product : products)
 		{
 			if (product.getBarcode().equals(barcode))
@@ -283,9 +280,14 @@ public class ProductCtr
 		return null;
 	}
 	
-	public boolean checkValues(String name,String value,boolean string)
+	/**
+	 * This method is used to do error handling in the GUI
+	 * we check if the inputs are correct, for the given
+	 * type.
+	 */
+	public boolean checkValues(String name,String value,boolean isString)
 	{
-		if (string)
+		if (isString)
 		{
 			if ((name+"...").equals(value) || (value.equals("")))
 			{
@@ -308,17 +310,14 @@ public class ProductCtr
 	}
 	
 	/**
-	 * Updates the amount of the items on the stock by the barcode
-	 * Used for both editing and creating products
-	 * 
-	 * @param barcode
-	 * @param stock
+	 * Updates the location by retrieving
+	 * the product based on barcode
+	 * and then inputing the new location.
 	 */
 	
-	public void updateLocation(String barcode, String stock)
+	public void updateLocation(String barcode, String location)
 	{
 		Product p = getProduct(barcode);
-		p.setLocation(stock);
+		p.setLocation(location);
 	}
-	
 }
