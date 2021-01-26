@@ -116,6 +116,12 @@ public class ProductsPanel extends JPanel {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
 		});
 		
 		table.getColumnModel().getColumn(0).setPreferredWidth(85);

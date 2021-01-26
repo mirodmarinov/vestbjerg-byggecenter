@@ -109,6 +109,12 @@ public class CustomersPanel extends JPanel {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
 		});
 		//Setting the sizes of the columns
 		table.getColumnModel().getColumn(0).setPreferredWidth(85);

@@ -249,6 +249,12 @@ public class AddProductsDialog extends JDialog {
 				public Class getColumnClass(int columnIndex) {
 					return columnTypes[columnIndex];
 				}
+				boolean[] columnEditables = new boolean[] {
+					false, false, false, true, false, false, false
+				};
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				}
 			});
 			
 
