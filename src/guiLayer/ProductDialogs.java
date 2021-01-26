@@ -719,7 +719,7 @@ public class ProductDialogs extends JDialog {
 	 */
 	public void fillFields(String barcode)
 	{
-		String[] data = productCtr.getProductrByBarcode(barcode);
+		String[] data = productCtr.getProductInfoByBarcode(barcode);
 		if (data != null)
 		{
 			nameTextField.setText(data[0]);
@@ -783,9 +783,9 @@ public class ProductDialogs extends JDialog {
 						Integer.parseInt(discountTextField.getText()), Integer.parseInt(purchasePriceTextField.getText()), 
 						Integer.parseInt(salesPriceTextField.getText()), barcodeTextField.getText(), nameTextField.getText(), descriptionTextField.getText(),
 						groupTextField.getText(),"");
+				productCtr.updateLocation(barcodeTextField.getText(),(row + "." + column + "." + place));
 				productsPanel.defaultFillTable(Integer.parseInt(productsPanel.getTablePageLabel().getText()));
 				productsPanel.defaultFillTable(productsPanel.getPageIndex());
-				productCtr.updateLocation(barcodeTextField.getText(),(row + "." + column + "." + place));
 				dispose();
 			}
 		}

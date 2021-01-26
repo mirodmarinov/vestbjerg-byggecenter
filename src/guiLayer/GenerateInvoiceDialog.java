@@ -24,6 +24,7 @@ public class GenerateInvoiceDialog extends JDialog {
 	public GenerateInvoiceDialog(int orderNumber) {
 		setBounds(100, 100, 500, 400);
 		getContentPane().setLayout(new BorderLayout());
+		setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setBackground(Color.WHITE);
