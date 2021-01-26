@@ -2,7 +2,6 @@ package guiLayer.Renderers;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,10 +18,10 @@ import guiLayer.*;
 public class JTableButtonMouseListener extends MouseAdapter
 {
 	private final JTable table;
-	private static int x = 0, y = 0;
+	private static int x = 0;
+	private static int y = 0;
 	private int recolor = 0;
 	private Color babyBlue = new Color(28, 150, 202);
-	private String[] tableElements = new String[] {"Order Number", "Customer", "Purchase Date", "Status", "Expiration Date", "Total (DKK)", ""};
 	private JDialog popup;
 	private OrderCtr orderCtr;
 

@@ -8,7 +8,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class OrderInfoDialog extends JDialog {
 

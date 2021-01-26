@@ -1,15 +1,9 @@
 package guiLayer.Renderers;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
-
-import guiLayer.RoundedButton;
 
 /**
  * Custom implementation of TableCellRenderer for retrieving the right content from a button cell.

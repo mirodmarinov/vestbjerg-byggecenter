@@ -15,10 +15,8 @@ import javax.swing.*;
 public class ProductJListCellRenderer extends JLabel implements ListCellRenderer<String> {
 	public ProductJListCellRenderer() {
 	}
-     // This is the only method defined by ListCellRenderer.
+     // This is the only method defined by ProductJListCellRenderer.
      // We just reconfigure the JLabel each time we're called.
-
-	private Color babyBlue = new Color(28, 150, 202);
 
 	/**
 	 * a custom overridden method for retrieving

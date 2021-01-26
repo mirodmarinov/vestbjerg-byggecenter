@@ -11,12 +11,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
-import guiLayer.Renderers.JTableButtonMouseListener;
-import guiLayer.Renderers.JTableButtonRenderer;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
+import guiLayer.Renderers.*;
+import java.beans.*;
 
 
 public class CreateOrderPanel extends JPanel {
