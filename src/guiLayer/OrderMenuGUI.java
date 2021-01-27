@@ -7,6 +7,15 @@ import java.util.Locale;
 
 import modelLayer.Serialization;
 
+/**
+ * This class is part of the warehouse system
+ * for Vestbjerg Byggecenter. It contains the
+ * GUI frame for the entire program. Every static
+ * element, like the sidebar, are placed in this
+ * class. It also contains the interactions
+ * that allow the user to navigate the system.
+ */
+
 public class OrderMenuGUI {
 
 	private JFrame frmVestbjergByggecenterManagement;
@@ -17,7 +26,10 @@ public class OrderMenuGUI {
 	private ProductsPanel productsPanel = new ProductsPanel();
 	private CustomersPanel customersPanel = new CustomersPanel();
 	private CreateOrderPanel createOrderPanel = new CreateOrderPanel();
-	private RoundedButton orderMenuButton,createOrderButton,productMenuButton,customerMenuButton;
+	private RoundedButton orderMenuButton;
+	private RoundedButton createOrderButton;
+	private RoundedButton productMenuButton;
+	private RoundedButton customerMenuButton;
 	private RoundedButton selected;
 
 	/**
@@ -32,8 +44,7 @@ public class OrderMenuGUI {
 					window.frmVestbjergByggecenterManagement.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
-				}
-				
+				}	
 			}
 		});
 	}
@@ -64,20 +75,20 @@ public class OrderMenuGUI {
 		frmVestbjergByggecenterManagement = new JFrame();
 		frmVestbjergByggecenterManagement.setTitle("Vestbjerg Byggecenter Management System");
 		frmVestbjergByggecenterManagement.setIconImage(new ImageIcon(getClass().getResource("images/icon.png")).getImage());
-		Rectangle height = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-		frmVestbjergByggecenterManagement.setBounds(0, 0, (int)height.getWidth(), (int)height.getHeight());
+		Rectangle size = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		frmVestbjergByggecenterManagement.setBounds(0, 0, (int)size.getWidth(), (int)size.getHeight());
 		frmVestbjergByggecenterManagement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmVestbjergByggecenterManagement.addWindowListener(new WindowAdapter() {
 		
-			@Override
+		frmVestbjergByggecenterManagement.addWindowListener(new WindowAdapter() {
+		@Override
 		public void windowClosing(WindowEvent e)
 		{
-			
 			Serialization.getInstance().serializeClass("modelLayer.OrderContainer");
 			Serialization.getInstance().serializeClass("modelLayer.ProductContainer");
 			Serialization.getInstance().serializeClass("modelLayer.CustomerContainer");
 		}
 		});
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0};
@@ -92,14 +103,17 @@ public class OrderMenuGUI {
 		 */
 		JPanel sideBar = new JPanel();
 		sideBar.setBackground(babyBlue);
-		sideBar.setMinimumSize(new Dimension((int)(height.getWidth()*0.14),(int)height.getHeight()));
-		sideBar.setLocation((int)(height.getWidth()*0.14),(int)height.getHeight());
+		sideBar.setMinimumSize(new Dimension((int)(size.getWidth()*0.14),(int)size.getHeight()));
+		sideBar.setLocation((int)(size.getWidth()*0.14),(int)size.getHeight());
+		
+		//Constraints for how the sidebar is placed in the window
 		GridBagConstraints gbc_sideBar = new GridBagConstraints();
 		gbc_sideBar.fill = GridBagConstraints.BOTH;
-		gbc_sideBar.insets = new Insets(0, 0, 0, 0);
 		gbc_sideBar.gridx = 0;
 		gbc_sideBar.gridy = 0;
 		frmVestbjergByggecenterManagement.getContentPane().add(sideBar, gbc_sideBar);
+		
+		//Layout for how things are placed inside the sidebar
 		GridBagLayout gbl_sideBar = new GridBagLayout();
 		gbl_sideBar.columnWidths = new int[]{200};
 		gbl_sideBar.rowHeights = new int[]{75, 50, 50, 50, 50, 50, 0};
@@ -125,7 +139,6 @@ public class OrderMenuGUI {
 				changeSelectedButton(orderMenuButton);
 			}
 		});
-		selected = orderMenuButton;
 		formatButton(orderMenuButton);
 		orderMenuButton.addOffset(-70, 3);
 		GridBagConstraints gbc_orderMenuButton = new GridBagConstraints();
@@ -142,8 +155,7 @@ public class OrderMenuGUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				cards.show(mainFrame, "Create Order");
-				changeSelectedButton(createOrderButton);
-				
+				changeSelectedButton(createOrderButton);	
 			}
 		});
 		formatButton(createOrderButton);
@@ -192,7 +204,6 @@ public class OrderMenuGUI {
 				customersPanel.getTablePageLabel().setText("1");
 				customersPanel.getTablePageLabel().setVisible(true);
 				changeSelectedButton(customerMenuButton);
-				
 			}
 		});
 		formatButton(customerMenuButton);
@@ -205,7 +216,7 @@ public class OrderMenuGUI {
 		sideBar.add(customerMenuButton, gbc_customerMenuButton);
 		
 		
-		
+		/********************************************** Main Frame **********************************************/
 		mainFrame = new JPanel();
 		mainFrame.setBackground(new Color(252, 252, 252));
 		GridBagConstraints gbc_mainFrame = new GridBagConstraints();
@@ -222,11 +233,11 @@ public class OrderMenuGUI {
 		mainFrame.add(createOrderPanel, "Create Order");
 		mainFrame.add(productsPanel, "Products");
 		mainFrame.add(customersPanel, "Customers");
+		
+		//The order Menu Button is colored so we can see that is where we start
+		selected = orderMenuButton;
 		orderMenuButton.setBackground(babyBlue.darker());
 		orderMenuButton.setFocusable(false);
-		
-		
-		
 	}
 	
 	/**
@@ -251,7 +262,6 @@ public class OrderMenuGUI {
 					button.setBackground(Color.WHITE);
 					button.setForeground(Color.BLACK);
 				}
-				
 			}
 			
 			@Override
@@ -265,7 +275,7 @@ public class OrderMenuGUI {
 			}
 		});
 		}
-	
+
 	
 	/**
 	 * Changed the current selected button to the other selected one

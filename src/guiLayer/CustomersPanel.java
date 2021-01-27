@@ -12,6 +12,14 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * This class is a part of the Warehouse System
+ * for Vestbjerg Byggecenter. It contains the customer
+ * panel that consist of a table, with all customers in the
+ * system. It allows the user to interact with the customer
+ * objects.
+ */
+
 public class CustomersPanel extends JPanel {
 	private JTable table;
 	private JTextField searchTextField;
@@ -24,8 +32,6 @@ public class CustomersPanel extends JPanel {
 	private CustomerCtr customerCtr;
 	
 	private DocumentListener cl = new DocumentListener()
-	
-	
 	{
 		@Override
 		public void insertUpdate(DocumentEvent e)
@@ -78,6 +84,11 @@ public class CustomersPanel extends JPanel {
 		JTableHeader header = table.getTableHeader();
 		header.setBackground(babyBlue);
 		header.setForeground(Color.WHITE);
+		header.setFont(new Font("Lato", Font.BOLD, 14));
+		header.setReorderingAllowed(false);
+		DefaultTableCellRenderer defaultHeaderRenderer = (DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer();
+		defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
+		header.setDefaultRenderer(defaultHeaderRenderer);
 
 		table.setRowSelectionAllowed(false);
 		table.setFocusable(false);
@@ -89,13 +100,6 @@ public class CustomersPanel extends JPanel {
 		
 		TableCellRenderer tableRenderer = table.getDefaultRenderer(RoundedButton.class);
 	    table.setDefaultRenderer(RoundedButton.class, new JTableButtonRenderer(tableRenderer));
-	      
-		// Could be moved to a custom header renderer
-		DefaultTableCellRenderer defaultHeaderRenderer = (DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer();
-		defaultHeaderRenderer.setHorizontalAlignment(JLabel.LEFT);
-		table.getTableHeader().setFont(new Font("Lato", Font.BOLD, 14));
-		table.getTableHeader().setReorderingAllowed(false);
-		table.getTableHeader().setDefaultRenderer(defaultHeaderRenderer);
 
 		//Setting the number of columns, the data types
 		table.setModel(new DefaultTableModel(
@@ -130,7 +134,7 @@ public class CustomersPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setPreferredWidth(70);
 		table.getColumnModel().getColumn(5).setMinWidth(70);
 		
-		table.addMouseListener(new JTableButtonMouseListener(table,new CustomerDialogs(this,true)));
+		table.addMouseListener(new JTableButtonMouseListener(table,new CustomerDialog(this,true)));
 		table.addMouseMotionListener(new JTableButtonMouseListener(table));
 		
 		
@@ -280,7 +284,7 @@ public class CustomersPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				CustomerDialogs dialog = new CustomerDialogs(thisClass,false);
+				CustomerDialog dialog = new CustomerDialog(thisClass,false);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 				dialog.setVisible(true);

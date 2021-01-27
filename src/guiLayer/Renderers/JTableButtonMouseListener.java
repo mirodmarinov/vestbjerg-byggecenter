@@ -2,10 +2,8 @@ package guiLayer.Renderers;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import controlLayer.OrderCtr;
 import guiLayer.*;
 
@@ -20,7 +18,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 	private final JTable table;
 	private static int x = 0;
 	private static int y = 0;
-	private int recolor = 0;
+	private boolean isRecolored = false;
 	private Color babyBlue = new Color(28, 150, 202);
 	private JDialog popup;
 	private OrderCtr orderCtr;
@@ -53,8 +51,8 @@ public class JTableButtonMouseListener extends MouseAdapter
 	{
 		int column = table.getColumnModel().getColumnIndexAtX(e.getX()); // get the column of the button
 		int row = e.getY() / table.getRowHeight(); // get the row of the button
+		
 		// Checking the row or column is valid or not
-
 		if (row < table.getRowCount() && row >= 0 && column < table.getColumnCount() && column >= 0)
 		{
 			Object value = table.getValueAt(row, column);
@@ -68,9 +66,10 @@ public class JTableButtonMouseListener extends MouseAdapter
 						int index = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), table.convertColumnIndexToView(table.getColumn("Order Number").getModelIndex())));
 						
 						try {
+							//We retrieve the panel using the table, and getting it's parent.
 							OrderPanel opd = (OrderPanel) table.getParent().getParent().getParent();
 							OrderInfoDialog dialog = new OrderInfoDialog(index,opd);
-							dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+							dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE); //makes sure only one thing is open
 							dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 							dialog.setVisible(true);
 							
@@ -81,17 +80,17 @@ public class JTableButtonMouseListener extends MouseAdapter
 				}
 				else if(table.getName().equals("CustomersPanel"))
 				{
-					((CustomerDialogs)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Phone number").getModelIndex()));
-					((CustomerDialogs)popup).reDraw();
+					((CustomerDialog)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Phone number").getModelIndex()));
+					((CustomerDialog)popup).reDraw();
 					popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					popup.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 					popup.setVisible(true);
 				}
 				else if(table.getName().equals(("ProductsPanel")))
 				{
-					((ProductDialogs)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex()));
-					((ProductDialogs)popup).setPlaceOnList(table.getSelectedRow());
-					((ProductDialogs)popup).reDraw();
+					((ProductDialog)popup).fillFields((String)table.getValueAt(table.getSelectedRow(), table.getColumn("Barcode").getModelIndex()));
+					((ProductDialog)popup).setPlaceOnList(table.getSelectedRow());
+					((ProductDialog)popup).reDraw();
 					popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					popup.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 					popup.setVisible(true);
@@ -134,7 +133,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 	
 	/**
 	 * It is a mouse moved listener that is a custom
-	 * implementation of mouse hover for the RandonButton class.
+	 * implementation of mouse hover for the RandomButton class.
 	 * The method is called when the mouse is moved
 	 * inside any of the tables. Used for updating the
 	 * color of buttons according to their focus/mouse hover.
@@ -149,12 +148,13 @@ public class JTableButtonMouseListener extends MouseAdapter
 		if (column != y || row != x)
 		{
 			// Leave the button
-			if (recolor == 1)
+			if (isRecolored)
 			{
-				if (y<table.getRowCount() && x<table.getColumnCount())
+				//Checks if you are still inside the table, but leave the button
+				if (y < table.getRowCount() && x < table.getColumnCount())
 				{
 					Object value = table.getValueAt(y, x);
-					recolor = 0;
+					isRecolored = false;
 					if (value instanceof RoundedButton)
 					{
 						if (!((RoundedButton)value).getName().equals("Confirmed") && !((RoundedButton)value).getName().equals("Added"))
@@ -167,6 +167,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 			}
 
 			// Enter the button
+			//Check if you are in the table
 			if (row < table.getRowCount() && row >= 0 && column < table.getColumnCount() && column >= 0)
 			{
 				Object value = table.getValueAt(row, column);
@@ -174,7 +175,6 @@ public class JTableButtonMouseListener extends MouseAdapter
 				{
 					if (!((RoundedButton)value).getName().equals("Confirmed") && !((RoundedButton)value).getName().equals("Added"))
 					{
-
 						((RoundedButton)value).setBackground(Color.WHITE);
 						((RoundedButton)value).setForeground(babyBlue);
 						((RoundedButton)value).setBorderColor(babyBlue);
@@ -182,7 +182,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 					}
 					y = row;
 					x = column;
-					recolor = 1;
+					isRecolored = true;
 
 				}
 			}
@@ -190,7 +190,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 	}
 
 	/**
-	 * Triggered on table mouse exit.
+	 * Triggered on table mouse exit of the table.
 	 * It resets the colors of all buttons
 	 */
 	public void mouseExited(MouseEvent e)
@@ -207,7 +207,6 @@ public class JTableButtonMouseListener extends MouseAdapter
 				table.repaint();
 			}
 		}
-
 	}
 	
 	/**

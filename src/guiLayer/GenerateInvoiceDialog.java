@@ -1,18 +1,16 @@
 package guiLayer;
 
-/**
- * This class is a part of the warehouse management system
- * for Vestbjerg Byggecenter. It creates an Invoice dialog, containing
- * a preview of the invoice that should be sent to customers.
- * 
- */
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
-
 import controlLayer.OrderCtr;
+
+/**
+ * This class is a part of the warehouse management system
+ * for Vestbjerg Byggecenter. It creates an Invoice dialog, containing
+ * a preview of the invoice that should be sent to customers.
+ */
 
 public class GenerateInvoiceDialog extends JDialog {
 
@@ -63,7 +61,12 @@ public class GenerateInvoiceDialog extends JDialog {
 				closeButton.addOffset(-5, 2);
 				closeButton.setBackground(Color.WHITE);
 				closeButton.setForeground(new Color(28, 150, 202));
+				
 				GridBagConstraints gbc_closeButton = new GridBagConstraints();
+				gbc_closeButton.anchor = GridBagConstraints.SOUTHEAST;
+				gbc_closeButton.gridx = 4;
+				gbc_closeButton.gridy = 3;
+				buttonPane.add(closeButton, gbc_closeButton);
 				
 				//Hover functions are added to the button*****************
 				closeButton.addMouseListener(new MouseAdapter()
@@ -81,14 +84,8 @@ public class GenerateInvoiceDialog extends JDialog {
 						closeButton.setBackground(Color.WHITE);
 						closeButton.setForeground(new Color(28, 150, 202));
 					}
-					
 				});
-				gbc_closeButton.anchor = GridBagConstraints.SOUTHEAST;
-				gbc_closeButton.gridx = 4;
-				gbc_closeButton.gridy = 3;
-				buttonPane.add(closeButton, gbc_closeButton);
 			}
 		}
 	}
-
 }
