@@ -239,7 +239,7 @@ public class JTableButtonMouseListener extends MouseAdapter
 			//change value to "Added"
 			table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), table.getSelectedRow(), table.getColumn("").getModelIndex());
 			//stores the product line for further manipulation
-			((AddProductsDialog)popup).addToList(Integer.toString(table.getSelectedRow()),table.getValueAt(table.getSelectedRow(),table.getColumn("Barcode").getModelIndex()).toString());
+			((AddProductsDialog)popup).addToList(Integer.toString(table.getSelectedRow()),table.getValueAt(table.getSelectedRow(),table.getColumn("Barcode").getModelIndex()).toString(),table.getValueAt(table.getSelectedRow(),table.getColumn("Input Quantity").getModelIndex()).toString());
 		}
 	}
 }

@@ -409,7 +409,9 @@ public class AddProductsDialog extends JDialog {
 				
 				if (!a.equals(b) && !productPlace.get(rows)[0].equals(a))
 				{
+					
 					table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+					
 					break;
 				}
 				else
@@ -419,7 +421,7 @@ public class AddProductsDialog extends JDialog {
 			}
 			if(createOrderPanelTabledtm.getRowCount() == 0) 
 			{
-
+				
 				table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
 			}
 			
@@ -430,7 +432,7 @@ public class AddProductsDialog extends JDialog {
 					if(data.get(e)[3].equals(string[1]))
 					{
 						table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
-						table.setValueAt("1", e, table.getColumn("Input Quantity").getModelIndex());
+						table.setValueAt(string[2], e, table.getColumn("Input Quantity").getModelIndex());
 						break;
 					}
 					else
@@ -473,7 +475,6 @@ public class AddProductsDialog extends JDialog {
 					
 					for (int rows = 0; rows < createOrderPanelTabledtm.getRowCount(); rows++)
 					{
-						
 						String a = createOrderPanelTable.getValueAt(rows, createOrderPanelTable.getColumn("Barcode").getModelIndex()).toString();
 						String b = data.get(e)[3].toString();
 						
@@ -485,6 +486,7 @@ public class AddProductsDialog extends JDialog {
 						if (!a.equals(b) && !productPlace.get(rows)[0].equals(a))
 						{
 							table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+							
 							break;
 						}
 						else
@@ -492,6 +494,27 @@ public class AddProductsDialog extends JDialog {
 							table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
 						}
 					}
+					
+					if (dtm.getRowCount() != 0)
+					{
+						for (String[] string : productPlace)
+						{
+							if(data.get(e)[3].equals(string[1]))
+							{
+								table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+								table.setValueAt(string[2], e, table.getColumn("Input Quantity").getModelIndex());
+								break;
+							}
+							else
+							{
+								table.setValueAt(new RoundedButton("Add", babyBlue, Color.WHITE, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
+							}
+						}
+						
+					}
+					
+					
+					
 				}
 			}
 			else
@@ -513,9 +536,9 @@ public class AddProductsDialog extends JDialog {
 	 * product list.
 	 * @param placeInList - specific place in list
 	 */
-	public void addToList(String placeInList, String barcode) 
+	public void addToList(String placeInList, String barcode, String quantity) 
 	{
-		productPlace.add(new String[] {placeInList,barcode});
+		productPlace.add(new String[] {placeInList,barcode,quantity});
 	}
 	
 	/**
