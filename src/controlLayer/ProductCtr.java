@@ -297,7 +297,11 @@ public class ProductCtr
 		{
 			try
 			{
-				Float.parseFloat(value);
+				float input = Float.parseFloat(value);
+				if(input < 0)
+				{
+					return false;
+				}
 				return true;
 			}
 			catch(Exception e)

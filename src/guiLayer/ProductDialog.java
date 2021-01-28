@@ -824,8 +824,8 @@ public class ProductDialog extends JDialog {
 	 */
 	private boolean checkValues()
 	{
-		JTextComponent[] strings = new JTextComponent[] {nameTextField,groupTextField,barcodeTextField,quantityTextField,descriptionTextField}; 
-		JTextField[] integers = new JTextField[] {thresholdTextField,salesPriceTextField,purchasePriceTextField,discountTextField};
+		JTextComponent[] strings = new JTextComponent[] {nameTextField,groupTextField,barcodeTextField,descriptionTextField}; 
+		JTextField[] integers = new JTextField[] {thresholdTextField,salesPriceTextField,purchasePriceTextField,discountTextField,quantityTextField};
 		
 		String errorMessage = "";
 		
