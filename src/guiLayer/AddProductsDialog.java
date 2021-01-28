@@ -566,7 +566,7 @@ public class AddProductsDialog extends JDialog {
 		for (int e = 0; e < productPlace.size(); e++)
 		{
 			String name = (String) table.getValueAt(Integer.parseInt(productPlace.get(e)[0]), table.getColumn("Name").getModelIndex());
-			int barcode = Integer.parseInt((String)table.getValueAt(Integer.parseInt(productPlace.get(e)[0]), table.getColumn("Barcode").getModelIndex()));
+			String barcode = (String)table.getValueAt(Integer.parseInt(productPlace.get(e)[0]), table.getColumn("Barcode").getModelIndex());
 			int discount = Integer.parseInt((String)table.getValueAt(Integer.parseInt(productPlace.get(e)[0]), table.getColumn("Discount").getModelIndex()));
 			float price = Float.valueOf(((String)table.getValueAt(Integer.parseInt(productPlace.get(e)[0]), table.getColumn("Price").getModelIndex())));
 				quantity = Integer.parseInt((String)table.getValueAt(Integer.parseInt(productPlace.get(e)[0]), table.getColumn("Input Quantity").getModelIndex()));
