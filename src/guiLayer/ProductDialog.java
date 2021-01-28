@@ -790,7 +790,6 @@ public class ProductDialog extends JDialog {
 						Integer.parseInt(salesPriceTextField.getText()), barcodeTextField.getText(), nameTextField.getText(), descriptionTextField.getText(),
 						groupTextField.getText(),"");
 				productCtr.updateLocation(barcodeTextField.getText(),(row + "." + column + "." + place));
-				productsPanel.defaultFillTable(Integer.parseInt(productsPanel.getTablePageLabel().getText()));
 				productsPanel.defaultFillTable(productsPanel.getPageIndex());
 				dispose();
 			}

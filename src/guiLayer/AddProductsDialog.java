@@ -404,11 +404,11 @@ public class AddProductsDialog extends JDialog {
 				 * either through previously opening the dialog, or by pressing the add button.
 				 */
 				
-				if (!a.equals(b) && !productPlace.get(rows)[0].equals(a))
+				if (a.equals(b)/* && !productPlace.get(rows)[0].equals(a)*/)
 				{
 					
 					table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
-					
+					table.setValueAt(createOrderPanelTable.getValueAt(rows, createOrderPanelTable.getColumn("Quantity").getModelIndex()) , e, table.getColumn("Input Quantity").getModelIndex());
 					break;
 				}
 				else
@@ -477,10 +477,10 @@ public class AddProductsDialog extends JDialog {
 						 * either through previously opening the dialog, or by pressing the add button.
 						 */
 						
-						if (!a.equals(b) && !productPlace.get(rows)[0].equals(a))
+						if (a.equals(b)/* && !productPlace.get(rows)[0].equals(a)*/)
 						{
 							table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
-							
+							table.setValueAt(createOrderPanelTable.getValueAt(rows, createOrderPanelTable.getColumn("Quantity").getModelIndex()) , e, table.getColumn("Input Quantity").getModelIndex());
 							break;
 						}
 						else
