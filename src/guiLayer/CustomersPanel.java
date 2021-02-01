@@ -102,11 +102,8 @@ public class CustomersPanel extends JPanel {
 	    table.setDefaultRenderer(RoundedButton.class, new JTableButtonRenderer(tableRenderer));
 
 		//Setting the number of columns, the data types
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			tableElements
-		) {
+		table.setModel(new DefaultTableModel(new Object[][]{}, tableElements) 
+		{
 			Class[] columnTypes = new Class[] {
 				String.class, String.class, String.class, String.class, String.class, RoundedButton.class
 			};
@@ -120,6 +117,7 @@ public class CustomersPanel extends JPanel {
 				return columnEditables[column];
 			}
 		});
+		
 		//Setting the sizes of the columns
 		table.getColumnModel().getColumn(0).setPreferredWidth(85);
 		table.getColumnModel().getColumn(0).setMinWidth(85);

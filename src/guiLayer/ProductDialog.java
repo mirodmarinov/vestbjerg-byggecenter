@@ -790,7 +790,6 @@ public class ProductDialog extends JDialog {
 						Integer.parseInt(salesPriceTextField.getText()), barcodeTextField.getText(), nameTextField.getText(), descriptionTextField.getText(),
 						groupTextField.getText(),"");
 				productCtr.updateLocation(barcodeTextField.getText(),(row + "." + column + "." + place));
-				productsPanel.defaultFillTable(Integer.parseInt(productsPanel.getTablePageLabel().getText()));
 				productsPanel.defaultFillTable(productsPanel.getPageIndex());
 				dispose();
 			}
@@ -824,8 +823,8 @@ public class ProductDialog extends JDialog {
 	 */
 	private boolean checkValues()
 	{
-		JTextComponent[] strings = new JTextComponent[] {nameTextField,groupTextField,barcodeTextField,quantityTextField,descriptionTextField}; 
-		JTextField[] integers = new JTextField[] {thresholdTextField,salesPriceTextField,purchasePriceTextField,discountTextField};
+		JTextComponent[] strings = new JTextComponent[] {nameTextField,groupTextField,barcodeTextField,descriptionTextField}; 
+		JTextField[] integers = new JTextField[] {thresholdTextField,salesPriceTextField,purchasePriceTextField,discountTextField,quantityTextField};
 		
 		String errorMessage = "";
 		

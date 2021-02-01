@@ -404,11 +404,11 @@ public class AddProductsDialog extends JDialog {
 				 * either through previously opening the dialog, or by pressing the add button.
 				 */
 				
-				if (!a.equals(b) && !productPlace.get(rows)[0].equals(a))
+				if (a.equals(b)/* && !productPlace.get(rows)[0].equals(a)*/)
 				{
 					
 					table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
-					
+					table.setValueAt(createOrderPanelTable.getValueAt(rows, createOrderPanelTable.getColumn("Quantity").getModelIndex()) , e, table.getColumn("Input Quantity").getModelIndex());
 					break;
 				}
 				else
@@ -477,10 +477,10 @@ public class AddProductsDialog extends JDialog {
 						 * either through previously opening the dialog, or by pressing the add button.
 						 */
 						
-						if (!a.equals(b) && !productPlace.get(rows)[0].equals(a))
+						if (a.equals(b)/* && !productPlace.get(rows)[0].equals(a)*/)
 						{
 							table.setValueAt(new RoundedButton("Added", Color.WHITE, Color.BLACK, Color.WHITE, new Font("Lato", Font.BOLD, 14)), e, table.convertColumnIndexToView(table.getColumn(tableElements[6]).getModelIndex()));
-							
+							table.setValueAt(createOrderPanelTable.getValueAt(rows, createOrderPanelTable.getColumn("Quantity").getModelIndex()) , e, table.getColumn("Input Quantity").getModelIndex());
 							break;
 						}
 						else
@@ -566,7 +566,7 @@ public class AddProductsDialog extends JDialog {
 		for (int e = 0; e < productPlace.size(); e++)
 		{
 			String name = (String) table.getValueAt(Integer.parseInt(productPlace.get(e)[0]), table.getColumn("Name").getModelIndex());
-			int barcode = Integer.parseInt((String)table.getValueAt(Integer.parseInt(productPlace.get(e)[0]), table.getColumn("Barcode").getModelIndex()));
+			String barcode = (String)table.getValueAt(Integer.parseInt(productPlace.get(e)[0]), table.getColumn("Barcode").getModelIndex());
 			int discount = Integer.parseInt((String)table.getValueAt(Integer.parseInt(productPlace.get(e)[0]), table.getColumn("Discount").getModelIndex()));
 			float price = Float.valueOf(((String)table.getValueAt(Integer.parseInt(productPlace.get(e)[0]), table.getColumn("Price").getModelIndex())));
 				quantity = Integer.parseInt((String)table.getValueAt(Integer.parseInt(productPlace.get(e)[0]), table.getColumn("Input Quantity").getModelIndex()));

@@ -175,7 +175,11 @@ public class CustomerCtr
 			}
 			try
 			{
-				Integer.parseInt(value);
+				int input = Integer.parseInt(value);
+				if(input < 0)
+				{
+					return false;
+				}
 				return true;
 			}
 			catch(Exception e)
