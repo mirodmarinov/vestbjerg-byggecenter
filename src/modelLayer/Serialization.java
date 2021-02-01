@@ -97,7 +97,10 @@ public class Serialization {
 					for (Order order: orders)
 					{
 						Customer newCustomer = CustomerContainer.getInstance().getCustomer(order.getCustomer().getPhone());
-						order.setCustomer(newCustomer);
+						if (newCustomer !=null)
+						{
+							order.setCustomer(newCustomer);
+						}
 					}
 					OrderContainer.setInstance(oldOrderC);
 				}
